@@ -1,0 +1,34 @@
+.App {
+  background-color: #282c34;
+  height: 300vh;
+}
+
+.App-header {
+  min-height: 100vh;
+  height: 200vh;
+  display: flex;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  position: sticky;
+  top: 0;
+}
+
+.main img {
+  margin: auto;
+  height: 80vh;
+}
+
+.login {
+  width: 60vh;
+  margin: auto;
+}
+
+.content {
+  height: 100vh;
+}
