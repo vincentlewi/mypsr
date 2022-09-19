@@ -39,7 +39,7 @@ function App() {
             <h1>myPSR</h1>
             <h3>home away from home</h3>
           </div>
-          <img src={require(`./house/${scrolled.toString().padStart(4, 0)}.jpg`)} />
+          <img src={require(`./house_compressed/${scrolled.toString().padStart(4, 0)}.jpg`)} />
         </div>
       </header>
       <div class='content'>
