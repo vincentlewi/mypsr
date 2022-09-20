@@ -14,6 +14,14 @@ function App() {
   //   } 
   // }, [count])
 
+  function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+  }
+  
+  const images = importAll(require.context('./house_compressed', false, /\.(png|jpe?g|svg)$/));
+
   const [scrolled, setScrolled] = useState(1)
 
   useEffect(() => {
@@ -39,7 +47,7 @@ function App() {
             <h1>myPSR</h1>
             <h3>home away from home</h3>
           </div>
-          <img src={require(`./house_compressed/${scrolled.toString().padStart(4, 0)}.jpg`)} />
+          <img src={images[`${scrolled.toString().padStart(4, 0)}.jpg`]} />
         </div>
       </header>
       <div class='content'>
