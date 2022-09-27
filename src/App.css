@@ -1,27 +1,31 @@
 .App {
-  background-color: #282c34;
-  height: 300vh;
+  background-color: #ffffff;
+  height: 400vh;
 }
 
 .App-header {
   min-height: 100vh;
   height: 200vh;
-  display: flex;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .main {
+  background-color: white;
   height: 100vh;
   display: flex;
   position: sticky;
   top: 0;
+  border: black solid
 }
 
-.main img {
+.App-header img {
   margin: auto;
-  height: 80vh;
+  width: 100vw;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
 }
 
 .login {
@@ -30,5 +34,21 @@
 }
 
 .content {
+  background-color: #f8c2a6;
+  color: #282c34;
   height: 100vh;
+  text-align: center;
+}
+
+.testdiv {
+  border: solid black;
+  height: 200px;
+  overflow: hidden;
+  position: sticky;
+}
+
+.testimg {
+  height: 300px;
+  position: absolute;
+  bottom: 0px;
 }
