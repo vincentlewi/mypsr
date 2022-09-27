@@ -38,7 +38,7 @@ function App() {
     const scrollLen = Math.min(120, Math.ceil(scrollPx / winHeightPx * 100) + 1)
     setScrolled(scrollLen)
   }
-
+  document.title = 'myPSR'
   return (
     <div className="App">
       <header className="App-header">
