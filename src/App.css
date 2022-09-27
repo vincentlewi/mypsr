@@ -4,11 +4,11 @@
 }
 
 .App-header {
-  min-height: 100vh;
   height: 200vh;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
+  top: 0;
 }
 
 .main {
@@ -17,30 +17,33 @@
   display: flex;
   position: sticky;
   top: 0;
-  border: black solid
+  justify-content: center;
+  overflow: hidden;
 }
 
-.App-header img {
-  margin: auto;
-  width: 100vw;
+img.logo {
+  height: calc(50vw*585/1280);
+  width: 50vw;
+  margin-top: 10vh;
+}
+
+img.house {
   position: absolute;
-  bottom: 0px;
-  left: 0;
+  bottom: 0;
 }
-
-.login {
+/* .login {
   width: 60vh;
   margin: auto;
-}
+} */
 
 .content {
-  background-color: #f8c2a6;
+  background-color: #f5bfa2;
   color: #282c34;
   height: 100vh;
   text-align: center;
 }
 
-.testdiv {
+/* .testdiv {
   border: solid black;
   height: 200px;
   overflow: hidden;
@@ -51,4 +54,4 @@
   height: 300px;
   position: absolute;
   bottom: 0px;
-}
+} */

@@ -22,7 +22,7 @@ function App() {
     return images;
   }
   
-  const images = importAll(require.context('./house', false, /\.(png|jpe?g|svg)$/));
+  const images = importAll(require.context('./house_transparent', false, /\.(png|jpe?g|svg)$/));
 
   const [scrolled, setScrolled] = useState(1)
 
@@ -35,9 +35,11 @@ function App() {
     const scrollPx = document.documentElement.scrollTop
     const winHeightPx = document.getElementsByClassName('App-header')[0].scrollHeight - document.documentElement.clientHeight
 
-    const scrollLen = Math.min(120, Math.ceil(scrollPx / winHeightPx * 100) + 1)
+    const scrollLen = Math.min(90, Math.ceil(scrollPx / winHeightPx * 100) + 1)
+    console.log(window.pageYOffset)
     setScrolled(scrollLen)
   }
+
   document.title = 'myPSR'
   return (
     <div className="App">
@@ -47,15 +49,18 @@ function App() {
             <h1>myPSR</h1>
             <h3>home away from home</h3>
           </div> */}
-          <img src={images[`${scrolled.toString().padStart(4, 0)}.jpg`]} /> 
+          <img className='logo' src={require('./logoblack.png')}  />
+          <img className='house' src={images[`${scrolled.toString().padStart(4, 0)}.png`]} style={{width: Math.max(document.documentElement.clientHeight, document.documentElement.clientWidth)}} /> 
         </div>
       </header>
-      <div className='testdiv'>
+      {/* <div className='testdiv'>
         <img src={require("./house_transparent/0001.png")} className='testimg'/>
-      </div>
+      </div> */}
       <div className='content'>
-        <h1>test</h1>
+        test
+        <h1>Laundry</h1>
       </div>
+      <h1>Events</h1>
     </div>
   );
 }
