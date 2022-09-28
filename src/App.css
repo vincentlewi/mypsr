@@ -1,14 +1,17 @@
+html {
+  scroll-padding: 69px;
+  scroll-behavior: smooth;
+}
+
 .App {
   background-color: #ffffff;
-  height: 400vh;
+  height: calc(400vh - 69px);
 }
 
 .App-header {
   height: 200vh;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  position: relative;
-  top: 0;
 }
 
 .main {
@@ -28,30 +31,34 @@ img.logo {
 }
 
 img.house {
+  width: max(100vh, 100vw);
   position: absolute;
   bottom: 0;
 }
-/* .login {
-  width: 60vh;
-  margin: auto;
-} */
 
-.content {
-  background-color: #f5bfa2;
+.screen {
   color: #282c34;
   height: 100vh;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5vh 10vw;
 }
 
-/* .testdiv {
-  border: solid black;
-  height: 200px;
-  overflow: hidden;
-  position: sticky;
+.laundry, .chats {
+  background-color: #f5bfa2;
 }
 
-.testimg {
-  height: 300px;
-  position: absolute;
-  bottom: 0px;
-} */
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.screen img {
+  width: max(40vw, 40vh);
+  height: max-content;
+}
+
+.content {
+  padding: min(2vh, 2vw) 0 min(2vh, 2vw) min(4vh, 4vw);
+}
