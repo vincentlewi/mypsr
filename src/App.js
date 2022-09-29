@@ -77,6 +77,13 @@ function App() {
           <h2>get your shit done in a minute</h2>
         </div>
       </div>
+      <div id='maintenance' className='screen'>
+        <h1 className='break'>Maintenance</h1>
+        <img src={require('./prelogin/laundry.png')} />
+        <div className='content'>
+          <h2>get your shit done in a minute</h2>
+        </div>
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ function NavbarPreLogin() {
   const html = document.documentElement
 
   const [isActive, setIsActive] = useState([false, false, false, false])
-  
+
   useEffect(() => {
     window.addEventListener('scroll', scrollProgress)
     return () => window.removeEventListener('scroll', scrollProgress)
@@ -19,18 +19,12 @@ function NavbarPreLogin() {
     const winHeightPx = document.getElementsByClassName('App-header')[0].scrollHeight - html.clientHeight
     const scrollLen = scrollPx / winHeightPx * 100
     
-    console.log(scrollPx)
-    if (scrollPx < 1644) {
-      setIsActive([false, false, false, false])
-    } else if (scrollPx < 2438) {
-      setIsActive([true, false, false, false])
-    } else if (scrollPx < 3232) {
-      setIsActive([false, true, false, false])
-    } else if (scrollPx < 4026) {
-      setIsActive([false, false, true, false])
-    } else {
-      setIsActive([false, false, false, true])
-    }
+    setIsActive([
+      1644 <= scrollPx & scrollPx < 2438 ? true:false, 
+      2438 <= scrollPx & scrollPx < 3232 ? true:false, 
+      3232 <= scrollPx & scrollPx < 4026 ? true:false,
+      4026 <= scrollPx? true:false
+    ])
   }
   // console.log(document.getElementById('chatsLink').innerHTML)
   return (
