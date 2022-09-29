@@ -1,5 +1,5 @@
 html {
-  scroll-padding: 69px;
+  scroll-padding: 56px;
   scroll-behavior: smooth;
 }
 
@@ -38,7 +38,7 @@ img.house {
 
 .screen {
   color: #282c34;
-  height: 100vh;
+  height: calc(100vh - 56px);
   text-align: center;
   display: flex;
   flex-wrap: wrap;

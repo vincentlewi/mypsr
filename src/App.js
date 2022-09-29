@@ -16,20 +16,23 @@ function App() {
   //   } 
   // }, [count])
 
-  // function importAll(r) {
-  //   let images = {};
-  //   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-  //   return images;
-  // }
+  const html = document.documentElement
+
+  const frameCount = 82;
+  const currentFrame = index => (
+    require(`./prelogin/house/${index.toString().padStart(4, 0)}.png`)
+  )
   
-  // const images = importAll(require.context('./house', false, /\.(png|jpe?g|svg)$/));
+  const preloadImages = () => {
+    for (let i = 1; i < frameCount; i++) {
+      const img = new Image();
+      img.src = currentFrame(i);
+    }
+  };
+  preloadImages()
 
-  var images = new Array()
-  for (let i = 1; i <= 82; i++) {
-    images[i] = require(`./prelogin/house/${i.toString().padStart(4, 0)}.png`)
-  }
-
-  const [scrolled, setScrolled] = useState(1)
+  const img = new Image()
+  const [image, setImage] = useState(img.src = currentFrame(1))
 
   useEffect(() => {
     window.addEventListener('scroll', scrollProgress)
@@ -37,25 +40,20 @@ function App() {
   })
 
   const scrollProgress = () => {
-    const scrollPx = document.documentElement.scrollTop
-    const winHeightPx = document.getElementsByClassName('App-header')[0].scrollHeight - document.documentElement.clientHeight
-
+    const scrollPx = html.scrollTop
+    const winHeightPx = document.getElementsByClassName('App-header')[0].scrollHeight - html.clientHeight
     const scrollLen = Math.min(82, Math.ceil(scrollPx / winHeightPx * 100) + 1)
-    setScrolled(scrollLen)
+    
+    requestAnimationFrame(() => setImage(img.src = currentFrame(scrollLen)))
   }
-
-  document.title = 'myPSR'
+  
   return (
     <div className="App">
       <NavbarPreLogin />
       <header id='home' className="App-header">
         <div className='main'>
-          {/* <div class='login'>
-            <h1>myPSR</h1>
-            <h3>home away from home</h3>
-          </div> */}
           <img className='logo' src={require('./logoblack.png')}  />
-          <img className='house' src={images[scrolled]} /> 
+          <img className='house' src={image} /> 
         </div>
       </header>
       <div id='laundry' className='laundry screen'>
