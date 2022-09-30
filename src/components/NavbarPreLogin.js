@@ -1,3 +1,4 @@
+import './NavbarPreLogin.css'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -11,22 +12,20 @@ function NavbarPreLogin() {
 
   useEffect(() => {
     window.addEventListener('scroll', scrollProgress)
-    return () => window.removeEventListener('scroll', scrollProgress)
   })
 
   const scrollProgress = () => {
-    const scrollPx = html.scrollTop
-    const winHeightPx = document.getElementsByClassName('App-header')[0].scrollHeight - html.clientHeight
-    const scrollLen = scrollPx / winHeightPx * 100
-    
+    const scrollPx = html.scrollTop + 200
+    const vh = html.clientHeight - 56
+    console.log(vh, scrollPx)
     setIsActive([
-      1644 <= scrollPx & scrollPx < 2438 ? true:false, 
-      2438 <= scrollPx & scrollPx < 3232 ? true:false, 
-      3232 <= scrollPx & scrollPx < 4026 ? true:false,
-      4026 <= scrollPx? true:false
+      2*vh <= scrollPx & scrollPx < 3*vh ? true:false, 
+      3*vh <= scrollPx & scrollPx < 4*vh ? true:false, 
+      4*vh <= scrollPx & scrollPx < 5*vh ? true:false,
+      5*vh <= scrollPx? true:false
     ])
   }
-  // console.log(document.getElementById('chatsLink').innerHTML)
+  
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container fluid>
@@ -34,11 +33,11 @@ function NavbarPreLogin() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto my-2 my-lg-0">
-            <Nav.Link className={`${isActive[0] ? 'active':''}`} id='laundryLink' href="#laundry">Laundry</Nav.Link>
-            <Nav.Link className={`${isActive[1] ? 'active':''}`} id='eventsLink' href="#events">Events</Nav.Link>
-            <Nav.Link className={`${isActive[2] ? 'active':''}`} id='chatsLink' href="#chats">Chats</Nav.Link>
-            <Nav.Link className={`${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#maintenace">Maintenance</Nav.Link>
-          </Nav>[]
+            <Nav.Link class={`nav-link ${isActive[0] ? 'active':''}`} id='laundryLink' href="#laundry">Laundry</Nav.Link>
+            <Nav.Link class={`nav-link ${isActive[1] ? 'active':''}`} id='eventsLink' href="#events">Events</Nav.Link>
+            <Nav.Link class={`nav-link ${isActive[2] ? 'active':''}`} id='chatsLink' href="#chats">Chats</Nav.Link>
+            <Nav.Link class={`nav-link ${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#maintenance">Maintenance</Nav.Link>
+          </Nav>
           <Button href="#" variant="outline-success" className="d-grid gap-2">Sign In</Button>{' '}
         </Navbar.Collapse>
       </Container>

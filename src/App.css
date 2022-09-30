@@ -5,21 +5,21 @@ html {
 
 .App {
   background-color: #ffffff;
-  height: calc(400vh - 69px);
+  height: calc(4*(100vh - 56px));
 }
 
 .App-header {
-  height: 200vh;
+  height: calc(2*(100vh - 56px));
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
 
 .main {
   background-color: white;
-  height: 100vh;
+  height: calc(100vh - 56px);
   display: flex;
   position: sticky;
-  top: 0;
+  top: 56px;
   justify-content: center;
   overflow: hidden;
 }
