@@ -14,10 +14,9 @@ function NavbarPreLogin() {
     window.addEventListener('scroll', scrollProgress)
   })
 
-  const scrollProgress = () => {
+  function scrollProgress() {
     const scrollPx = html.scrollTop + 200
     const vh = html.clientHeight - 56
-    console.log(vh, scrollPx)
     setIsActive([
       2*vh <= scrollPx & scrollPx < 3*vh ? true:false, 
       3*vh <= scrollPx & scrollPx < 4*vh ? true:false, 
@@ -29,7 +28,7 @@ function NavbarPreLogin() {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container fluid>
-        <Navbar.Brand href="#home" style={{margin: "0px 10px 5px 4px", padding: "0 0 2px 0"}}><img src={require('../logoblack.png')} height="30" /></Navbar.Brand>
+        <Navbar.Brand href="#home" style={{margin: "0px 10px 5px 4px", padding: "0 0 2px 0"}}><img src={require('../logoblack.png')} height="30" alt='logo'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto my-2 my-lg-0">
@@ -38,7 +37,7 @@ function NavbarPreLogin() {
             <Nav.Link class={`nav-link ${isActive[2] ? 'active':''}`} id='chatsLink' href="#chats">Chats</Nav.Link>
             <Nav.Link class={`nav-link ${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#maintenance">Maintenance</Nav.Link>
           </Nav>
-          <Button href="#" variant="outline-success" className="d-grid gap-2">Sign In</Button>{' '}
+          <Button href="/login" variant="outline-success" className="d-grid gap-2">Login</Button>{' '}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -1,0 +1,32 @@
+html {
+    scroll-padding: 56px;
+    scroll-behavior: smooth;
+}
+
+.App-header {
+    height: calc(2*(100vh - 56px));
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    }
+
+.main {
+    background-color: white;
+    height: calc(100vh - 56px);
+    display: flex;
+    position: sticky;
+    top: 56px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+img.logo {
+    height: calc(50vw*585/1280);
+    width: 50vw;
+    margin-top: 10vh;
+}
+
+img.house {
+    width: max(100vh, 100vw);
+    position: absolute;
+    bottom: 0;
+}
