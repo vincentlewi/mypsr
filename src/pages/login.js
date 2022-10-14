@@ -1,7 +1,11 @@
 import './login.css'
+import { Link } from "react-router-dom";
+import PageTransition from "../components/PageTransition";
 
 export default function Login() {
     return (
+        <>
+        <PageTransition />
         <div className="login">
             <div className='leftText'>
                 <h1>Hello!</h1>
@@ -14,9 +18,10 @@ export default function Login() {
                     <input type='text' />
                     <p>Password:</p>
                     <input type='password' />
-                    <a href='/mypsr'>Login</a>
+                    <Link to='/mypsr'>Login</Link>
                 </form>
             </div>
         </div>
+        </>
     )
 }

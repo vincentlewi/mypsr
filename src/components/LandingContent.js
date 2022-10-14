@@ -1,5 +1,5 @@
 import React from 'react';
-import './PreLoginContent.css';
+import './LandingContent.css';
 
 export default function PreLoginContent() {
   return (

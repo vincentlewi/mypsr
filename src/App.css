@@ -3,7 +3,7 @@ html {
   scroll-behavior: smooth;
 }
 
-.App {
+.Landing {
   background-color: #ffffff;
   height: calc(4*(100vh - 56px));
 }
@@ -61,4 +61,13 @@ img.house {
 
 .content {
   padding: min(2vh, 2vw) 0 min(2vh, 2vw) min(4vh, 4vw);
+}
+
+.privacy-screen {
+  position: absolute;
+  background-color: #F78B43;
+  height: max(100vh, 100vw);
+  width: max(100vh, 100vw);
+  border-radius: 50%;
+  z-index: 100;
 }
