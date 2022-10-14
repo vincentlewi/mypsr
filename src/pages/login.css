@@ -1,0 +1,36 @@
+.login {
+    display: flex;
+    padding: 20vh 10vw;
+    background-color: #FFE0CF;
+}
+
+.leftText {
+    width: 40vw;
+    height: 60vh;
+    padding: 5%;
+}
+
+.form {
+    width: 40vw;
+    height: 60vh;
+    padding: 5%;
+    border-radius: 5%;
+    background-color: #B88A59;
+}
+
+p {
+    color: white;
+    margin: 0;
+}
+
+input {
+    margin: 0 0 5%;
+    border: none;
+    border-radius: 5vw;
+    width: 100%;
+}
+
+.login img {
+    height: 100px;
+    margin: 0 0 5%;
+}

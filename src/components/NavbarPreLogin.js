@@ -37,7 +37,7 @@ function NavbarPreLogin() {
             <Nav.Link class={`nav-link ${isActive[2] ? 'active':''}`} id='chatsLink' href="#chats">Chats</Nav.Link>
             <Nav.Link class={`nav-link ${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#maintenance">Maintenance</Nav.Link>
           </Nav>
-          <Button href="/login" variant="outline-success" className="d-grid gap-2">Login</Button>{' '}
+          <Button href="/mypsr/login" variant="outline-success" className="d-grid gap-2">Login</Button>{' '}
         </Navbar.Collapse>
       </Container>
     </Navbar>
