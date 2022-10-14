@@ -5,7 +5,6 @@ import NavbarPreLogin from './components/NavbarPreLogin';
 import PreLoginContent from './components/PreLoginContent';
 import {Routes, Route} from 'react-router-dom';
 import Login from './pages/login';
-import Calendar from './pages/Calendar'
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
           <Route path='login' element={<Login />}/>
           {/* <Route path='/home' element={<Home />}/> */}
         </Route>
-        <Route path='/calendar' element={<Calendar />}/>
       </Routes>
   );
 }

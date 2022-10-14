@@ -44,12 +44,12 @@ export default function House() {
     
     requestAnimationFrame(() => setImage(img.src = currentFrame(scrollLen)))
   }
-  
+  const [clicked, setClicked] = useState(false)
   return (
     <header id='home' className="App-header">
         <div className='main'>
-            <img className='logo' src={require('../logoblack.png')} alt='logo' />
-            <img className='house' src={image} alt='house'/> 
+            <img className={'logo ' + (clicked ? 'clip-animation':'')} src={require('../logoblack.png')} alt='logo'/>
+            <img className='house' src={image} alt='house' onClick={() => setClicked(!clicked)} /> 
         </div>
     </header>
   );
