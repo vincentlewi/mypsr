@@ -63,11 +63,15 @@ img.house {
   padding: min(2vh, 2vw) 0 min(2vh, 2vw) min(4vh, 4vw);
 }
 
-.privacy-screen {
-  position: absolute;
+.vitto {
+  position: fixed;
   background-color: #F78B43;
   height: max(100vh, 100vw);
   width: max(100vh, 100vw);
   border-radius: 50%;
   z-index: 100;
+}
+
+Link {
+  text-decoration: none;
 }

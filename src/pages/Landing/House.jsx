@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import './House.css';
 
 export default function House() {
   // Change with time
@@ -20,7 +19,7 @@ export default function House() {
 
   const frameCount = 82;
   const currentFrame = index => (
-    require(`../prelogin/house/${index.toString().padStart(4, 0)}.png`)
+    require(`../../assets/house/${index.toString().padStart(4, 0)}.png`)
   )
   
   // Preload images
@@ -48,7 +47,7 @@ export default function House() {
   return (
     <header id='home' className="App-header">
         <div className='main'>
-            <img className={'logo ' + (clicked ? 'clip-animation':'')} src={require('../logoblack.png')} alt='logo'/>
+            <img className={'logo ' + (clicked ? 'clip-animation':'')} src={require('../../assets/logoblack.png')} alt='logo'/>
             <img className='house' src={image} alt='house' onClick={() => setClicked(!clicked)} /> 
         </div>
     </header>

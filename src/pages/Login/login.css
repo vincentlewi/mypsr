@@ -4,13 +4,13 @@
     background-color: #FFE0CF;
 }
 
-.leftText {
+.login .leftText {
     width: 40vw;
     height: 60vh;
     padding: 5%;
 }
 
-.form {
+.login .form {
     width: 40vw;
     height: 60vh;
     padding: 5%;
@@ -18,12 +18,12 @@
     background-color: #B88A59;
 }
 
-p {
+.login p {
     color: white;
     margin: 0;
 }
 
-input {
+.login input {
     margin: 0 0 5%;
     border: none;
     border-radius: 5vw;
