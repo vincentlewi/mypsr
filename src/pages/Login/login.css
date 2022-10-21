@@ -34,3 +34,10 @@
     height: 100px;
     margin: 0 0 5%;
 }
+
+.login .back {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 2vw
+}

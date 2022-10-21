@@ -1,9 +1,11 @@
 import './register.css'
 import { Link } from "react-router-dom";
+import PageTransition from "../../components/PageTransition";
 
-export default function Login(props) {
+export default function Register() {
     return (
         <div className="register">
+            <PageTransition animated={false}/>
             <div className='leftText'>
                 <h1>Hello!</h1>
                 <h2>Welcome to myPSR, your one-stop booking website!</h2>
@@ -15,9 +17,10 @@ export default function Login(props) {
                     <input type='text' />
                     <p>Password:</p>
                     <input type='password' />
-                    {/* <Link to='/mypsr' state={{loc: loc}} onClick={() => setToLoc('/mypsr')}>back</Link><br/> back button */}
-                    <Link to='/mypsr/login' state={false}>Register</Link><br/>
-                    Already have an account? <Link to='/mypsr/login' state={false}>Login</Link>
+                    <p>Confirm Password:</p>
+                    <input type='password' />
+                    <Link to='/mypsr/login' state={0}>Register</Link><br/>
+                    Already have an account? <Link to='/mypsr/login' state={0}>Login</Link>
                 </form>
             </div>
         </div>
