@@ -6,6 +6,7 @@ import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import Home from './pages/Home/index';
 import './App.css';
+import './components/Components.css'
 
 function App() {
   const location = useLocation();

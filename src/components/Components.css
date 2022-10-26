@@ -1,0 +1,28 @@
+.WelcomeButton{
+    height: 40vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 14px;
+    background-color: #FFE0CF;
+    padding: 10px;
+}
+
+.subheader{
+    color: #F78B43;
+}
+
+.events-card{
+    margin: 30px 10px;
+    background-color: #e97379;
+    border-radius: 14px;
+    color: white;
+    padding: 20px;
+}
+
+.events-card:hover{
+    background-color: #a3be5f;
+    cursor: pointer;
+}
