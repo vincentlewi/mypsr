@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { db } from './firebase'
-import { setDoc, doc, onSnapshot, getDoc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '../components/contexts/AuthContext'
 import { useState } from 'react';
 
