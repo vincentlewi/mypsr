@@ -18,7 +18,7 @@ export default function Home(){
     const navigate = useNavigate()
     function logout(){
         signOut(auth)
-        navigate('/')
+        navigate('/mypsr')
     }
 
     useEffect(() => {

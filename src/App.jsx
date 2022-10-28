@@ -1,13 +1,15 @@
 import React from 'react';
 import {Routes, Route, useLocation} from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
-import Landing from './pages/Landing/index';
-import Login from './pages/Login/index';
-import Register from './pages/Register/index';
-import Home from './pages/Home/index';
+import Landing from './pages/Landing/Landing';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Home from './pages/Home/Landing';
 import Laundry from './pages/Laundry/Laundry';
 import Events from './pages/Events/Events';
 import Services from './pages/Services/Services';
+import Profile from './pages/Profile/Profile';
+import Error404 from './pages/Error404';
 import PrivateRoutes from "./components/PrivateRoutes"
 import './App.css';
 import './components/Components.css'
@@ -26,8 +28,10 @@ function App() {
             <Route path='laundry' element={<Laundry />}/>
             <Route path='events' element={<Events />}/>
             <Route path='services' element={<Services />}/>
+            <Route path='profile' element={<Profile/>}/>
           </Route>
         </Route>
+        <Route path='*' element={<Error404/>}/>
       </Routes>
     </AnimatePresence>
   );
