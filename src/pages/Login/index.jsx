@@ -31,7 +31,7 @@ export default function Login() {
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
             setAnimate(true)
-            navigate('/mypsr/home')
+            navigate('/mypsr/home', {state:1})
         }
         catch {
             setError('GABISA LOGIN JANCOK')

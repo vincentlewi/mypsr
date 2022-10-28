@@ -1,6 +1,6 @@
 import PageTransition from '../../components/PageTransition';
 import House from './House';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/NavbarPreLogin';
 import LandingContent from './LandingContent';
 import { useIsPresent } from "framer-motion";
 import './Landing.css'

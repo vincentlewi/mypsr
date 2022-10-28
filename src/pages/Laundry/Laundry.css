@@ -1,0 +1,39 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 35px 35px 35px 35px 35px 35px 35px;
+  }
+
+.grid-item {
+    background-color: white;
+    border: none;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+}
+
+.dates {
+    border-radius: 50%;
+}
+
+.this-month {
+    color: black;
+}
+
+.not-this-month {
+    color: lightgray;
+}
+
+.today {
+    color: blue;
+    font-weight: bold;
+}
+
+.selected{
+    background-color: blue;
+    color: white;
+}
+
+.hover:hover {
+    background-color: lightgray;
+    color: black;
+}
