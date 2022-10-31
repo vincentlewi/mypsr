@@ -5,9 +5,15 @@
     justify-content: center;
     align-items: center;
     margin: auto;
+    margin-top: 80px;
+    margin-bottom: 40px;
     border-radius: 14px;
     background-color: #FFE0CF;
     padding: 10px;
+}
+
+.WelcomeButton img{
+    width: 30%;
 }
 
 .subheader{

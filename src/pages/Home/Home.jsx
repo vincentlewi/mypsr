@@ -9,6 +9,7 @@ import PageTransition from '../../components/PageTransition'
 import './Home.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import HomeEvents from './HomeEvents';
 
 
 export default function Home(){
@@ -24,6 +25,7 @@ export default function Home(){
     useEffect(() => {
         setAnimate(0)
     }, [])
+    
     return(
         <div className='Home'>
             <PageTransition animated={animate} isPresent={isPresent}/>
@@ -31,7 +33,7 @@ export default function Home(){
             <WelcomeButton loc="home"/>
             <button className = "btn btn-danger" onClick={logout}>LOG OUT</button>
             <h2>Recent updates for you</h2>
-            <EventUpdates/>
+            <HomeEvents/>
         </div>
     )
 }

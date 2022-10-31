@@ -4,15 +4,15 @@ import Modal from 'react-bootstrap/Modal';
 import {db} from '../../components/firebase'
 import {doc, deleteDoc} from 'firebase/firestore'
 
-export default function DeleteEventsPopup(props) {
+export default function DeleteGuestRegistration(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
 
-  const deleteEvent = async(id) => {
-    const eventDoc = doc(db, "events", id)
+  const deleteGuestRegistration = async(id) => {
+    const eventDoc = doc(db, "guestVisit", id)
     await deleteDoc(eventDoc);
     }
 
@@ -21,7 +21,7 @@ export default function DeleteEventsPopup(props) {
       <Button variant="danger" 
       disabled = {props.isDisabled}
       onClick={handleShow}>
-        Delete Events
+        Delete Registration Request
       </Button>
 
       <Modal
@@ -31,12 +31,10 @@ export default function DeleteEventsPopup(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Delete Event?</Modal.Title>
+          <Modal.Title>Delete Registration Request?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure?
-          <br/>
-          You cannot retrieve any data that has been deleted!
+          The guest will be unable to enter into PSR on the stipulated date
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -44,11 +42,10 @@ export default function DeleteEventsPopup(props) {
           </Button>
           <Button variant="danger"
           onClick={ ()=>
-                {deleteEvent(props.id)}
-            }>Delete Event</Button>
+                {deleteGuestRegistration(props.id)}
+            }>Delete Registration</Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
-
