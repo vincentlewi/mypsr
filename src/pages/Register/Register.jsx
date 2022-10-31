@@ -24,7 +24,7 @@ export default function Register() {
     
     function checkFullname() {
         if (data.current.fullname.length === 0) {
-            setFullnameWarning('ur mom never give u name ah??')
+            setFullnameWarning('Please enter your name')
             isValid.current.fullname = false
         } else {
             setFullnameWarning('')
@@ -91,6 +91,7 @@ export default function Register() {
             navigate('/mypsr/home')
         }
     }, [error, navigate])
+
     return (
         <div className="register">
             {error && <Alert variant ="danger">{error}</Alert>}
@@ -102,20 +103,28 @@ export default function Register() {
                 <img src={require('../../assets/logowhite.png')} alt='logowhite'/>
                 <form>
                     <p>Full Name:</p>
-                    <input type='text' onChange={(e) => {data.current.fullname = e.target.value; checkFullname()}}/>
-                    <p>{fullnameWarning}</p>
+                    <input type='text'
+                    onChange={(e) => {data.current.fullname = e.target.value; checkFullname()}}
+                    placeholder={fullnameWarning}/>
+                    {/* <p style ={{color: "red"}}>{fullnameWarning}</p> */}
 
                     <p>SMU Email:</p>
-                    <input type='email' onChange={(e) => {data.current.email = e.target.value; checkEmail()}}/>
-                    <p>{emailWarning}</p>
+                    <input type='email'
+                    onChange={(e) => {data.current.email = e.target.value; checkEmail()}}
+                    placeholder={emailWarning}/>
+                    {/* <p>{emailWarning}</p> */}
                     
                     <p>Password:</p>
-                    <input type='password' onChange={(e) => {data.current.password = e.target.value; checkPassword()}}/>
-                    <p>{passwordWarning}</p>
+                    <input type='password'
+                    onChange={(e) => {data.current.password = e.target.value; checkPassword()}}
+                    placeholder={passwordWarning}/>
+                    {/* <p>{passwordWarning}</p> */}
                     
                     <p>Confirm Password:</p>
-                    <input type='password' onChange={(e) => {data.current.confirm = e.target.value; checkConfirm()}}/>
-                    <p>{ConfirmWarning}</p>
+                    <input type='password'
+                    onChange={(e) => {data.current.confirm = e.target.value; checkConfirm()}}
+                    placeholder={ConfirmWarning}/>
+                    {/* <p>{ConfirmWarning}</p> */}
                     
                     <Link to='/mypsr/login' state={0}>Register</Link><br/>
                     <motion.div
@@ -126,9 +135,10 @@ export default function Register() {
                                 disabled={(!Object.values(isValid.current).every((v) => v)) || (loading)}
                                 onClick={(e) => handleSubmit(e)}
                             >
-                                submit
+                                Submit
                             </button>
-                    </motion.div><br/>
+                    </motion.div>
+                    <br/>
                     Already have an account? <Link to='/mypsr/login' state={0}>Login</Link>
                 </form>
             </div>
