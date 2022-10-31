@@ -32,7 +32,12 @@ export default function Register() {
         }
     }
     function checkEmail() {
-        if (data.current.email.slice(-10) !== 'smu.edu.sg') {
+        const year = new Date().getFullYear
+        if (
+            data.current.email.slice(-11) !== '.smu.edu.sg' || 
+            parseInt(data.current.email.split('@')[0].slice(-4)) <= year ||
+            !['scis', 'business', 'economics', 'accountancy', 'socsc', 'law'].includes(data.current.email.split('@')[1].split('.')[0])
+        ) {
             setEmailWarning('Please use valid SMU email')
             isValid.current.email = false
         } else {
