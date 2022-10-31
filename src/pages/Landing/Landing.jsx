@@ -8,7 +8,7 @@ import './Landing.css'
 export default function Landing() {
     const isPresent = useIsPresent()
     return(
-        <div className="Landing">
+        <div className="landing">
             <PageTransition animated={true} isPresent={isPresent}/>
             <Navbar/>
             <House />

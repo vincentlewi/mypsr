@@ -10,10 +10,15 @@ export default function Profile() {
     const { user } = useAuth()
     let [userInfo, setUserInfo] = useState({})
     const userRef = doc(db, "users", user.uid)
+    const date = new Date()
 
     const schoolNames = {
         scis: 'School of Computing and Information Systems',
-        sob: 'School of Business'
+        sob: 'School of Business',
+        soe: 'School of Economics',
+        soa: 'School of Accountancy',
+        soss: 'School of Social Sciences',
+        sol: 'School of Law'
     }
     
     async function getUserData(){
@@ -23,16 +28,16 @@ export default function Profile() {
             name: userData.name,
             email: user.email,
             school: schoolNames[user.email.split("@")[1].split(".")[0]],
+            year: date.getFullYear() - parseInt(user.email.split("@")[0].slice(-4)) + 1,
             block: userData.address.block,
             floor: userData.address.floor,
             room: userData.address.room,
             wallet: userData.wallet
         })
-        console.log(user.email)
     }
     useEffect(() => {
         getUserData()
-    }, [])
+    })
     
     return(
 
@@ -42,6 +47,7 @@ export default function Profile() {
             <h3>name: {userInfo.name}</h3>
             <h3>email: {userInfo.email}</h3>
             <h3>school: {userInfo.school}</h3>
+            <h3>year: {userInfo.year}</h3>
             <h3>block: {userInfo.block}</h3>
             <h3>floor: {userInfo.floor}</h3>
             <h3>room: {userInfo.room}</h3>

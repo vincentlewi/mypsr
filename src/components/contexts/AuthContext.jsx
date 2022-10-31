@@ -15,28 +15,34 @@ export function useAuth(){
     return useContext(AuthContext)
 }
 
+
 export function AuthProvider( {children} ){ 
     const [user, setUser]  = useState()
     const [loading, setLoading] = useState(true)
     const [currentUserData, setCurrentUserData] = useState()
-    
+
     async function signup(email, password, fullname,  block, floor, room){
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then((cred) =>{
-            setDoc(doc(db, 'users', cred.user.uid),{
-                name: fullname,
-                events: [],
-                complaints: [],
-                wallet: 0,
-                address: {
-                    block: block,
-                    floor: floor,
-                    room: room
-                }
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+            .then((cred) =>{
+                setDoc(doc(db, 'users', cred.user.uid),{
+                    name: fullname,
+                    events: [],
+                    complaints: [],
+                    wallet: 0,
+                    address: {
+                        block: block,
+                        floor: floor,
+                        room: room
+                    }
+                })
+                setUser(auth.currentUser)
             })
-            setUser(auth.currentUser)
-            return auth.currentUser
-        })
+            return ''
+        } catch(e){
+            return e.message
+        }
+        
         
     }
 

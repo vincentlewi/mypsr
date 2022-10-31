@@ -1,7 +1,7 @@
 import Navbar from '../../components/Navbar';
 import EventUpdates from '../Events/EventUpdates'
 import WelcomeButton from '../../components/WelcomeButton'
-import { auth, db } from '../../components/firebase'
+import { auth } from '../../components/firebase'
 import { signOut } from 'firebase/auth'
 import { useLocation, useNavigate } from "react-router-dom"
 import { useIsPresent } from "framer-motion";

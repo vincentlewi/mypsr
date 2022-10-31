@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import Home from './pages/Home/Landing';
+import Home from './pages/Home/Home';
 import Laundry from './pages/Laundry/Laundry';
 import Events from './pages/Events/Events';
 import Services from './pages/Services/Services';

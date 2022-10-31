@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import { db } from './firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '../components/contexts/AuthContext'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function WelcomeButton(props){
     const { user } = useAuth()
@@ -11,12 +11,12 @@ export default function WelcomeButton(props){
     
     async function getUserData(){
         const userDoc = await getDoc(userRef)
-        console.log(userDoc.data())
         setUsername(userDoc.data().name)
-        console.log("username is set")
     }
 
-    getUserData()
+    useEffect(() => {
+        getUserData()
+    }, [])
 
     let today = new Date(); 
 
