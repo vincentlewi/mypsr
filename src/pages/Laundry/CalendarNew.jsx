@@ -10,7 +10,8 @@ import {
   parse,
   startOfToday,
   startOfWeek,
-  endOfWeek
+  endOfWeek,
+  isPast
 } from 'date-fns'
 import { useState } from 'react'
 import './Laundry.css'
@@ -19,10 +20,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function CalendarNew({ value }) {
+export default function CalendarNew(props) {
   let today = startOfToday()
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
+  let dateID = ""
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
   let days = eachDayOfInterval({
     start: startOfWeek(firstDayCurrentMonth),
@@ -82,7 +84,8 @@ export default function CalendarNew({ value }) {
                   <button
                     type="button"
                     id = {format(day, 'yyyy-MM-dd')}
-                    onClick={(e) => {setSelectedDay(day);value(e.currentTarget.id)}}
+                    onClick={(e) => {setSelectedDay(day);props.getDateID(e.currentTarget.id)}}
+                    disabled = {isPast(day) && !isToday(day)}
                     className={classNames(
                       isEqual(day, selectedDay) && 
                         'selected',
