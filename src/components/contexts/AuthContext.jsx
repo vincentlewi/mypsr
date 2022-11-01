@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useContext } from 'react'
 import { auth, db } from '../firebase'
 import {
-    getAuth, createUserWithEmailAndPassword,
-    signOut, signInWithEmailAndPassword,
-    onAuthStateChanged, sendEmailVerification, updateProfile
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword,
+    onAuthStateChanged
 } from 'firebase/auth'
-import { setDoc, doc, onSnapshot, getDoc } from 'firebase/firestore'
+import { setDoc, doc } from 'firebase/firestore'
 
 
 const AuthContext = React.createContext()
@@ -21,7 +21,7 @@ export function AuthProvider( {children} ){
     const [loading, setLoading] = useState(true)
     const [currentUserData, setCurrentUserData] = useState()
 
-    async function signup(email, password, fullname,  block, floor, room){
+    async function signup(email, password, fullname, address){
         try {
             await createUserWithEmailAndPassword(auth, email, password)
             .then((cred) =>{
@@ -30,11 +30,7 @@ export function AuthProvider( {children} ){
                     events: [],
                     complaints: [],
                     wallet: 0,
-                    address: {
-                        block: block,
-                        floor: floor,
-                        room: room
-                    }
+                    address: address
                 })
                 setUser(auth.currentUser)
             })
@@ -42,8 +38,6 @@ export function AuthProvider( {children} ){
         } catch(e){
             return e.message
         }
-        
-        
     }
 
     // function getUserData(user){

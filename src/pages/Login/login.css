@@ -1,43 +1,102 @@
-.login {
+html{
+    background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
+}
+
+#login{
+    display:flex;
+    margin:auto;
+    width: 80vw;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+
+#opening{
+    text-align: center;
+    width: 50%;
+    border-radius: 20px 0px 0px 20px;
+    color: #146152;
+}
+
+#opening h1{
+    font-size: 5vw;
+    font-weight: bold;
+}
+
+#opening p{
+    font-size: 2vw;
+    
+}
+
+#welcome{
     display: flex;
-    padding: 20vh 10vw;
-    background-color: #FFE0CF;
 }
 
-.login .leftText {
-    width: 40vw;
-    height: 60vh;
-    padding: 5%;
-}
-
-.login .form {
-    width: 40vw;
-    height: 60vh;
-    padding: 5%;
-    border-radius: 5%;
-    background-color: #B88A59;
-}
-
-.login p {
+#form{
+    background-color: #024959;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 3px 4px;
     color: white;
-    margin: 0;
+    font-weight: 400;
+    font-size: 17px;
 }
 
-.login input {
-    margin: 0 0 5%;
-    border: none;
-    border-radius: 5vw;
-    width: 100%;
+#form label{
+    margin-top: 10px;
 }
 
-.login img {
-    height: 100px;
-    margin: 0 0 5%;
+#form td{
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
-.login .back {
-    position: fixed;
-    top: 0;
-    right: 0;
-    margin: 2vw
+#form input{
+    border-radius: 15px;
+    border: 0px solid #555 !important;
+    height: 30px;
+    padding: 20px;
+    color: #146152;
+    margin-bottom: 20px;
 }
+
+
+#form input:focus{
+    background-color: #d7eeee;
+    border: 0px solid #555 !important;
+}
+
+
+#login button{
+    border-radius: 15px;
+    padding: 5px 20px;
+    font-size: 16px;
+    background-color: #3CA6A6;
+    width: 30%;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#login button:hover{
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 1px 4px 0 rgba(0,0,0,0.19);
+    background-color: #318686;
+}
+
+.content{
+    width: 60%;
+    margin:auto;
+    margin-top: 60px;
+}
+
+#new_account a{
+    color: #7cdbc7;
+    text-decoration: underline;
+}
+
+

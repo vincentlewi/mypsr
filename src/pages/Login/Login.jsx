@@ -1,13 +1,18 @@
-import './login.css'
-import PageTransition from "../../components/PageTransition"
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import React, { useRef, useState, useEffect } from "react"
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Alert } from "react-bootstrap"
+import { Link, useNavigate, useLocation } from "react-router-dom"
+import './login.css'
+import PageTransition from "../../components/PageTransition"
 
-export default function Login() {
+export default function LoginNew() {
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const { login } = useAuth()
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    
+
     // animations
     let ani = useLocation().state
     const [animate, setAnimate] = useState(ani)
@@ -18,12 +23,7 @@ export default function Login() {
         }
     }, [destination, navigate, ani, animate])
 
-    // user auth
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login } = useAuth()
-    const [error, setError] = useState()
-    const [loading, setLoading] = useState(false)
+
     async function handleSubmit(e) {
         e.preventDefault()
         try {
@@ -34,33 +34,46 @@ export default function Login() {
             navigate('/mypsr/home', {state:1})
         }
         catch {
-            setError('GABISA LOGIN JANCOK')
+            setError('Something went wrong! Please try again!')
         }
         setLoading(false)
 
     }
-
     return (
-        <div className="login">
+        <>
             <PageTransition animated={animate}/>
-            {error && <Alert variant ="danger">{error}</Alert>}
-            <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>back</div>
-            <div className='leftText'>
-                <h1>Hello!</h1>
-                <h2>Welcome to myPSR, your one-stop booking website!</h2>
+            <div id="login">
+                {error && <Alert variant ="danger">{error}</Alert>}
+                <div id="opening">
+                    <div className="content">
+                        <h1>Hello!</h1>
+                        <br/>
+                        <p id="welcome">Welcome to myPSR, your one-stop booking website!</p>
+                    </div>
+                </div>
+                <div id="form">
+                    <div className="content">
+                        <h2><b>Log In</b></h2>
+                                <label htmlFor='username' className="col-md-4 col-sm-12">Email:</label>
+                                <input type="email" id="username" ref={emailRef} className="col-md-8 col-sm-12"/>
+                                <label htmlFor="pwd" className="col-md-4 col-sm-12">Password:</label>
+                                <input type="password" id="pwd" ref={passwordRef} className="col-md-8 col-sm-12"/>
+                        <button id="sign-in" disabled={loading} onClick={handleSubmit}>Login</button>
+                        <div id="new_account">
+                            Do not have an account?
+                            <Link
+                            to="/register"
+                            onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
+                            >
+                                Sign Up
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className='form'>
-                <img src={require('../../assets/logowhite.png')} alt='logowhite'/>
-                <form>
-                    <p>Email:</p>
-                    <input type='email' ref={emailRef}/>
-                    <p>Password:</p>
-                    <input type='password' ref={passwordRef}/>
-                    <div disabled={loading} onClick={handleSubmit}>Login</div>
-                    Need an account? 
-                    <div onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}>Register</div>
-                </form>
-            </div>
-        </div>
+            
+
+        </>
+
     )
 }

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useAuth } from "../../components/contexts/AuthContext"
+import RemoveFavouriteGuest from './RemoveFavouriteGuest';
+import RegisterFavouriteGuest from './RegisterFavouriteGuest';
 
-export default function ComplaintCard(props) {
+export default function FavouriteGuestCard(props) {
 
     const [show, setShow] = useState(false);
     const { user } = useAuth()
@@ -11,19 +13,12 @@ export default function ComplaintCard(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const day = props.time.split(" ")[0]
-    const date = props.time.split(" ").slice(1,4).join(" ")
-    const time = props.time.split(" ")[4]
-
-    const final_str = day + ", " + date + " at " + time
-
     return (
         <>
             <div className="events-card col-lg-3 col-md-6 col-sm-12" id={props.id} onClick={handleShow}>
-                <h5><b>{props.name}</b></h5>
+                <h1><b>{props.name}</b></h1>
                 <hr />
-                <p>Time: {final_str}</p>
-                <p>Status: Report received</p>
+                <p> {props.email}</p>
             </div>
             <Modal
                 show={show}
@@ -32,21 +27,29 @@ export default function ComplaintCard(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Report Details</Modal.Title>
+                    <Modal.Title>Guest Information</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h5>Description of report:</h5>
-                    <p>{props.desc}</p>
+                    <p>Name: {props.name}</p>
                     <hr />
-                    <p>Location: {props.location}</p>
-                    <p>Report made on: {final_str}</p>
-                    <hr />
-                    <p> Status: Report received</p>
+                    <p>ID: {props.guestid}</p>
+                    <p>Email: {props.email}</p>
+                    <p>Phone Number: {props.phoneNumber}</p>
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
+                    <RemoveFavouriteGuest id={props.id}/>
+                    <RegisterFavouriteGuest
+                         id={props.id}
+                         firebaseref={props.id}
+                         guestid = {props.guestid}
+                         name={props.name}
+                         email={props.email}
+                         phoneNumber={props.phoneNumber}
+                    />
                 </Modal.Footer>
             </Modal>
         </>

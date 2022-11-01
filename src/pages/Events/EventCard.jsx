@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import DeleteEventsPopup from './DeleteEventsPopup'
 import { db } from "../../components/firebase"
 import { getDoc, doc, arrayUnion, updateDoc, arrayRemove } from "firebase/firestore"
-import { useAuth, user } from "../../components/contexts/AuthContext"
+import { useAuth } from "../../components/contexts/AuthContext"
 
 export default function EventCard(props) {
     const [show, setShow] = useState(false);
@@ -37,7 +37,7 @@ export default function EventCard(props) {
                 })
             } else {
                 //if event has user and is not the host of the event
-                if (eventParticipants[0] != userData.name) {
+                if (eventParticipants[0] !== userData.name) {
                     updateDoc(eventRef, {
                         participants: arrayRemove(userData.name)
                     })
@@ -65,7 +65,7 @@ export default function EventCard(props) {
             //If user is in the event
             if (eventParticipants.includes(userData.name)) {
                 //if the user is the host allow him to delete
-                if (eventParticipants[0] == userData.name) {
+                if (eventParticipants[0] === userData.name) {
                     setEventHost(userData.name + " (You)")
                     setShowDelete(true)
                     setShowJoin(false)
@@ -73,7 +73,7 @@ export default function EventCard(props) {
                     setShowDelete(false)
                     setShowJoin(true)
                 }
-                setJoinName("Unjoin")
+                setJoinName("Withdraw")
             } else {
                 setShowJoin(true)
                 setShowDelete(false)
@@ -107,11 +107,14 @@ export default function EventCard(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Details</Modal.Title>
+                    <Modal.Title><b>{props.name}</b></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h3>Host: {eventHost}</h3>
-                    <h5>Other Participants: {eventJoiners}</h5>
+                    <p>Time: {props.startTime + " to " + props.endTime}</p>
+                    <p>Date: {props.date}</p>
+                    <p>Location: {props.location}</p>
+                    <p><b>Host: {eventHost}</b></p>
+                    <p>Other Participants: {eventJoiners}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
