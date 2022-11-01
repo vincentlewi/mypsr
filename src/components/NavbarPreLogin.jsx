@@ -27,7 +27,7 @@ export default function NavbarPreLogin(props) {
   }
   
   return (
-      <Navbar bg="light" expand="lg" fixed="top" style={{zIndex:'100'}}>
+      <Navbar bg="light" expand="lg" fixed="top" style={{zIndex:'99'}}>
         <Container fluid>
           <Navbar.Brand href="#home" style={{margin: "0px 10px 5px 4px", padding: "0 0 2px 0"}}><img src={require('../assets/logoblack.png')} height="30" alt='logo'/></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
