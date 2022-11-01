@@ -1,4 +1,4 @@
-html{
+*{
     background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
 }
 
@@ -73,14 +73,7 @@ html{
 
 
 #login button{
-    border-radius: 15px;
-    padding: 5px 20px;
-    font-size: 16px;
-    background-color: #3CA6A6;
     width: 30%;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
 }
 
 #login button:hover{

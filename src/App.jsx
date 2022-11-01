@@ -13,6 +13,7 @@ import Error404 from './pages/Error404';
 import PrivateRoutes from "./components/PrivateRoutes"
 import './App.css';
 import './components/Components.css'
+import './components/buttons.css'
 
 function App() {
   const location = useLocation();

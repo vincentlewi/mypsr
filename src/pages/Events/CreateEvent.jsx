@@ -58,7 +58,7 @@ export default function CreateNewEvent() {
 
   return (
     <>
-      <button onClick={handleShow} className="px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 hover:text-white hover:bg-green-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2">Create</button>
+      <button onClick={handleShow} className="createbtn">Create</button>
       <Modal
         show={show}
         onHide={handleClose}
@@ -124,8 +124,8 @@ export default function CreateNewEvent() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button className="bg-slate-400 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded-full" onClick={handleClose}>Close</button>
-          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" onClick={finishCreating} >Create</button>
+          <button className="closebtn" onClick={handleClose}>Close</button>
+          <button className="createbtn" onClick={finishCreating} >Create</button>
         </Modal.Footer>
       </Modal>
     </>

@@ -1,7 +1,7 @@
 export default function StripeButton() {
   return (
     <button
-      className="btn btn-info btn-xl"
+      className="createbtn"
       onClick={() => {
         fetch("http://localhost:8080/create-checkout-session", {
           method: "POST",

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {db} from '../../components/firebase'
 import {doc, deleteDoc} from 'firebase/firestore'
@@ -18,11 +17,12 @@ export default function DeleteEventsPopup(props) {
 
   return (
     <>
-      <Button variant="danger" 
+      <button
+      className = "cancelbtn"
       disabled = {props.isDisabled}
       onClick={handleShow}>
         Delete Events
-      </Button>
+      </button>
 
       <Modal
         show={show}
@@ -39,13 +39,12 @@ export default function DeleteEventsPopup(props) {
           You cannot retrieve any data that has been deleted!
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger"
-          onClick={ ()=>
+          <button className = "closebtn" onClick={handleClose}> Close</button>
+          <button className = "cancelbtn" onClick={ ()=>
                 {deleteEvent(props.id)}
-            }>Delete Event</Button>
+            }>
+              Delete Event
+            </button>
         </Modal.Footer>
       </Modal>
     </>

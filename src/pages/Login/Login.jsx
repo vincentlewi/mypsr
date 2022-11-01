@@ -58,7 +58,7 @@ export default function LoginNew() {
                                 <input type="email" id="username" ref={emailRef} className="col-md-8 col-sm-12"/>
                                 <label htmlFor="pwd" className="col-md-4 col-sm-12">Password:</label>
                                 <input type="password" id="pwd" ref={passwordRef} className="col-md-8 col-sm-12"/>
-                        <button id="sign-in" disabled={loading} onClick={handleSubmit}>Login</button>
+                        <button id="sign-in" className = "createbtn" disabled={loading} onClick={handleSubmit}>Login</button>
                         <div id="new_account">
                             Do not have an account?
                             <Link

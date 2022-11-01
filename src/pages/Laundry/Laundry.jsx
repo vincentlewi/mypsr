@@ -41,7 +41,7 @@ export default function Laundry(){
                 laundry4: ['vittosuryat.2021']
             }
         },
-        '2022-10-31': {
+        '2022-11-02': {
             '23:00' : {
                 laundry1: ['vittosuryat.2021'],
                 laundry2: ['avlewi'],

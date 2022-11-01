@@ -94,9 +94,11 @@ export default function Register() {
         ))
         setLoading(false)
     }
+
     if([]){
         console.log('[]')
     }
+    
     useEffect(() => {
         if (error === '') {
             navigate('/mypsr/home')
@@ -145,6 +147,7 @@ export default function Register() {
                             <button 
                                 disabled={(!Object.values(isValid.current).every((v) => v)) || (loading)}
                                 onClick={(e) => handleSubmit(e)}
+                                className = "createbtn"
                             >
                                 Submit
                             </button>

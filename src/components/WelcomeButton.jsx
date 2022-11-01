@@ -50,9 +50,9 @@ export default function WelcomeButton(props){
         if(props.loc === "home"){
             return(
                     <div className="profile-btn">
-                        <Button variant="danger">
-                            Go To My Profile
-                        </Button>
+                        <button className = "createbtn">
+                            Go to My Profile
+                        </button>
                     </div>
             )
         }

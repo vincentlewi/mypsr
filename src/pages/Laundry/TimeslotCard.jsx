@@ -7,7 +7,7 @@ export default function TimeslotCard(props){
             {props.timings ? props.timings.map((hourSlot)=>{
             let time = hourSlot[0]
             return <button
-                className = 'btn col-2 btn-success'
+                className = 'col-2 createbtn'
                 disabled = {Object.values(hourSlot[1]).every((slot) => slot[0])}
                 id={time}
                 key={time}

@@ -31,7 +31,7 @@ export default function Home(){
             <PageTransition animated={animate} isPresent={isPresent}/>
             <Navbar/>
             <WelcomeButton loc="home"/>
-            <button className = "btn btn-danger" onClick={logout}>LOG OUT</button>
+            <button className = "cancelbtn" onClick={logout}>LOG OUT</button>
             <h2>Recent updates for you</h2>
             <HomeEvents/>
         </div>

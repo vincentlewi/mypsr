@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.createbtn{
+    border-radius: 25px;
+    background-color: #3CA6A6; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.createbtn:hover{
+    background-color: #3CA6A6;
+    box-shadow: 3px 3px 5px lightgrey;
+    
+}
+
+.createbtn:active{
+    background-color: #026773;
+    box-shadow: 0px 0px;
+}
+
+.closebtn{
+    border-radius: 25px;
+    background-color: #A5A2A2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+.closebtn:hover{
+    background-color: #A5A2A2;
+    box-shadow: 3px 3px 5px lightgrey;
+}
+
+.closebtn:active{
+    background-color: #797777;
+    box-shadow: 0px 0px;
+}
+
+.cancelbtn{
+    border-radius: 25px;
+    background-color: #CD2C2C;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cancelbtn:hover{
+    background-color: #CD2C2C;
+    box-shadow: 3px 3px 5px lightgrey;
+}
+
+.cancelbtn:active{
+    background-color: #B10404;
+    box-shadow: 0px 0px;
+}

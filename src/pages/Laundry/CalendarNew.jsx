@@ -58,7 +58,7 @@ export default function CalendarNew(props) {
               <button
                 onClick={nextMonth}
                 type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-cen ter p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Next month</span>
               </button>

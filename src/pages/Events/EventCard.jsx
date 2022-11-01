@@ -117,11 +117,16 @@ export default function EventCard(props) {
                     <p>Other Participants: {eventJoiners}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <button className = "closebtn" onClick={handleClose}>
                         Close
-                    </Button>
+                    </button>
                     {renderDeleteButton()}
-                    <Button hidden={!showJoin} variant="primary" onClick={() => { joinEvent(props.id) }}>{joinName}</Button>
+                    <button
+                    hidden = {!showJoin}
+                    className = "createbtn"
+                    onClick={() => { joinEvent(props.id) }}>
+                        {joinName}
+                    </button>
                 </Modal.Footer>
             </Modal>
         </>
