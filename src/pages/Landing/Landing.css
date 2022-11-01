@@ -88,7 +88,7 @@
 
 .landing .hole {
     pointer-events: none;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 56px);
     position: absolute;
     z-index: 80;

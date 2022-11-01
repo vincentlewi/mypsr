@@ -21,7 +21,7 @@ export default function Register() {
             setX(-50)
         }
     }, [fullnameWarning, emailWarning, passwordWarning, ConfirmWarning])
-
+    
     function checkFullname() {
         if (data.current.fullname.length === 0) {
             setFullnameWarning('Please enter your name')
@@ -31,13 +31,12 @@ export default function Register() {
             isValid.current.fullname = true
         }
     }
-    
     function checkEmail() {
         const year = new Date().getFullYear
         if (
             data.current.email.slice(-11) !== '.smu.edu.sg' || 
             parseInt(data.current.email.split('@')[0].slice(-4)) <= year ||
-            !['scis', 'business', 'economics', 'accountancy', 'socsc', 'law'].includes(data.current.email.split('@')[1].slice(0, 4))
+            !['scis', 'business', 'economics', 'accountancy', 'socsc', 'law'].includes(data.current.email.split('@')[1].split('.')[0])
         ) {
             setEmailWarning('Please use valid SMU email')
             isValid.current.email = false
@@ -88,17 +87,10 @@ export default function Register() {
             data.current.email, 
             data.current.password, 
             data.current.fullname,
-            83 + Math.floor(Math.random()*3)*2, 
-            Math.floor(Math.random()*4), 
-            Math.floor(Math.random()*10)
+            `0${Math.ceil(Math.random()*4)}-${String(Math.ceil(Math.random()*12)).padStart(2, 0)}${'abcde'[Math.floor(Math.random()*5)]}` // address. format: level.unit + room (a to e)
         ))
         setLoading(false)
     }
-
-    if([]){
-        console.log('[]')
-    }
-    
     useEffect(() => {
         if (error === '') {
             navigate('/mypsr/home')
