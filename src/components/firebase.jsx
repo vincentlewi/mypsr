@@ -6,21 +6,33 @@ import {
   signOut, signInWithEmailAndPassword,
   onAuthStateChanged, sendEmailVerification, updateProfile
 } from 'firebase/auth'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBymbzTkYRjuKaV7pym484v7rnOpHjloFg",
-  authDomain: "mypsr-dc320.firebaseapp.com",
-  projectId: "mypsr-dc320",
-  storageBucket: "mypsr-dc320.appspot.com",
-  messagingSenderId: "541265964220",
-  appId: "1:541265964220:web:c49333fe38245386f3b4b9",
-  measurementId: "G-6CPLWGZGDL"
+  apiKey: "AIzaSyBvoBFbMRhi8dhy6cEIsnjBk8myJDqvyBw",
+  authDomain: "mypsr-backup.firebaseapp.com",
+  projectId: "mypsr-backup",
+  storageBucket: "mypsr-backup.appspot.com",
+  messagingSenderId: "779681012043",
+  appId: "1:779681012043:web:f0e75a35261bdcca0df0ce",
+  measurementId: "G-1C3M99MCTE"
 };
 
+// the db that kena usage limit
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBymbzTkYRjuKaV7pym484v7rnOpHjloFg",
+//   authDomain: "mypsr-dc320.firebaseapp.com",
+//   projectId: "mypsr-dc320",
+//   storageBucket: "mypsr-dc320.appspot.com",
+//   messagingSenderId: "541265964220",
+//   appId: "1:541265964220:web:c49333fe38245386f3b4b9",
+//   measurementId: "G-6CPLWGZGDL"
+// };
 
+// original US db I think
 // const firebaseConfig = {
 //   apiKey: "AIzaSyBaN2LjRT_HJ5K9plN0yQ5ztcPxBR97508",
 //   authDomain: "mypsr-test-dcf48.firebaseapp.com",
@@ -35,3 +47,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 export const auth = getAuth()
+
+
+const storage = getStorage()
+export async function upload(file, user, setUserInfo, setLoading) {
+  const fileRef = ref(storage, `${user.uid}.png`)
+
+  setLoading(true)
+  const snapshot = await uploadBytes(fileRef, file)
+  const photoURL = await getDownloadURL(fileRef)
+
+  updateProfile(user, {
+    photoURL: photoURL
+  }).then(() => {
+      console.log('Profile updated!')
+      // ...
+  }).catch((error) => {
+      // An error occurred
+      // ...
+  });
+
+  // updates picture shown on page
+  setUserInfo(prevState => ({
+    ...prevState,
+    photo: photoURL
+  }))
+  console.log('a')
+  setLoading(false)
+}

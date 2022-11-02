@@ -11,7 +11,7 @@ import { setDoc, doc } from 'firebase/firestore'
 
 const AuthContext = React.createContext()
 
-export function useAuth(){
+export function useAuth(){ 
     return useContext(AuthContext)
 }
 
@@ -53,7 +53,7 @@ export function AuthProvider( {children} ){
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser){
-                console.log("from use effect",auth.currentUser)
+                console.log("from use effect", auth.currentUser)
                 setUser(currentUser)
                 console.log(user)
             }

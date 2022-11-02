@@ -1,0 +1,6 @@
+.profile .pp {
+    object-fit: cover;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+}
