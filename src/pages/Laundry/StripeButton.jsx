@@ -1,4 +1,15 @@
-export default function StripeButton() {
+export default function StripeButton(props) {
+  let referenceList = {
+    laundry1 : 1,
+    laundry2 : 2,
+    laundry3 : 3,
+    laundry4 : 4,
+    dryer1 : 5,
+    dryer2 : 6,
+    dryer3 : 7,
+    dryer4 : 8
+  }
+  
   return (
     <button
       className="createbtn"
