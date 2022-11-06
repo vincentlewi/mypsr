@@ -3,6 +3,7 @@ import { db } from '../../components/firebase'
 import { collection, query, orderBy, onSnapshot, where, getDoc, doc } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext"
 import EventCard from "../Events/EventCard";
+import NoEvent from "./NoEvent";
 
 export default function HomeEvents() {
     const [events, setEvents] = useState([])
@@ -29,7 +30,7 @@ export default function HomeEvents() {
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="activity-section row px-2 d-flex flex-wrap">
-                    <h1>{events.length === 0 ? "Looks like you dont haven't joined any events yet. Join an event today and see your events here!": null}</h1>
+                    {events.length === 0 ? <NoEvent/>:null}
                     {events.map((event) => {
                         return (
                             <EventCard

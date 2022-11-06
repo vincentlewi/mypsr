@@ -8,8 +8,14 @@ const stripe = require('stripe')(process.env.SECRET_KEY);
 app.use(express.json());
 
 const storeItems = new Map([
-    [1, {priceInCents: 300, name: '$3 Thing'}],
-    [2, {priceInCents: 600, name: '$6 Thing'}]
+    [1, {priceInCents: 300, name: 'Washer 1'}],
+    [2, {priceInCents: 300, name: 'Washer 2'}],
+    [3, {priceInCents: 300, name: 'Washer 3'}],
+    [4, {priceInCents: 300, name: 'Washer 4'}],
+    [5, {priceInCents: 300, name: 'Dryer 1'}],
+    [6, {priceInCents: 300, name: 'Dryer 2'}],
+    [7, {priceInCents: 300, name: 'Dryer 3'}],
+    [8, {priceInCents: 300, name: 'Dryer 4'}]
 ])
 
 app.use(
@@ -36,7 +42,7 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: item.quantity,
         }
       }),
-      success_url: `https://vincentlewi.github.io/mypsr`,
+      success_url: `http://localhost:3000/mypsr/laundry`,
       cancel_url: `https://smu.edu.sg`,
     })
     res.json({ url: session.url })

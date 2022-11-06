@@ -73,3 +73,15 @@
     background-color: #B10404;
     box-shadow: 0px 0px;
 }
+
+.disabledbtn{
+    border-radius: 25px;
+    border: 1px solid #A5A2A2;
+    color: #797777;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+

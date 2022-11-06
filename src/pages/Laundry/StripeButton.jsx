@@ -21,8 +21,8 @@ export default function StripeButton(props) {
           },
           body: JSON.stringify({
             items: [  
-              { id: 1, quantity: 1 },
-              { id: 2, quantity: 1  },
+              { id: referenceList.laundry1, quantity: 1 },
+              { id: referenceList.laundry2, quantity: 1  },
             ],
           }),
         })
