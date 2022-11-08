@@ -6,6 +6,9 @@ import {doc, deleteDoc, updateDoc, arrayUnion, getDoc} from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext"
 
 export default function AddToFavourites(props) {
+
+  console.log("Rendering AddToFavourites.jsx")
+
   const { user } = useAuth()
 
   async function handleAdd() {

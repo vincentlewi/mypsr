@@ -1,29 +1,45 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useAuth } from "../../components/contexts/AuthContext"
+import { Timestamp } from 'firebase/firestore'
+import { useEffect } from 'react';
 
 export default function ComplaintCard(props) {
 
     const [show, setShow] = useState(false);
+    const [status, setStatus] = useState(false);
     const { user } = useAuth()
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const day = props.time.split(" ")[0]
-    const date = props.time.split(" ").slice(1,4).join(" ")
-    const time = props.time.split(" ")[4]
+    // const day = props.time.split(" ")[0]
+    // const date = props.time.split(" ").slice(1,4).join(" ")
+    // const time = props.time.split(" ")[4]
 
-    const final_str = day + ", " + date + " at " + time
+    // const final_str = day + ", " + date + " at " + time
+
+    const time = props.time
+
+    useEffect(()=>{
+        if (Timestamp.now().toMillis() > time.toMillis() + 300000) {
+            setStatus("Status: Maintainence Done")
+        } else {
+            setStatus("Status: Report Received")
+        }
+    }, [])
+
+    const timeArr = time.toDate().toLocaleString().split(",")
+    const fstring = timeArr[0] + " at " + timeArr[1]
 
     return (
         <>
             <div className="events-card col-lg-3 col-md-6 col-sm-12" id={props.id} onClick={handleShow}>
                 <h5><b>{props.name}</b></h5>
                 <hr />
-                <p>Time: {final_str}</p>
-                <p>Status: Report received</p>
+                <p>Time: {fstring}</p>
+                <p>{status}</p>
             </div>
             <Modal
                 show={show}
@@ -39,9 +55,9 @@ export default function ComplaintCard(props) {
                     <p>{props.desc}</p>
                     <hr />
                     <p>Location: {props.location}</p>
-                    <p>Report made on: {final_str}</p>
+                    <p>Report made on: {fstring}</p>
                     <hr />
-                    <p> Status: Report received</p>
+                    <p> {status} </p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

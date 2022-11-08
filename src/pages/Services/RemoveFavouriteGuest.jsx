@@ -7,6 +7,9 @@ import { useAuth } from "../../components/contexts/AuthContext"
 import { createPath } from 'react-router-dom';
 
 export default function RemoveFavouriteGuest(props) {
+
+    console.log("RemoveFavouriteGuest.jsx")
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);

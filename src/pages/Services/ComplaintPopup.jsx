@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, collection, orderBy, query, onSnapshot } from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, orderBy, query, onSnapshot, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 
 
@@ -21,6 +21,15 @@ export default function ComplaintPopup() {
   const { user } = useAuth()
   const userRef = doc(db, "users", user.uid)
 
+  console.log("Rendering ComplaintPopUp.jsx")
+
+  function getCurrentTime() {
+    const beginningDate = Date.now()
+    const beginningDateObject = new Date(beginningDate)
+    const timestamp = Timestamp.fromDate(beginningDateObject)
+    return timestamp
+  }
+
   async function createMaintainence() {
     try {
       const userSnap = await getDoc(userRef)
@@ -31,9 +40,9 @@ export default function ComplaintPopup() {
           description: newDescription,
           location: newLocation,
           reporter: userSnap.data().name,
-          time: currentTime.toString()
+          time: getCurrentTime()
         })
-    } catch(e) {
+    } catch (e) {
       console.log(e.message)
     }
   }
@@ -65,19 +74,19 @@ export default function ComplaintPopup() {
           <Modal.Title>File your complaints here</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <label htmlFor='problem_name'>Subject of Complaint<input type="text" name="" id="problem_name" onChange={(e)=> {setNewName(e.target.value)}}/></label>
-            <label htmlFor='description'>Description<input type="textarea" name="" id="description" onChange={(e)=> {setNewDescription(e.target.value)}}/></label>
-            <label>Location
-            <select id = "location" onChange={(e)=> {setNewLocation(e.target.value)}}>
-                <option selected disabled hidden>--Select an option--</option>
-                <option>My Room</option>
-                <option>PSR Study Area</option>
-                <option>PSR Dining Area</option>
-                <option>PSR Classroom</option>
-                <option>PSR Court</option>
-                <option>PSR Relax Area</option>
+          <label htmlFor='problem_name'>Subject of Complaint<input type="text" name="" id="problem_name" onChange={(e) => { setNewName(e.target.value) }} /></label>
+          <label htmlFor='description'>Description<input type="textarea" name="" id="description" onChange={(e) => { setNewDescription(e.target.value) }} /></label>
+          <label>Location
+            <select id="location" onChange={(e) => { setNewLocation(e.target.value) }}>
+              <option selected disabled hidden>--Select an option--</option>
+              <option>My Room</option>
+              <option>PSR Study Area</option>
+              <option>PSR Dining Area</option>
+              <option>PSR Classroom</option>
+              <option>PSR Court</option>
+              <option>PSR Relax Area</option>
             </select>
-            </label>
+          </label>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -87,4 +96,5 @@ export default function ComplaintPopup() {
         </Modal.Footer>
       </Modal>
     </>
-  )}
+  )
+}

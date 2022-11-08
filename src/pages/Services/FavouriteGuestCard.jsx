@@ -7,6 +7,8 @@ import RegisterFavouriteGuest from './RegisterFavouriteGuest';
 
 export default function FavouriteGuestCard(props) {
 
+    console.log("Rendering FavouriteGuestCard.jsx")
+
     const [show, setShow] = useState(false);
     const { user } = useAuth()
 
