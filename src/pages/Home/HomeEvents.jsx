@@ -6,6 +6,7 @@ import EventCard from "../Events/EventCard";
 import NoEvent from "./NoEvent";
 
 export default function HomeEvents() {
+    console.log("==RENDER in homeEvents .jsx==")
     const [events, setEvents] = useState([])
     const { user } = useAuth()
 
@@ -50,8 +51,8 @@ export default function HomeEvents() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="activity-section row px-2 d-flex flex-wrap">
-                    {events.length === 0 ? <NoEvent /> : null}
+                <div className="roww events">
+                    {events.length === 0 ? <NoEvent/>:null}
                     {events.map((event) => {
                         return (
                             <EventCard

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EventCard from "./EventCard";
 import { db } from '../../components/firebase'
 import { collection, query, orderBy, onSnapshot, where, Timestamp } from 'firebase/firestore'
+import '../../components/card.css'
 
 export default function EventUpdates() {
     const [events, setEvents] = useState([])
@@ -24,7 +25,7 @@ export default function EventUpdates() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="activity-section row px-2 d-flex flex-wrap">
+                <div className="events roww">
                     {events.map((event) => {
                         return (
                             <EventCard

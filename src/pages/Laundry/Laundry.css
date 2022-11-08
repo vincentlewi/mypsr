@@ -38,6 +38,11 @@
     color: black;
 }
 
-.past {
-    background-color: hotpink;
+.top-part, .bottom-part{    
+    display: flex;
+    justify-content: space-between;
+    margin:auto;
 }
+
+/* .top-part .timeslot-card{
+} */

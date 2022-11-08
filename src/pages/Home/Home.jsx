@@ -1,9 +1,8 @@
 import Navbar from '../../components/Navbar';
-import EventUpdates from '../Events/EventUpdates'
 import WelcomeButton from '../../components/WelcomeButton'
-import { auth } from '../../components/firebase'
-import { signOut } from 'firebase/auth'
-import { useLocation, useNavigate } from "react-router-dom"
+
+
+import { useLocation } from "react-router-dom"
 import { useIsPresent } from "framer-motion";
 import PageTransition from '../../components/PageTransition'
 import './Home.css'
@@ -13,27 +12,24 @@ import HomeEvents from './HomeEvents';
 
 
 export default function Home(){
+    console.log("==RENDER in Home.jsx==")
     const isPresent = useIsPresent()
     const location = useLocation()
     const [animate, setAnimate] = useState(location.state)
-    const navigate = useNavigate()
-    function logout(){
-        signOut(auth)
-        navigate('/mypsr')
-    }
-
+    
     useEffect(() => {
         setAnimate(0)
     }, [])
     
     return(
-        <div className='Home'>
+        <div className='home'>
             <PageTransition animated={animate} isPresent={isPresent}/>
             <Navbar/>
-            <WelcomeButton loc="home"/>
-            <button className = "cancelbtn" onClick={logout}>LOG OUT</button>
-            <h2>Recent updates for you</h2>
-            <HomeEvents/>
+            <div className="container">
+                <WelcomeButton loc="home"/>
+                <h2>Recent updates for you</h2>
+                <HomeEvents/>   
+            </div>
         </div>
     )
 }

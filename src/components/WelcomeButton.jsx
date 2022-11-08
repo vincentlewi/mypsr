@@ -45,19 +45,6 @@ export default function WelcomeButton(props){
         return time;
     }
     
-    
-    function getProfileButton(){
-        if(props.loc === "home"){
-            return(
-                    <div className="profile-btn">
-                        <button className = "createbtn">
-                            Go to My Profile
-                        </button>
-                    </div>
-            )
-        }
-    }
-    
     return (
         <div className="WelcomeButton">
             <div className="welcome-img">
@@ -66,7 +53,6 @@ export default function WelcomeButton(props){
             <div className="welcome_msg">
                 <h3><span className = "header"><b>{getTiming()}, {username}</b></span></h3>
                 <h3 className = "subheader py-2">{notes[props.loc]}</h3>
-                {getProfileButton()}
             </div>  
         </div>
     );

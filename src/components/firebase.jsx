@@ -7,6 +7,10 @@ import {
   onAuthStateChanged, sendEmailVerification, updateProfile
 } from 'firebase/auth'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { doc, getDoc } from 'firebase/firestore'
+import { useAuth } from './contexts/AuthContext'
+import { useState } from 'react';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -60,7 +64,7 @@ export async function upload(file, user, setUserInfo, setLoading) {
   updateProfile(user, {
     photoURL: photoURL
   }).then(() => {
-      console.log('Profile updated!')
+      console.log('Profile updated!') 
       // ...
   }).catch((error) => {
       // An error occurred
@@ -72,6 +76,6 @@ export async function upload(file, user, setUserInfo, setLoading) {
     ...prevState,
     photo: photoURL
   }))
-  console.log('a')
   setLoading(false)
+  window.location.reload()
 }

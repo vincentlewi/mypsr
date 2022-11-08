@@ -21,6 +21,7 @@ function classNames(...classes) {
 }
 
 export default function CalendarNew(props) {
+  console.log("==RENDER in CalendarNew.jsx==")
   let today = startOfToday()
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
@@ -51,7 +52,7 @@ export default function CalendarNew(props) {
               <button
                 type="button"
                 onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Previous month</span>
               </button>

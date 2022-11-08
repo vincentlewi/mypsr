@@ -1,4 +1,5 @@
 export default function StripeButton(props) {
+  console.log("==RENDER in StripeButton.jsx==")
   let referenceList = {
     laundry1 : 1,
     laundry2 : 2,
