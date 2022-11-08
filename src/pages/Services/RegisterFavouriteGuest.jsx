@@ -6,6 +6,9 @@ import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs } from 
 import { useAuth } from '../../components/contexts/AuthContext'
 
 export default function RegisterFavouriteGuest(props) {
+
+    console.log("Rendering RegisterFavouriteGuest.jsx")
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
