@@ -10,37 +10,48 @@ export default function HomeEvents() {
     const { user } = useAuth()
 
     const eventsRef = collection(db, "events")
-    const userRef = doc(db,"users", user.uid )
-    
-    async function getEventsDocs(){
+    const userRef = doc(db, "users", user.uid)
+
+    async function getEventsDocs() {
         const userDoc = await getDoc(userRef)
         const username = userDoc.data().name
-        const q = query(eventsRef, where("participants", "array-contains", username ),  where("endtimestamp", ">", getCurrentTime()), orderBy("endtimestamp", "asc"), orderBy("starttimestamp", "asc"))
+        const q = query(eventsRef, where("participants", "array-contains", username), where("endtimestamp", ">", getCurrentTime()), orderBy("endtimestamp", "asc"), orderBy("starttimestamp", "asc"))
         onSnapshot(q, (snapshot) => {
             setEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         },
-        error=>{
+        error => {
             console.log(error.message)
         })
     }
 
-    function getCurrentTime(){
+    function getCurrentTime() {
         const beginningDate = Date.now()
         const beginningDateObject = new Date(beginningDate)
         const timestamp = Timestamp.fromDate(beginningDateObject)
+        console.log("Current time is", beginningDateObject)
+        return timestamp
+    }
+
+    function getOneWeekFromNow() {
+        const beginningDate = Date.now()
+        const beginningDateObject = new Date(beginningDate)
+        beginningDateObject.setDate(beginningDateObject.getDate() + 7)
+        const endDate = new Date(beginningDateObject)
+        const timestamp = Timestamp.fromDate(endDate)
+        console.log("One week from now is", endDate)
         return timestamp
     }
 
     useEffect(() => {
         getEventsDocs()
-    })
-           
+    }, [])
+
 
     return (
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="activity-section row px-2 d-flex flex-wrap">
-                    {events.length === 0 ? <NoEvent/>:null}
+                    {events.length === 0 ? <NoEvent /> : null}
                     {events.map((event) => {
                         return (
                             <EventCard
