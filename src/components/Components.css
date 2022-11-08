@@ -4,12 +4,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    margin-top: 80px;
-    margin-bottom: 40px;
+    margin: 80px auto 40px;
     border-radius: 14px;
-    background-color: #FFE0CF;
-    padding: 10px;
+    background-color: #CBE5FF;
+    padding: 80px;
+}
+
+.WelcomeButton .welcome-img{
+    flex: 1;
+}
+
+.WelcomeButton .welcome-msg{
+    flex: 2;
 }
 
 .WelcomeButton img{
@@ -17,7 +23,7 @@
 }
 
 .subheader{
-    color: #F78B43;
+    color: #024959;
 }
 
 .events-card{

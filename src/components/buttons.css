@@ -76,7 +76,8 @@
 
 .disabledbtn{
     border-radius: 25px;
-    border: 1px solid #A5A2A2;
+    background-color: #dfdddd;
+    border: none;
     color: #797777;
     padding: 10px 20px;
     text-align: center;
@@ -85,3 +86,26 @@
     font-size: 16px;
 }
 
+.laundrybtn{
+    border-radius: 25px;
+    background-color: #D3EFBD; /* Green */
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.laundrybtn:hover{
+    background-color: #d0f5b3;
+    box-shadow: 3px 3px 5px lightgrey;
+    
+}
+
+.laundrybtn:active{
+    background-color: #d3fdb3;
+    box-shadow: 0px 0px;
+}

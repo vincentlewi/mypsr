@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EventCard from "./EventCard";
 import { db } from '../../components/firebase'
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import '../../components/card.css'
 
 export default function EventUpdates(){
         const [events, setEvents] = useState([])
@@ -9,12 +10,14 @@ export default function EventUpdates(){
             () => 
             onSnapshot(query(collection(db, 'events'), orderBy("date", "asc"), orderBy("startTime", "asc")), (snapshot) => {
                 setEvents(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+            }, error=>{
+                console.log(error.message)
             }), [])
 
     return(
         <>
          <div className="schedule p-3 mx-auto">
-            <div className="activity-section row px-2 d-flex flex-wrap">
+            <div className="row events">
                 {events.map((event) => {
                     return (    
                     <EventCard

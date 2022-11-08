@@ -1,0 +1,102 @@
+.column {
+    float: left;
+    width: 25%;
+    padding: 20px 20px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.roww {
+    margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.roww:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the counter cards */
+.events .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* this adds the "card" effect */
+    padding: 16px;
+    /* text-align: center; */
+    background-color: #EFF7FF;
+    color: #024959;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .column {
+        width: 33%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .column {
+        width: 50%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+.col-75 {
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+}
+
+.butt-on {
+    text-align: right;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 250px) {
+    .butt-on {
+        text-align: center;
+    }
+}
+
+.title {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.laundry .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* this adds the "card" effect */
+    padding: 16px;
+    /* text-align: center; */
+    background-color: #024959;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.test .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* this adds the "card" effect */
+    padding: 16px;
+    /* text-align: center; */
+    background-color: #EFF7FF;
+    color: #024959;
+    border: none;
+    border-radius: 10px;
+}

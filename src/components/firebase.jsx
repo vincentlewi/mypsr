@@ -11,26 +11,26 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBvoBFbMRhi8dhy6cEIsnjBk8myJDqvyBw",
-//   authDomain: "mypsr-backup.firebaseapp.com",
-//   projectId: "mypsr-backup",
-//   storageBucket: "mypsr-backup.appspot.com",
-//   messagingSenderId: "779681012043",
-//   appId: "1:779681012043:web:f0e75a35261bdcca0df0ce",
-//   measurementId: "G-1C3M99MCTE"
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyBvoBFbMRhi8dhy6cEIsnjBk8myJDqvyBw",
+  authDomain: "mypsr-backup.firebaseapp.com",
+  projectId: "mypsr-backup",
+  storageBucket: "mypsr-backup.appspot.com",
+  messagingSenderId: "779681012043",
+  appId: "1:779681012043:web:f0e75a35261bdcca0df0ce",
+  measurementId: "G-1C3M99MCTE"
+};
 
 // the db that kena usage limit
-const firebaseConfig = {
-  apiKey: "AIzaSyBymbzTkYRjuKaV7pym484v7rnOpHjloFg",
-  authDomain: "mypsr-dc320.firebaseapp.com",
-  projectId: "mypsr-dc320",
-  storageBucket: "mypsr-dc320.appspot.com",
-  messagingSenderId: "541265964220",
-  appId: "1:541265964220:web:c49333fe38245386f3b4b9",
-  measurementId: "G-6CPLWGZGDL"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBymbzTkYRjuKaV7pym484v7rnOpHjloFg",
+//   authDomain: "mypsr-dc320.firebaseapp.com",
+//   projectId: "mypsr-dc320",
+//   storageBucket: "mypsr-dc320.appspot.com",
+//   messagingSenderId: "541265964220",
+//   appId: "1:541265964220:web:c49333fe38245386f3b4b9",
+//   measurementId: "G-6CPLWGZGDL"
+// };
 
 // original US db I think
 // const firebaseConfig = {
@@ -60,7 +60,7 @@ export async function upload(file, user, setUserInfo, setLoading) {
   updateProfile(user, {
     photoURL: photoURL
   }).then(() => {
-      console.log('Profile updated!')
+      console.log('Profile updated!') 
       // ...
   }).catch((error) => {
       // An error occurred

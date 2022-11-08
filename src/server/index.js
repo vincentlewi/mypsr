@@ -20,7 +20,7 @@ const storeItems = new Map([
 
 app.use(
     cors({
-      origin: "http://localhost:3001",
+      origin: "http://localhost:3000",
     })
   )
 
