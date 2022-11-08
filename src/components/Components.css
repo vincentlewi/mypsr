@@ -37,3 +37,7 @@
     background-color: #a3be5f;
     cursor: pointer;
 }
+
+img.profile {
+    border-radius: 50%;
+}

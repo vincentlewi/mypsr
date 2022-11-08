@@ -3,8 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from './contexts/AuthContext';
 
 export default function NavbarDoang(props) {
+  const { user } = useAuth()
+  // const profile
   const navigate = useNavigate()
   return (
       <Navbar bg="light" expand="lg" fixed="top" style={{zIndex:'100'}}>
@@ -18,7 +21,7 @@ export default function NavbarDoang(props) {
               <Nav.Link className={'nav-link'} id='maintenaceLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
-              <Button variant="outline-success" className="d-grid gap-2">Profile</Button>
+              <img className='profile' src={user.photoURL} height='40'></img>
             </Link>
           </Navbar.Collapse>
         </Container>

@@ -4,7 +4,8 @@ import { auth, db } from '../firebase'
 import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
-    onAuthStateChanged
+    onAuthStateChanged,
+    updateProfile
 } from 'firebase/auth'
 import { setDoc, doc } from 'firebase/firestore'
 
@@ -31,6 +32,9 @@ export function AuthProvider( {children} ){
                     complaints: [],
                     wallet: 0,
                     address: address
+                })
+                updateProfile(auth.currentUser, {
+                    photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
                 })
                 setUser(auth.currentUser)
             })
