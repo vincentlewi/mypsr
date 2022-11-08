@@ -11,7 +11,6 @@ export default function PreLoginContent() {
   const next = () => {
     setY(y - document.documentElement.clientHeight + 56)
   }
-  console.log(document.documentElement.clientHeight - 56)
   const back = () => {
     setY(y + document.documentElement.clientHeight - 56)
   }

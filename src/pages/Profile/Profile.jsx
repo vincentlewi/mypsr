@@ -1,28 +1,30 @@
 import './profile.css'
-import { db, upload } from '../../components/firebase'
+import { db } from '../../components/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Navbar from '../../components/Navbar'
 import { useEffect } from 'react';
 import PhotoCropper from './PhotoCropper';
 
 export default function Profile() {
     const { user } = useAuth()
-
+    console.log(user.photoURL)
+    // const useruser = useUser()
+    // console.log(() => useUser())
     // getting user data from firestore
     const userRef = doc(db, "users", user.uid)
     const date = new Date()
     let [userInfo, setUserInfo] = useState({})
     const schoolNames = {
         scis: 'School of Computing and Information Systems',
-        sob: 'School of Business',
-        soe: 'School of Economics',
-        soa: 'School of Accountancy',
-        soss: 'School of Social Sciences',
-        sol: 'School of Law'
+        business: 'School of Business',
+        economics: 'School of Economics',
+        accountancy: 'School of Accountancy',
+        socsc: 'School of Social Sciences',
+        law: 'School of Law'
     }
-        
+    
     async function getUserData(){
         const userDoc = await getDoc(userRef)
         const userData = userDoc.data()
