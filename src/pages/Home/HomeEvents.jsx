@@ -34,13 +34,13 @@ export default function HomeEvents() {
 
     useEffect(() => {
         getEventsDocs()
-    })
+    },[])
            
 
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="row events">
+                <div className="roww events">
                     {events.length === 0 ? <NoEvent/>:null}
                     {events.map((event) => {
                         return (

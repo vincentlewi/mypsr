@@ -18,7 +18,7 @@ export default function NavbarDoang(props) {
               <Nav.Link className={'nav-link'} id='maintenaceLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
-              <Button variant="outline-success" className="d-grid gap-2">profile</Button>
+              <Button variant="outline-success" className="d-grid gap-2">Profile</Button>
             </Link>
           </Navbar.Collapse>
         </Container>

@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar';
 import WelcomeButton from '../../components/WelcomeButton'
 
 
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useIsPresent } from "framer-motion";
 import PageTransition from '../../components/PageTransition'
 import './Home.css'
@@ -25,9 +25,11 @@ export default function Home(){
         <div className='home'>
             <PageTransition animated={animate} isPresent={isPresent}/>
             <Navbar/>
-            <WelcomeButton loc="home"/>
-            <h2>Recent updates for you</h2>
-            <HomeEvents/>
+            <div className="container">
+                <WelcomeButton loc="home"/>
+                <h2>Recent updates for you</h2>
+                <HomeEvents/>   
+            </div>
         </div>
     )
 }

@@ -25,7 +25,7 @@ export default function EventUpdates() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="events row">
+                <div className="events roww">
                     {events.map((event) => {
                         return (
                             <EventCard

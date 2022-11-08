@@ -1,0 +1,8 @@
+.events-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.events-header button{
+    max-height: 50px;
+}

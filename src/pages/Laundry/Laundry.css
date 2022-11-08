@@ -38,8 +38,7 @@
     color: black;
 }
 
-.top-part, .bottom-part{
-    width: 80%;
+.top-part, .bottom-part{    
     display: flex;
     justify-content: space-between;
     margin:auto;

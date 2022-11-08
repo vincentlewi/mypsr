@@ -6,10 +6,15 @@ import CalendarNew from './CalendarNew'
 import React, { useState, useRef } from 'react'
 import Navbar from '../../components/Navbar'
 import OrderSummary from './OrderSummary'
+import { db } from '../../components/firebase'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { useEffect } from 'react'
 
 export default function Laundry(){
     console.log("==RENDER in Laundry.jsx==")
     const [dateID, setDateID] = useState('')
+    const [laundryDateObject, setLaundryDateObject] = useState([])
+    const [dryerDateObject, setDryerDateObject] = useState([])
     const [laundryTimeSlot, setLaundryTimeSlot] = useState('')
     const [dryerTimeSlot, setDryerTimeSlot] = useState('')
     const [chosenLaundry, setChosenLaundry] = useState('')
@@ -42,175 +47,240 @@ export default function Laundry(){
     const getChosenLaundry = (laundry) => setChosenLaundry(laundry)
 
     const getChosenDryer = (dryer) => setChosenDryer(dryer)
+ 
+    async function getLaundryDate(dateID){
+        const docRef = doc(db, "laundry", dateID)
+        const docSnap = await getDoc(docRef)
 
-
-    
-
-    let laundryData = {
-        '': {},
-        '2022-11-08': {
-            '00:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '01:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '02:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['wilsonsetiawan'],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '03:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '04:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '05:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '06:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '07:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '08:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '09:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '10:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '11:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '12:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '13:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '14:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '15:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '16:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '17:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '18:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '19:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: [],
-                laundry3: [],
-                laundry4: ['vittosuryat.2021']
-            },
-            '20:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '21:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            },
-            '22:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: ['jordih'],
-                laundry4: ['vittosuryat.2021']
-            },
-            '23:00' : {
-                laundry1: ['vit'],
-                laundry2: ['emil'],
-                laundry3: ['wilson'],
-                laundry4: ['vittosuryat.202']
-            }
-        },
-        '2022-11-09': {
-            '23:00' : {
-                laundry1: ['vittosuryat.2021'],
-                laundry2: ['avlewi'],
-                laundry3: [],
-                laundry4: ['jordhi']
-            }
-        }}
-
-    let dryerData = {
-            '': {},
-            '2022-11-08': {
+        if (docSnap.exists()){
+            setLaundryDateObject(docSnap.data()) 
+        }
+        else{
+            await setDoc(docRef,
+            {
+                '00:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '01:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '02:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '03:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '04:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '05:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '06:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '07:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '08:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '09:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
                 '10:00' : {
-                    dryer1: ['wilsos'],
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '11:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '12:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '13:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '14:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '15:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '16:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '17:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '18:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '19:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '20:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '21:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '22:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                },
+                '23:00' : {
+                    laundry1: [],
+                    laundry2: [],
+                    laundry3: [],
+                    laundry4: []
+                }
+            })
+            getLaundryDate(dateID)
+        }
+    }
+
+    async function getDryerDate(dateID){
+        const docRef = doc(db, "dryer", dateID)
+        const docSnap = await getDoc(docRef)
+        if (docSnap.exists()){
+            setDryerDateObject(docSnap.data()) 
+        }
+        else{
+            await setDoc(docRef,
+            {
+                '00:00' : {
+                    dryer1: [],
                     dryer2: [],
-                    dryer3: ['jordih'],
-                    dryer4: ['vittosuryat.2021']
+                    dryer3: [],
+                    dryer4: []
+                },
+                '01:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '02:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '03:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '04:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '05:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '06:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '07:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '08:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '09:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '10:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
                 },
                 '11:00' : {
                     dryer1: [],
@@ -219,33 +289,100 @@ export default function Laundry(){
                     dryer4: []
                 },
                 '12:00' : {
-                    dryer1: ['vittosuryat.2021'],
-                    dryer2: ['hello'],
-                    dryer3: ['kyong'],
-                    dryer4: ['vittosuryat.2021']
-                }
-            },
-            '2022-11-09': {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '13:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '14:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '15:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '16:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '17:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '18:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '19:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '20:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '21:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
+                '22:00' : {
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
+                },
                 '23:00' : {
-                    laundry1: ['vittosuryat.2021'],
-                    laundry2: ['avlewi'],
-                    laundry3: [],
-                    laundry4: ['jordhi']
+                    dryer1: [],
+                    dryer2: [],
+                    dryer3: [],
+                    dryer4: []
                 }
-        }}
+            })
+            getDryerDate(dateID)
+        }
 
-    let laundryTimings = laundryData[dateID] ? Object.entries(laundryData[dateID]):null
+    }
+
+    useEffect(()=>{
+        getLaundryDate(dateID)
+        getDryerDate(dateID)
+    },[dateID])
+
+    let laundryTimings = Object.entries(laundryDateObject).sort()
     laundryTimings ? laundryTimings.map((slot) => {
         if(slot[0] === laundryTimeSlot){
-            machineSlot.current = Object.entries(slot[1])
+            machineSlot.current = Object.entries(slot[1]).sort()
         }
         return machineSlot.current
     }): machineSlot.current = []
 
-    let dryerTimings = dryerData[dateID] ? Object.entries(dryerData[dateID]):null
+    let dryerTimings = Object.entries(dryerDateObject).sort()
     dryerTimings ? dryerTimings.map((slot) => {
         if(slot[0] === dryerTimeSlot){
-            dryerSlot.current = Object.entries(slot[1])
+            dryerSlot.current = Object.entries(slot[1]).sort()
         }
         return dryerSlot.current
     }): dryerSlot.current = []
@@ -253,20 +390,22 @@ export default function Laundry(){
     return(
        <>
         <Navbar/>
-        <WelcomeButton loc="laundry"/>
-        <div className="top-part">
-            <CalendarNew getDateID={getDateID}/>
-            <div className="timeslot-area">
-                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot}/>
-                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot}/>
+        <div className="container">
+            <WelcomeButton loc="laundry"/>
+            <div className="top-part">
+                <CalendarNew getDateID={getDateID}/>
+                <div className="timeslot-area">
+                    <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot}/>
+                    <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot}/>
+                </div>
             </div>
+            <div className="bottom-part">
+                <MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>
+                <MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>
+            </div>
+            {(chosenLaundry || chosenDryer) ?<OrderSummary laundrySlot = {chosenLaundry} dryerSlot = {chosenDryer}/>: null}
+            <StripeButton/>
         </div>
-        <div className="bottom-part">
-            <MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>
-            <MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>
-        </div>
-        {(chosenLaundry || chosenDryer) ?<OrderSummary laundrySlot = {chosenLaundry} dryerSlot = {chosenDryer}/>: null}
-        <StripeButton/>
        </> 
     )
 }
