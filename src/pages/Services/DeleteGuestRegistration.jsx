@@ -5,6 +5,8 @@ import {db} from '../../components/firebase'
 import {doc, deleteDoc} from 'firebase/firestore'
 
 export default function DeleteGuestRegistration(props) {
+
+  console.log("Rendering DeleteGuestRegistration.jsx")
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

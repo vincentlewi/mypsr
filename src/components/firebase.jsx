@@ -64,7 +64,7 @@ export async function upload(file, user, setUserInfo, setLoading) {
   updateProfile(user, {
     photoURL: photoURL
   }).then(() => {
-      console.log('Profile updated!')
+      console.log('Profile updated!') 
       // ...
   }).catch((error) => {
       // An error occurred

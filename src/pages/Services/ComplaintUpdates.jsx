@@ -8,6 +8,8 @@ export default function ComplaintUpdates() {
     const [complaints, setComplaints] = useState([])
     const { user } = useAuth()
 
+    console.log("Rendering ComplaintUpdates.jsx")
+
     async function getUserDoc() {
         const userDoc = await getDoc(doc(db, "users", user.uid))
         const username = userDoc.data().name

@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, updateDoc, arrayUnion, serverTimestamp, collection, orderBy, query, onSnapshot, deleteDoc, where, setDoc, getDocs } from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 
 export default function GuestFormPopup(props) {
+
+  console.log("Rendering GuestFormPopup.jsx")
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,6 +27,16 @@ export default function GuestFormPopup(props) {
   const { user, username } = useAuth()
   const userRef = doc(db, "users", user.uid)
   const guestsCollectionRef = collection(db, 'guests')
+
+  function getCurrentTime() {
+    const beginningDate = Date.now()
+    const beginningDateObject = new Date(beginningDate)
+    const timestamp = Timestamp.fromDate(beginningDateObject)
+    return timestamp
+  }
+
+  const dateArr = date.split("-")
+  const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
 
   async function createGuestRegistration() {
     try {
@@ -44,7 +57,9 @@ export default function GuestFormPopup(props) {
           name: name,
           purpose: purpose,
           resident: username,
-          guestFirebaseRef: docRef.id
+          guestFirebaseRef: docRef.id, 
+          created: getCurrentTime(),
+          datetimestamp: datetimestamp
         })
       } else {
         const docRef = await addDoc(guestsCollectionRef,
@@ -61,7 +76,9 @@ export default function GuestFormPopup(props) {
           name: name,
           purpose: purpose,
           resident: username,
-          guestFirebaseRef: docRef.id
+          guestFirebaseRef: docRef.id,
+          created: getCurrentTime(),
+          datetimestamp: datetimestamp
         })
       }
     } catch (e) {

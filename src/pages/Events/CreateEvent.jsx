@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore'
+import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, updateDoc, setDoc, arrayUnion, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 
 
@@ -16,6 +16,7 @@ export default function CreateNewEvent() {
   const [newEndTime, setNewEndTime] = useState("")
   const [newLocation, setNewLocation] = useState("")
   const [newDate, setNewDate] = useState("")
+  const [errorMessage, setErrorMessage] = useState()
   const [events, setEvents] = useState([])
   const eventsCollectionRef = collection(db, 'events')
   const q = query(eventsCollectionRef, orderBy("date", "asc"), orderBy("startTime", "asc"))
@@ -24,30 +25,42 @@ export default function CreateNewEvent() {
 
   async function createEvent() {
     try {
-      console.log("This is who is logged in", user.uid)
       const userSnap = await getDoc(userRef)
-      console.log(userSnap.data())
-      const docRef = await addDoc(eventsCollectionRef,
-        {
-          name: newName,
-          startTime: newStartTime,
-          endTime: newEndTime,
-          location: newLocation,
-          date: newDate,
-          participants: [userSnap.data().name]
+      const dateArr = newDate.split("-")
+      const endTimeArr = newEndTime.split(":")
+      const startTimeArr = newStartTime.split(":")
+      const endTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endTimeArr[0], endTimeArr[1]))
+      const startTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], startTimeArr[0], startTimeArr[1]))
+
+      if (newName == "" || newStartTime == "" || newEndTime == "" || newLocation == "" || newDate == "") {
+        setErrorMessage("Please enter all of the required fields")
+        setShow(true)
+      } else {
+        const docRef = await addDoc(eventsCollectionRef,
+          {
+            name: newName,
+            startTime: newStartTime,
+            endTime: newEndTime,
+            location: newLocation,
+            date: newDate,
+            participants: [userSnap.data().name],
+            starttimestamp: startTimeStamp,
+            endtimestamp: endTimeStamp
+          })
+
+        updateDoc(doc(db, "users", user.uid), {
+          events: arrayUnion(docRef.id)
         })
-      console.log("This is the event id", docRef.id)
-      updateDoc(doc(db, "users", user.uid), {
-        events: arrayUnion(docRef.id)
-      })
-    } catch(e) {
+
+        handleClose();
+      }
+    } catch (e) {
       console.log(e.message)
     }
   }
 
   async function finishCreating() {
     createEvent();
-    handleClose();
   }
 
   useEffect(
@@ -77,7 +90,7 @@ export default function CreateNewEvent() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="name" type="text" onChange={(e) => { setNewName(e.target.value) }} />
+                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="name" type="text" onChange={(e) => { setNewName(e.target.value) }} required />
               </div>
             </div>
             <div className="md:flex md:items-center mb-6">
@@ -87,7 +100,7 @@ export default function CreateNewEvent() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="date" type="date" onChange={(e) => { setNewDate(e.target.value) }} />
+                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="date" type="date" onChange={(e) => { setNewDate(e.target.value) }} required />
               </div>
             </div>
             <div className="md:flex md:items-center mb-6">
@@ -97,7 +110,7 @@ export default function CreateNewEvent() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="startTime" type="time" onChange={(e) => { setNewStartTime(e.target.value) }} />
+                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="startTime" type="time" onChange={(e) => { setNewStartTime(e.target.value) }} required />
               </div>
             </div>
             <div className="md:flex md:items-center mb-6">
@@ -107,7 +120,7 @@ export default function CreateNewEvent() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="endTime" type="time" onChange={(e) => { setNewEndTime(e.target.value) }} />
+                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="endTime" type="time" onChange={(e) => { setNewEndTime(e.target.value) }} required />
               </div>
             </div>
             <div className="md:flex md:items-center mb-6">
@@ -117,10 +130,10 @@ export default function CreateNewEvent() {
                 </label>
               </div>
               <div className="md:w-2/3">
-                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="role" type="text" onChange={(e) => { setNewLocation(e.target.value) }} />
+                <input className="bg-orange-100 appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-yellow-900 leading-tight focus:outline-none focus:bg-white focus:border-orange-700" id="role" type="text" onChange={(e) => { setNewLocation(e.target.value) }} required />
               </div>
             </div>
-
+            {errorMessage && <div className="error"> {errorMessage} </div>}
           </form>
         </Modal.Body>
         <Modal.Footer>

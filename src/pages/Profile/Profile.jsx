@@ -1,17 +1,26 @@
 import './profile.css'
 import { db } from '../../components/firebase'
 import { doc, getDoc } from 'firebase/firestore'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../components/firebase'
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useState } from 'react';
 import Navbar from '../../components/Navbar'
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router'
 import PhotoCropper from './PhotoCropper';
 
 export default function Profile() {
+    const navigate = useNavigate()
     const { user } = useAuth()
     console.log(user.photoURL)
     // const useruser = useUser()
     // console.log(() => useUser())
+    function logout(){
+        signOut(auth)
+        navigate('/mypsr')
+    }
+
     // getting user data from firestore
     const userRef = doc(db, "users", user.uid)
     const date = new Date()
@@ -57,6 +66,7 @@ export default function Profile() {
             <h3>year: {userInfo.year}</h3>
             <h3>address: {userInfo.address}</h3>
             <h3>wallet: {userInfo.wallet}</h3>
+            <button className = "cancelbtn" onClick={logout}>LOG OUT</button>
         </div>
     )
 }

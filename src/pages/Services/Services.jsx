@@ -9,6 +9,7 @@ import FavouriteGuestsUpdates from "./FavouriteGuestsUpdates"
 import Navbar from '../../components/Navbar'
 
 export default function Services() {
+    console.log("Rendering Services.jsx")
     return (
         <>
             <Navbar/>
