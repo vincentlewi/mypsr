@@ -47,23 +47,58 @@ export default function HomeEvents() {
         getEventsDocs()
     }, [])
 
+    if (events.length != 0 ){
+        const nextweekevents = []
+        const otherevents = []
+        events.map((event)=>{
+            if (event.endtimestamp < getOneWeekFromNow()){
+                nextweekevents.push(event)
+            } else {
+                otherevents.push(event)
+            }
+        })
+       
+    }
+
 
     return (
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="roww events">
+                    <h1>Your Events in the next 7 days</h1>
                     {events.length === 0 ? <NoEvent/>:null}
-                    {events.map((event) => {
-                        return (
-                            <EventCard
-                                key={event.id}
-                                id={event.id}
-                                name={event.name}
-                                startTime={event.startTime}
-                                endTime={event.endTime}
-                                location={event.location}
-                                date={event.date} />
-                        )
+                    {events.map((event) => { 
+                        if (event.endtimestamp < getOneWeekFromNow()){
+                            console.log("Events next week !")
+                            return (
+                                <EventCard
+                                    key={event.id}
+                                    id={event.id}
+                                    name={event.name}
+                                    startTime={event.startTime}
+                                    endTime={event.endTime}
+                                    location={event.location}
+                                    date={event.date} />
+                            )}
+                    })}
+                </div>
+            </div>
+            <div className="schedule p-3 mx-auto">
+                <div className="roww events">
+                    <h1>Your other events</h1>
+                    {events.length === 0 ? <NoEvent/>:null}
+                    {events.map((event) => { 
+                        if (event.endtimestamp > getOneWeekFromNow()){
+                            return (
+                                <EventCard
+                                    key={event.id}
+                                    id={event.id}
+                                    name={event.name}
+                                    startTime={event.startTime}
+                                    endTime={event.endTime}
+                                    location={event.location}
+                                    date={event.date} />
+                            )}
                     })}
                 </div>
             </div>
