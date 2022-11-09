@@ -13,7 +13,6 @@ import PhotoCropper from './PhotoCropper';
 export default function Profile() {
     const navigate = useNavigate()
     const { user } = useAuth()
-    console.log(user.photoURL)
     // const useruser = useUser()
     // console.log(() => useUser())
     function logout(){
@@ -52,12 +51,18 @@ export default function Profile() {
     }, [])
     
     const [show, setShow] = useState(false)
-    console.log(show)
     return(
         <>
         <Navbar/>
         <PhotoCropper key={show} show={show} setUserInfo={setUserInfo} setShow={setShow}/>
         <div className='profile'>
+            <Navbar/>
+            <PhotoCropper 
+                key={show} 
+                show={show} 
+                setUserInfo={setUserInfo} 
+                setShow={setShow}
+            />
             <h1>ini profile</h1>
             <h3>Name: {userInfo.name}</h3>
             <h3>Profile Picture: </h3><img className='pp' src={userInfo.photo} alt="profile pic"/><br/>

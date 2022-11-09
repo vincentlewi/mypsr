@@ -9,6 +9,7 @@ import './Home.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import HomeEvents from './HomeEvents';
+import HomeLaundryEvents from './HomeLaundryEvents';
 
 
 export default function Home(){
@@ -27,8 +28,8 @@ export default function Home(){
             <Navbar/>
             <div className="container">
                 <WelcomeButton loc="home"/>
-                <h2>Recent updates for you</h2>
-                <HomeEvents/>   
+                <HomeEvents/> 
+                <HomeLaundryEvents />
             </div>
         </div>
     )

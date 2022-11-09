@@ -1,17 +1,24 @@
 import React, { useRef, useState, useEffect } from "react"
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Alert } from "react-bootstrap"
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom"
 import './login.css'
 import PageTransition from "../../components/PageTransition"
 
 export default function LoginNew() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login } = useAuth()
+    const { login, user } = useAuth()
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
+    // reroute to home if user exists
+    useEffect(() => {
+        if (user) {
+            navigate("/mypsr/home", {state:1})
+        }
+    }, [])
 
     // animations
     let ani = useLocation().state
@@ -23,7 +30,7 @@ export default function LoginNew() {
         }
     }, [destination, navigate, ani, animate])
 
-
+    // handle form submit
     async function handleSubmit(e) {
         e.preventDefault()
         try {
