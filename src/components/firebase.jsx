@@ -64,18 +64,15 @@ export async function upload(file, user, setUserInfo, setLoading) {
   updateProfile(user, {
     photoURL: photoURL
   }).then(() => {
-      console.log('Profile updated!') 
-      // ...
+      // updates picture shown on page
+      setUserInfo(prevState => ({
+        ...prevState,
+        photo: photoURL
+      }))
+      setLoading(false)
   }).catch((error) => {
       // An error occurred
       // ...
   });
-
-  // updates picture shown on page
-  setUserInfo(prevState => ({
-    ...prevState,
-    photo: photoURL
-  }))
-  setLoading(false)
-  window.location.reload()
+  // window.location.reload()
 }

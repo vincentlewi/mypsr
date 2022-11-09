@@ -7,15 +7,23 @@ import { Alert } from "react-bootstrap"
 import { motion } from "framer-motion"
 
 export default function Register() {
+    const { user } = useAuth()
     const data = useRef({fullname: '', email: '', password: '', confirm: ''})
-    
     const isValid = useRef({email: false, password: false, confirm: false})
     const [fullnameWarning, setFullnameWarning] = useState('')
     const [emailWarning, setEmailWarning] = useState('')
     const [passwordWarning, setPasswordWarning] = useState('')
     const [ConfirmWarning, setConfirmWarning] = useState('')
-
     const [x, setX] = useState(-50)
+
+    // reroute to home if user exists
+    useEffect(() => {
+        if (user) {
+            navigate("/mypsr/home", {state:1})
+        }
+    }, [])
+
+    // move 'register' button if form not valid
     useEffect(() => {
         if([fullnameWarning, emailWarning, passwordWarning, ConfirmWarning].every((v) => v === '')) {
             setX(-50)
@@ -31,6 +39,7 @@ export default function Register() {
             isValid.current.fullname = true
         }
     }
+
     function checkEmail() {
         const year = new Date().getFullYear
         if (
