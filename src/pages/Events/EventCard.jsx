@@ -104,8 +104,6 @@ export default function EventCard(props) {
             <Modal
                 show={show}
                 onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
             >
                 <Modal.Header closeButton>
                     <Modal.Title><b>{props.name}</b></Modal.Title>

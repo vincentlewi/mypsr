@@ -52,9 +52,6 @@ export default function Profile() {
     
     const [show, setShow] = useState(false)
     return(
-        <>
-        <Navbar/>
-        <PhotoCropper key={show} show={show} setUserInfo={setUserInfo} setShow={setShow}/>
         <div className='profile'>
             <Navbar/>
             <PhotoCropper 
@@ -64,22 +61,15 @@ export default function Profile() {
                 setShow={setShow}
             />
             <h1>ini profile</h1>
-            <h3>Name: {userInfo.name}</h3>
-            <h3>Profile Picture: </h3><img className='pp' src={userInfo.photo} alt="profile pic"/><br/>
-            <button 
-                className='createbtn'
-                onClick={() => setShow(true)}
-            >
-                Change profile picture
-            </button>
-            <h3>Email: {userInfo.email}</h3>
-            <h3>School: {userInfo.school}</h3>
-            <h3>Year: {userInfo.year}</h3>
-            <h3>Room Number: {userInfo.address}</h3>
-            <h3>Wallet: {userInfo.wallet}</h3>
+            <h3>name: {userInfo.name}</h3>
+            <h3>Profile Picture: </h3><img className='pp' src={userInfo.photo}/><br/>
+            <button onClick={() => setShow(true)}>Change profile picture</button>
+            <h3>email: {userInfo.email}</h3>
+            <h3>school: {userInfo.school}</h3>
+            <h3>year: {userInfo.year}</h3>
+            <h3>address: {userInfo.address}</h3>
+            <h3>wallet: {userInfo.wallet}</h3>
             <button className = "cancelbtn" onClick={logout}>LOG OUT</button>
-            <button className = "createbtn" >Top Up Wallet</button>
         </div>
-        </>
     )
 }
