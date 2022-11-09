@@ -38,7 +38,7 @@ export default function GuestRegistrationUpdates() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="activity-section row px-2 d-flex flex-wrap">
+                <div className="events roww">
                     {guests?guests.map((guest) => {
                         return (
                             <GuestCard
