@@ -17,11 +17,13 @@ export default function FavouriteGuestCard(props) {
 
     return (
         <>
-            <div className="events-card col-lg-3 col-md-6 col-sm-12" id={props.id} onClick={handleShow}>
+        <div className="column">
+            <div className="card" id={props.id} onClick={handleShow}>
                 <h1><b>{props.name}</b></h1>
                 <hr />
                 <p> {props.email}</p>
             </div>
+        </div>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -40,9 +42,7 @@ export default function FavouriteGuestCard(props) {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
+                    <button onClick={handleClose} className="closebtn">Close</button>
                     <RemoveFavouriteGuest id={props.id}/>
                     <RegisterFavouriteGuest
                          id={props.id}

@@ -60,9 +60,7 @@ export default function ComplaintPopup() {
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow}>
-        File a maintainence report
-      </Button>
+      <button onClick={handleShow} className="createbtn">File a maintainence report</button>
 
       <Modal
         show={show}
@@ -71,7 +69,7 @@ export default function ComplaintPopup() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>File your complaints here</Modal.Title>
+          <Modal.Title>File your complaint here</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <label htmlFor='problem_name'>Subject of Complaint<input type="text" name="" id="problem_name" onChange={(e) => { setNewName(e.target.value) }} /></label>
@@ -89,10 +87,8 @@ export default function ComplaintPopup() {
           </label>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={finishCreating}>File Complaint</Button>
+          <button onClick={handleClose} className="closebtn">Close</button>
+          <button onClick={finishCreating} className="cancelbtn">File Complaint</button>
         </Modal.Footer>
       </Modal>
     </>

@@ -55,9 +55,7 @@ export default function RegisterFavouriteGuest(props) {
 
     return (
         <>
-            <Button variant="warning" onClick={handleShow}>
-                Register Guest
-            </Button>
+            <button className='createbtn' onClick={handleShow}>Register Guest</button>
 
             <Modal
                 show={show}
@@ -83,10 +81,8 @@ export default function RegisterFavouriteGuest(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="danger" onClick={finishCreating}>Register Guest</Button>
+                    <button className='closebtn' onClick={handleClose}>Close</button>
+                    <button className='createbtn' onClick={finishCreating}>Register Guest</button>
                 </Modal.Footer>
             </Modal>
         </>

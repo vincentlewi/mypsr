@@ -44,5 +44,25 @@
     margin:auto;
 }
 
-/* .top-part .timeslot-card{
-} */
+.payment-area{
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.payment-area .payment-button-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ordersummary-table td, th{
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+
+.ordersummary-table .price{
+    text-align: end;
+}

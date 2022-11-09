@@ -1,16 +1,5 @@
 export default function StripeButton(props) {
   console.log("==RENDER in StripeButton.jsx==")
-  let referenceList = {
-    laundry1 : 1,
-    laundry2 : 2,
-    laundry3 : 3,
-    laundry4 : 4,
-    dryer1 : 5,
-    dryer2 : 6,
-    dryer3 : 7,
-    dryer4 : 8
-  }
-  
   return (
     <button
       className="createbtn"
@@ -19,11 +8,11 @@ export default function StripeButton(props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-          },
+          },  
           body: JSON.stringify({
             items: [  
-              { id: referenceList.laundry1, quantity: 1 },
-              { id: referenceList.laundry2, quantity: 1  },
+              { id: 1, quantity: 1 },
+              { id: 2, quantity: 1  },
             ],
           }),
         })

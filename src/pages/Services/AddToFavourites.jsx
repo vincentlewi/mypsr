@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
 import {db} from '../../components/firebase'
-import {doc, deleteDoc, updateDoc, arrayUnion, getDoc} from 'firebase/firestore'
+import {doc, updateDoc, arrayUnion, getDoc} from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext"
 
 export default function AddToFavourites(props) {
@@ -22,10 +20,9 @@ export default function AddToFavourites(props) {
 
   return (
     <>
-      <Button variant="primary" 
-      onClick={handleAdd}>
-        Add Guest To Favourites
-      </Button>
+      <button className = "createbtn" onClick={handleAdd}>
+          Add Guest to Favorites
+      </button>
     </>
   );
 }

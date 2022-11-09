@@ -25,7 +25,6 @@ export default function CalendarNew(props) {
   let today = startOfToday()
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
-  let dateID = ""
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
   let days = eachDayOfInterval({
     start: startOfWeek(firstDayCurrentMonth),

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from '../../components/firebase'
-import { collection, query, orderBy, onSnapshot, getDoc, doc, where, getDocs } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, getDoc, doc, where } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext";
 import ComplaintCard from "./ComplaintCard";
 
@@ -30,7 +30,7 @@ export default function ComplaintUpdates() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="activity-section row px-2 d-flex flex-wrap">
+                <div className="laundry roww">
                     {complaints.map((complaint) => {
                         return (
                             <ComplaintCard

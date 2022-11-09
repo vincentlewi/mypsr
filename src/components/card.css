@@ -31,47 +31,24 @@
 
 @media screen and (max-width: 900px) {
     .column {
-        width: 33%;
-        display: block;
-        margin-bottom: 20px;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .column {
         width: 50%;
         display: block;
         margin-bottom: 20px;
     }
-}
+  }
 
-
-/* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     .column {
-        width: 100%;
-        display: block;
-        margin-bottom: 20px;
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
     }
-}
-
-
+  }
 
 .col-75 {
     float: left;
     width: 100%;
     margin-top: 6px;
-}
-
-.butt-on {
-    text-align: right;
-    margin-top: 5px;
-}
-
-@media screen and (max-width: 250px) {
-    .butt-on {
-        text-align: center;
-    }
 }
 
 .title {
@@ -88,6 +65,7 @@
     color: white;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .test .card {
@@ -99,4 +77,5 @@
     color: #024959;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }

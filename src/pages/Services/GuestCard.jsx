@@ -6,7 +6,6 @@ import { getDoc, doc, Timestamp} from "firebase/firestore"
 import { useAuth } from "../../components/contexts/AuthContext"
 import DeleteGuestRegistration from "./DeleteGuestRegistration"
 import AddToFavourites from './AddToFavourites';
-import { id } from 'date-fns/locale';
 
 export default function ComplaintCard(props) {
 
@@ -57,12 +56,15 @@ export default function ComplaintCard(props) {
 
     return (
         <>
-            <div className="events-card col-lg-3 col-md-6 col-sm-12" id={props.id} onClick={handleShow}>
+        <div className="column">
+            <div className="card" id={props.id} onClick={handleShow}>
                 <h5><b>Registration: {props.name}</b></h5>
                 <hr />
                 <p>Date: {props.date}</p>
-                <p> {status}</p>
+                <p>{status}</p>
             </div>
+        </div>
+            
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -83,9 +85,7 @@ export default function ComplaintCard(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     {renderAddFavouriteButton()}
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
+                    <button className='closebtn' onClick={handleClose}>Close</button>
                     <DeleteGuestRegistration id={props.id} />
                 </Modal.Footer>
             </Modal>

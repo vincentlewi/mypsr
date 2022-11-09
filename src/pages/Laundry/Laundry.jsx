@@ -9,10 +9,14 @@ import OrderSummary from './OrderSummary'
 import { db } from '../../components/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
+import { format } from 'date-fns'
 
 export default function Laundry(){
     console.log("==RENDER in Laundry.jsx==")
-    const [dateID, setDateID] = useState('')
+    let today = new Date()
+    let dateToday = format(today, 'yyyy-MM-dd')
+
+    const [dateID, setDateID] = useState(dateToday)
     const [laundryDateObject, setLaundryDateObject] = useState([])
     const [dryerDateObject, setDryerDateObject] = useState([])
     const [laundryTimeSlot, setLaundryTimeSlot] = useState('')
@@ -395,15 +399,22 @@ export default function Laundry(){
             <div className="top-part">
                 <CalendarNew getDateID={getDateID}/>
                 <div className="timeslot-area">
-                    <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot}/>
-                    <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot}/>
+                    <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} dateID={dateID}/>
+                    <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} dateID = {dateID}/>
                 </div>
             </div>
             <div className="bottom-part">
-                <MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>
-                <MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>
+                {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>: null}
+                {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>:null}
             </div>
-            {(chosenLaundry || chosenDryer) ?<OrderSummary laundrySlot = {chosenLaundry} dryerSlot = {chosenDryer}/>: null}
+
+            {/* LaundryTimeSlot = 10:00 chosenLaundry = laundry 2 */}
+            {(chosenLaundry || chosenDryer) ?
+                <OrderSummary
+                laundryTimeSlot = {laundryTimeSlot}
+                laundrySlot = {chosenLaundry}
+                dryerSlot = {chosenDryer}
+                dryerTimeSlot = {dryerTimeSlot}/>: null}
             <StripeButton/>
         </div>
        </> 

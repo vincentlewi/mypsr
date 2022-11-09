@@ -42,7 +42,7 @@ export default function GuestFormPopup(props) {
     try {
       const userSnap = await getDoc(userRef)
       const username = userSnap.data().name
-      if (favouriteGuest != "") {
+      if (favouriteGuest !== "") {
         const docRef = await addDoc(guestsCollectionRef,
           {
             name: name,
@@ -93,9 +93,7 @@ export default function GuestFormPopup(props) {
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow}>
-        Register Guest
-      </Button>
+      <button onClick={handleShow} className="createbtn">Register Guest</button>
 
       <Modal
         show={show}
@@ -126,10 +124,8 @@ export default function GuestFormPopup(props) {
           <label htmlFor="addfavorite"><input type="checkbox" name="" id="addfavorite" onChange={(e) => { setFavouriteGuest(e.target.value) }} />Add to Favorites</label>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={finishCreating}>Add Guest</Button>
+          <button onClick={handleClose} className="createbtn">Close</button>
+          <button onClick={finishCreating} className="cancelbtn">Add Guest</button>
         </Modal.Footer>
       </Modal>
     </>

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Timestamp } from 'firebase/firestore'
 import { useEffect } from 'react';
+import '../../components/card.css'
 
 export default function ComplaintCard(props) {
 
@@ -35,12 +36,15 @@ export default function ComplaintCard(props) {
 
     return (
         <>
-            <div className="events-card col-lg-3 col-md-6 col-sm-12" id={props.id} onClick={handleShow}>
+        <div className="column">
+            <div className="card" id={props.id} onClick={handleShow}>
                 <h5><b>{props.name}</b></h5>
                 <hr />
                 <p>Time: {fstring}</p>
                 <p>{status}</p>
             </div>
+        </div>
+
             <Modal
                 show={show}
                 onHide={handleClose}

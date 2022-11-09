@@ -7,12 +7,14 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./tabs.css"
 import FavouriteGuestsUpdates from "./FavouriteGuestsUpdates"
 import Navbar from '../../components/Navbar'
+import '../../components/card.css'
 
 export default function Services() {
     console.log("Rendering Services.jsx")
     return (
         <>
             <Navbar/>
+            <div className="container">
             <WelcomeButton loc="services" />
             <h1>Your recent reports:</h1>
             <ComplaintPopup />
@@ -34,6 +36,8 @@ export default function Services() {
                         <GuestFormPopup />
                     </TabPanel>
                 </Tabs>
+            </div>
+            
         </>
 
     )

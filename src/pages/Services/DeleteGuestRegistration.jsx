@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {db} from '../../components/firebase'
 import {doc, deleteDoc} from 'firebase/firestore'
@@ -20,11 +19,7 @@ export default function DeleteGuestRegistration(props) {
 
   return (
     <>
-      <Button variant="danger" 
-      disabled = {props.isDisabled}
-      onClick={handleShow}>
-        Delete Registration Request
-      </Button>
+      <button disabled = {props.isDisabled} onClick={handleShow} className="cancelbtn">Delete Registration Request</button>
 
       <Modal
         show={show}
@@ -39,13 +34,13 @@ export default function DeleteGuestRegistration(props) {
           The guest will be unable to enter into PSR on the stipulated date
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger"
+          <button onClick={handleClose} className="closebtn">Close</button>
+          <button
           onClick={ ()=>
-                {deleteGuestRegistration(props.id)}
-            }>Delete Registration</Button>
+            {deleteGuestRegistration(props.id)}}
+          className="cancelbtn"
+            >
+              Delete Registration</button>
         </Modal.Footer>
       </Modal>
     </>

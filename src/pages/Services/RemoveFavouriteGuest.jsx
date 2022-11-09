@@ -26,11 +26,7 @@ export default function RemoveFavouriteGuest(props) {
 
     return (
         <>
-            <Button variant="danger"
-                disabled={props.isDisabled}
-                onClick={handleShow}>
-                Remove from favourites
-            </Button>
+            <button className='cancelbtn' disabled={props.isDisabled} onClick={handleShow}>Remove from favourites</button>
 
             <Modal
                 show={show}
