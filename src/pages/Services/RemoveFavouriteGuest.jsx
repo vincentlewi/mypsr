@@ -41,12 +41,8 @@ export default function RemoveFavouriteGuest(props) {
                     The guest will be removed from your favourites list
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="danger"
-                        onClick={() => { removeFavouriteGuest(props.id) }
-                        }>Remove</Button>
+                    <button className='closebtn' onClick={handleClose}>Close</button>
+                    <button onClick={() => { removeFavouriteGuest(props.id) }} className="cancelbtn">Remove</button>
                 </Modal.Footer>
             </Modal>
         </>
