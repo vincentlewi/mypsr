@@ -20,7 +20,7 @@ export default function Error404() {
     return (
         <>  
         <div style={divStyle}>
-            <Lottie options={defaultOptions} style={{width: "100vh"}} />
+            <Lottie options={defaultOptions} />
         </div>
             
         </>

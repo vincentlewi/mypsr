@@ -22,6 +22,7 @@ export default function NoEvent(){
         <div className="noevent">
             <Lottie options={defaultOptions} height={400} width={400}/>
             <h2>You have not joined any events</h2>
+            <br></br>
             <button className="createbtn" onClick={() => {
                 navigate("/mypsr/events")
             }}>Join an event Now</button>
