@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs } from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs, Timestamp} from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 
 export default function RegisterFavouriteGuest(props) {
@@ -25,7 +25,18 @@ export default function RegisterFavouriteGuest(props) {
     const userRef = doc(db, "users", user.uid)
     const guestsCollectionRef = collection(db, 'guests')
 
+    function getCurrentTime() {
+        const beginningDate = Date.now()
+        const beginningDateObject = new Date(beginningDate)
+        const timestamp = Timestamp.fromDate(beginningDateObject)
+        return timestamp
+      }
+
+   
     async function createGuestRegistration(props) {
+        const dateArr = date.split("-")
+        const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
+    
         try {
             const userSnap = await getDoc(userRef)
             const username = userSnap.data().name
@@ -35,7 +46,9 @@ export default function RegisterFavouriteGuest(props) {
                 guestFirebaseRef: props.firebaseref,
                 name: props.name,
                 purpose: purpose,
-                resident: username
+                resident: username,
+                datetimestamp: datetimestamp,
+                created: getCurrentTime()
             })
             const q = query(collection(db, "guestVisit"), where("resident", "==", username), orderBy("date", "asc"))
             const querySnap = await getDocs(q)
