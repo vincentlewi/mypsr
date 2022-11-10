@@ -52,12 +52,13 @@ export const auth = getAuth()
 
 const storage = getStorage()
 export async function upload(file, user, setUserInfo, setLoading) {
-  const fileRef = ref(storage, `${user.uid}.png`)
-
   setLoading(true)
-  const snapshot = await uploadBytes(fileRef, file)
-  const photoURL = await getDownloadURL(fileRef)
-
+  let photoURL = 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
+  if (file) {
+    const fileRef = ref(storage, `${user.uid}.png`)
+    const snapshot = await uploadBytes(fileRef, file)
+    photoURL = await getDownloadURL(fileRef)
+  }
   updateProfile(user, {
     photoURL: photoURL
   }).then(() => {
@@ -73,3 +74,4 @@ export async function upload(file, user, setUserInfo, setLoading) {
   });
   // window.location.reload()
 }
+

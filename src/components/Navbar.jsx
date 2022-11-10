@@ -10,7 +10,7 @@ export default function NavbarDoang(props) {
   // const profile
   const navigate = useNavigate()
   return (
-      <Navbar bg="light" expand="lg" sticky="top" style={{zIndex:'100'}}>
+      <Navbar className='navbar' bg="light" expand="lg" sticky="top" style={{zIndex:'100'}}>
         <Container fluid>
           <Navbar.Brand onClick={() => {navigate("/mypsr/home")}} style={{margin: "0px 10px 5px 4px", padding: "0 0 2px 0", cursor: 'pointer'}}><img src={require('../assets/logoblack.png')} height="30" alt='logo'/></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,7 +21,8 @@ export default function NavbarDoang(props) {
               <Nav.Link className={'nav-link'} id='maintenaceLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
-              <img className='profile' src={user.photoURL} height='40' alt="profilepic"/>
+              <p className='nav-link d-inline text-black-50'>Profile</p>
+              {document.documentElement.clientWidth >= 992 && <img className='profile' src={user.photoURL} alt="profilepic"/>}
             </Link>
           </Navbar.Collapse>
         </Container>

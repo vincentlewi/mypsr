@@ -41,3 +41,8 @@
 img.profile {
     border-radius: 50%;
 }
+
+.navbar .profile {
+    height: 34px;
+    margin-left: 10px;
+}

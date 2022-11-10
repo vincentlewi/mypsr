@@ -27,8 +27,6 @@ export default function DeleteEventsPopup(props) {
       <Modal
         show={show}
         onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
       >
         <Modal.Header closeButton>
           <Modal.Title>Delete Event?</Modal.Title>

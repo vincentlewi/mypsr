@@ -11,23 +11,23 @@ export default function GuestRegistrationUpdates() {
     const [guests, setGuests] = useState([])
     const { user } = useAuth()
 
-    function getCurrentTime(){
-        const beginningDate = Date.now()
-        const beginningDateObject = new Date(beginningDate)
-        const timestamp = Timestamp.fromDate(beginningDateObject)
-        return timestamp
-    }
-
     async function getGuests() {
         const userDoc = await getDoc(doc(db, "users", user.uid))
         const username = userDoc.data().name
         const q = query(collection(db, "guestVisit"), where("datetimestamp", ">", getCurrentTime()), where("resident", "==", username), orderBy("datetimestamp", "asc"))
         onSnapshot(q, (snapshot) => {
             setGuests(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            console.log(guests)
         }, (error)=> {
             console.log(error.message)
         })
-    
+    }
+
+    function getCurrentTime(){
+        const beginningDate = Date.now()
+        const beginningDateObject = new Date(beginningDate)
+        const timestamp = Timestamp.fromDate(beginningDateObject)
+        return timestamp
     }
     useEffect(
         () => {
