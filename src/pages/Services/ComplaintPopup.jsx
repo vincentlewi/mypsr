@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
 import { addDoc, getDoc, doc, collection, orderBy, query, onSnapshot, Timestamp } from 'firebase/firestore'
@@ -60,9 +59,9 @@ export default function ComplaintPopup() {
 
   return (
     <>
-      <button onClick={handleShow} className="createbtn">File a maintainence report</button>
+      <button onClick={handleShow} className="createbtn">File a maintenance report</button>
 
-      <Modal
+      <Modal  
         show={show}
         onHide={handleClose}
         backdrop="static"

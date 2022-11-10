@@ -25,7 +25,7 @@ export default function ComplaintCard(props) {
 
     useEffect(()=>{
         if (Timestamp.now().toMillis() > time.toMillis() + 300000) {
-            setStatus("Status: Maintainence Done")
+            setStatus("Status: Maintenance Done")
         } else {
             setStatus("Status: Report Received")
         }

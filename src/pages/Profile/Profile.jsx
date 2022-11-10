@@ -9,6 +9,7 @@ import Navbar from '../../components/Navbar'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router'
 import PhotoCropper from './PhotoCropper';
+import Topup from './Topup'
 
 export default function Profile() {
     const navigate = useNavigate()
@@ -53,8 +54,6 @@ export default function Profile() {
     const [show, setShow] = useState(false)
     return(
         <>
-        <Navbar/>
-        <PhotoCropper key={show} show={show} setUserInfo={setUserInfo} setShow={setShow}/>
         <div className='profile'>
             <Navbar/>
             <PhotoCropper 
@@ -79,6 +78,7 @@ export default function Profile() {
             <h3>Wallet: {userInfo.wallet}</h3>
             <button className = "cancelbtn" onClick={logout}>LOG OUT</button>
             <button className = "createbtn" >Top Up Wallet</button>
+            <Topup/>
         </div>
         </>
     )

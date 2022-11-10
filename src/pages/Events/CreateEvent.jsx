@@ -85,7 +85,7 @@ export default function CreateNewEvent() {
           <form id='editmodal' className="w-full max-w-sm">
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
+                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="name">
                   Event Name
                 </label>
               </div>
@@ -95,7 +95,7 @@ export default function CreateNewEvent() {
             </div>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" for="date">
+                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="date">
                   Date
                 </label>
               </div>
@@ -105,7 +105,7 @@ export default function CreateNewEvent() {
             </div>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" for="start_time">
+                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="start_time">
                   Start Time
                 </label>
               </div>
@@ -115,7 +115,7 @@ export default function CreateNewEvent() {
             </div>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" for="end_time">
+                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="end_time">
                   End Time
                 </label>
               </div>
@@ -125,7 +125,7 @@ export default function CreateNewEvent() {
             </div>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
-                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" for="location">
+                <label className="block text-stone-700 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="location">
                   Location
                 </label>
               </div>

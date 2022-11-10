@@ -7,9 +7,6 @@ import {
   onAuthStateChanged, sendEmailVerification, updateProfile
 } from 'firebase/auth'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { doc, getDoc } from 'firebase/firestore'
-import { useAuth } from './contexts/AuthContext'
-import { useState } from 'react';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

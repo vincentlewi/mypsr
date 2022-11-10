@@ -47,10 +47,10 @@ export default function HomeEvents() {
         getEventsDocs()
     }, [])
 
-    if (events.length != 0 ){
+    if (events.length !== 0 ){
         const nextweekevents = []
         const otherevents = []
-        events.map((event)=>{
+        events.map((event) => {
             if (event.endtimestamp < getOneWeekFromNow()){
                 nextweekevents.push(event)
             } else {
