@@ -57,8 +57,6 @@ export default function CreateNewEvent() {
         updateDoc(doc(db, "users", user.uid), {
           events: arrayUnion(docRef.id)
         })
-
-        handleClose();
       }
     } catch (e) {
       console.log(e.message)
@@ -67,6 +65,7 @@ export default function CreateNewEvent() {
 
   async function finishCreating() {
     createEvent();
+    handleClose();
   }
 
   useEffect(
@@ -84,7 +83,44 @@ export default function CreateNewEvent() {
       location: ''
     }
   })
-  const onSubmit = (values) => {console.log(values)}
+
+  async function create(values) {
+    try {
+      const userSnap = await getDoc(userRef)
+      const dateArr = values.date.split("-")
+      const startTimeArr = values.startTime.split(":")
+      const endTimeArr = values.endTime.split(":")
+      const startTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], startTimeArr[0], startTimeArr[1]))
+      const endTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endTimeArr[0], endTimeArr[1]))
+
+      if (values.name == "" || values.startTime == "" || values.endTime == "" || values.location == "" || values.date == "") {
+        setErrorMessage("Please enter all of the required fields")
+        setShow(true)
+      } else {
+        const docRef = await addDoc(eventsCollectionRef,
+          {
+            name: values.name,
+            startTime: values.startTime,
+            endTime: values.endTime,
+            location: values.location,
+            date: values.date,
+            participants: [userSnap.data().name],
+            starttimestamp: startTimeStamp,
+            endtimestamp: endTimeStamp
+          })
+
+        updateDoc(doc(db, "users", user.uid), {
+          events: arrayUnion(docRef.id)
+        })
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
+  const onSubmit = (values) => {create(values)}
+  // const onSubmit = (values) => {console.log(values)}
+
   const watchValues = watch('name')
   const today = new Date()
   const [startDate, setStartDate] = useState(
@@ -134,7 +170,7 @@ export default function CreateNewEvent() {
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
             
-            <button type='submit'>Submit Form</button>
+            <button className="createbtn" type='submit'>Submit Form</button>
           </form>
           {/* form lama */}
           {/* <form id='editmodal' className="w-full max-w-sm">

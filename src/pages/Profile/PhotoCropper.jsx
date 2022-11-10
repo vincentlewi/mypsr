@@ -1,9 +1,10 @@
 import { useRef, useState, useCallback } from 'react';
-import { db, upload } from '../../components/firebase'
+import { upload } from '../../components/firebase'
 import Cropper from 'react-easy-crop'
 import Modal from 'react-bootstrap/Modal';
 import { useAuth } from '../../components/contexts/AuthContext'
 import getCroppedImg from './cropImage';
+import { updateProfile } from 'firebase/auth'
 
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -52,7 +53,12 @@ export default function PhotoCropper(props) {
         upload(dataURLtoFile(foto, 'a.png'), user, props.setUserInfo, setLoading)
         props.setShow(false)
     }
-     
+
+    function handleReset() {
+        upload('', user, props.setUserInfo, setLoading)
+        props.setShow(false)
+    }
+    
     return (
         <Modal
             show={props.show}
@@ -61,7 +67,7 @@ export default function PhotoCropper(props) {
             <Modal.Header closeButton>
                 <Modal.Title>Profile Picture Preview</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{height: 500}}>
+            <Modal.Body style={photo && {height: 500}}>
             {!photo?<input type='file' ref={fileSelectRef} key={1} onChange={(e) => handleChange(e)}></input>:null}
             {photo?<Cropper
                 image={photo}
@@ -75,6 +81,7 @@ export default function PhotoCropper(props) {
             />:null}
             </Modal.Body>
             <Modal.Footer>
+                <button onClick={handleReset}>Reset Profile Picture</button>
                 <input disabled={loading || !photo} type='submit' onClick={handleSubmit} value='Set as Profile Picture'></input>
             </Modal.Footer>
         </Modal>
