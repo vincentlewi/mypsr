@@ -24,12 +24,7 @@ export default function FavouriteGuestCard(props) {
                 <p> {props.email}</p>
             </div>
         </div>
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Guest Information</Modal.Title>
                 </Modal.Header>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, collection, Timestamp } from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, Timestamp, setDoc, query, getDocs, where, updateDoc, orderBy } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
+import { useForm } from 'react-hook-form'
+import { TwitterAuthProvider } from 'firebase/auth';
 
 export default function GuestFormPopup(props) {
 
@@ -11,22 +12,18 @@ export default function GuestFormPopup(props) {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    setErrorMessage("")
+    reset()
+  };
+
   const handleShow = () => setShow(true);
 
   const [guests, setGuests] = useState([])
-
-  const [name, setName] = useState("")
-  const [guestID, setGuestID] = useState("")
-  const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [purpose, setPurpose] = useState("")
-  const [date, setDate] = useState("")
-  const [favouriteGuest, setFavouriteGuest] = useState("")
-
+  const [errorMessage, setErrorMessage] = useState()
   const { user, username } = useAuth()
   const userRef = doc(db, "users", user.uid)
-  const guestsCollectionRef = collection(db, 'guests')
 
   function getCurrentTime() {
     const beginningDate = Date.now()
@@ -35,98 +32,136 @@ export default function GuestFormPopup(props) {
     return timestamp
   }
 
-  const dateArr = date.split("-")
-  const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
-
-  async function createGuestRegistration() {
-    try {
+  async function create(values) {
+    if (values.gname == "" || values.gid == "" || values.gemail == "" || values.gpurpose == "" || values.gphonenum == "" || values.gndate == "" || values.gentrytime == "") {
+      setErrorMessage("Please enter all of the required fields")
+      setShow(true)
+    } else {
+      const docRef = doc(db, "guests", values.gemail)
+      const guestSnap = await getDoc(docRef)
+      const todaydate = new Date().getDay
       const userSnap = await getDoc(userRef)
       const username = userSnap.data().name
-      if (favouriteGuest !== "") {
-        const docRef = await addDoc(guestsCollectionRef,
-          {
-            name: name,
-            guestid: guestID,
-            email: email,
-            phoneNumber: phoneNumber,
+      const dateArr = values.gdate.split("-")
+      const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
+      try {
+        if (guestSnap.exists()) {
+          await updateDoc(docRef, {
+            name: values.gname,
+            guestid: values.gid,
+            email: values.gemail,
+            phoneNumber: values.gphonenum,
             favouritedBy: [user.uid]
           })
-        await addDoc(collection(db, "guestVisit"), {
-          date: date,
-          guestid: guestID,
-          name: name,
-          purpose: purpose,
-          resident: username,
-          guestFirebaseRef: docRef.id, 
-          created: getCurrentTime(),
-          datetimestamp: datetimestamp
-        })
-      } else {
-        const docRef = await addDoc(guestsCollectionRef,
-          {
-            name: name,
-            guestid: guestID,
-            email: email,
-            phoneNumber: phoneNumber,
-            favouritedBy: []
+          const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", values.gemail), where("resident", "==", username), where("date", "==", values.gdate))
+          const querySnapshot = await getDocs(q)
+          if (querySnapshot.docs.length > 0) {
+            setErrorMessage("The guest has been registered for today")
+          } else {
+            await addDoc(collection(db, "guestVisit"), {
+              date: values.gdate,
+              guestid: values.gid,
+              name: values.gname,
+              purpose: values.gpurpose,
+              resident: username,
+              guestFirebaseRef: values.gemail,
+              created: getCurrentTime(),
+              datetimestamp: datetimestamp,
+              entryTime: values.gentrytime
+            })
+            handleClose()
+            reset()
+          }
+        } else {
+          if (values.gfavourite !== "") {
+            await setDoc(doc(db, 'guests', values.gemail), {
+              name: values.gname,
+              guestid: values.gid,
+              email: values.gemail,
+              phoneNumber: values.gphonenum,
+              favouritedBy: [user.uid]
+            })
+          } else {
+            await setDoc(doc(db, 'guests', values.gemail),
+              {
+                name: values.gname,
+                guestid: values.gid,
+                email: values.gemail,
+                phoneNumber: values.gphonenum,
+                favouritedBy: []
+              })
+          }
+
+          await addDoc(collection(db, "guestVisit"), {
+            date: values.gdate,
+            guestid: values.gid,
+            name: values.gname,
+            purpose: values.gpurpose,
+            resident: username,
+            guestFirebaseRef: values.gemail,
+            created: getCurrentTime(),
+            datetimestamp: datetimestamp,
+            entryTime: values.gentrytime
           })
-        await addDoc(collection(db, "guestVisit"), {
-          date: date,
-          guestid: guestID,
-          name: name,
-          purpose: purpose,
-          resident: username,
-          guestFirebaseRef: docRef.id,
-          created: getCurrentTime(),
-          datetimestamp: datetimestamp
-        })
+          handleClose()
+          reset()
+        }
+      } catch (e) {
+        console.log(e.message)
       }
-    } catch (e) {
-      console.log(e.message)
+
     }
   }
 
-  async function finishCreating() {
-    createGuestRegistration();
-    handleClose();
-  }
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      gname: '',
+      gid: '',
+      gemail: '',
+      gpurpose: '',
+      gphonenum: '',
+      gdate: '',
+      gfavourite: '',
+      gentrytime: ''
+    }
+  })
+
+  const onSubmit = (values) => { create(values) }
 
   return (
     <>
       <button onClick={handleShow} className="createbtn">Register Guest</button>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Register New Guest</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h5>Key in all the details necessary for registration</h5>
-          <label htmlFor="guestname"> Name <input type="text" id='guestname' onChange={(e) => { setName(e.target.value) }} /></label><br />
-          <label htmlFor="guestid"> Student ID or IC Number <input type="text" id='guestid' onChange={(e) => { setGuestID(e.target.value) }} /></label><br />
-          <label htmlFor="guestemail"> Email <input type="email" id='guestemail' onChange={(e) => { setEmail(e.target.value) }} /></label><br />
-          <label htmlFor="guestpurpose"> Phone Number <input type="text" id='guestnumber' onChange={(e) => { setPhoneNumber(e.target.value) }} /></label><br />
-          <label htmlFor="guestpurpose"> Purpose of Visit <input type="text" id='guestpurpose' onChange={(e) => { setPurpose(e.target.value) }} /></label><br />
-          <div className="tw-md:flex tw-md:items-center tw-mb-6">
-            <div className="tw-md:w-1/3">
-              <label className="tw-block tw-text-stone-700 tw-font-bold tw-md:text-right tw-mb-1 tw-md:mb-0 tw-pr-4" for="date">
-                Date of Visit
-              </label>
-            </div>
-            <div className="tw-md:w-2/3">
-              <input className="tw-bg-orange-100 tw-appearance-none tw-border-2 tw-border-orange-100 tw-rounded tw-w-full tw-py-2 tw-px-4 tw-text-yellow-900 tw-leading-tight tw-focus:outline-none tw-focus:bg-white tw-focus:border-orange-700" id="date" type="date" onChange={(e) => { setDate(e.target.value) }} />
-            </div>
-          </div>
-          <label htmlFor="addfavorite"><input type="checkbox" name="" id="addfavorite" onChange={(e) => { setFavouriteGuest(e.target.value) }} />Add to Favorites</label>
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose} className="createbtn">Close</button>
-          <button onClick={finishCreating} className="cancelbtn">Add Guest</button>
-        </Modal.Footer>
+      <Modal show={show} onHide={handleClose}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Register New Guest</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h5>Key in all the details necessary for registration</h5>
+            <p>Name </p>
+            <input {...register('gname')} type="text" />
+            <p>Student ID or NRIC</p>
+            <input {...register('gid')} type="text" />
+            <p>Email</p>
+            <input {...register('gemail')} type="email" />
+            <p>Phone Number</p>
+            <input {...register('gphonenum')} type="text" />
+            <p>Purpose</p>
+            <input {...register('gpurpose')} type="text" />
+            <p>Date</p>
+            <input {...register('gdate')} type="date" min={new Date().toISOString().split("T")[0]} />
+            <p>Entry Time</p>
+            <input {...register('gentrytime')} type="time" />
+            <p>Add to favourites <input {...register('gfavourite')} type="checkbox" /></p>
+
+            {errorMessage && <div className="error"> {errorMessage} </div>}
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={handleClose} className="closebtn">Close</button>
+            <button className="createbtn" type='submit'>Add guest</button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </>
   )

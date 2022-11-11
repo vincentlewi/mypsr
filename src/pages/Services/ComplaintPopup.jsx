@@ -1,27 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
 import { addDoc, getDoc, doc, collection, orderBy, query, onSnapshot, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
-
+import { useForm } from 'react-hook-form'
 
 export default function ComplaintPopup() {
+
+  console.log("Rendering ComplaintPopUp.jsx")
+
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const [complaints, setComplaints] = useState([])
-  const [newName, setNewName] = useState("")
-  const [newDescription, setNewDescription] = useState("")
-  const [newLocation, setNewLocation] = useState("")
   const complaintsCollectionRef = collection(db, 'complaints')
+  const [errorMessage, setErrorMessage] = useState()
   const q = query(complaintsCollectionRef, orderBy("time", "asc"))
   const { user } = useAuth()
   const userRef = doc(db, "users", user.uid)
 
-  console.log("Rendering ComplaintPopUp.jsx")
+  const handleClose = () => {
+    setShow(false)
+    setErrorMessage("")
+    reset()
+  };
+
+  const handleShow = () => setShow(true);
+
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      name: '',
+      description: '',
+      location: ''
+    }
+  })
+
+  async function create(values) {
+    try {
+      if (values.name == "" || values.description == "" || values.location == "") {
+        setErrorMessage("Please enter all of the required fields")
+        setShow(true)
+      } else {
+        const userSnap = await getDoc(userRef)
+        const docRef = await addDoc(complaintsCollectionRef,
+          {
+            name: values.name,
+            description: values.description,
+            location: values.location,
+            reporter: userSnap.data().name,
+            time: getCurrentTime()
+          })
+        handleClose();
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
+  const onSubmit = (values) => { create(values) }
 
   function getCurrentTime() {
     const beginningDate = Date.now()
@@ -30,66 +65,48 @@ export default function ComplaintPopup() {
     return timestamp
   }
 
-  async function createMaintainence() {
-    try {
-      const userSnap = await getDoc(userRef)
-      const currentTime = new Date()
-      const docRef = await addDoc(complaintsCollectionRef,
-        {
-          name: newName,
-          description: newDescription,
-          location: newLocation,
-          reporter: userSnap.data().name,
-          time: getCurrentTime()
-        })
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
-
-  async function finishCreating() {
-    createMaintainence();
-    handleClose();
-  }
-
   useEffect(
     () =>
       onSnapshot(q, (snapshot) => {
         setComplaints(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      }), [])
+      })
+      , [])
 
   return (
     <>
       <button onClick={handleShow} className="createbtn">File a maintainence report</button>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>File your complaint here</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <label htmlFor='problem_name'>Subject of Complaint<input type="text" name="" id="problem_name" onChange={(e) => { setNewName(e.target.value) }} /></label>
-          <label htmlFor='description'>Description<input type="textarea" name="" id="description" onChange={(e) => { setNewDescription(e.target.value) }} /></label>
-          <label>Location
-            <select id="location" onChange={(e) => { setNewLocation(e.target.value) }}>
-              <option selected disabled hidden>--Select an option--</option>
-              <option>My Room</option>
-              <option>PSR Study Area</option>
-              <option>PSR Dining Area</option>
-              <option>PSR Classroom</option>
-              <option>PSR Court</option>
-              <option>PSR Relax Area</option>
+      <Modal show={show} onHide={handleClose}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Modal.Header closeButton>
+            <Modal.Title>File a maintainence report here</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
+            <p>Subject of Report</p>
+            <input {...register('name')} type="text" />
+
+            <p>Description</p>
+            <input {...register('description')} type="text" />
+
+            <p>Location</p>
+            <select {...register("location")} >
+              <option value="My Room">My Room</option>
+              <option value="PSR Study Area">PSR Study Area</option>
+              <option value="PSR Dining Area">PSR Dining Area</option>
+              <option value="PSR Classroom">PSR Classroom</option>
+              <option value="PSR Court">PSR Court</option>
+              <option value="PSR Relax Area">PSR Relax Area</option>
             </select>
-          </label>
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose} className="closebtn">Close</button>
-          <button onClick={finishCreating} className="cancelbtn">File Complaint</button>
-        </Modal.Footer>
+
+            {errorMessage && <div className="error"> {errorMessage} </div>}
+
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={handleClose} className="closebtn">Close</button>
+            <button className="createbtn" type='submit'>File complaint</button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </>
   )

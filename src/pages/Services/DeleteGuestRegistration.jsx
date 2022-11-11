@@ -21,12 +21,7 @@ export default function DeleteGuestRegistration(props) {
     <>
       <button disabled = {props.isDisabled} onClick={handleShow} className="cancelbtn">Delete Registration Request</button>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Registration Request?</Modal.Title>
         </Modal.Header>

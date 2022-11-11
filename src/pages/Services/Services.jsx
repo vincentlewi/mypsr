@@ -26,7 +26,6 @@ export default function Services() {
                         <Tab>Register a Guest here</Tab>
                     </TabList>
                     <TabPanel>
-                        <p>Favourite Guests go here</p>
                         <FavouriteGuestsUpdates />
                     </TabPanel>
                     <TabPanel>

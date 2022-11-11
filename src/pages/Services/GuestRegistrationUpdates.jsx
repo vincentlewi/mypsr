@@ -17,7 +17,6 @@ export default function GuestRegistrationUpdates() {
         const q = query(collection(db, "guestVisit"), where("datetimestamp", ">", getCurrentTime()), where("resident", "==", username), orderBy("datetimestamp", "asc"))
         onSnapshot(q, (snapshot) => {
             setGuests(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            console.log(guests)
         }, (error)=> {
             console.log(error.message)
         })
@@ -29,6 +28,7 @@ export default function GuestRegistrationUpdates() {
         const timestamp = Timestamp.fromDate(beginningDateObject)
         return timestamp
     }
+    
     useEffect(
         () => {
             getGuests()
@@ -49,6 +49,7 @@ export default function GuestRegistrationUpdates() {
                                 date={guest.date}
                                 purpose={guest.purpose}
                                 created={guest.created}
+                                entryTime = {guest.entryTime}
                             />
                         )
                     }):"No guest registered yet!"}
