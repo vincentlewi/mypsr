@@ -125,7 +125,6 @@ useEffect(() => {
             <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-                Choose the amount you want!
                 <Topup/>
           </Modal.Body>
           <Modal.Footer>

@@ -16,6 +16,7 @@ export default function AddToFavourites(props) {
     await updateDoc(doc(db, "guests", guestRef), {
       favouritedBy: arrayUnion(user.uid)
     })
+    props.setShow(false)
   }
 
   return (

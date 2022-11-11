@@ -157,7 +157,6 @@ export default function GuestFormPopup(props) {
             {errorMessage && <div className="error"> {errorMessage} </div>}
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose} className="closebtn">Close</button>
             <button className="createbtn" type='submit'>Add guest</button>
           </Modal.Footer>
         </form>

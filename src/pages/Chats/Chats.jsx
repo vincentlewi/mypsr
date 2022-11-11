@@ -4,18 +4,21 @@ import Chat from './components/Chat'
 import { ChatContextProvider } from './context/ChatContext'
 // import "./style.scss";
 import "./chats.css";
+import Navbar from "../../components/Navbar"
 
 const Chats = () => {
   return (
-    <div className='chatHome'>
-      <div className="container">
-      <ChatContextProvider>
-      <Sidebar/>
-      <Chat/>
-      </ChatContextProvider>
-        
+    <>
+      <Navbar />
+      <div className='chatHome'>
+        <div className="container">
+          <ChatContextProvider>
+            <Sidebar />
+            <Chat />
+          </ChatContextProvider>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

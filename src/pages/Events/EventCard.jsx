@@ -116,9 +116,6 @@ export default function EventCard(props) {
                     <p>Other Participants: {eventJoiners}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className = "closebtn" onClick={handleClose}>
-                        Close
-                    </button>
                     {renderDeleteButton()}
                     <button
                     hidden = {!showJoin}

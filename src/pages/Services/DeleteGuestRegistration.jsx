@@ -29,7 +29,6 @@ export default function DeleteGuestRegistration(props) {
           The guest will be unable to enter into PSR on the stipulated date
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={handleClose} className="closebtn">Close</button>
           <button
           onClick={ ()=>
             {deleteGuestRegistration(props.id)}}

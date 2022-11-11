@@ -70,6 +70,7 @@ export default function RegisterFavouriteGuest(props) {
                     })
                     handleClose()
                     reset()
+                    props.setShow(false)
                 }
             } catch (e) {
                 console.log(e.message)
@@ -98,7 +99,6 @@ export default function RegisterFavouriteGuest(props) {
                         {errorMessage && <div className="error"> {errorMessage} </div>}
                     </Modal.Body>
                     <Modal.Footer>
-                        <button className='closebtn' onClick={handleClose}>Close</button>
                         <button className='createbtn' type="submit">Register Guest</button>
                     </Modal.Footer>
                 </form>

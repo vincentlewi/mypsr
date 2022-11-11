@@ -21,12 +21,11 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <span className="logo">MyPSR</span>
-      <div className="user">
-      {/* the pic needs to make a login page */}
+      {/* <div className="user">
         <img src={user.photoURL} alt="" />  
         <span>{user.displayName}</span>
         <button onClick={()=>signOut(auth)}>logout</button>
-      </div>
+      </div> */}
     </div>
   )
 }
