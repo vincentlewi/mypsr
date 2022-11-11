@@ -27,13 +27,18 @@ export function AuthProvider( {children} ){
             await createUserWithEmailAndPassword(auth, email, password)
             .then((cred) =>{
                 setDoc(doc(db, 'users', cred.user.uid),{
+                    uid: cred.user.uid,
                     name: fullname,
+                    displayName: fullname,
                     events: [],
                     complaints: [],
                     wallet: 0,
-                    address: address
+                    address: address,
+                    photoURL:'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
                 })
+                setDoc(doc(db, "userChats", cred.user.uid), {})
                 updateProfile(auth.currentUser, {
+                    displayName: fullname,
                     photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
                 })
                 setUser(auth.currentUser)

@@ -1,0 +1,272 @@
+.formContainer {
+    background-color: #a7bcff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.formContainer .formWrapper {
+    background-color: white;
+    padding: 20px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.formContainer .formWrapper .logo {
+    color: #5d5b8d;
+    font-weight: bold;
+    font-size: 24px;
+}
+.formContainer .formWrapper .title {
+    color: #5d5b8d;
+    font-size: 12px;
+}
+.formContainer .formWrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.formContainer .formWrapper form input {
+    padding: 15px;
+    border: none;
+    width: 250px;
+    border-bottom: 1px solid #a7bcff;
+}
+.formContainer .formWrapper form input::placeholder {
+    color: #afafaf;
+}
+.formContainer .formWrapper form button {
+    background-color: #7b96ec;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.formContainer .formWrapper form label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8da4f1;
+    font-size: 12px;
+    cursor: pointer;
+}
+.formContainer .formWrapper form label img {
+    width: 32px;
+}
+.formContainer .formWrapper p {
+    color: #5d5b8d;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.chatHome {
+    background-color: #a7bcff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chatHome .container {
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 65%;
+    height: 80%;
+    display: flex;
+    overflow: hidden;
+}
+@media screen and (max-width: 768px) {
+    .chatHome .container {
+        width: 90%;
+   }
+}
+.chatHome .container .sidebar {
+    flex: 1;
+    background-color: #3e3c61;
+    position: relative;
+}
+.chatHome .container .sidebar .navbar {
+    display: flex;
+    align-items: center;
+    background-color: #2f2d52;
+    height: 50px;
+    padding: 10px;
+    justify-content: space-between;
+    color: #ddddf7;
+}
+.chatHome .container .sidebar .navbar .logo {
+    font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+    .chatHome .container .sidebar .navbar .logo {
+        display: none;
+   }
+}
+.chatHome .container .sidebar .navbar .user {
+    display: flex;
+    gap: 10px;
+}
+.chatHome .container .sidebar .navbar .user img {
+    background-color: #ddddf7;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.chatHome .container .sidebar .navbar .user button {
+    background-color: #5d5b8d;
+    color: #ddddf7;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+    .chatHome .container .sidebar .navbar .user button {
+        position: absolute;
+        bottom: 10px;
+   }
+}
+.chatHome .container .sidebar .search {
+    border-bottom: 1px solid gray;
+}
+.chatHome .container .sidebar .search .searchForm {
+    padding: 10px;
+}
+.chatHome .container .sidebar .search .searchForm input {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+.chatHome .container .sidebar .search .searchForm input::placeholder {
+    color: lightgray;
+}
+.chatHome .container .sidebar .userChat {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+}
+.chatHome .container .sidebar .userChat:hover {
+    background-color: #2f2d52;
+}
+.chatHome .container .sidebar .userChat img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.chatHome .container .sidebar .userChat .userChatInfo span {
+    font-size: 18px;
+    font-weight: 500;
+}
+.chatHome .container .sidebar .userChat .userChatInfo p {
+    font-size: 14px;
+    color: lightgray;
+}
+.chatHome .container .chat {
+    flex: 2;
+}
+.chatHome .container .chat .chatInfo {
+    height: 50px;
+    background-color: #5d5b8d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    color: lightgray;
+}
+.chatHome .container .chat .chatIcons {
+    display: flex;
+    gap: 10px;
+}
+.chatHome .container .chat .chatIcons img {
+    height: 24px;
+    cursor: pointer;
+}
+.chatHome .container .chat .messages {
+    background-color: #ddddf7;
+    padding: 10px;
+    height: calc(100% - 160px);
+    overflow: scroll;
+}
+.chatHome .container .chat .messages .message {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.chatHome .container .chat .messages .message .messageInfo {
+    display: flex;
+    flex-direction: column;
+    color: gray;
+    font-weight: 300;
+}
+.chatHome .container .chat .messages .message .messageInfo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.chatHome .container .chat .messages .message .messageContent {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.chatHome .container .chat .messages .message .messageContent p {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 0px 10px 10px 10px;
+    max-width: max-content;
+}
+.chatHome .container .chat .messages .message .messageContent img {
+    width: 50%;
+}
+.chatHome .container .chat .messages .message.owner {
+    flex-direction: row-reverse;
+}
+.chatHome .container .chat .messages .message.owner .messageContent {
+    align-items: flex-end;
+}
+.chatHome .container .chat .messages .message.owner .messageContent p {
+    background-color: #8da4f1;
+    color: white;
+    border-radius: 10px 0px 10px 10px;
+}
+.chatHome .container .chat .input {
+    height: 50px;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatHome .container .chat .input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #2f2d52;
+    font-size: 18px;
+}
+.chatHome .container .chat .input input::placeholder {
+    color: lightgray;
+}
+.chatHome .container .chat .input .send {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chatHome .container .chat .input .send img {
+    height: 24px;
+    cursor: pointer;
+}
+.chatHome .container .chat .input .send button {
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    background-color: #8da4f1;
+    cursor: pointer;
+}

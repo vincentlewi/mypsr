@@ -7,11 +7,21 @@ import {
   onAuthStateChanged, sendEmailVerification, updateProfile
 } from 'firebase/auth'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDiw-g5bngsRBUD2Zr8v__3QzCtQmwb32A",
+//   authDomain: "chat-11df9.firebaseapp.com",
+//   projectId: "chat-11df9",
+//   storageBucket: "chat-11df9.appspot.com",
+//   messagingSenderId: "578380463410",
+//   appId: "1:578380463410:web:08e22184929c5212a72b2b",
+//   measurementId: "G-H8C98NSREB"
+// };
+
 const firebaseConfig = {
   apiKey: "AIzaSyBvoBFbMRhi8dhy6cEIsnjBk8myJDqvyBw",
   authDomain: "mypsr-backup.firebaseapp.com",
@@ -50,7 +60,7 @@ export const db = getFirestore(app)
 export const auth = getAuth()
 
 
-const storage = getStorage()
+export const storage = getStorage()
 export async function upload(file, user, setUserInfo, setLoading) {
   setLoading(true)
   let photoURL = 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
