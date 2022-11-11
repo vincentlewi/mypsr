@@ -5,9 +5,10 @@ import { useAuth } from "../../components/contexts/AuthContext"
 import EventCard from "../Events/EventCard";
 import NoEvent from "./NoEvent";
 
+
+
 export default function HomeEvents() {
     console.log("==RENDER in homeEvents .jsx==")
-    // const [events, setEvents] = useState([])
     const { user } = useAuth()
 
     const eventsRef = collection(db, "events")
@@ -22,27 +23,16 @@ export default function HomeEvents() {
         const q1 = query(eventsRef, where("participants", "array-contains", username), where("endtimestamp", ">", getCurrentTime()), where("endtimestamp", "<", getOneWeekFromNow()), orderBy("endtimestamp", "asc"), orderBy("starttimestamp", "asc"))
         onSnapshot(q1, (snapshot) => {
             setNextWeekEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            // events.map((event) => {
-            //     console.log(event)
-            //     if (event.endtimestamp < getOneWeekFromNow()) {
-            //         setNextWeekEvents(prev => [...prev, event])
-            //     } else {
-            //         setOtherEvents(prev => [...prev, event])
-            //     }
-            //     console.log("Next week events are", nextweekevents)
-            //     console.log("Other events are", otherevents)
-            // })
         },
             error => {
                 console.log(error.message)
             })
         const q2 = query(eventsRef, where("participants", "array-contains", username), where("endtimestamp", ">", getOneWeekFromNow()), orderBy("endtimestamp", "asc"), orderBy("starttimestamp", "asc"))
         onSnapshot(q2, (snapshot) => {
-            setOtherEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        },
+            setOtherEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))},
             error => {
                 console.log(error.message)
-            })
+            });
     }
 
     function getCurrentTime() {
@@ -51,6 +41,7 @@ export default function HomeEvents() {
         const timestamp = Timestamp.fromDate(beginningDateObject)
         return timestamp
     }
+
 
     function getOneWeekFromNow() {
         const beginningDate = Date.now()
@@ -65,28 +56,13 @@ export default function HomeEvents() {
         getEventsDocs()
     }, [])
 
-    if (events.length !== 0 ){
-        const nextweekevents = []
-        const otherevents = []
-        events.map((event) => {
-            if (event.endtimestamp < getOneWeekFromNow()){
-                nextweekevents.push(event)
-            } else {
-                otherevents.push(event)
-            }
-        })
-       
-    }
-
-
-    return (
-        <>
+    if (nextweekevents.length === 0 && otherevents.length === 0) {
+        return (
             <div className="schedule p-3 mx-auto">
                 <div className="roww events">
                     <NoEvent />
                 </div>
             </div>
-
         )
     } else if (nextweekevents.length > 0 && otherevents.length > 0) {
         return (
@@ -104,9 +80,8 @@ export default function HomeEvents() {
                                     endTime={event.endTime}
                                     location={event.location}
                                     date={event.date} />
-                            )
-
-                        })}
+                                    )
+                                })}
                     </div>
                 </div>
                 <div className="schedule p-3 mx-auto">
@@ -145,13 +120,11 @@ export default function HomeEvents() {
                                     location={event.location}
                                     date={event.date} />
                             )
-
-                        })}
+                            })}
                     </div>
                 </div>
-            </>
-        )
-    } else if ((nextweekevents.length == 0 && otherevents.length > 0)) {
+            </>)
+    } else if ((nextweekevents.length === 0 && otherevents.length > 0)) {
         return (
             <>
                 <div className="schedule p-3 mx-auto">

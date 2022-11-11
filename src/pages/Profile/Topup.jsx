@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "../../components/firebase";
-import { collection, getDocs, query, where, addDoc, onSnapshot, doc } from "firebase/firestore";
+import { collection, getDocs, query, where, addDoc, onSnapshot, doc, updateDoc, increment } from "firebase/firestore";
 import { useEffect } from "react";
 import { useAuth } from '../../components/contexts/AuthContext';
 
@@ -27,14 +27,14 @@ export default function Topup(){
         }
         return products
     }
+
+
     
     useEffect(() => {
        async function getProducts(){
         const products = await getActiveProducts();
         setProducts(products)
-        console.log(products)
        }
-
        getProducts()
     },[])
 
@@ -51,6 +51,7 @@ export default function Topup(){
                     price: item.priceId
                 }]
         })
+        
         const cancelListening = onSnapshot(doc(db, `users/${uid}/checkout_sessions/${id}`),
         (snapshot) => {
             let url = snapshot.data().url;
@@ -64,12 +65,13 @@ export default function Topup(){
     }
 
 
+
     return(
-        <div>
+        <div className="topup-modal">
             {products ? products.map((p) => {
                 return(
                 <button
-                    className="btn" 
+                    className="createbtn" 
                     key={p.id}
                     onClick={()=>{
                         createCheckoutSession(user.user.uid, p)
@@ -78,7 +80,7 @@ export default function Topup(){
                         {p.name}
                 </button>)
             }):null}
-        </div>
+        </div>  
         
     )
 }
