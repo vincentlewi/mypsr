@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import  Modal  from 'react-bootstrap/Modal';
 import { useAuth } from "../../components/contexts/AuthContext";
-import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, increment, collection, addDoc } from 'firebase/firestore'
 import { db } from '../../components/firebase'
+import { useNavigate } from "react-router-dom";
 
 export default function OrderSummary(props){
     const [show, setShow] = useState(false);
     const [walletBalance, setWalletBalance] = useState(0);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const navigate = useNavigate()
     const { user } = useAuth()
     const userRef = doc(db, "users", user.uid);
 
@@ -40,10 +41,42 @@ export default function OrderSummary(props){
         await updateDoc(userRef, {
             wallet: increment(-total)
         })
-        handleClose()
+        navigate('/mypsr/home')
     }
 
+    async function addLaundryBookingSlot(){
+        const laundryRef = doc(db, "laundry", props.dateID)
+        await updateDoc(laundryRef, {
+            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: [user.displayName]
+        })
+        const laundryEventsRef = collection(db, "laundryEvents")
+        await addDoc(laundryEventsRef, {
+            date: props.dateID,
+            machine: props.laundrySlot,
+            participant: user.displayName,
+            timing: props.laundryTimeSlot,
+            type: "washer"
+        })
+    } 
 
+    async function addDryerBookingSlot(){
+        const dryerRef = doc(db, "dryer", props.dateID)
+        await updateDoc(dryerRef, {
+            [`${props.dryerTimeSlot}.${props.dryerSlot}`]: [user.displayName]
+        })
+        const laundryEventsRef = collection(db, "laundryEvents")
+        await addDoc(laundryEventsRef, {
+            date: props.dateID,
+            machine: props.dryerSlot,
+            participant: user.displayName,
+            timing: props.dryerTimeSlot,
+            type: "dryer"
+        })
+        
+    }  
+
+
+    
     return(
         <div className="payment-area">
         <div>
@@ -55,7 +88,7 @@ export default function OrderSummary(props){
                 </tr>
                 {laundry?
                 <tr>
-                    <td>Laundry - Machine {laundry.slice(-1)} </td>
+                    <td>Washer - Machine {laundry.slice(-1)} </td>
                     <td>at {props.laundryTimeSlot}</td>
                     <td className = "price">$2.00</td>
                 </tr>:null}
@@ -97,7 +130,7 @@ export default function OrderSummary(props){
                 <table>
                     {laundry?
                         <tr>
-                            <td>Laundry - Machine {laundry.slice(-1)} </td>
+                            <td>Washer - Machine {laundry.slice(-1)} </td>
                             <td>at {props.laundryTimeSlot}</td>
                             <td className = "price">at $2.00</td>
                         </tr>:null}
@@ -116,6 +149,8 @@ export default function OrderSummary(props){
                 <button
                 className = "cancelbtn"
                 onClick={() =>{ 
+                    dryer && addDryerBookingSlot()
+                    laundry && addLaundryBookingSlot()
                     handlePayment()
                 }}
                 >
