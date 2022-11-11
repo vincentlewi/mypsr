@@ -41,7 +41,7 @@ export default function FavouriteGuestCard(props) {
                     <RemoveFavouriteGuest id={props.id}/>
                     <RegisterFavouriteGuest
                          id={props.id}
-                         firebaseref={props.id}
+                         guestFirebaseRef={props.id}
                          guestid = {props.guestid}
                          name={props.name}
                          email={props.email}

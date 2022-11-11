@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs, Timestamp} from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
+import { useForm } from 'react-hook-form'
 
 export default function RegisterFavouriteGuest(props) {
 
@@ -15,11 +16,7 @@ export default function RegisterFavouriteGuest(props) {
     const handleShow = () => setShow(true);
 
     const [guests, setGuests] = useState([])
-
-    const [guestID, setGuestID] = useState("")
-    const [purpose, setPurpose] = useState("")
-    const [date, setDate] = useState("")
-    const [favouriteGuest, setFavouriteGuest] = useState("")
+    const [errorMessage, setErrorMessage] = useState()
 
     const { user, username } = useAuth()
     const userRef = doc(db, "users", user.uid)
@@ -30,73 +27,81 @@ export default function RegisterFavouriteGuest(props) {
         const beginningDateObject = new Date(beginningDate)
         const timestamp = Timestamp.fromDate(beginningDateObject)
         return timestamp
-      }
-
-   
-    async function createGuestRegistration(props) {
-        const dateArr = date.split("-")
-        const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
-    
-        try {
-            const userSnap = await getDoc(userRef)
-            const username = userSnap.data().name
-            await addDoc(collection(db, "guestVisit"), {
-                date: date,
-                id: props.id,
-                guestFirebaseRef: props.firebaseref,
-                name: props.name,
-                purpose: purpose,
-                resident: username,
-                datetimestamp: datetimestamp,
-                created: getCurrentTime()
-            })
-            const q = query(collection(db, "guestVisit"), where("resident", "==", username), orderBy("date", "asc"))
-            const querySnap = await getDocs(q)
-            querySnap.forEach((doc) => {
-                console.log(doc.data())
-            })
-            console.log(guests)
-        } catch (e) {
-            console.log(e.message)
-        }
     }
 
-    async function finishCreating() {
-        createGuestRegistration(props);
-        handleClose();
+
+    const { register, handleSubmit, reset } = useForm({
+        defaultValues: {
+            gpurpose: '',
+            gdate: '',
+            gentrytime: ''
+        }
+    })
+
+    const onSubmit = (values) => { create(values) }
+
+    async function create(values) {
+        if (values.gdate == "" || values.gentrytime == "" | values.gpurpose == "") {
+            setErrorMessage("Please enter all of the required fields")
+            setShow(true)
+        } else {
+            try {
+                const dateArr = values.gdate.split("-")
+                const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
+                const userSnap = await getDoc(userRef)
+                const username = userSnap.data().name
+                const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", props.guestFirebaseRef), where("resident", "==", username), where("date", "==", values.gdate))
+                const querySnapshot = await getDocs(q)
+
+                if (querySnapshot.docs.length > 0) {
+                    setErrorMessage("The guest has been registered for today")
+                } else {
+
+                    await addDoc(collection(db, "guestVisit"), {
+                        date: values.gdate,
+                        id: props.id,
+                        guestFirebaseRef: props.guestFirebaseRef,
+                        name: props.name,
+                        purpose: values.gpurpose,
+                        resident: username,
+                        datetimestamp: datetimestamp,
+                        created: getCurrentTime(),
+                        entryTime: values.gentrytime
+                    })
+                    handleClose()
+                    reset()
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
     }
 
     return (
         <>
             <button className='createbtn' onClick={handleShow}>Re-register Guest</button>
 
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Register New Guest</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h5>Registration for {props.name} </h5>
-                    <label htmlFor="guestpurpose">Purpose of Visit<input type="text" id='guestpurpose' onChange={(e) => { setPurpose(e.target.value) }} /></label><br />
-                    <div className="tw-md:flex tw-md:items-center tw-mb-6">
-                        <div className="tw-md:w-1/3">
-                            <label className="tw-block tw-text-stone-700 tw-font-bold tw-md:text-right tw-mb-1 tw-md:mb-0 tw-pr-4" for="date">
-                                Date of Visit
-                            </label>
-                        </div>
-                        <div className="tw-md:w-2/3">
-                            <input className="tw-bg-orange-100 tw-appearance-none tw-border-2 tw-border-orange-100 tw-rounded tw-w-full tw-py-2 tw-px-4 tw-text-yellow-900 tw-leading-tight tw-focus:outline-none tw-focus:bg-white tw-focus:border-orange-700" id="date" type="date" onChange={(e) => { setDate(e.target.value) }} />
-                        </div>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button className='closebtn' onClick={handleClose}>Close</button>
-                    <button className='createbtn' onClick={finishCreating}>Re-register Guest</button>
-                </Modal.Footer>
+            <Modal show={show} onHide={handleClose}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Register New Guest</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Registration for {props.name} </h5>
+                        <p>Purpose</p>
+                        <input {...register('gpurpose')} type="text" />
+                        <p>Date</p>
+                        <input {...register('gdate')} type="date" min={new Date().toISOString().split("T")[0]} />
+                        <p>Entry Time</p>
+                        <input {...register('gentrytime')} type="time" />
+
+                        {errorMessage && <div className="error"> {errorMessage} </div>}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className='closebtn' onClick={handleClose}>Close</button>
+                        <button className='createbtn' type="submit">Register Guest</button>
+                    </Modal.Footer>
+                </form>
             </Modal>
         </>
     )

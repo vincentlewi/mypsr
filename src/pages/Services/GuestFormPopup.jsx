@@ -4,7 +4,6 @@ import { db } from '../../components/firebase'
 import { addDoc, getDoc, doc, collection, Timestamp, setDoc, query, getDocs, where, updateDoc, orderBy } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useForm } from 'react-hook-form'
-import { TwitterAuthProvider } from 'firebase/auth';
 
 export default function GuestFormPopup(props) {
 
