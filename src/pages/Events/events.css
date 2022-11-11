@@ -6,3 +6,23 @@
 .events-header button{
     max-height: 50px;
 }
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+}
+
+.somespace{
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #EFF7FF;
+    padding: 5px 10px;
+    box-shadow: 1.5px 1.5px #FFE0CF;
+}
+
+span{
+    font-weight: bold;
+}
