@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, updateDoc, setDoc, arrayUnion, Timestamp } from 'firebase/firestore'
+import { collection, addDoc, query, orderBy, getDoc, doc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import { setHours, setMinutes, addDays, getDate } from 'date-fns';
+import { setHours, setMinutes, addDays, format } from 'date-fns';
 
 export default function CreateNewEvent() {
   console.log('rerendered')
@@ -19,22 +19,23 @@ export default function CreateNewEvent() {
   const { user } = useAuth()
   const userRef = doc(db, "users", user.uid)
 
-  const { register, handleSubmit, watch, control, reset, formState: { errors } } = useForm({
-    defaultValues: {
-      name: '', 
-      date: '', 
-      startTime: '', 
-      endTime: '', 
-      location: ''
-    }
-  })
+  const { register, handleSubmit, watch, control, reset, formState: { errors } } = useForm()
+  useEffect(() => {
+    let defaultValues = {}
+    defaultValues.name = ""
+    defaultValues.date = new Date()
+    defaultValues.startTime = ""
+    defaultValues.endTime = ""
+    defaultValues.location = ""
+    reset({ ...defaultValues })
+  }, []);
 
   async function create(values) {
     try {
       const userSnap = await getDoc(userRef)
-      const dateArr = values.date.split("-")
-      const startTimeArr = values.startTime.split(":")
-      const endTimeArr = values.endTime.split(":")
+      const dateArr = format(values.date, 'yyyy-MM-dd').split("-")
+      const startTimeArr = format(values.startTime, 'HH:mm').split(":")
+      const endTimeArr = format(values.endTime, 'HH:mm').split(":")
       const startTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], startTimeArr[0], startTimeArr[1]))
       const endTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endTimeArr[0], endTimeArr[1]))
 
@@ -45,10 +46,10 @@ export default function CreateNewEvent() {
         const docRef = await addDoc(eventsCollectionRef,
           {
             name: values.name,
-            startTime: values.startTime,
-            endTime: values.endTime,
+            date: format(values.date, 'yyyy-MM-dd'),
+            startTime: format(values.startTime, 'HH:mm'),
+            endTime: format(values.endTime, 'HH:mm'),
             location: values.location,
-            date: values.date,
             participants: [userSnap.data().name],
             starttimestamp: startTimeStamp,
             endtimestamp: endTimeStamp
@@ -63,13 +64,13 @@ export default function CreateNewEvent() {
     }
   }
 
-  // const onSubmit = (values) => {
-  //   create(values)
-  //   handleClose()
-  // }
-  const onSubmit = (values) => {console.log(values)}
+  const onSubmit = (values) => {
+    create(values)
+    handleClose()
+  }
+  // const onSubmit = (values) => {console.log(values)}
 
-  const watchValues = watch('name')
+  const [name, startTime] = watch(['name', 'startTime'])
   const today = new Date()
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(today, today.getMinutes()), today.getHours())
@@ -95,7 +96,7 @@ export default function CreateNewEvent() {
           <Modal.Body>
             <p>Event Name</p>
             <input {...register('name')} type="text"/>
-            { watchValues === 'ngentot' && <span>gabole</span>}
+            { name === 'ngentot' && <span>gabole</span>}
 
             <p>Date</p>
             <Controller
@@ -104,30 +105,54 @@ export default function CreateNewEvent() {
               render={({ field }) => (
                 <DatePicker
                   minDate={new Date()}
-                  maxDate={addDays(new Date(), 6)}
+                  onChange={(e) => field.onChange(e)}
+                  dateFormat="yyyy-MM-dd"
+                  selected={field.value ? field.value : new Date()}
+                />
+              )}
+            />
+
+            <p>Start Time</p>
+            <Controller
+              control={control}
+              name="startTime"
+              render={({ field }) => (
+                <DatePicker
                   onChange={(e) => field.onChange(e)}
                   showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
                   filterTime={filterPassedTime}
-                  dateFormat="yyyy-MM-dd hh:mm"
+                  dateFormat="hh:mm aa"
                   selected={field.value}
                 />
               )}
             />
-            <p>Start Time</p>
-            <input {...register('startTime')} type="time"/>
 
             <p>End Time</p>
-            <input {...register('endTime')} type="time"/>
+            <Controller
+              control={control}
+              name="endTime"
+              render={({ field }) => (
+                <DatePicker
+                  onChange={(e) => field.onChange(e)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  filterTime={(time) => (startTime ? startTime < time : false)}
+                  dateFormat="hh:mm aa"
+                  selected={field.value}
+                />
+              )}
+            />
 
             <p>Location</p>
             <input {...register('location')} type="text"/>
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
-            
-            <button className="createbtn" type='submit'>Submit Form</button>
           </Modal.Body>
           <Modal.Footer>
-            <button className="closebtn" onClick={handleClose}>Close</button>
+            <button className="createbtn" type='submit'>Submit Form</button>
           </Modal.Footer>
         </form>
       </Modal>
