@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
@@ -74,7 +74,7 @@ export default function ComplaintPopup() {
 
   return (
     <>
-      <button onClick={handleShow} className="createbtn">File a maintainence report</button>
+      <button onClick={handleShow} className="createbtn">File a maintenance report</button>
 
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>

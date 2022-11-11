@@ -65,8 +65,22 @@ export default function HomeEvents() {
         getEventsDocs()
     }, [])
 
-    if (nextweekevents.length === 0 && otherevents.length === 0) {
-        return (
+    if (events.length !== 0 ){
+        const nextweekevents = []
+        const otherevents = []
+        events.map((event) => {
+            if (event.endtimestamp < getOneWeekFromNow()){
+                nextweekevents.push(event)
+            } else {
+                otherevents.push(event)
+            }
+        })
+       
+    }
+
+
+    return (
+        <>
             <div className="schedule p-3 mx-auto">
                 <div className="roww events">
                     <NoEvent />
