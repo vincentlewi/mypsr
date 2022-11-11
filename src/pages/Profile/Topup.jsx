@@ -17,9 +17,6 @@ export default function Topup(){
         const filteredCollection = query(collectionRef, where("active", "==", true))
         const docs = await getDocs(filteredCollection);
         const products = [];
-        // docs.forEach((doc) => {
-        //     products.push(doc.data())
-        // })
         for await(const doc of docs.docs){
             const product = doc.data()
             product.id = doc.id
@@ -90,7 +87,6 @@ export default function Topup(){
                     key={p.id}
                     onClick={()=>{
                         createCheckoutSession(user.user.uid, p)
-                        console.log(p.priceId)
                     }}>
                         {p.name}
                 </button>)

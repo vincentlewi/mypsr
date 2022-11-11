@@ -1,6 +1,6 @@
 import "./profile.css";
 import { db } from "../../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { useAuth } from "../../components/contexts/AuthContext";
@@ -11,14 +11,16 @@ import { useNavigate } from "react-router";
 import PhotoCropper from "./PhotoCropper";
 import Topup from "./Topup";
 import Modal from "react-bootstrap/Modal";
-import { collection, getDocs, query, where, addDoc, onSnapshot, updateDoc, increment } from "firebase/firestore";
+import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
 
 export default function Profile() {
-  console.log("RENDERING MY ASS")
+  // const [walletBalance, setWalletBalance] = useState(0)
+
   const navigate = useNavigate();
   const { user } = useAuth();
   // const useruser = useUser()
   // console.log(() => useUser())
+
   function logout() {
     signOut(auth);
     navigate("/mypsr");
@@ -28,6 +30,7 @@ export default function Profile() {
   const userRef = doc(db, "users", user.uid);
   const date = new Date();
   let [userInfo, setUserInfo] = useState({});
+
   const schoolNames = {
     scis: "School of Computing and Information Systems",
     business: "School of Business",
@@ -64,21 +67,25 @@ export default function Profile() {
         updateDoc(doc(db, `users`, user.uid), {
             wallet: increment(amountToBeAdded)
         })
-
         updateDoc(doc(db, `users/${uid}/payments/`, res.id), {
-            amount : 0,
+          amount : 0,
         })
-        console.log("end of update")
     })
 }
 
 
+
 useEffect(() => {
-  getUserData();
+  async function doSth(){
+    await topUpWallet(user.uid)
+    getUserData()
+    console.log("helo")
+  }
+
+  doSth()
 }, []);
 
 
-  topUpWallet(user.uid)
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
