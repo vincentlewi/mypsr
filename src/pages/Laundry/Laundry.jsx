@@ -11,11 +11,13 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
 import { format } from 'date-fns'
 
+
 export default function Laundry(){
     console.log("==RENDER in Laundry.jsx==")
     let today = new Date()
     let dateToday = format(today, 'yyyy-MM-dd')
 
+    
     const [dateID, setDateID] = useState(dateToday)
     const [laundryDateObject, setLaundryDateObject] = useState([])
     const [dryerDateObject, setDryerDateObject] = useState([])

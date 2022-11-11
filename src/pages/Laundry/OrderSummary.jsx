@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import  Modal  from 'react-bootstrap/Modal';
+import { useAuth } from "../../components/contexts/AuthContext";
+import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
+import { db } from '../../components/firebase'
 
 export default function OrderSummary(props){
     const [show, setShow] = useState(false);
-    const [walletBalance, setWalletBalance] = useState(10);
+    const [walletBalance, setWalletBalance] = useState(0);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const { user } = useAuth()
+    const userRef = doc(db, "users", user.uid);
 
-    const handlePayment = () => {
-        setWalletBalance(walletBalance - 3)
-        handleClose()
+    async function getWalletData(){
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+        setWalletBalance(userData.wallet)
     }
+
+    useEffect(() => {
+        getWalletData()
+    },[])
+
 
     let laundry = props.laundrySlot
     let dryer = props.dryerSlot
@@ -22,6 +33,14 @@ export default function OrderSummary(props){
     }
     if(dryer !== ''){
         total += 1
+    }
+
+    async function handlePayment(){
+        setWalletBalance(walletBalance - total)
+        await updateDoc(userRef, {
+            wallet: increment(-total)
+        })
+        handleClose()
     }
 
 
@@ -74,20 +93,20 @@ export default function OrderSummary(props){
                 <Modal.Title>Payment Confirmation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>You are about to pay $3.00 for:</p>
+                <p>You are about to pay ${total}.00 for:</p>
                 <table>
-                    <tr>
-                        <td>Laundry</td>
-                        <td>Machine 3</td>
-                        <td>at</td>
-                        <td>20:00</td>
-                    </tr>
-                    <tr>
-                        <td>Dryer</td>
-                        <td>Machine 2</td>
-                        <td>at</td>
-                        <td>21:00</td>
-                    </tr>
+                    {laundry?
+                        <tr>
+                            <td>Laundry - Machine {laundry.slice(-1)} </td>
+                            <td>at {props.laundryTimeSlot}</td>
+                            <td className = "price">at $2.00</td>
+                        </tr>:null}
+                    {dryer?
+                        <tr>
+                            <td>Dryer - Machine {dryer.slice(-1)}</td>
+                            <td>at {props.dryerTimeSlot}</td>
+                            <td className = "price">at $1.00</td>
+                        </tr>:null}
                 </table>
             </Modal.Body>
             <Modal.Footer>

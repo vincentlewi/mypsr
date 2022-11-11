@@ -7,6 +7,8 @@ import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, addDays, format } from 'date-fns';
+import { Row, Col, Container } from 'react-bootstrap';
+
 
 export default function CreateNewEvent() {
   console.log('rerendered')
@@ -94,11 +96,15 @@ export default function CreateNewEvent() {
         </Modal.Header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Body>
-            <p>Event Name</p>
-            <input {...register('name')} type="text"/>
+            <Container>
+            <Row>
+              <Col>
+            <span>Event Name</span>
+            <input {...register('name')} type="text" style={{width: "100%"}} className="somespace"/>
             { name === 'ngentot' && <span>gabole</span>}
-
-            <p>Date</p>
+            </Col>
+            <Col>
+            <span>Date</span>
             <Controller
               control={control}
               name="date"
@@ -108,11 +114,15 @@ export default function CreateNewEvent() {
                   onChange={(e) => field.onChange(e)}
                   dateFormat="yyyy-MM-dd"
                   selected={field.value ? field.value : new Date()}
+                  className="somespace"
                 />
               )}
-            />
-
-            <p>Start Time</p>
+              />
+            </Col>
+            </Row>
+            <Row>
+              <Col>
+            <span>Start Time</span>
             <Controller
               control={control}
               name="startTime"
@@ -125,11 +135,13 @@ export default function CreateNewEvent() {
                   filterTime={filterPassedTime}
                   dateFormat="hh:mm aa"
                   selected={field.value}
-                />
+                  className="somespace"
+                  />
               )}
-            />
-
-            <p>End Time</p>
+              />
+            </Col>
+            <Col>
+            <span>End Time</span>
             <Controller
               control={control}
               name="endTime"
@@ -142,14 +154,21 @@ export default function CreateNewEvent() {
                   filterTime={(time) => (startTime ? startTime < time : false)}
                   dateFormat="hh:mm aa"
                   selected={field.value}
-                />
-              )}
-            />
-
-            <p>Location</p>
-            <input {...register('location')} type="text"/>
+                  className="somespace"
+                  />
+                  )}
+                  />
+            </Col>
+            </Row>
+            <Row>
+              <Col>
+            <span>Location</span>
+            <input {...register('location')} type="text" style={{width: "100%"}} className="somespace"/>
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
+            </Col>
+            </Row>
+            </Container>
           </Modal.Body>
           <Modal.Footer>
             <button className="createbtn" type='submit'>Submit Form</button>
