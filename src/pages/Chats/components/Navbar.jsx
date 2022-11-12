@@ -17,7 +17,7 @@ const Navbar = () => {
   //   const userdata = await getDoc(db,"users", user.uid)
   //   return userdata
   // }
-  console.log(user)
+  // console.log(user)
   return (
     <div className='navbar'>
       <span className="logo">MyPSR</span>

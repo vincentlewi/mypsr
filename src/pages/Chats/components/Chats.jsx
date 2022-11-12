@@ -19,14 +19,35 @@ export const Chats = () => {
 
       return () => {
         unsub();
-        console.log(unsub())
+        // console.log(unsub())
       };
     };
 
     user.uid && getChats();
   }, [user.uid]);
 
-  console.log(chats)
+  // console.log(chats)
+
+  function LastMessage(message){
+    // console.log(message.lastMessage)
+    if(!message.lastMessage){
+      // console.log(message.photo)
+      // if(message.lastMessage.img){
+      //   // console.log(message.userInfo.photoURL)
+      //   return "picture was sent"
+      // }
+    }
+    else{
+    message = message.lastMessage.text
+    // if(typeof message)
+    // console.log(message)
+    if(message.length >= 26){
+      message = message.slice(0,25) + "..."
+    }
+    
+    return message
+  }
+  }
 
   const handleSelect = (u) => {
     // console.log(u)
@@ -49,7 +70,8 @@ export const Chats = () => {
           <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage?.text}</p>
+            {/* <p>{chat[1].lastMessage ?.text}{}</p> */}
+            <p>{LastMessage(chat[1])}{}</p>
           </div>
         </div>
       ))}
