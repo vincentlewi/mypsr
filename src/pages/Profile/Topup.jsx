@@ -51,6 +51,7 @@ export default function Topup(){
         const checkoutSessionsRef = collection(db, `users/${uid}/checkout_sessions`);
         const { id } = await addDoc(checkoutSessionsRef, {
             mode: "payment",
+            payment_method_types: ['card', 'paynow', 'grabpay'],
             success_url: `http://localhost:3000/mypsr/profile`,
             cancel_url: `http://localhost:3000/mypsr/home`,
             line_items:     
