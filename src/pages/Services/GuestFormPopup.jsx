@@ -126,18 +126,7 @@ export default function GuestFormPopup(props) {
     }
   }
 
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      gname: '',
-      gid: '',
-      gemail: '',
-      gpurpose: '',
-      gphonenum: '',
-      gdate: '',
-      gfavourite: '',
-      gentrytime: ''
-    }
-  })
+  const { register, handleSubmit, reset, control } = useForm()
 
   const onSubmit = (values) => { create(values) }
   // const onSubmit = (values) => { console.log(format(values.dateTime, 'yyyy-MM-dd')) }
