@@ -108,11 +108,16 @@ const Search = () => {
         });
       }
     } catch (err) {}
-    dispatch({ type: "CHANGE_USER", payload: pengguna });
     // setUser(null);
     setUsername("")
 
   };
+
+  const changeChat = (u) => {
+    // console.log(u)
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
+
   return (
     <div className="search">
       <div className="searchForm">
@@ -127,7 +132,11 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {Object.entries(userlists).map((pengguna) => (
-        <div className="userChat" onClick={() => handleSelect(pengguna)}>
+        <div className="userChat" onClick={() => {
+          handleSelect(pengguna)
+          changeChat(pengguna)
+          console.log("sa")
+          }}>
           <img src={pengguna[1][1]} alt="" />
           <div className="userChatInfo">
             <span>{pengguna[1][0]}</span>

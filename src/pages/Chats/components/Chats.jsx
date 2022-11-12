@@ -39,7 +39,10 @@ export const Chats = () => {
         <div
           className="userChat"
           key={chat[0]}
-          onClick={() => handleSelect(chat[1].userInfo)}
+          onClick={(e) => {
+            // e.target.className = 'chatSelected'
+            handleSelect(chat[1].userInfo)
+          }}
         >
 
         
