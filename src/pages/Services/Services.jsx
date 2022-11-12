@@ -10,6 +10,7 @@ import Navbar from '../../components/Navbar'
 import '../../components/card.css'
 import { Row, Col, Container, Card } from 'react-bootstrap';
 import './services.css';
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
 export default function Services() {
     console.log("Rendering Services.jsx")
@@ -39,6 +40,74 @@ export default function Services() {
                 </div>
             </div>
 
+            <div className="guestregistration">
+            
+                {/* header */}
+                <h1>Guest Registration</h1>
+                <Container className="mb-2">
+                    <Row>
+                        <Col lg={4} md={4} sm={12}>
+                        <h5>Your guests coming over:</h5>
+                        </Col>
+                        <Col lg={8} md={8} sm={12} className="reportcomp">
+                        <GuestFormPopup />
+                        </Col>
+                    </Row>
+                </Container>
+
+                <div className="Register">
+                    <Container>
+                        <Row>
+                            <Col lg={4} md={6} sm={6} className="mb-3" >
+                            <Card style={{border:'none'}} className="guestpart bg-light">
+                                <Card.Body>
+                                <Card.Title>Emily Aurelia</Card.Title>
+                                <Card.Subtitle className="mb-2 date">18 Sep 2022, 05:00AM</Card.Subtitle>
+                                <Card.Text>Project Work</Card.Text>
+                                <Card.Subtitle><button onClick="" className="cancelbtn cancel">Cancel</button></Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                    
+                </div>
+                <div className="Favourite">
+                    <h1>Favourites</h1>
+                    <Container>
+                        <Row>
+                            <Col lg={4} md={6} sm={6} className="mb-3 guestpart" >
+                                <Row>
+                                    <Col lg={9} md={9} sm={9}>
+                                    <span><h5 className='mb-0'>Vitto Surya Tedja</h5></span>
+                                    </Col>
+                                    <Col className="reportcomp" lg={3} md={3} sm={3}>
+                                    <img src={require("../../assets/closes.png")} width="20px" onClick=""/>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+                <div className="History">
+                    <h1>History</h1>
+                    <Container>
+                        <Row>
+                            <Col lg={4} md={6} sm={6} className="mb-3" >
+                            <Card style={{border:'none'}} className="guestpart bg-light">
+                                <Card.Body>
+                                <Card.Title>Emily Aurelia</Card.Title>
+                                <Card.Subtitle className="mb-2 date">18 Sep 2022, 05:00AM</Card.Subtitle>
+                                <Card.Text>Project Work</Card.Text>
+                                <Card.Subtitle><button onClick="" className="createbtn rereg">Re-Register</button></Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            </div>
+            
 
 
             {/* <h1>Your recent reports:</h1>

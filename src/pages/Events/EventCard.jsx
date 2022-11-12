@@ -96,7 +96,7 @@ export default function EventCard(props) {
             <div className="column">
                 <div className="card" onClick={handleShow} id={props.id}>
                     <h4 className="title"><b>{props.name}</b></h4>
-                    <hr />
+                    <hr className="line"/>
                     <Container>
                         <Row>
                             <Col lg={4} md={4} sm={4} xs={4}>
