@@ -14,6 +14,7 @@ import Modal from "react-bootstrap/Modal";
 import { collection, getDocs, where, updateDoc, increment, query, onSnapshot } from "firebase/firestore";
 import { Row, Col, Container } from 'react-bootstrap';
 import TransactionHistoryCards from "./TransactionHistoryCards";
+import { useRef } from "react";
 
 export default function Profile() {
   // const [walletBalance, setWalletBalance] = useState(50)
@@ -24,6 +25,7 @@ export default function Profile() {
   const [finalTransaction, setFinalTransactions]= useState([])
   const [showMore, setShowMore] = useState(false);
   const [sortedDesc, setSortedDesc] = useState([])
+  const transactionHistory = useRef([])
 
   function logout() {
     signOut(auth);
@@ -82,6 +84,7 @@ export default function Profile() {
           transactionDate: new Date(event.transactionDate)
         }
         setFinalTransactions(oldArray => [...oldArray, eventObj])
+        transactionHistory.current.push(eventObj)
       } else {
         const eventObj = {
           id: "DryerMachine" + "-" + event.transactionDate + "-" + event.timing,
@@ -93,6 +96,7 @@ export default function Profile() {
           transactionDate: new Date(event.transactionDate)
         }
         setFinalTransactions(oldArray => [...oldArray, eventObj])
+        transactionHistory.current.push(eventObj)
       }
     })
     topupTransactions.forEach((transaction)=>{
@@ -109,7 +113,11 @@ export default function Profile() {
         transactionDate: transactionDate
       }
       setFinalTransactions(oldArray => [...oldArray, eventObj])
+      transactionHistory.current.push(eventObj)
     })
+    console.log(transactionHistory)
+    setSortedDesc(transactionHistory.current.sort((objA, objB) => Number(objB.transactionDate) - Number(objA.transactionDate)))
+    
   }
 
   async function topUpWallet(uid) {
@@ -133,7 +141,7 @@ export default function Profile() {
     await topUpWallet(user.uid)
     await getUserData()
     await getTransactionHistory()
-    setSortedDesc(finalTransaction.sort((objA, objB) => Number(objB.transactionDate) - Number(objA.transactionDate)))
+   
     console.log("profile useEffect")
   }
 
