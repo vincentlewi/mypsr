@@ -26,11 +26,15 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>just now</span>
+        
       </div>
       <div className="messageContent">
         <p>{message.text && message.text}
-        {message.img && <img src={message.img} alt="" />}</p>
+        {message.img && <img src={message.img} alt=""/>}
+        <div className="timestamp">
+        <span>just now</span>
+        </div>
+        </p>
       </div>
     </div>
   );
