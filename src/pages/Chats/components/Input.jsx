@@ -85,10 +85,17 @@ const Input = () => {
         <img src={Attach} alt="" />
         <input
           type="file"
-          style={{ display: "none" }}
+          style={{ display: "block" }}
           id="file"
+          accept="image/*"
           onChange={(e) => setImg(e.target.files[0])}
         />
+        {/* <input
+          type ="image"
+          id="file"
+          alt="submit"
+          onChange={(e) => setImg(e.target.files[0])}
+        /> */}
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
