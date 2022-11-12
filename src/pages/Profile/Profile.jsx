@@ -22,7 +22,7 @@ export default function Profile() {
   const { user } = useAuth();
   // const useruser = useUser()
   // console.log(() => useUser())
-  const [finalTransaction, setFinalTransactions]= useState([])
+  const [finalTransaction, setFinalTransactions] = useState([])
   const [showMore, setShowMore] = useState(false);
   const [sortedDesc, setSortedDesc] = useState([])
   const transactionHistory = useRef([])
@@ -60,11 +60,9 @@ export default function Profile() {
       address: userData.address,
       wallet: userData.wallet,
     });
-    console.log(userData.wallet) //firebase
-    console.log(userInfo.wallet) //js
   }
 
-  async function getTransactionHistory(){
+  async function getTransactionHistory() {
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
     const laundryEventsData = await getDocs(collection(db, 'laundryEvents'), where("participant", "==", userData.name), orderBy("date", "asc"), orderBy("timing", "asc"))
@@ -75,7 +73,7 @@ export default function Profile() {
       const day = new Date(event.date)
       if (event.type == "washer") {
         const eventObj = {
-          id: "WashingMachine" + "-" + event.transactionDate+ "-" +event.timing,
+          id: "WashingMachine" + "-" + event.transactionDate + "-" + event.timing,
           name: "Washer",
           date: event.transactionDate,
           timing: event.timing,
@@ -99,12 +97,11 @@ export default function Profile() {
         transactionHistory.current.push(eventObj)
       }
     })
-    topupTransactions.forEach((transaction)=>{
-      const transactionDate = new Date(transaction.created *1000)
+    topupTransactions.forEach((transaction) => {
+      const transactionDate = new Date(transaction.created * 1000)
       const transactionDateParts = transactionDate.toDateString().split(" ")
-      console.log(transactionDate, typeof transactionDate)
       const eventObj = {
-        id: "Topup" + "-" +transactionDateParts[2] + "-" + transactionDateParts[1] + "-" + transactionDateParts[3]+"-"+transactionDate.toTimeString().split(" ")[0],
+        id: "Topup" + "-" + transactionDateParts[2] + "-" + transactionDateParts[1] + "-" + transactionDateParts[3] + "-" + transactionDate.toTimeString().split(" ")[0],
         name: "Top Up",
         price: transaction.amount_received / 100,
         date: transactionDateParts[2] + " " + transactionDateParts[1] + " " + transactionDateParts[3],
@@ -115,9 +112,11 @@ export default function Profile() {
       setFinalTransactions(oldArray => [...oldArray, eventObj])
       transactionHistory.current.push(eventObj)
     })
-    console.log(transactionHistory)
+    if (transactionHistory.length > 5) {
+      setShowMore(true)
+    }
     setSortedDesc(transactionHistory.current.sort((objA, objB) => Number(objB.transactionDate) - Number(objA.transactionDate)))
-    
+
   }
 
   async function topUpWallet(uid) {
@@ -141,7 +140,7 @@ export default function Profile() {
     await topUpWallet(user.uid)
     await getUserData()
     await getTransactionHistory()
-   
+
     console.log("profile useEffect")
   }
 
@@ -155,6 +154,39 @@ export default function Profile() {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const showFirstFive = () => {
+    sortedDesc.slice(0, 5).map((trans) => {
+      return (
+        <TransactionHistoryCards
+          id={trans.id}
+          key={trans.id}
+          name={trans.name}
+          date={trans.date}
+          timing={trans.timing}
+          price={trans.price}
+          status={trans.status}
+          transactionDate={trans.transactionDate}
+        />)
+    })
+    return (<button>Testing</button>)
+  }
+
+  const showRest = () => {
+    sortedDesc.slice(5, sortedDesc.length - 5).map((trans) => {
+      return (
+        <TransactionHistoryCards
+          id={trans.id}
+          key={trans.id}
+          name={trans.name}
+          date={trans.date}
+          timing={trans.timing}
+          price={trans.price}
+          status={trans.status}
+          transactionDate={trans.transactionDate}
+        />)
+    })
+  }
 
   return (
     <>
@@ -194,18 +226,18 @@ export default function Profile() {
             <Col lg={8} md={6} sm={12}>
               <Row>
                 <Col className="m-3 rounded-4">
-                <span className="text-start text-secondary">Wallet</span>
-                <Row className="wallet text-center py-3 px-3 rounded">
-                  <Col lg={6} md={12} sm={12} className="text-start">
-                  <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2" alt="psrWallet"/><br/>
-                  <span className="fw-bold">Balance: ${userInfo.wallet}</span>
-                  </Col>
-                  <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
-                  <button className="createbtn" onClick={handleShow}>
-                    Top Up Wallet
-                  </button>
-                  </Col>
-                </Row>
+                  <span className="text-start text-secondary">Wallet</span>
+                  <Row className="wallet text-center py-3 px-3 rounded">
+                    <Col lg={6} md={12} sm={12} className="text-start">
+                      <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2" alt="psrWallet" /><br />
+                      <span className="fw-bold">Balance: ${userInfo.wallet}</span>
+                    </Col>
+                    <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
+                      <button className="createbtn" onClick={handleShow}>
+                        Top Up Wallet
+                      </button>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
 

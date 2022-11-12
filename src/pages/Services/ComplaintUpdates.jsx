@@ -3,6 +3,8 @@ import { db } from '../../components/firebase'
 import { collection, query, orderBy, onSnapshot, getDoc, doc, where } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext";
 import ComplaintCard from "./ComplaintCard";
+import { Container, Row, Col } from "react-bootstrap";
+import './services.css'
 
 export default function ComplaintUpdates() {
     const [complaints, setComplaints] = useState([])
@@ -29,10 +31,11 @@ export default function ComplaintUpdates() {
 
     return (
         <>
-            <div className="schedule p-3 mx-auto">
-                <div className="laundry roww">
-                    {complaints.map((complaint) => {
-                        return (
+                <Container>
+                    <Row>
+                        {complaints.map((complaint) => {
+                            return(
+                            <Col lg={4} md={6} sm={6} className="mb-3 laundry">
                             <ComplaintCard
                                 key={complaint.id}
                                 id={complaint.id}
@@ -41,10 +44,9 @@ export default function ComplaintUpdates() {
                                 location={complaint.location}
                                 time={complaint.time}
                             />
-                        )
-                    })}
-                </div>
-            </div>
+                            </Col>)})}
+                    </Row>
+                </Container>
         </>
 
     )

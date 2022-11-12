@@ -15,6 +15,7 @@ import Chats from './pages/Chats/Chats'
 import './App.css';
 import './components/Components.css'
 import './components/buttons.css'
+import Maintenance from './pages/Services/Maintenance';
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
             <Route path='services' element={<Services />}/>
             <Route path='profile' element={<Profile/>}/>
             <Route path='chats' element={<Chats/>}/>
+            <Route path='maintenance' element={<Maintenance/>}/>
           </Route>
         </Route>
         <Route path='*' element={<Error404/>}/>

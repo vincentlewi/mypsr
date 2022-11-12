@@ -49,7 +49,7 @@ export default function OrderSummary(props){
     async function addLaundryBookingSlot(){
         const laundryRef = doc(db, "laundry", props.dateID)
         await updateDoc(laundryRef, {
-            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: [user.displayName]
+            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: {name: user.displayName, ID: user.uid}
         })
         const laundryEventsRef = collection(db, "laundryEvents")
         await addDoc(laundryEventsRef, {
@@ -58,7 +58,7 @@ export default function OrderSummary(props){
             participant: user.displayName,
             timing: props.laundryTimeSlot,
             type: "washer",
-            transactionDate: new Date().toGMTString(),
+            transactionDate: new Date().toLocaleString(),
             status: "Booked"
         })
     } 
@@ -75,7 +75,7 @@ export default function OrderSummary(props){
             participant: user.displayName,
             timing: props.dryerTimeSlot,
             type: "dryer",
-            transactionDate: new Date().toGMTString(),
+            transactionDate: new Date().toLocaleString(),
             status: "Booked"
         })
         
