@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Alert } from "react-bootstrap"
-import { Link, useNavigate, useLocation, Navigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import './login.css'
 import PageTransition from "../../components/PageTransition"
 
@@ -38,8 +38,6 @@ export default function LoginNew() {
             setLoading(true)
             console.log("before logging innn")
             await login(emailRef.current.value, passwordRef.current.value)
-            console.log("after logging innn")
-            setAnimate(true)
             navigate('/mypsr/home', {state:1})
         }
         catch {
