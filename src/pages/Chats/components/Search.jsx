@@ -15,41 +15,67 @@ import { AuthContext, useAuth } from "../../../components/contexts/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
   console.log(username);
-  const [findUser, setUser] = useState(null);
-  console.log(findUser)
+  // const [findUser, setUser] = useState(null);
+  // console.log(findUser)
   const [err, setErr] = useState(false);
+
+  const [userlists, setUserLists] = useState({})
 
   const { user } = useAuth();
 
-  const handleSearch = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
+  // const 
+  
+ 
 
+  const handleSearch = async () => {
+
+    let userl = {}
     try {
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(collection(db, "users"));
+      // console.log(querySnapshot.docs)
       querySnapshot.forEach((doc) => {
-        setUser(doc.data());
+        // console.log(doc.id, "=>", doc.data())
+        if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
+
+          userl[doc.id] = [doc.data().name, doc.data().photoURL]
+        }
+        
+        // setUser(findUser[doc.data().uid] = doc.data());
       });
+      // console.log(userl)
+      // Object.entries(userlists).map((keys) => {
+      //   console.log(keys)
+      //   // setUser(key)
+      // })
+      // console.log(findUser)
     } catch (err) {
       setErr(true);
     }
+    setUserLists(userl)
+    // Object.entries(userlists).map((pengguna) => {
+    //   console.log(pengguna[1])
+    //   // setUser(key)
+    // })
   };
+
+  // Object.entries(userlists).map((keys, values) => {
+  //   console.log(keys)
+  // })
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
 
-  const handleSelect = async () => {
+  const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
+    // console.log(pengguna)
     const combinedId =
-      user.uid > findUser.uid
-        ? user.uid + findUser.uid
-        : findUser.uid + user.uid;
+      user.uid > pengguna[0]
+        ? user.uid + pengguna[0]
+        : pengguna[0] + user.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-
+      console.log(combinedId)
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
@@ -57,14 +83,14 @@ const Search = () => {
         //create findUser chats
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
-            uid: findUser.uid,
-            displayName: findUser.displayName,
-            photoURL: findUser.photoURL,
+            uid: pengguna[0],
+            displayName: pengguna[1][0],
+            photoURL: pengguna[1][1],
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
 
-        await updateDoc(doc(db, "userChats", findUser.uid), {
+        await updateDoc(doc(db, "userChats", pengguna[0]), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
             displayName: user.displayName,
@@ -75,7 +101,7 @@ const Search = () => {
       }
     } catch (err) {}
 
-    setUser(null);
+    // setUser(null);
     setUsername("")
   };
   return (
@@ -83,21 +109,24 @@ const Search = () => {
       <div className="searchForm">
         <input
           type="text"
-          placeholder="Enter a fullname here"
+          placeholder="Enter a name"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
       </div>
       {err && <span>User not found!</span>}
-      {findUser && (
-        <div className="userChat" onClick={handleSelect}>
-          <img src={findUser.photoURL} alt="" />
+      {Object.entries(userlists).map((pengguna) => (
+        <div className="userChat" onClick={() => handleSelect(pengguna)}>
+          <img src={pengguna[1][1]} alt="" />
           <div className="userChatInfo">
-            <span>{findUser.displayName}</span>
+            <span>{pengguna[1][0]}</span>
           </div>
         </div>
-      )}
+      ))}
+      {/* {userlists.map((key) => (
+        <span>{key}</span>
+      ))} */}
     </div>
   );
 };
