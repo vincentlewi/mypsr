@@ -14,8 +14,7 @@ import Modal from "react-bootstrap/Modal";
 import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
 
 export default function Profile() {
-  // const [walletBalance, setWalletBalance] = useState(0)
-
+  // const [walletBalance, setWalletBalance] = useState(50)
   const navigate = useNavigate();
   const { user } = useAuth();
   // const useruser = useUser()
@@ -43,6 +42,7 @@ export default function Profile() {
   async function getUserData() {
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
+    console.log(userData)
     setUserInfo({
       name: userData.name,
       photo: user.photoURL,
@@ -53,19 +53,20 @@ export default function Profile() {
       address: userData.address,
       wallet: userData.wallet,
     });
+    console.log(userData.wallet) //firebase
+    console.log(userInfo.wallet) //js
   }
 
-
-
-  //add user wallet number?
   async function topUpWallet(uid){
     const paymentRef = collection(db, `users/${uid}/payments`);
-    const docs = await getDocs(paymentRef, where("status", "==", "succeeded"))
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    const docs = await getDocs(paymentRef)
     const results = docs.docs
     results.map((res) => {
         const amountToBeAdded = (res.data().amount)/100
         updateDoc(doc(db, `users`, user.uid), {
-            wallet: increment(amountToBeAdded)
+            wallet: userData.wallet + amountToBeAdded
         })
         updateDoc(doc(db, `users/${uid}/payments/`, res.id), {
           amount : 0,
@@ -75,15 +76,18 @@ export default function Profile() {
 
 
 
-useEffect(() => {
+
+
+
+useEffect(()=>{
   async function doSth(){
     await topUpWallet(user.uid)
     getUserData()
-    console.log("helo")
+    console.log("profile useEffect")
   }
 
   doSth()
-}, []);
+}, [])
 
 
   const [show, setShow] = useState(false);
@@ -113,6 +117,7 @@ useEffect(() => {
         <h3>year: {userInfo.year}</h3>
         <h3>address: {userInfo.address}</h3>
         <h3>wallet: {userInfo.wallet}</h3>
+        {/* <h3>wallet-v: {walletBalance}</h3> */}
         <button className="cancelbtn" onClick={logout}>
           LOG OUT
         </button>

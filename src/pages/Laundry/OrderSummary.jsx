@@ -4,10 +4,11 @@ import { useAuth } from "../../components/contexts/AuthContext";
 import { doc, getDoc, updateDoc, increment, collection, addDoc } from 'firebase/firestore'
 import { db } from '../../components/firebase'
 import { useNavigate } from "react-router-dom";
+import Topup from '../Profile/Topup'
 
 export default function OrderSummary(props){
     const [show, setShow] = useState(false);
-    const [walletBalance, setWalletBalance] = useState(0);
+    const [walletBalance, setWalletBalance] = useState(10);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navigate = useNavigate()
@@ -111,6 +112,7 @@ export default function OrderSummary(props){
             <br/>
             <span>Pay NOW</span>
         </button>
+        {total > walletBalance ? <Topup/> : null}
     </div>
 
 
