@@ -1,0 +1,59 @@
+.requested{
+    border: none;
+    background-color: #024959;
+    color: #fff;
+}
+
+.completed{
+    background-color:#026773;
+    color: #fff;
+}
+
+.completed .status{
+    color: #D3EFBD;
+}
+
+.date{
+    color: #A5A2A2;
+    font-size: 0.75em;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.comment{
+    font-size: 0.6em;
+}
+
+.utilities{
+    background-color: #FFE0CF;
+    height: 200px;
+    position: relative;
+    padding: 10px;
+}
+
+.utilities h1{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.utilities button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.details{
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #EFF7FF;
+    padding: 5px 10px;
+    box-shadow: 1.5px 1.5px #FFE0CF;
+}
+
+.reportcomp{
+    text-align: right;
+}

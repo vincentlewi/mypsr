@@ -5,6 +5,8 @@ import { db } from '../../components/firebase'
 import { addDoc, getDoc, doc, collection, orderBy, query, onSnapshot, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useForm } from 'react-hook-form'
+import { Row, Col, Container } from 'react-bootstrap';
+import './services.css';
 
 export default function ComplaintPopup() {
 
@@ -74,16 +76,48 @@ export default function ComplaintPopup() {
 
   return (
     <>
-      <button onClick={handleShow} className="createbtn">File a maintenance report</button>
+      <button onClick={handleShow} className="createbtn">Make a Report</button>
 
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>File a maintainence report here</Modal.Title>
+            <Modal.Title>Maintainance Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
-            <p>Subject of Report</p>
+            <Container>
+              <Row>
+                <Col lg={4} md={3} sm={12}>
+                <p>Subject</p>
+                </Col>
+                <Col lg={8} md={9} sm={12} >
+                <input {...register('name')} type="text" className="details"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={4} md={3} sm={12}>
+                <p>Description</p>
+                </Col>
+                <Col lg={8} md={9} sm={12} >
+                <input {...register('description')} type="text" className="details"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={4} md={3} sm={12}>
+                <p>Location</p>
+                </Col>
+                <Col lg={8} md={9} sm={12} >
+                <select {...register("location")} className="details">
+                  <option value="My Room">My Room</option>
+                  <option value="PSR Study Area">PSR Study Area</option>
+                  <option value="PSR Dining Area">PSR Dining Area</option>
+                  <option value="PSR Classroom">PSR Classroom</option>
+                  <option value="PSR Court">PSR Court</option>
+                  <option value="PSR Relax Area">PSR Relax Area</option>
+                </select>
+                </Col>
+              </Row>
+            </Container>
+            {/* <p>Subject</p>
             <input {...register('name')} type="text" />
 
             <p>Description</p>
@@ -97,7 +131,7 @@ export default function ComplaintPopup() {
               <option value="PSR Classroom">PSR Classroom</option>
               <option value="PSR Court">PSR Court</option>
               <option value="PSR Relax Area">PSR Relax Area</option>
-            </select>
+            </select> */}
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
 
