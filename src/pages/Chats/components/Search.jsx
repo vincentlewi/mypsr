@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   collection,
   query,
@@ -66,9 +66,12 @@ const Search = () => {
   // })
 
   const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
+    // e.code === "onKeyPress" && handleSearch();
+    handleSearch();
   };
-
+  useEffect(() => {
+    username ? handleSearch() : setUserLists({})
+  }, [username])
   const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
     // console.log(pengguna)
@@ -114,8 +117,9 @@ const Search = () => {
         <input
           type="text"
           placeholder="Enter a name"
-          onKeyDown={handleKey}
+          
           onChange={(e) => setUsername(e.target.value)}
+          // onKeyDown={handleKey}
           value={username}
         />
       </div>
