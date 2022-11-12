@@ -408,16 +408,16 @@ export default function Laundry(){
         <Navbar/>
         <div className="container">
             <WelcomeButton loc="laundry"/>
-            <div className="top">
+            <div className="top d-flex justify-content-center">
                 <CalendarNew getDateID={getDateID}/>
             </div>
             <div className="washer">
-                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} setSlotList = {setLaundryTimeSlotList} slotList = {laundryTimeSlotList} dateID={dateID}/>
-                {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} timeslot = {laundryTimeSlot} setSlotList = {setLaundryMachineSlotList} slotList = {laundryMachineSlotList} getChosenLaundry = {getChosenLaundry}/>: null}
+                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} setSlotList = {setLaundryTimeSlotList} slotList = {laundryTimeSlotList} dateID={dateID} currentSlot = {laundryTimeSlot}/>
+                {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} timeslot = {laundryTimeSlot} setSlotList = {setLaundryMachineSlotList} slotList = {laundryMachineSlotList} getChosenLaundry = {getChosenLaundry} currentMachine = {chosenLaundry}/>: null}
             </div>
             <div className="dryer">
-                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} setSlotList = {setDryerTimeSlotList} slotList = {dryerTimeSlotList} dateID = {dateID}/>
-                {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} timeslot = {dryerTimeSlot} setSlotList = {setDryerMachineSlotList} slotList = {dryerMachineSlotList} getChosenDryer = {getChosenDryer}/>:null}
+                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} setSlotList = {setDryerTimeSlotList} slotList = {dryerTimeSlotList} dateID = {dateID} currentSlot = {dryerTimeSlot}/>
+                {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} timeslot = {dryerTimeSlot} setSlotList = {setDryerMachineSlotList} slotList = {dryerMachineSlotList} getChosenDryer = {getChosenDryer} currentMachine = {chosenDryer}/>:null}
             </div>
             <div className="bottom-part">
                 {(chosenLaundry || chosenDryer) ?

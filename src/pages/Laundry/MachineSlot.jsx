@@ -25,8 +25,13 @@ export default function MachineSlot(props){
                         id={slot[0]}
                         key={slot}
                         onClick={(e) => 
-                        {
-                            props.name === "Laundry" ? props.getChosenLaundry(e.target.id):props.getChosenDryer(e.target.id)
+                        {   
+                            if(props.currentMachine !== e.target.id){
+                                props.name === "Laundry" ? props.getChosenLaundry(e.target.id):props.getChosenDryer(e.target.id)
+                            }
+                            else{
+                                props.name === "Laundry" ? props.getChosenLaundry(''):props.getChosenDryer('')
+                            }
                             handleClick(slot[0], checked)
                         }
                     }

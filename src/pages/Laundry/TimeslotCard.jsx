@@ -7,7 +7,6 @@ export default function TimeslotCard(props){
     let today = new Date()
     let nowHour = today.getHours()
     let dayNow = format(today, 'yyyy-MM-dd')
-    // console.log(props.slotList)
 
 
     function classNames(...classes) {
@@ -53,7 +52,12 @@ export default function TimeslotCard(props){
                     style={{width:'100%'}}
                     onClick = {
                         (e) => {
-                        props.getTimeSlot(e.target.id)
+                        if(props.currentSlot !== e.target.id){
+                            props.getTimeSlot(e.target.id)
+                        }
+                        else{
+                            props.getTimeSlot('')
+                        }
                         handleClick(time, checked)
                     }
                     }
