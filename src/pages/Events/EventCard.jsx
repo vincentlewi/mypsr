@@ -133,9 +133,6 @@ export default function EventCard(props) {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className = "closebtn" onClick={handleClose}>
-                        Close
-                    </button>
                     {renderDeleteButton()}
                     <button
                     hidden = {!showJoin}

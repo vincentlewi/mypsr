@@ -1,6 +1,6 @@
 import "./profile.css";
 import { db } from "../../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { useAuth } from "../../components/contexts/AuthContext";
@@ -11,14 +11,15 @@ import { useNavigate } from "react-router";
 import PhotoCropper from "./PhotoCropper";
 import Topup from "./Topup";
 import Modal from "react-bootstrap/Modal";
-import { collection, getDocs, query, where, addDoc, onSnapshot, updateDoc, increment } from "firebase/firestore";
+import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
 
 export default function Profile() {
-  console.log("RENDERING MY ASS")
+  // const [walletBalance, setWalletBalance] = useState(50)
   const navigate = useNavigate();
   const { user } = useAuth();
   // const useruser = useUser()
   // console.log(() => useUser())
+
   function logout() {
     signOut(auth);
     navigate("/mypsr");
@@ -28,6 +29,7 @@ export default function Profile() {
   const userRef = doc(db, "users", user.uid);
   const date = new Date();
   let [userInfo, setUserInfo] = useState({});
+
   const schoolNames = {
     scis: "School of Computing and Information Systems",
     business: "School of Business",
@@ -40,6 +42,7 @@ export default function Profile() {
   async function getUserData() {
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
+    console.log(userData)
     setUserInfo({
       name: userData.name,
       photo: user.photoURL,
@@ -50,35 +53,43 @@ export default function Profile() {
       address: userData.address,
       wallet: userData.wallet,
     });
+    console.log(userData.wallet) //firebase
+    console.log(userInfo.wallet) //js
   }
 
-
-
-  //add user wallet number?
   async function topUpWallet(uid){
     const paymentRef = collection(db, `users/${uid}/payments`);
-    const docs = await getDocs(paymentRef, where("status", "==", "succeeded"))
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    const docs = await getDocs(paymentRef)
     const results = docs.docs
     results.map((res) => {
         const amountToBeAdded = (res.data().amount)/100
         updateDoc(doc(db, `users`, user.uid), {
-            wallet: increment(amountToBeAdded)
+            wallet: userData.wallet + amountToBeAdded
         })
-
         updateDoc(doc(db, `users/${uid}/payments/`, res.id), {
-            amount : 0,
+          amount : 0,
         })
-        console.log("end of update")
     })
 }
 
 
-useEffect(() => {
-  getUserData();
-}, []);
 
 
-  topUpWallet(user.uid)
+
+
+useEffect(()=>{
+  async function doSth(){
+    await topUpWallet(user.uid)
+    getUserData()
+    console.log("profile useEffect")
+  }
+
+  doSth()
+}, [])
+
+
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -106,6 +117,7 @@ useEffect(() => {
         <h3>year: {userInfo.year}</h3>
         <h3>address: {userInfo.address}</h3>
         <h3>wallet: {userInfo.wallet}</h3>
+        {/* <h3>wallet-v: {walletBalance}</h3> */}
         <button className="cancelbtn" onClick={logout}>
           LOG OUT
         </button>
@@ -125,7 +137,6 @@ useEffect(() => {
             <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-                Choose the amount you want!
                 <Topup/>
           </Modal.Body>
           <Modal.Footer>

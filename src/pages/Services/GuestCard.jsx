@@ -78,8 +78,7 @@ export default function ComplaintCard(props) {
                     <p>{status}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    {renderAddFavouriteButton()}
-                    <button className='closebtn' onClick={handleClose}>Close</button>
+                    {!favourited && <AddToFavourites id={props.id} setShow={setShow}/>}
                     <DeleteGuestRegistration id={props.id} />
                 </Modal.Footer>
             </Modal>

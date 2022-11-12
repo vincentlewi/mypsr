@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import  Modal  from 'react-bootstrap/Modal';
+import { useAuth } from "../../components/contexts/AuthContext";
+import { doc, getDoc, updateDoc, increment, collection, addDoc } from 'firebase/firestore'
+import { db } from '../../components/firebase'
+import { useNavigate } from "react-router-dom";
+import Topup from '../Profile/Topup'
 
 export default function OrderSummary(props){
     const [show, setShow] = useState(false);
     const [walletBalance, setWalletBalance] = useState(10);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const navigate = useNavigate()
+    const { user } = useAuth()
+    const userRef = doc(db, "users", user.uid);
 
-
-    const handlePayment = () => {
-        setWalletBalance(walletBalance - 3)
-        handleClose()
+    async function getWalletData(){
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+        setWalletBalance(userData.wallet)
     }
+
+    useEffect(() => {
+        getWalletData()
+    },[])
+
 
     let laundry = props.laundrySlot
     let dryer = props.dryerSlot
@@ -24,7 +37,47 @@ export default function OrderSummary(props){
         total += 1
     }
 
+    async function handlePayment(){
+        setWalletBalance(walletBalance - total)
+        await updateDoc(userRef, {
+            wallet: increment(-total)
+        })
+        navigate('/mypsr/home')
+    }
 
+    async function addLaundryBookingSlot(){
+        const laundryRef = doc(db, "laundry", props.dateID)
+        await updateDoc(laundryRef, {
+            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: [user.displayName]
+        })
+        const laundryEventsRef = collection(db, "laundryEvents")
+        await addDoc(laundryEventsRef, {
+            date: props.dateID,
+            machine: props.laundrySlot,
+            participant: user.displayName,
+            timing: props.laundryTimeSlot,
+            type: "washer"
+        })
+    } 
+
+    async function addDryerBookingSlot(){
+        const dryerRef = doc(db, "dryer", props.dateID)
+        await updateDoc(dryerRef, {
+            [`${props.dryerTimeSlot}.${props.dryerSlot}`]: [user.displayName]
+        })
+        const laundryEventsRef = collection(db, "laundryEvents")
+        await addDoc(laundryEventsRef, {
+            date: props.dateID,
+            machine: props.dryerSlot,
+            participant: user.displayName,
+            timing: props.dryerTimeSlot,
+            type: "dryer"
+        })
+        
+    }  
+
+
+    
     return(
         <div className="payment-area">
         <div>
@@ -36,7 +89,7 @@ export default function OrderSummary(props){
                 </tr>
                 {laundry?
                 <tr>
-                    <td>Laundry - Machine {laundry.slice(-1)} </td>
+                    <td>Washer - Machine {laundry.slice(-1)} </td>
                     <td>at {props.laundryTimeSlot}</td>
                     <td className = "price">$2.00</td>
                 </tr>:null}
@@ -59,6 +112,7 @@ export default function OrderSummary(props){
             <br/>
             <span>Pay NOW</span>
         </button>
+        {total > walletBalance ? <Topup/> : null}
     </div>
 
 
@@ -74,20 +128,20 @@ export default function OrderSummary(props){
                 <Modal.Title>Payment Confirmation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>You are about to pay $3.00 for:</p>
+                <p>You are about to pay ${total}.00 for:</p>
                 <table>
-                    <tr>
-                        <td>Laundry</td>
-                        <td>Machine 3</td>
-                        <td>at</td>
-                        <td>20:00</td>
-                    </tr>
-                    <tr>
-                        <td>Dryer</td>
-                        <td>Machine 2</td>
-                        <td>at</td>
-                        <td>21:00</td>
-                    </tr>
+                    {laundry?
+                        <tr>
+                            <td>Washer - Machine {laundry.slice(-1)} </td>
+                            <td>at {props.laundryTimeSlot}</td>
+                            <td className = "price">at $2.00</td>
+                        </tr>:null}
+                    {dryer?
+                        <tr>
+                            <td>Dryer - Machine {dryer.slice(-1)}</td>
+                            <td>at {props.dryerTimeSlot}</td>
+                            <td className = "price">at $1.00</td>
+                        </tr>:null}
                 </table>
             </Modal.Body>
             <Modal.Footer>
@@ -97,6 +151,8 @@ export default function OrderSummary(props){
                 <button
                 className = "cancelbtn"
                 onClick={() =>{ 
+                    dryer && addDryerBookingSlot()
+                    laundry && addLaundryBookingSlot()
                     handlePayment()
                 }}
                 >

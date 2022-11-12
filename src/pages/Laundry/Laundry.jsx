@@ -1,5 +1,4 @@
 import MachineSlot from './MachineSlot'
-import StripeButton from './StripeButton'
 import TimeslotCard from './TimeslotCard'
 import WelcomeButton from '../../components/WelcomeButton'
 import CalendarNew from './CalendarNew'
@@ -11,11 +10,13 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
 import { format } from 'date-fns'
 
+
 export default function Laundry(){
     console.log("==RENDER in Laundry.jsx==")
     let today = new Date()
     let dateToday = format(today, 'yyyy-MM-dd')
 
+    
     const [dateID, setDateID] = useState(dateToday)
     const [laundryDateObject, setLaundryDateObject] = useState([])
     const [dryerDateObject, setDryerDateObject] = useState([])
@@ -63,148 +64,148 @@ export default function Laundry(){
             await setDoc(docRef,
             {
                 '00:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '01:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '02:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '03:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '04:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '05:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '06:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '07:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '08:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '09:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '10:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '11:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '12:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '13:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '14:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '15:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '16:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '17:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '18:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '19:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '20:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '21:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '22:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 },
                 '23:00' : {
-                    laundry1: [],
-                    laundry2: [],
-                    laundry3: [],
-                    laundry4: []
+                    washer1: [],
+                    washer2: [],
+                    washer3: [],
+                    washer4: []
                 }
             })
             getLaundryDate(dateID)
@@ -414,8 +415,10 @@ export default function Laundry(){
                 laundryTimeSlot = {laundryTimeSlot}
                 laundrySlot = {chosenLaundry}
                 dryerSlot = {chosenDryer}
-                dryerTimeSlot = {dryerTimeSlot}/>: null}
-            <StripeButton/>
+                dryerTimeSlot = {dryerTimeSlot}
+                dateID = {dateID}
+                getDateID={getDateID} />: null}
+            {/* <StripeButton/> */}
         </div>
        </> 
     )

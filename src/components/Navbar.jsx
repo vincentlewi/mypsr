@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,6 +6,7 @@ import { useAuth } from './contexts/AuthContext';
 
 export default function NavbarDoang(props) {
   const { user } = useAuth()
+
   // const profile
   const navigate = useNavigate()
   return (
@@ -18,7 +18,8 @@ export default function NavbarDoang(props) {
             <Nav className="me-auto my-2 my-lg-0">
               <Nav.Link className={'nav-link'} id='laundryLink' onClick={() => {navigate("/mypsr/laundry")}}>Laundry</Nav.Link>
               <Nav.Link className={'nav-link'} id='eventsLink' onClick={() => {navigate("/mypsr/events")}}>Events</Nav.Link>
-              <Nav.Link className={'nav-link'} id='maintenaceLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
+              <Nav.Link className={'nav-link'} id='servicesLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
+              <Nav.Link className={'nav-link'} id='chatsLink' onClick={() => {navigate("/mypsr/chats")}}>Chats</Nav.Link>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
               <p className='nav-link d-inline text-black-50'>Profile</p>

@@ -148,7 +148,7 @@ export default function Register() {
                     />
                     <p>{ConfirmWarning}</p>
                     
-                    <Link to='/mypsr/login' state={0}>Register</Link><br/>
+                    
                     <motion.div
                         className='submit'
                         animate={{ x }}

@@ -37,7 +37,6 @@ export default function FavouriteGuestCard(props) {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <button onClick={handleClose} className="closebtn">Close</button>
                     <RemoveFavouriteGuest id={props.id}/>
                     <RegisterFavouriteGuest
                          id={props.id}
@@ -46,6 +45,7 @@ export default function FavouriteGuestCard(props) {
                          name={props.name}
                          email={props.email}
                          phoneNumber={props.phoneNumber}
+                         setShow={setShow}
                     />
                 </Modal.Footer>
             </Modal>

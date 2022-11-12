@@ -103,7 +103,6 @@ export default function ComplaintPopup() {
 
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose} className="closebtn">Close</button>
             <button className="createbtn" type='submit'>File complaint</button>
           </Modal.Footer>
         </form>
