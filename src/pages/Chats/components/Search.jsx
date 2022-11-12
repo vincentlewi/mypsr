@@ -70,7 +70,7 @@ const Search = () => {
     handleSearch();
   };
   useEffect(() => {
-    username ? handleSearch() : setUserLists({})
+    username.trim() ? handleSearch() : setUserLists({})
   }, [username])
   const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
