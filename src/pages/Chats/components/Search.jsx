@@ -83,7 +83,7 @@ const Search = () => {
         : pengguna[0] + user.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(combinedId)
+      // console.log(combinedId)
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
@@ -113,10 +113,13 @@ const Search = () => {
 
   };
 
-  const changeChat = (u) => {
+  const changeChat = async (u) => {
     // console.log(u)
-    dispatch({ type: "CHANGE_USER", payload: u });
+    await dispatch({ type: "CHANGE_USER", payload: u });
+    console.log(u)
   };
+
+  // console.log(pengguna)
 
   return (
     <div className="search">
@@ -134,7 +137,12 @@ const Search = () => {
       {Object.entries(userlists).map((pengguna) => (
         <div className="userChat" onClick={() => {
           handleSelect(pengguna)
-          changeChat(pengguna)
+          const temp = new Object()
+          temp.uid = pengguna[0]
+          temp.displayName = pengguna[1][0]
+          temp.name = pengguna[1][0]
+          temp.photoURL = pengguna[1][1]
+          changeChat(temp)
           console.log("sa")
           }}>
           <img src={pengguna[1][1]} alt="" />
