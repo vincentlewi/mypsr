@@ -5,13 +5,9 @@
 }
 
 .completed{
-    background-color:#026773;
-    color: #fff;
-}
-
-.completed .status{
     color: #D3EFBD;
 }
+
 
 .date{
     color: #A5A2A2;
