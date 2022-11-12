@@ -1,7 +1,7 @@
 import React from 'react';
 import CalendarLanding from './CalendarLanding';
 import { motion } from "framer-motion"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Lottie from 'react-lottie';
@@ -62,58 +62,32 @@ export default function PreLoginContent() {
     <>
       <div id='laundry' className='laundry screen'>
         <h1 className='break'>Laundry</h1>
-        <div className='hole'></div>
-        <div className='inner'>
-          <motion.div animate={{ x, y }}>
-            <CalendarLanding click={next} />
-            <div className='content'>
-              <h5>Pick a date!</h5>
-            </div>
-          </motion.div>
-        </div>
-        <div className='inner'>
-          <motion.div animate={{ x, y }}>
-            <CalendarLanding click={next} />
-            <div className='content'>
-              <h5 onClick={back}>Choose a timing!</h5>
-            </div>
-          </motion.div>
-        </div>
-        <div className='inner'>
-          <motion.div animate={{ x, y }}>
-            <CalendarLanding click={next} />
-            <div className='content'>
-              <h5 onClick={back}>Select a machine!</h5>
-            </div>
-          </motion.div>
-        </div>
-        <div className='inner' onClick={back}>
-          <motion.div animate={{ x, y }}>
-            <div className='content'>
-              <h1>Yay! You got your laundry booked. Easy right?</h1>
-            </div>
-          </motion.div>
-        </div>
+          <div className='content'>
+            <Row className="d-flex align-items-center">
+              <Col> <Lottie options={eventDefaultOptions} /> </Col>
+              <Col> <h2>Join or create events for fellow PSR residents</h2> </Col>
+            </Row>
+          </div>
       </div>
 
       <div id='events' className='screen row'>
         <h1 className='break'>Events</h1>
         <div className='content'>
-          <Row class="d-flex align-items-center">
+          <Row className="d-flex align-items-center">
             <Col> <h2>Join or create events for fellow PSR residents</h2> </Col>
             <Col> <Lottie options={eventDefaultOptions} /> </Col>
           </Row>
         </div>
       </div>
 
-      <div id='services' className='screen'>
+      <div id='services' className='services screen'>
         <h1 className='break'>Services</h1>
         <div className='content'>
-          <Row class="d-flex align-items-center">
+          <Row className="d-flex align-items-center">
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
             <Col> <Lottie options={maintainenceDefaultOptions} /> </Col>
           </Row>
-          <Row class="d-flex align-items-center">
+          <Row className="d-flex align-items-center">
             <Col> <Lottie options={registrationDefaultOptions} /> </Col>
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
           </Row>
@@ -123,7 +97,7 @@ export default function PreLoginContent() {
       <div id='chats' className='chats screen'>
         <h1 className='break'>Chats</h1>
         <div className='content'>
-          <Row class="d-flex align-items-center">
+          <Row className="d-flex align-items-center">
             <Col> <Lottie options={chatsDefaultOptions} /> </Col>
             <Col> <h2>Chat with some of your fellow residents </h2> </Col>
           </Row>

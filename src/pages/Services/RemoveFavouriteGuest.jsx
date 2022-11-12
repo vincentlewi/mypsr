@@ -32,8 +32,6 @@ export default function RemoveFavouriteGuest(props) {
             <Modal
                 show={show}
                 onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Remove Guest from favourites?</Modal.Title>
