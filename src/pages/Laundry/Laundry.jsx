@@ -9,7 +9,6 @@ import { db } from '../../components/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
 import { format } from 'date-fns'
-import TryCalendar from './TryCalendar'
 
 
 export default function Laundry(){
