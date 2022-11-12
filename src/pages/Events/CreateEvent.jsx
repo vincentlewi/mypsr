@@ -21,7 +21,7 @@ export default function CreateNewEvent() {
   const { user } = useAuth()
   const userRef = doc(db, "users", user.uid)
 
-  const { register, handleSubmit, watch, control, reset, formState: { errors } } = useForm()
+  const { register, handleSubmit, watch, control, reset } = useForm()
   useEffect(() => {
     let defaultValues = {}
     defaultValues.name = ""
@@ -70,20 +70,16 @@ export default function CreateNewEvent() {
     create(values)
     handleClose()
   }
-  // const onSubmit = (values) => {console.log(values)}
+  // const onSubmit = (values) => {console.log(new Date(format(values.startTime.getTime(), 'yyyy-MM-dd HH:mm')))}
 
-  const [name, startTime] = watch(['name', 'startTime'])
+  const [name, date, startTime] = watch(['name', 'date', 'startTime'])
   const today = new Date()
-  const [startDate, setStartDate] = useState(
-    setHours(setMinutes(today, today.getMinutes()), today.getHours())
-  );
   const filterPassedTime = (time) => {
     const currentDate = new Date();
-    const selectedDate = new Date(time);
+    const selectedDate = new Date(format(date, 'yyyy-MM-dd ') + format(time.getTime(), 'HH:mm'));
 
     return currentDate.getTime() < selectedDate.getTime();
   };
-
   return (
     <>
       <button onClick={handleShow} className="createbtn">Create</button>
