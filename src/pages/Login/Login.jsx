@@ -36,7 +36,9 @@ export default function LoginNew() {
         try {
             setError("")
             setLoading(true)
+            console.log("before logging innn")
             await login(emailRef.current.value, passwordRef.current.value)
+            console.log("after logging innn")
             setAnimate(true)
             navigate('/mypsr/home', {state:1})
         }
@@ -44,8 +46,8 @@ export default function LoginNew() {
             setError('Something went wrong! Please try again!')
         }
         setLoading(false)
-
     }
+
     return (
         <>
             <PageTransition animated={animate}/>
