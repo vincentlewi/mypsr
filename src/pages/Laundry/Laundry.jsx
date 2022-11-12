@@ -397,20 +397,19 @@ export default function Laundry(){
         <Navbar/>
         <div className="container">
             <WelcomeButton loc="laundry"/>
-            <div className="top-part">
+            <div className="top">
                 <CalendarNew getDateID={getDateID}/>
-                <div className="timeslot-area">
-                    <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} dateID={dateID}/>
-                    <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} dateID = {dateID}/>
-                </div>
             </div>
-            <div className="bottom-part">
+            <div className="washer">
+                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} dateID={dateID}/>
                 {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>: null}
+            </div>
+            <div className="dryer">
+                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} dateID = {dateID}/>
                 {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>:null}
             </div>
-
-            {/* LaundryTimeSlot = 10:00 chosenLaundry = laundry 2 */}
-            {(chosenLaundry || chosenDryer) ?
+            <div className="bottom-part">
+                {(chosenLaundry || chosenDryer) ?
                 <OrderSummary
                 laundryTimeSlot = {laundryTimeSlot}
                 laundrySlot = {chosenLaundry}
@@ -418,7 +417,7 @@ export default function Laundry(){
                 dryerTimeSlot = {dryerTimeSlot}
                 dateID = {dateID}
                 getDateID={getDateID} />: null}
-            {/* <StripeButton/> */}
+            </div>
         </div>
        </> 
     )

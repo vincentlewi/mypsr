@@ -48,8 +48,6 @@ export default function ComplaintCard(props) {
             <Modal
                 show={show}
                 onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Report Details</Modal.Title>

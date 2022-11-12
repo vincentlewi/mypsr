@@ -11,6 +11,7 @@ export default function OrderSummary(props){
     const [walletBalance, setWalletBalance] = useState(10);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleTopUp = () => navigate("/mypsr/profile")
     const navigate = useNavigate()
     const { user } = useAuth()
     const userRef = doc(db, "users", user.uid);
@@ -112,17 +113,19 @@ export default function OrderSummary(props){
             <br/>
             <span>Pay NOW</span>
         </button>
-        {total > walletBalance ? <Topup/> : null}
+        {total > walletBalance ?
+                    <>
+                        <br/>
+                        <button onClick={handleTopUp} className={"laundrybtn"}>
+                            <p>Insufficient Balance</p>
+                            <span>Please Top Up now</span>
+                        </button>
+                    </> : null}
     </div>
-
-
-
 
     <Modal
             show={show}
             onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Payment Confirmation</Modal.Title>
