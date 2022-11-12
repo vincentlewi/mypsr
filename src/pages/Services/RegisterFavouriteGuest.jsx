@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
 import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs, Timestamp } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
+import { addDays, format } from 'date-fns';
+import DatePicker from 'react-datepicker'
 
 export default function RegisterFavouriteGuest(props) {
 
@@ -30,7 +31,7 @@ export default function RegisterFavouriteGuest(props) {
     }
 
 
-    const { register, handleSubmit, reset } = useForm({
+    const { register, handleSubmit, reset, control } = useForm({
         defaultValues: {
             gpurpose: '',
             gdate: '',
@@ -40,17 +41,24 @@ export default function RegisterFavouriteGuest(props) {
 
     const onSubmit = (values) => { create(values) }
 
+    const filterPassedTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+    
+        return currentDate.getTime() < selectedDate.getTime();
+    };
+
     async function create(values) {
-        if (values.gdate == "" || values.gentrytime == "" | values.gpurpose == "") {
+        if (values.dateTime == "" || values.gpurpose == "") {
             setErrorMessage("Please enter all of the required fields")
             setShow(true)
         } else {
             try {
-                const dateArr = values.gdate.split("-")
+                const dateArr = format(values.dateTime, 'yyyy-MM-dd').split("-")
                 const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], 23, 59))
                 const userSnap = await getDoc(userRef)
                 const username = userSnap.data().name
-                const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", props.guestFirebaseRef), where("resident", "==", username), where("date", "==", values.gdate))
+                const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", props.guestFirebaseRef), where("resident", "==", username), where("date", "==", format(values.dateTime, 'yyyy-MM-dd')))
                 const querySnapshot = await getDocs(q)
 
                 if (querySnapshot.docs.length > 0) {
@@ -58,7 +66,7 @@ export default function RegisterFavouriteGuest(props) {
                 } else {
 
                     await addDoc(collection(db, "guestVisit"), {
-                        date: values.gdate,
+                        date: format(values.dateTime, 'yyyy-MM-dd'),
                         id: props.id,
                         guestFirebaseRef: props.guestFirebaseRef,
                         name: props.name,
@@ -66,7 +74,7 @@ export default function RegisterFavouriteGuest(props) {
                         resident: username,
                         datetimestamp: datetimestamp,
                         created: getCurrentTime(),
-                        entryTime: values.gentrytime
+                        entryTime: format(values.dateTime, 'HH:mm')
                     })
                     handleClose()
                     reset()
@@ -91,11 +99,22 @@ export default function RegisterFavouriteGuest(props) {
                         <h5>Registration for {props.name} </h5>
                         <p>Purpose</p>
                         <input {...register('gpurpose')} type="text" />
-                        <p>Date</p>
-                        <input {...register('gdate')} type="date" min={new Date().toISOString().split("T")[0]} />
-                        <p>Entry Time</p>
-                        <input {...register('gentrytime')} type="time" />
-
+                        <p>Date and Time</p>
+                        <Controller
+                            control={control}
+                            name="dateTime"
+                            render={({ field }) => (
+                            <DatePicker
+                                minDate={new Date()}
+                                maxDate={addDays(new Date(), 6)}
+                                onChange={(e) => field.onChange(e)}
+                                showTimeSelect
+                                filterTime={filterPassedTime}
+                                dateFormat="yyyy-MM-dd hh:mm aa"
+                                selected={field.value}
+                            />
+                            )}
+                        />
                         {errorMessage && <div className="error"> {errorMessage} </div>}
                     </Modal.Body>
                     <Modal.Footer>

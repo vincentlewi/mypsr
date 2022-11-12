@@ -66,7 +66,7 @@ export default function GuestFormPopup(props) {
             })
           }
           
-          const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", values.gemail), where("resident", "==", username), where("date", "==", values.gdate))
+          const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", values.gemail), where("resident", "==", username), where("date", "==", format(values.dateTime, 'yyyy-MM-dd')))
           const querySnapshot = await getDocs(q)
           if (querySnapshot.docs.length > 0) {
             setErrorMessage("The guest has been registered for today")
@@ -106,7 +106,7 @@ export default function GuestFormPopup(props) {
           }
 
           await addDoc(collection(db, "guestVisit"), {
-            date: values.gdate,
+            date: format(values.dateTime, 'yyyy-MM-dd'),
             guestid: values.gid,
             name: values.gname,
             purpose: values.gpurpose,
@@ -114,7 +114,7 @@ export default function GuestFormPopup(props) {
             guestFirebaseRef: values.gemail,
             created: getCurrentTime(),
             datetimestamp: datetimestamp,
-            entryTime: values.gentrytime
+            entryTime: format(values.dateTime, 'HH:mm')
           })
           handleClose()
           reset()
