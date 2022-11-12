@@ -96,7 +96,7 @@ export default function CreateNewEvent() {
             <Row>
               <Col>
             <span>Event Name</span>
-            <input {...register('name')} type="text" style={{width: "100%"}} className="somespace" maxLength={20}/>
+            <input {...register('name')} type="text" style={{width: "100%"}} className="somespace" maxLength={15}/>
             { name === 'ngentot' && <span>gabole</span>}
             </Col>
             <Col>

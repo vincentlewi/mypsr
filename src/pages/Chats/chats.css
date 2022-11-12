@@ -63,16 +63,16 @@
 }
 .chatHome {
     background-color: white;
-    height: 100vh;
+    height: 90vh;
     display: flex;
-    align-items: top;
+    align-items: center;
     justify-content: center;
 }
 .chatHome .container {
     border: 1px solid white;
     border-radius: 10px;
     width: 100%;
-    height: 90%;
+    height: 100%;
     display: flex;
     overflow: hidden;
 }
@@ -85,6 +85,7 @@
     flex: 1;
     background-color: #EFF7FF;
     position: relative;
+    border-radius: 10px 0px 0px 0px;
 }
 .chatHome .container .sidebar .navbar {
     display: flex;
@@ -169,6 +170,7 @@
 .chatHome .container .sidebar .userChat .userChatInfo p {
     font-size: 14px;
     color: #A5A2A2;
+    margin-bottom: 0px;
 }
 .chatHome .container .chat {
     flex: 2;
@@ -235,10 +237,11 @@
     border-radius: 0px 10px 10px 10px;
     max-width: max-content;
     font-size: 0.7em;
+
 }
 .chatHome .container .chat .messages .message .messageContent img {
     width: 50%;
-    margin:0; 
+    margin-right:0px; 
     padding:0;
 }
 .chatHome .container .chat .messages .message.owner {
