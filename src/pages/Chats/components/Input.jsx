@@ -82,10 +82,9 @@ const Input = () => {
         value={text}
       />
       <div className="send">
-        <img src={Attach} alt="" />
         <input
           type="file"
-          style={{ display: "block" }}
+          style={{ display: "none" }}
           id="file"
           accept="image/*"
           onChange={(e) => setImg(e.target.files[0])}
