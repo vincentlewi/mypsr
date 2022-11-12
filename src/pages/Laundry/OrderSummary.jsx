@@ -74,7 +74,7 @@ export default function OrderSummary(props){
     async function addDryerBookingSlot(){
         const dryerRef = doc(db, "dryer", props.dateID)
         await updateDoc(dryerRef, {
-            [`${props.dryerTimeSlot}.${props.dryerSlot}`]: {name: user.displayName, ID: user.uid}
+            [`${props.dryerTimeSlot}.${props.dryerSlot}`]:  {name: user.displayName, ID: user.uid}
         })
         const laundryEventsRef = collection(db, "laundryEvents")
         const bookerBefore = await getPreviousDryerSlotBooker()
