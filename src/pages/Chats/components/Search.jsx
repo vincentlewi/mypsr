@@ -11,6 +11,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../../../components/firebase";
+import { ChatContext } from "../context/ChatContext";
 import { AuthContext, useAuth } from "../../../components/contexts/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -22,6 +23,8 @@ const Search = () => {
   const [userlists, setUserLists] = useState({})
 
   const { user } = useAuth();
+
+  const { dispatch } = useContext(ChatContext);
 
   // const 
   
@@ -103,6 +106,7 @@ const Search = () => {
 
     // setUser(null);
     setUsername("")
+    dispatch({ type: "CHANGE_USER", payload: pengguna });
   };
   return (
     <div className="search">
