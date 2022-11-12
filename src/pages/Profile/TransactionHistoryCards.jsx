@@ -10,6 +10,8 @@ export default function TransactionHistoryCards(props) {
         const day = date_arr[0].split("/")[1]
         const month = date_arr[0].split("/")[0]
         const year = date_arr[0].split("/")[2]
+        const monthStrFull = monthNames[month-1]
+
         return (
             <Row className="history text-center py-3 px-3 rounded">
                 <Col lg={6} md={6} sm={6} className="text-start">

@@ -10,18 +10,24 @@ export default function LaundryCard(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const deleteEvent = async (id) => {
-        const eventDoc = doc(db, "laundryEvents", id)
-        await deleteDoc(eventDoc);
-    }
-
     const renderDeleteButton = () => {
         return <DeleteLaundryPopup id={props.id} participant={props.participant} date={props.date} timing={props.timing} machine={props.machine} type={props.type}/>
     }
 
-
     const fstring = props.type.charAt(0).toUpperCase() + props.type.slice(1);
     const machinestr = props.machine.charAt(0).toUpperCase() + props.machine.slice(1).substring(0, props.machine.length-2) + " " + props.machine.charAt(props.machine.length-1)
+
+    async function getPreviousUser(){
+        const laundryRef = doc(db, "laundry", props.date)
+        const laundryData = await getDoc(laundryRef)
+        const prevTiming = props.timing.charAt(0) + (Number(props.timing.charAt(1)) - 1) + ":00"
+        const prevUser = laundryData.data()[prevTiming][props.machine]
+        console.log(prevUser)
+    }
+
+    useEffect(()=>{
+        getPreviousUser()
+    }, [])
 
     return (
         <>

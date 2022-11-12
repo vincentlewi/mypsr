@@ -53,6 +53,7 @@ export default function CreateNewEvent() {
             endTime: format(values.endTime, 'HH:mm'),
             location: values.location,
             participants: [userSnap.data().name],
+            hostID: user.uid,
             starttimestamp: startTimeStamp,
             endtimestamp: endTimeStamp
           })

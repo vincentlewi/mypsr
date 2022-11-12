@@ -46,6 +46,22 @@ const Input = () => {
           });
         }
       );
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+          
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+  
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
     }else{
       const storageRef = ref(storage, uuid());
 
@@ -69,6 +85,21 @@ const Input = () => {
           });
         }
       );
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+  
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
     }
     
     }
@@ -86,6 +117,7 @@ const Input = () => {
     await updateDoc(doc(db, "userChats", user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        img
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
@@ -93,6 +125,7 @@ const Input = () => {
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        img
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
@@ -129,6 +162,21 @@ const Input = () => {
           });
         }
       );
+      updateDoc(doc(db, "userChats", user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+  
+      updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
     }
   }, [img])
   return (

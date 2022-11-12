@@ -4,6 +4,7 @@ import { useAuth } from "../../components/contexts/AuthContext";
 import { doc, getDoc, updateDoc, increment, collection, addDoc } from 'firebase/firestore'
 import { db } from '../../components/firebase'
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 import Topup from '../Profile/Topup'
 
 export default function OrderSummary(props){
@@ -29,6 +30,11 @@ export default function OrderSummary(props){
 
     let laundry = props.laundrySlot
     let dryer = props.dryerSlot
+    let laundryTimeSlot = props.laundryTimeSlot
+    let dryerTimeSlot = props.dryerTimeSlot
+    let dateID = props.dateID
+
+
     let total = 0
 
     if(laundry !== ''){
@@ -52,34 +58,84 @@ export default function OrderSummary(props){
             [`${props.laundryTimeSlot}.${props.laundrySlot}`]: {name: user.displayName, ID: user.uid}
         })
         const laundryEventsRef = collection(db, "laundryEvents")
+        const bookerBefore = await getPreviousLaundrySlotBooker()
         await addDoc(laundryEventsRef, {
             date: props.dateID,
             machine: props.laundrySlot,
             participant: user.displayName,
             timing: props.laundryTimeSlot,
             type: "washer",
-            transactionDate: new Date().toLocaleString(),
-            status: "Booked"
+            transactionDate: new Date().toGMTString(),
+            status: "Booked",
+            previousBooker: {bookerBefore}
         })
     } 
 
     async function addDryerBookingSlot(){
         const dryerRef = doc(db, "dryer", props.dateID)
         await updateDoc(dryerRef, {
-            [`${props.dryerTimeSlot}.${props.dryerSlot}`]: [user.displayName]
+            [`${props.dryerTimeSlot}.${props.dryerSlot}`]:  {name: user.displayName, ID: user.uid}
         })
         const laundryEventsRef = collection(db, "laundryEvents")
+        const bookerBefore = await getPreviousDryerSlotBooker()
         await addDoc(laundryEventsRef, {
             date: props.dateID,
             machine: props.dryerSlot,
             participant: user.displayName,
             timing: props.dryerTimeSlot,
             type: "dryer",
-            transactionDate: new Date().toLocaleString(),
-            status: "Booked"
+            transactionDate: new Date().toGMTString(),
+            status: "Booked",
+            previousBooker: bookerBefore
+            
         })
         
     }  
+
+
+    function getPreviousDay(date = new Date()){
+        const previous = new Date(date.getTime());
+        previous.setDate(date.getDate() - 1);
+        return previous;
+    }
+
+    function getPreviousHour(hour){
+        let hourStr = hour.split(":")
+        let hourInt = parseInt(hourStr[0])-1
+        if(hourInt < 10){
+            if(hourInt === -1){
+                dateID = format(getPreviousDay(new Date(props.dateID)), "yyyy-MM-dd")
+                return("23:00")
+            }
+            return(`0${hourInt.toString()}:00`) 
+        }
+        else{
+            return(`${hourInt.toString()}:00`)
+        }
+    
+    }
+
+    async function getPreviousLaundrySlotBooker(){
+        const previousHour = getPreviousHour(laundryTimeSlot)
+        const laundryRef = doc(db, "laundry", dateID)
+        const laundryDoc = await getDoc(laundryRef)
+        const timeSlot = laundryDoc.data()[previousHour]
+        const bookerBefore = timeSlot[laundry]
+        
+        return bookerBefore
+        
+    }
+
+    async function getPreviousDryerSlotBooker(){
+        const previousHour = getPreviousHour(dryerTimeSlot)
+        const dryerRef = doc(db, "dryer", dateID)
+        const dryerDoc = await getDoc(dryerRef)
+        const timeSlot = dryerDoc.data()[previousHour]
+        const bookerBefore = timeSlot[dryer]
+        
+        return bookerBefore
+        
+    }
 
 
     

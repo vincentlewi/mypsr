@@ -61,7 +61,6 @@ export default function CalendarNew(props) {
                   type="button"
                   className="createbtn"
                 >
-                  <i class="bi bi-chevron-right"></i>
                   <span className="">Next month</span>
                 </button>
               </div>

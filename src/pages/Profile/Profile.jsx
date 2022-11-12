@@ -155,39 +155,6 @@ export default function Profile() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const showFirstFive = () => {
-    sortedDesc.slice(0, 5).map((trans) => {
-      return (
-        <TransactionHistoryCards
-          id={trans.id}
-          key={trans.id}
-          name={trans.name}
-          date={trans.date}
-          timing={trans.timing}
-          price={trans.price}
-          status={trans.status}
-          transactionDate={trans.transactionDate}
-        />)
-    })
-    return (<button>Testing</button>)
-  }
-
-  const showRest = () => {
-    sortedDesc.slice(5, sortedDesc.length - 5).map((trans) => {
-      return (
-        <TransactionHistoryCards
-          id={trans.id}
-          key={trans.id}
-          name={trans.name}
-          date={trans.date}
-          timing={trans.timing}
-          price={trans.price}
-          status={trans.status}
-          transactionDate={trans.transactionDate}
-        />)
-    })
-  }
-
   return (
     <>
       <div className="profile">
@@ -208,7 +175,7 @@ export default function Profile() {
                     <img className="pp" src={userInfo.photo} alt="profile" />
                     <Row>
                       <Col>
-                        <span onClick={() => setShow(true)} className="edit">Edit</span>
+                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit</span>
                       </Col>
                     </Row>
                   </div>
@@ -246,8 +213,7 @@ export default function Profile() {
               <Row>
                 <Col className="m-3 rounded-4 transaction">
                   <span className="text-start text-secondary">Transaction History</span>
-                  {/* {showMore ? "test": null} */}
-                  {/* <button className="btn" onClick={() => setShowMore(!showMore)}>Show more</button> */}
+
                   {sortedDesc.map((trans) => {
                         return (
                             <TransactionHistoryCards

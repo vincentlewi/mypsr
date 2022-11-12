@@ -5,16 +5,17 @@ import { db } from "../../components/firebase"
 import { getDoc, doc, arrayUnion, updateDoc, arrayRemove } from "firebase/firestore"
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Row, Col, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function EventCard(props) {
     const [show, setShow] = useState(false);
     const [showDelete, setShowDelete] = useState()
     const [showJoin, setShowJoin] = useState(true)
-    const [eventHost, setEventHost] = useState()
+    const [host, setHost] = useState({name: '', ID: ''})
     const [eventJoiners, setEventJoiners] = useState("")
     const [joinName, setJoinName] = useState("Join")
     const { user } = useAuth()
-
+    const navigate = useNavigate()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
@@ -60,13 +61,16 @@ export default function EventCard(props) {
             const userRef = doc(db, "users", user.uid)
             const userDoc = await getDoc(userRef)
             const userData = userDoc.data()
-            setEventHost(eventParticipants[0])
+            setHost({name: eventParticipants[0], ID: eventDoc.data().hostID})
             setEventJoiners(eventParticipants.slice(1).join(", "))
             //If user is in the event
             if (eventParticipants.includes(userData.name)) {
                 //if the user is the host allow him to delete
                 if (eventParticipants[0] === userData.name) {
-                    setEventHost(userData.name + " (You)")
+                    setHost(prevState => ({
+                        ...prevState,
+                        name: eventParticipants[0] + ' (You)'
+                      }))
                     setShowDelete(true)
                     setShowJoin(false)
                 } else {
@@ -148,7 +152,10 @@ export default function EventCard(props) {
                     <Col lg={8}><p>{props.location}</p></Col>
                     </Row><Row>
                     <Col lg={4}><p><b>Host:</b></p></Col>
-                    <Col lg={8}><p><b>{eventHost}</b></p></Col>
+                    <Col lg={8}>
+                        <p><b>{host.name}</b></p>
+                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})}>Chat</button>}
+                    </Col>
                     </Row><Row>
                     <Col><p>Other Participants:</p></Col></Row>
                     <Row><Col lg={8}><p> {eventJoiners}</p></Col>
