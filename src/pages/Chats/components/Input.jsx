@@ -13,6 +13,7 @@ import { db, storage } from "../../../components/firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useAuth } from "../../../components/contexts/AuthContext";
+import { zhCN } from "date-fns/locale";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -102,6 +103,7 @@ const Input = () => {
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSend();
+    console.log("WORKING")
   };
 
   useEffect(() => {
@@ -136,7 +138,8 @@ const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
-        onKeyDown={handleKey}
+        // onKeyDown={ text.trim() !== "" && handleKey}
+        onKeyDown={ text.trim() !== "" ? handleKey : undefined}
       />
       <div className="send">
         <input
@@ -155,7 +158,7 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={ text.trim() !== "" ? handleSend : undefined}>Send</button>
       </div>
     </div>
   );
