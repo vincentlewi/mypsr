@@ -9,6 +9,7 @@ import eventAnimation from "./29774-dance-party.json"
 import chatAnimation from "./74908-girl-chatting-with-online-friends.json"
 import maintainenceAnimation from "./52676-meditating-mechanic.json"
 import registrationAnimation from "./112454-form-registration.json"
+import laundryAnimation from "./108241-laundry.json"
 
 export default function PreLoginContent() {
   const x = 0
@@ -58,14 +59,23 @@ export default function PreLoginContent() {
     }
   };
 
+  const laundryDefaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: laundryAnimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+
   return (
     <>
       <div id='laundry' className='laundry screen'>
         <h1 className='break'>Laundry</h1>
           <div className='content'>
             <Row className="d-flex align-items-center">
-              <Col> <Lottie options={eventDefaultOptions} /> </Col>
-              <Col> <h2>Join or create events for fellow PSR residents</h2> </Col>
+              <Col> <Lottie options={laundryDefaultOptions} speed={0.7}/> </Col>
+              <Col> <h2>Book washing and dryer machines to do you laundry !</h2> </Col>
             </Row>
           </div>
       </div>
@@ -85,10 +95,10 @@ export default function PreLoginContent() {
         <div className='content'>
           <Row className="d-flex align-items-center">
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
-            <Col> <Lottie options={maintainenceDefaultOptions} /> </Col>
+            <Col> <Lottie options={maintainenceDefaultOptions} height={250} width={250}/> </Col>
           </Row>
           <Row className="d-flex align-items-center">
-            <Col> <Lottie options={registrationDefaultOptions} /> </Col>
+            <Col> <Lottie options={registrationDefaultOptions} height={200} width={220} /> </Col>
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
           </Row>
         </div>
