@@ -97,9 +97,32 @@ export default function EventCard(props) {
                 <div className="card" onClick={handleShow} id={props.id}>
                     <h4 className="title"><b>{props.name}</b></h4>
                     <hr />
-                    <p>{props.startTime + " to " + props.endTime}</p>
-                    <p>{props.date}</p>
-                    <p>{props.location}</p>
+                    <Container>
+                        <Row>
+                            <Col lg={4} md={6} sm={12}>
+                            Date:
+                            </Col>
+                            <Col lg={8} md={6} sm={12}>
+                            <p>{props.date}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={4} md={6} sm={12}>
+                            Time:
+                            </Col>
+                            <Col lg={8} md={6} sm={12}>
+                            <p>{props.startTime + " to " + props.endTime}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={12} md={12} sm={12}>
+                            Location:
+                            </Col>
+                            <Col lg={12} md={12} sm={12}>
+                            <p>{props.location}</p>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
             </div>
             <Modal

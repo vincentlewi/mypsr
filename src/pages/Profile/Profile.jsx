@@ -11,7 +11,8 @@ import { useNavigate } from "react-router";
 import PhotoCropper from "./PhotoCropper";
 import Topup from "./Topup";
 import Modal from "react-bootstrap/Modal";
-import { collection, getDocs, updateDoc } from "firebase/firestore";
+import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function Profile() {
   // const [walletBalance, setWalletBalance] = useState(50)
@@ -106,7 +107,89 @@ useEffect(()=>{
           setUserInfo={setUserInfo}
           setShow={setShow}
         />
-        <h1>ini profile</h1>
+        <Container className="mx-auto mt-3">
+          <Row>
+          
+            <Col lg={4} md={6} sm={12}>
+              <Row>
+                <Col className="text-center mx-3 rounded-4 profile_data">
+                {/* <span className="test-start text-secondary">My Profile</span> */}
+                <div className="profimg">
+                <img className="pp" src={userInfo.photo} alt="profile" />
+                <Row>
+                  <Col>
+                  <span onClick={() => setShow(true)} className="edit">Edit</span>
+                  </Col>
+                </Row>
+                </div>
+                <h3 className="mt-3">{userInfo.name}</h3>
+                <p className="mt-3">{userInfo.email}</p>
+                <p className="mt-3">{userInfo.school}</p>
+                <p className="mt-3">Year {userInfo.year}</p>
+                <p className="mt-3">Blk {userInfo.address}</p>
+                <button className="cancelbtn" onClick={logout}>
+                  LOG OUT
+                </button>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col lg={8} md={6} sm={12}>
+              <Row>
+                <Col className="m-3 rounded-4">
+                <span className="text-start text-secondary">Wallet</span>
+                <Row className="wallet text-center py-3 px-3 rounded">
+                  <Col lg={6} md={12} sm={12} className="text-start">
+                  <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2"/><br/>
+                  <span className="fw-bold">Balance: ${userInfo.wallet}</span>
+                  </Col>
+                  <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
+                  <button className="createbtn" onClick={handleShow}>
+                    Top Up Wallet
+                  </button>
+                  </Col>
+                </Row>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col className="m-3 rounded-4 transaction">
+                <span className="text-start text-secondary">Transaction History</span>
+                <Row className="history text-center py-3 px-3 rounded">
+                  <Col lg={6} md={6} sm={6} className="text-start">
+                  <h2>Laundry</h2>
+                  <span className="text-secondary date">18 Sep 2022</span>
+                  </Col>
+                  <Col lg={6} md={6} sm={6} className="m-auto text-end">
+                  <h5>- 3.00</h5>
+                  </Col>
+                </Row>
+
+                <Row className="topup text-center py-3 px-3 rounded">
+                  <Col lg={6} md={6} sm={6} className="text-start">
+                  <h2>Top Up</h2>
+                  <span className="text-secondary date">17 Sep 2022</span>
+                  </Col>
+                  <Col lg={6} md={6} sm={6} className="m-auto text-end">
+                  <h5>+ 3.00</h5>
+                  </Col>
+                </Row>
+
+                </Col>
+              </Row>
+              
+
+            </Col>
+          </Row>
+        </Container>
+
+
+
+
+
+
+
+        {/* <h1>ini profile</h1>
         <h3>name: {userInfo.name}</h3>
         <h3>Profile Picture: </h3>
         <img className="pp" src={userInfo.photo} alt="profile" />
@@ -116,8 +199,9 @@ useEffect(()=>{
         <h3>school: {userInfo.school}</h3>
         <h3>year: {userInfo.year}</h3>
         <h3>address: {userInfo.address}</h3>
-        <h3>wallet: {userInfo.wallet}</h3>
-        <button className="cancelbtn" onClick={logout}>
+        <h3>wallet: {userInfo.wallet}</h3> */}
+        {/* <h3>wallet-v: {walletBalance}</h3> */}
+        {/* <button className="cancelbtn" onClick={logout}>
           LOG OUT
         </button>
 
@@ -128,7 +212,7 @@ useEffect(()=>{
 
         <button className="createbtn" onClick={handleShow}>
           Top Up Wallet
-        </button>
+        </button> */}
 
 
         <Modal show={showModal} onHide={handleClose}>
