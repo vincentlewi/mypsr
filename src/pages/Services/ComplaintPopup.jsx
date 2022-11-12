@@ -81,7 +81,7 @@ export default function ComplaintPopup() {
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>Maintainance Report</Modal.Title>
+            <Modal.Title>Maintenance Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Container>

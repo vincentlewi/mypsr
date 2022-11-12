@@ -60,8 +60,6 @@ export default function Profile() {
       address: userData.address,
       wallet: userData.wallet,
     });
-    console.log(userData.wallet) //firebase
-    console.log(userInfo.wallet) //js
   }
 
   async function getTransactionHistory() {

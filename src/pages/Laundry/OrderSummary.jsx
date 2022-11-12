@@ -49,7 +49,7 @@ export default function OrderSummary(props){
     async function addLaundryBookingSlot(){
         const laundryRef = doc(db, "laundry", props.dateID)
         await updateDoc(laundryRef, {
-            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: [user.displayName]
+            [`${props.laundryTimeSlot}.${props.laundrySlot}`]: {name: user.displayName, ID: user.uid}
         })
         const laundryEventsRef = collection(db, "laundryEvents")
         await addDoc(laundryEventsRef, {
