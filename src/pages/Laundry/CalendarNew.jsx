@@ -21,7 +21,7 @@ function classNames(...classes) {
 }
 
 export default function CalendarNew(props) {
-  console.log("==RENDER in CalendarNew.jsx==")
+  // console.log("==RENDER in CalendarNew.jsx==")
   let today = startOfToday()
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))

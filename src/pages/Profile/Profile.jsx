@@ -186,20 +186,23 @@ export default function Profile() {
             <Col lg={8} md={6} sm={12}>
               <Row>
                 <Col className="m-3 rounded-4">
-                  <span className="text-start text-secondary">Wallet</span>
-                  <Row className="wallet text-center py-3 px-3 rounded">
-                    <Col lg={6} md={12} sm={12} className="text-start">
-                      <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2" /><br />
-                      <span className="fw-bold">Balance: ${userInfo.wallet}</span>
-                    </Col>
-                    <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
-                      <button className="createbtn" onClick={handleShow}>
-                        Top Up Wallet
-                      </button>
-                    </Col>
-                  </Row>
+                <span className="text-start text-secondary">Wallet</span>
+                <Row className="wallet text-center py-3 px-3 rounded">
+                  <Col lg={6} md={12} sm={12} className="text-start">
+                  <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2" alt="psrWallet"/><br/>
+                  <span className="fw-bold">Balance: ${userInfo.wallet}</span>
+                  </Col>
+                  <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
+                  <button className="createbtn" onClick={handleShow}>
+                    Top Up Wallet
+                  </button>
+                  </Col>
+                </Row>
                 </Col>
               </Row>
+
+
+              {/* Transaction HIstory */}
               <Row>
                 <Col className="m-3 rounded-4 transaction">
                   <span className="text-start text-secondary">Transaction History</span>
