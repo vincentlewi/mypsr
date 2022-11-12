@@ -27,7 +27,7 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    height: 250px;
+    height: 280px;
 }
 
 @media screen and (max-width: 992px) {

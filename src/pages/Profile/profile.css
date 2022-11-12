@@ -8,3 +8,74 @@
 .topup-modal{
     padding: 20px 5px;
 }
+
+html{
+    font-size: 20px;
+}
+
+span{
+    font-weight: lighter;
+}
+
+.edit{
+    color:#3CA6A6;
+}
+
+.profile_data{
+    background-color: #CBE5FF;
+    padding: 20px;
+}
+
+
+.profile_data p{
+    font-size: 0.75em;
+}
+
+.profimg{
+    width: 80%;
+    margin-left:auto;
+    margin-right: auto
+    
+}
+
+.editimg{
+    
+    bottom: 0;
+    font-size: 10px;
+    
+}
+
+.editimg:hover{
+    color: #024959;
+}
+
+.wallet{
+    background-color: #D3EFBD;
+}
+
+.transaction .row{
+    background-color: #EFF7FF;
+    margin-bottom: 2vh
+}
+
+ .date{
+    font-size: 0.70em;
+}
+
+.history h5{
+    color: #CD2C2C;
+}
+
+.topup h5{
+    color:#3CA6A6;
+}
+
+.topupbtn{
+    text-align: right;
+}
+
+@media screen and (max-width: 992px){
+    .topupbtn{
+        text-align: center;
+    }
+}
