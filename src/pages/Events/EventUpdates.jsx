@@ -8,7 +8,7 @@ export default function EventUpdates() {
     const [events, setEvents] = useState([])
     useEffect(
         () =>
-            onSnapshot(query(collection(db, 'events'), where("endtimestamp", ">", getCurrentTime()), orderBy("endtimestamp", "asc"), orderBy("starttimestamp", "asc")),  (snapshot) => {
+            onSnapshot(query(collection(db, 'events'), where("starttimestamp", ">", getCurrentTime()), orderBy("starttimestamp", "asc"), orderBy("endtimestamp", "asc")),  (snapshot) => {
                 setEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
             },
             error=> {

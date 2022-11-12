@@ -1,10 +1,10 @@
 .vitto {
   position: fixed;
-  background-color: #F78B43;
+  background-image: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
   height: max(100vh, 100vw);
   width: max(100vh, 100vw);
   border-radius: 50%;
-  z-index: 100;
+  z-index: 101;
 }
 
 Link {

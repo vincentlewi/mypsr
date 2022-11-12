@@ -10,7 +10,7 @@ const Message = ({ message }) => {
   const ref = useRef();
   const today = new Date()
   const tanggal = new Date(message.date.seconds*1000)
-  console.log(today.toDateString() == tanggal.toDateString());
+  // console.log(today.toDateString() == tanggal.toDateString());
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);

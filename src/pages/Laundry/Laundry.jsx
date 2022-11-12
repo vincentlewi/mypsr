@@ -12,7 +12,6 @@ import { format } from 'date-fns'
 
 
 export default function Laundry(){
-    console.log("==RENDER in Laundry.jsx==")
     let today = new Date()
     let dateToday = format(today, 'yyyy-MM-dd')
 
@@ -20,6 +19,10 @@ export default function Laundry(){
     const [dateID, setDateID] = useState(dateToday)
     const [laundryDateObject, setLaundryDateObject] = useState([])
     const [dryerDateObject, setDryerDateObject] = useState([])
+    const [laundryTimeSlotList, setLaundryTimeSlotList] = useState([])
+    const [laundryMachineSlotList, setLaundryMachineSlotList] = useState([])
+    const [dryerTimeSlotList, setDryerTimeSlotList] = useState([])
+    const [dryerMachineSlotList, setDryerMachineSlotList] = useState([])
     const [laundryTimeSlot, setLaundryTimeSlot] = useState('')
     const [dryerTimeSlot, setDryerTimeSlot] = useState('')
     const [chosenLaundry, setChosenLaundry] = useState('')
@@ -33,18 +36,26 @@ export default function Laundry(){
         setDryerTimeSlot('')
         setChosenLaundry('')
         setChosenDryer('')
+        setLaundryTimeSlotList([])
+        setDryerTimeSlotList([])  
+        setLaundryMachineSlotList([])  
+        setDryerMachineSlotList([])  
         machineSlot.current = []
         dryerSlot.current = []
     }
 
     const getLaundryTimeSlot = (time) => {
         setLaundryTimeSlot(time)
+        setLaundryTimeSlotList([])
+        setLaundryMachineSlotList([])  
         machineSlot.current = []
         setChosenLaundry('')
     }
 
     const getDryerTimeSlot = (time) => {
         setDryerTimeSlot(time)
+        setDryerTimeSlotList([])
+        setDryerMachineSlotList([]) 
         dryerSlot.current = []
         setChosenDryer('')
     }
@@ -52,7 +63,7 @@ export default function Laundry(){
     const getChosenLaundry = (laundry) => setChosenLaundry(laundry)
 
     const getChosenDryer = (dryer) => setChosenDryer(dryer)
- 
+    
     async function getLaundryDate(dateID){
         const docRef = doc(db, "laundry", dateID)
         const docSnap = await getDoc(docRef)
@@ -397,16 +408,16 @@ export default function Laundry(){
         <Navbar/>
         <div className="container">
             <WelcomeButton loc="laundry"/>
-            <div className="top">
+            <div className="top d-flex justify-content-center">
                 <CalendarNew getDateID={getDateID}/>
             </div>
             <div className="washer">
-                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} dateID={dateID}/>
-                {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} getChosenLaundry = {getChosenLaundry}/>: null}
+                <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} setSlotList = {setLaundryTimeSlotList} slotList = {laundryTimeSlotList} dateID={dateID} currentSlot = {laundryTimeSlot}/>
+                {laundryTimeSlot?<MachineSlot name="Laundry" slots = {machineSlot.current} timeslot = {laundryTimeSlot} setSlotList = {setLaundryMachineSlotList} slotList = {laundryMachineSlotList} getChosenLaundry = {getChosenLaundry} currentMachine = {chosenLaundry}/>: null}
             </div>
             <div className="dryer">
-                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} dateID = {dateID}/>
-                {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} getChosenDryer = {getChosenDryer}/>:null}
+                <TimeslotCard name="Dryer" timings={dryerTimings} getTimeSlot={getDryerTimeSlot} setSlotList = {setDryerTimeSlotList} slotList = {dryerTimeSlotList} dateID = {dateID} currentSlot = {dryerTimeSlot}/>
+                {dryerTimeSlot?<MachineSlot name="Dryer" slots = {dryerSlot.current} timeslot = {dryerTimeSlot} setSlotList = {setDryerMachineSlotList} slotList = {dryerMachineSlotList} getChosenDryer = {getChosenDryer} currentMachine = {chosenDryer}/>:null}
             </div>
             <div className="bottom-part">
                 {(chosenLaundry || chosenDryer) ?

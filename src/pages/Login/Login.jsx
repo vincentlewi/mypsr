@@ -26,7 +26,7 @@ export default function LoginNew() {
     const [destination, setDestination] = useState('')
     useEffect(() => {
         if(ani !== animate){
-            navigate(destination)
+            destination === '/mypsr/home' ? navigate(destination, {state: 1}) : navigate(destination)
         }
     }, [destination, navigate, ani, animate])
 
@@ -38,7 +38,8 @@ export default function LoginNew() {
             setLoading(true)
             console.log("before logging innn")
             await login(emailRef.current.value, passwordRef.current.value)
-            navigate('/mypsr/home', {state:1})
+            setAnimate(true)
+            setDestination('/mypsr/home')
         }
         catch {
             setError('Something went wrong! Please try again!')
@@ -50,6 +51,7 @@ export default function LoginNew() {
         <>
             <PageTransition animated={animate}/>
             <div id="login">
+                <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>back</div>
                 {error && <Alert variant ="danger">{error}</Alert>}
                 <div id="opening">
                     <div className="content">
@@ -67,7 +69,7 @@ export default function LoginNew() {
                                 <input type="password" id="pwd" ref={passwordRef} className="col-md-8 col-sm-12"/>
                         <button id="sign-in" className = "createbtn" disabled={loading} onClick={handleSubmit}>Login</button>
                         <div id="new_account">
-                            Do not have an account?
+                            <span>Do not have an account? </span>
                             <Link
                             to="/register"
                             onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}

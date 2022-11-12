@@ -1,6 +1,6 @@
 import "./profile.css";
 import { db } from "../../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, orderBy } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { useAuth } from "../../components/contexts/AuthContext";
@@ -11,8 +11,9 @@ import { useNavigate } from "react-router";
 import PhotoCropper from "./PhotoCropper";
 import Topup from "./Topup";
 import Modal from "react-bootstrap/Modal";
-import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
+import { collection, getDocs, where, updateDoc, increment, query, onSnapshot } from "firebase/firestore";
 import { Row, Col, Container } from 'react-bootstrap';
+import TransactionHistoryCards from "./TransactionHistoryCards";
 
 export default function Profile() {
   // const [walletBalance, setWalletBalance] = useState(50)
@@ -20,6 +21,9 @@ export default function Profile() {
   const { user } = useAuth();
   // const useruser = useUser()
   // console.log(() => useUser())
+  const [finalTransaction, setFinalTransactions]= useState([])
+  const [showMore, setShowMore] = useState(false);
+  const [sortedDesc, setSortedDesc] = useState([])
 
   function logout() {
     signOut(auth);
@@ -58,37 +62,84 @@ export default function Profile() {
     console.log(userInfo.wallet) //js
   }
 
-  async function topUpWallet(uid){
+  async function getTransactionHistory(){
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    const laundryEventsData = await getDocs(collection(db, 'laundryEvents'), where("participant", "==", userData.name), orderBy("date", "asc"), orderBy("timing", "asc"))
+    const laundryEvents = (laundryEventsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    const topupData = await getDocs(collection(db, `users/${user.uid}/payments`))
+    const topupTransactions = (topupData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    laundryEvents.forEach((event) => {
+      const day = new Date(event.date)
+      if (event.type == "washer") {
+        const eventObj = {
+          id: "WashingMachine" + "-" + event.transactionDate+ "-" +event.timing,
+          name: "Washer",
+          date: event.transactionDate,
+          timing: event.timing,
+          price: 2,
+          status: event.status,
+          transactionDate: new Date(event.transactionDate)
+        }
+        setFinalTransactions(oldArray => [...oldArray, eventObj])
+      } else {
+        const eventObj = {
+          id: "DryerMachine" + "-" + event.transactionDate + "-" + event.timing,
+          name: "Dryer",
+          date: event.transactionDate,
+          timing: event.timing,
+          price: 1,
+          status: event.status,
+          transactionDate: new Date(event.transactionDate)
+        }
+        setFinalTransactions(oldArray => [...oldArray, eventObj])
+      }
+    })
+    topupTransactions.forEach((transaction)=>{
+      const transactionDate = new Date(transaction.created *1000)
+      const transactionDateParts = transactionDate.toDateString().split(" ")
+      console.log(transactionDate, typeof transactionDate)
+      const eventObj = {
+        id: "Topup" + "-" +transactionDateParts[2] + "-" + transactionDateParts[1] + "-" + transactionDateParts[3]+"-"+transactionDate.toTimeString().split(" ")[0],
+        name: "Top Up",
+        price: transaction.amount_received / 100,
+        date: transactionDateParts[2] + " " + transactionDateParts[1] + " " + transactionDateParts[3],
+        timing: transactionDate.toTimeString().split(" ")[0],
+        status: "Successful",
+        transactionDate: transactionDate
+      }
+      setFinalTransactions(oldArray => [...oldArray, eventObj])
+    })
+  }
+
+  async function topUpWallet(uid) {
     const paymentRef = collection(db, `users/${uid}/payments`);
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
     const docs = await getDocs(paymentRef)
     const results = docs.docs
     results.map((res) => {
-        const amountToBeAdded = (res.data().amount)/100
-        updateDoc(doc(db, `users`, user.uid), {
-            wallet: userData.wallet + amountToBeAdded
-        })
-        updateDoc(doc(db, `users/${uid}/payments/`, res.id), {
-          amount : 0,
-        })
+      const amountToBeAdded = (res.data().amount) / 100
+      updateDoc(doc(db, `users`, user.uid), {
+        wallet: userData.wallet + amountToBeAdded
+      })
+      updateDoc(doc(db, `users/${uid}/payments/`, res.id), {
+        amount: 0,
+      })
     })
-}
+  }
 
-
-
-
-
-
-useEffect(()=>{
-  async function doSth(){
+  async function doSth() {
     await topUpWallet(user.uid)
-    getUserData()
+    await getUserData()
+    await getTransactionHistory()
+    setSortedDesc(finalTransaction.sort((objA, objB) => Number(objB.transactionDate) - Number(objA.transactionDate)))
     console.log("profile useEffect")
   }
 
-  doSth()
-}, [])
+  useEffect(() => {
+    doSth()
+  }, [])
 
 
   const [show, setShow] = useState(false);
@@ -109,38 +160,36 @@ useEffect(()=>{
         />
         <Container className="mx-auto mt-3">
           <Row>
-          
             <Col lg={4} md={6} sm={12}>
               <Row>
                 <Col className="text-center mx-3 rounded-4 profile_data">
-                {/* <span className="test-start text-secondary">My Profile</span> */}
-                <div className="profimg">
-                <img className="pp" src={userInfo.photo} alt="profile" />
-                <Row>
-                  <Col>
-                  <span onClick={() => setShow(true)} className="edit">Edit</span>
-                  </Col>
-                </Row>
-                </div>
-                <h3 className="mt-3">{userInfo.name}</h3>
-                <p className="mt-3">{userInfo.email}</p>
-                <p className="mt-3">{userInfo.school}</p>
-                <p className="mt-3">Year {userInfo.year}</p>
-                <p className="mt-3">Blk {userInfo.address}</p>
-                <button className="cancelbtn" onClick={logout}>
-                  LOG OUT
-                </button>
+                  {/* <span className="test-start text-secondary">My Profile</span> */}
+                  <div className="profimg">
+                    <img className="pp" src={userInfo.photo} alt="profile" />
+                    <Row>
+                      <Col>
+                        <span onClick={() => setShow(true)} className="edit">Edit</span>
+                      </Col>
+                    </Row>
+                  </div>
+                  <h3 className="mt-3">{userInfo.name}</h3>
+                  <p className="mt-3">{userInfo.email}</p>
+                  <p className="mt-3">{userInfo.school}</p>
+                  <p className="mt-3">Year {userInfo.year}</p>
+                  <p className="mt-3">Blk {userInfo.address}</p>
+                  <button className="cancelbtn" onClick={logout}>
+                    LOG OUT
+                  </button>
                 </Col>
               </Row>
             </Col>
-
             <Col lg={8} md={6} sm={12}>
               <Row>
                 <Col className="m-3 rounded-4">
                 <span className="text-start text-secondary">Wallet</span>
                 <Row className="wallet text-center py-3 px-3 rounded">
                   <Col lg={6} md={12} sm={12} className="text-start">
-                  <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2"/><br/>
+                  <img src={require("../../assets/mypsrwallet.png")} width="200px" className="mb-2" alt="psrWallet"/><br/>
                   <span className="fw-bold">Balance: ${userInfo.wallet}</span>
                   </Col>
                   <Col lg={6} md={12} sm={12} className="m-auto mt-3 topupbtn">
@@ -152,82 +201,44 @@ useEffect(()=>{
                 </Col>
               </Row>
 
+
+              {/* Transaction HIstory */}
               <Row>
                 <Col className="m-3 rounded-4 transaction">
-                <span className="text-start text-secondary">Transaction History</span>
-                <Row className="history text-center py-3 px-3 rounded">
-                  <Col lg={6} md={6} sm={6} className="text-start">
-                  <h2>Laundry</h2>
-                  <span className="text-secondary date">18 Sep 2022</span>
-                  </Col>
-                  <Col lg={6} md={6} sm={6} className="m-auto text-end">
-                  <h5>- 3.00</h5>
-                  </Col>
-                </Row>
-
-                <Row className="topup text-center py-3 px-3 rounded">
-                  <Col lg={6} md={6} sm={6} className="text-start">
-                  <h2>Top Up</h2>
-                  <span className="text-secondary date">17 Sep 2022</span>
-                  </Col>
-                  <Col lg={6} md={6} sm={6} className="m-auto text-end">
-                  <h5>+ 3.00</h5>
-                  </Col>
-                </Row>
-
+                  <span className="text-start text-secondary">Transaction History</span>
+                  {/* {showMore ? "test": null} */}
+                  {/* <button className="btn" onClick={() => setShowMore(!showMore)}>Show more</button> */}
+                  {sortedDesc.map((trans) => {
+                        return (
+                            <TransactionHistoryCards
+                                id={trans.id}
+                                key={trans.id}
+                                name={trans.name}
+                                date={trans.date}
+                                timing={trans.timing}
+                                price={trans.price}
+                                status={trans.status}
+                                transactionDate={trans.transactionDate}
+                                 />
+                        )
+                    })}
                 </Col>
               </Row>
-              
-
             </Col>
           </Row>
         </Container>
-
-
-
-
-
-
-
-        {/* <h1>ini profile</h1>
-        <h3>name: {userInfo.name}</h3>
-        <h3>Profile Picture: </h3>
-        <img className="pp" src={userInfo.photo} alt="profile" />
-        <br />
-        <button onClick={() => setShow(true)}>Change profile picture</button>
-        <h3>email: {userInfo.email}</h3>
-        <h3>school: {userInfo.school}</h3>
-        <h3>year: {userInfo.year}</h3>
-        <h3>address: {userInfo.address}</h3>
-        <h3>wallet: {userInfo.wallet}</h3> */}
-        {/* <h3>wallet-v: {walletBalance}</h3> */}
-        {/* <button className="cancelbtn" onClick={logout}>
-          LOG OUT
-        </button>
-
-
-
-
-
-
-        <button className="createbtn" onClick={handleShow}>
-          Top Up Wallet
-        </button> */}
-
 
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-                <Topup/>
+            <Topup />
           </Modal.Body>
           <Modal.Footer>
             <button onClick={handleClose} className="closebtn">Close</button>
           </Modal.Footer>
         </Modal>
-
-        {/* <Topup /> */}
       </div>
     </>
   );
