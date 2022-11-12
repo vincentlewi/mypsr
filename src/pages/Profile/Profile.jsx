@@ -1,6 +1,6 @@
 import "./profile.css";
 import { db } from "../../components/firebase";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { useAuth } from "../../components/contexts/AuthContext";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 import PhotoCropper from "./PhotoCropper";
 import Topup from "./Topup";
 import Modal from "react-bootstrap/Modal";
-import { collection, getDocs, where, updateDoc, increment } from "firebase/firestore";
+import { collection, getDocs, updateDoc } from "firebase/firestore";
 
 export default function Profile() {
   // const [walletBalance, setWalletBalance] = useState(50)
@@ -117,7 +117,6 @@ useEffect(()=>{
         <h3>year: {userInfo.year}</h3>
         <h3>address: {userInfo.address}</h3>
         <h3>wallet: {userInfo.wallet}</h3>
-        {/* <h3>wallet-v: {walletBalance}</h3> */}
         <button className="cancelbtn" onClick={logout}>
           LOG OUT
         </button>
