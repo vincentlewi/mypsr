@@ -22,7 +22,7 @@ export default function HomeLaundryEvents() {
     async function getEventsDocs() {
         const userDoc = await getDoc(userRef)
         const username = userDoc.data().name
-        const q = query(laundryEventsRef, where("participant", "==", username), orderBy("date", "asc"), orderBy("timing", "asc"))
+        const q = query(laundryEventsRef, where("participant", "==", username), where("status", "==", "Booked"),orderBy("date", "asc"), orderBy("timing", "asc"))
         onSnapshot(q, (snapshot) => {
             setEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         },

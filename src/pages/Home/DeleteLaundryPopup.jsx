@@ -12,7 +12,9 @@ export default function DeleteLaundryPopup(props) {
 
     const deleteEvent = async (id) => {
         const eventDoc = doc(db, "laundryEvents", id)
-        await deleteDoc(eventDoc);
+        await updateDoc(eventDoc, {
+            status: "Cancelled"
+        });
         if (props.type == "washer") {
             const laundryRef = doc(db, "laundry", props.date)
             await updateDoc(laundryRef, {

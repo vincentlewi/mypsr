@@ -57,7 +57,9 @@ export default function OrderSummary(props){
             machine: props.laundrySlot,
             participant: user.displayName,
             timing: props.laundryTimeSlot,
-            type: "washer"
+            type: "washer",
+            transactionDate: new Date().toGMTString(),
+            status: "Booked"
         })
     } 
 
@@ -72,7 +74,9 @@ export default function OrderSummary(props){
             machine: props.dryerSlot,
             participant: user.displayName,
             timing: props.dryerTimeSlot,
-            type: "dryer"
+            type: "dryer",
+            transactionDate: new Date().toGMTString(),
+            status: "Booked"
         })
         
     }  

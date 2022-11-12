@@ -167,7 +167,7 @@ export default function CreateNewEvent() {
             </Container>
           </Modal.Body>
           <Modal.Footer>
-            <button className="createbtn" type='submit'>Submit Form</button>
+            <button className="createbtn" type='submit'>Create Event</button>
           </Modal.Footer>
         </form>
       </Modal>
