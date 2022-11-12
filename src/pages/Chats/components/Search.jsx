@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   collection,
-  query,
-  where,
   getDocs,
   setDoc,
   doc,
@@ -12,8 +10,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../components/firebase";
 import { ChatContext } from "../context/ChatContext";
-import { useAuth } from "../../../components/contexts/AuthContext";
+import { AuthContext, useAuth } from "../../../components/contexts/AuthContext";
+import { useLocation } from "react-router-dom";
+
 const Search = () => {
+  const [host, setHost] = useState(useLocation().state)
   const [username, setUsername] = useState("");
   // console.log(username);
   // const [findUser, setUser] = useState(null);
@@ -29,7 +30,6 @@ const Search = () => {
   // const 
   
  
-
   const handleSearch = async () => {
 
     let userl = {}
@@ -38,11 +38,24 @@ const Search = () => {
       // console.log(querySnapshot.docs)
       querySnapshot.forEach((doc) => {
         // console.log(doc.id, "=>", doc.data())
-        if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
-
-          userl[doc.id] = [doc.data().name, doc.data().photoURL]
+        if (host) {
+          if(doc.data().uid === host.ID){
+            // userl[doc.id] = [doc.data().name, doc.data().photoURL]
+            const pengguna = [doc.id, [doc.data().name, doc.data().photoURL]]
+            handleSelect(pengguna)
+            const temp = new Object()
+            temp.uid = pengguna[0]
+            temp.displayName = pengguna[1][0]
+            temp.name = pengguna[1][0]
+            temp.photoURL = pengguna[1][1]
+            changeChat(temp)
+            window.history.replaceState({}, document.title)
+          }
+        } else {
+          if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
+            userl[doc.id] = [doc.data().name, doc.data().photoURL]
+          }
         }
-        
         // setUser(findUser[doc.data().uid] = doc.data());
       });
       // console.log(userl)
@@ -74,9 +87,15 @@ const Search = () => {
     username.trim() ? handleSearch() : setUserLists({})
   }, [username])
 
+  // search for chat if host exist
+  useEffect(() => {
+    host && setUsername(host.name)
+  }, [])
+
+
   const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
-    // console.log(pengguna)
+    console.log(pengguna)
     const combinedId =
       user.uid > pengguna[0]
         ? user.uid + pengguna[0]
@@ -119,7 +138,6 @@ const Search = () => {
     console.log(u)
   };
 
-  // console.log(pengguna)
 
   return (
     <div className="search">
@@ -135,7 +153,7 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {Object.entries(userlists).map((pengguna) => (
-        <div className="userChat" onClick={() => {
+        <div id='userChat' className="userChat" onClick={() => {
           handleSelect(pengguna)
           const temp = new Object()
           temp.uid = pengguna[0]
@@ -143,7 +161,6 @@ const Search = () => {
           temp.name = pengguna[1][0]
           temp.photoURL = pengguna[1][1]
           changeChat(temp)
-          console.log("sa")
           }}>
           <img src={pengguna[1][1]} alt="" />
           <div className="userChatInfo">
