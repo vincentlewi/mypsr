@@ -10,7 +10,7 @@
     }
 
 .landing .main {
-    background-image: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
+    /* background-image: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd); */
     height: calc(100vh - 56px);
     display: flex;
     position: sticky;
@@ -56,8 +56,8 @@
     overflow: clip;
 }
 
-.landing .laundry, .chats {
-    background-image: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
+.landing .laundry, .services {
+    background-image: linear-gradient(to bottom, #cce7ff, #c9edff, #c8f4ff, #c9faff, #ccffff);
 }
 
 .landing .break {

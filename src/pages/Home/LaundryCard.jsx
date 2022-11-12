@@ -21,6 +21,8 @@ export default function LaundryCard(props) {
 
 
     const fstring = props.type.charAt(0).toUpperCase() + props.type.slice(1);
+    const machinestr = props.machine.charAt(0).toUpperCase() + props.machine.slice(1).substring(0, props.machine.length-2) + " " + props.machine.charAt(props.machine.length-1)
+
     return (
         <>
             <div className="column">
@@ -29,7 +31,7 @@ export default function LaundryCard(props) {
                     <hr />
                     <p>Date: {props.date}</p>
                     <p>Time: {props.timing}</p>
-                    <p>Machine: {props.machine}</p>
+                    <p>Machine: {machinestr}</p>
                 </div>
             </div>
             <Modal
@@ -42,7 +44,7 @@ export default function LaundryCard(props) {
                 <Modal.Body>
                     <p>Date: {props.date}</p>
                     <p>Time: {props.timing}</p>
-                    <p>Machine: {props.machine}</p>
+                    <p>Machine: {machinestr}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     {renderDeleteButton()}

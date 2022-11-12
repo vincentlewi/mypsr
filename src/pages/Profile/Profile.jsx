@@ -1,6 +1,6 @@
 import "./profile.css";
 import { db } from "../../components/firebase";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { useAuth } from "../../components/contexts/AuthContext";
