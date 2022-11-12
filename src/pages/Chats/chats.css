@@ -166,7 +166,7 @@
     font-size: 18px;
     font-weight: 500;
 }
-.chatHome .container .sidebar .userChat .userChatInfo p {
+.chatHome .container .sidebar .userChat .userChatInfo div {
     font-size: 14px;
     color: #A5A2A2;
 }
@@ -229,7 +229,7 @@
     flex-direction: column;
     gap: 10px;
 }
-.chatHome .container .chat .messages .message .messageContent p {
+.chatHome .container .chat .messages .message .messageContent div {
     background-color: #D9D9D9;
     padding: 10px 20px;
     border-radius: 0px 10px 10px 10px;
@@ -247,7 +247,7 @@
 .chatHome .container .chat .messages .message.owner .messageContent {
     align-items: flex-end;
 }
-.chatHome .container .chat .messages .message.owner .messageContent p {
+.chatHome .container .chat .messages .message.owner .messageContent div {
     background-color: #CBE5FF;
     color: #333333;
     border-radius: 10px 0px 10px 10px;
