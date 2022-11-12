@@ -3,6 +3,7 @@ import { db } from './firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '../components/contexts/AuthContext'
 import { useState, useEffect } from 'react';
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function WelcomeButton(props){
     const { user } = useAuth()
@@ -23,7 +24,7 @@ export default function WelcomeButton(props){
     let notes = {
         home: "Let's keep you updated with everything PSR related",
         laundry: "Time to clean your clothes",
-        events: "Jangan ansos lagi ya!",
+        events: "Come join the fun!",
         services: "What problem do you bring today?"
     }
 
@@ -46,15 +47,32 @@ export default function WelcomeButton(props){
     }
     
     return (
-        <div className="WelcomeButton">
-            <div className="welcome-img">
-                <img src={require("../assets/logoblack.png")} alt="" />
-            </div>
-            <div className="welcome_msg">
-                <h3><span className = "header"><b>{getTiming()}, {username}</b></span></h3>
-                <h3 className = "subheader py-2">{notes[props.loc]}</h3>
-            </div>  
-        </div>
+        <Container className="mx-auto my-3">
+            <Row className="banner rounded-3 p-3">
+                <Col lg={4} md={4} sm={6} className="text-center picture">
+                    <img src={require("../assets/logoblack.png")} alt="" width="60%" className="my-auto"/>
+                </Col>
+                <Col lg={8} md={8} sm={6} className="my-auto words">
+                    {/* <h2>{props.loc}</h2> */}
+                    <h2>{getTiming()}, {username}</h2>
+                    <p>{notes[props.loc]}</p>
+                </Col>
+            </Row>
+        </Container>
+
+
+
+
+
+        // <div className="WelcomeButton">
+        //     <div className="welcome-img">
+        //         <img src={require("../assets/logoblack.png")} alt="" />
+        //     </div>
+        //     <div className="welcome_msg">
+        //         <h3><span className = "header"><b>{getTiming()}, {username}</b></span></h3>
+        //         <h3 className = "subheader py-2">{notes[props.loc]}</h3>
+        //     </div>  
+        // </div>
     );
 }
 

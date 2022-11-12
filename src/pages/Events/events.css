@@ -1,3 +1,5 @@
+
+
 .events-header{
     display: flex;
     justify-content: space-between;
@@ -5,6 +7,10 @@
 
 .events-header button{
     max-height: 50px;
+}
+
+.events-header h3{
+    font-size: calc(1em + 1vw);
 }
 
 .react-datepicker-wrapper,
@@ -25,4 +31,14 @@
 
 span{
     font-weight: bold;
+}
+
+.create{
+    text-align: right;
+}
+
+@media screen and (max-width: 767px){
+    .create{
+        text-align: left;
+    }
 }
