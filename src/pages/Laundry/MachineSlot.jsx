@@ -1,20 +1,35 @@
 import './TimeslotCard.css';
+
 export default function MachineSlot(props){
-    console.log("==RENDER in MachineSlot.jsx==")
+
+    const handleClick=(id, checked) => {
+        if(checked){
+          props.setSlotList([])
+        } else {
+          props.setSlotList(id)
+        }
+      }
+
     return(
         <div className="machine-slot">
-            <h3>{props.name}</h3>
+            <h3>{props.name} at {props.timeslot}</h3>
             {props.slots ? props.slots.map((slot) => {
+                // console.log(slotList)
+                const checked = props.slotList.includes(slot[0])
+                // console.log(slot[0])
                 if(slot[1].length === 0){    
                     return (
                         <div className="timeslot-buttons" key={slot}>
                         <button
-                        className = "laundrybtn"
+                        className = {`laundrybtn ${checked ? 'active' : 'inactive'}`}
                         id={slot[0]}
                         key={slot}
-                        onClick={(e) => {props.name === "Laundry" ? 
-                        props.getChosenLaundry(e.target.id):
-                        props.getChosenDryer(e.target.id)}}
+                        onClick={(e) => 
+                        {
+                            props.name === "Laundry" ? props.getChosenLaundry(e.target.id):props.getChosenDryer(e.target.id)
+                            handleClick(slot[0], checked)
+                        }
+                    }
                         style={{width: '100%'}}
                         >{slot[0]}</button>
                         </div>          

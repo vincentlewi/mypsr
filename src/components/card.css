@@ -80,3 +80,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
+
+.active{
+    background-color: #3ca6a6;
+}
