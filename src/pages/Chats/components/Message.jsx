@@ -35,10 +35,10 @@ const Message = ({ message }) => {
         <p>
           {message.text && message.text}
           {message.img && <img src={message.img} alt="" />}
-          {today.toDateString() == tanggal.toDateString()
+          <div className="timestamp">{today.toDateString() == tanggal.toDateString()
             ? format(tanggal, 'HH:mm aa')
             : format(tanggal, 'MMM dd, HH:mm aa')
-          }
+          }</div>
         </p>
       </div>
     </div>
