@@ -4,6 +4,7 @@ import DeleteEventsPopup from './DeleteEventsPopup'
 import { db } from "../../components/firebase"
 import { getDoc, doc, arrayUnion, updateDoc, arrayRemove } from "firebase/firestore"
 import { useAuth } from "../../components/contexts/AuthContext"
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function EventCard(props) {
     const [show, setShow] = useState(false);
@@ -96,9 +97,32 @@ export default function EventCard(props) {
                 <div className="card" onClick={handleShow} id={props.id}>
                     <h4 className="title"><b>{props.name}</b></h4>
                     <hr />
-                    <p>Time: {props.startTime + " to " + props.endTime}</p>
-                    <p>Date: {props.date}</p>
-                    <p>Location: {props.location}</p>
+                    <Container>
+                        <Row>
+                            <Col lg={4} md={6} sm={12}>
+                            Date:
+                            </Col>
+                            <Col lg={8} md={6} sm={12}>
+                            <p>{props.date}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={4} md={6} sm={12}>
+                            Time:
+                            </Col>
+                            <Col lg={8} md={6} sm={12}>
+                            <p>{props.startTime + " to " + props.endTime}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={12} md={12} sm={12}>
+                            Location:
+                            </Col>
+                            <Col lg={12} md={12} sm={12}>
+                            <p>{props.location}</p>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
             </div>
             <Modal
@@ -109,16 +133,29 @@ export default function EventCard(props) {
                     <Modal.Title><b>{props.name}</b></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Time: {props.startTime + " to " + props.endTime}</p>
-                    <p>Date: {props.date}</p>
-                    <p>Location: {props.location}</p>
-                    <p><b>Host: {eventHost}</b></p>
-                    <p>Other Participants: {eventJoiners}</p>
+                    <Container>
+                        <Row>
+                            <Col lg={4}><p>Time:</p></Col>
+                        
+                    <Col lg={8}><p>{props.startTime + " to " + props.endTime}</p></Col>
+                    </Row><Row>
+                    <Col lg={4}><p>Date: </p></Col>
+                    
+                    <Col lg={8}><p>{props.date}</p></Col>
+                    </Row><Row>
+                    <Col lg={4}><p>Location: </p></Col>
+                    
+                    <Col lg={8}><p>{props.location}</p></Col>
+                    </Row><Row>
+                    <Col lg={4}><p><b>Host:</b></p></Col>
+                    <Col lg={8}><p><b>{eventHost}</b></p></Col>
+                    </Row><Row>
+                    <Col><p>Other Participants:</p></Col></Row>
+                    <Row><Col lg={8}><p> {eventJoiners}</p></Col>
+                    </Row>
+                    </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className = "closebtn" onClick={handleClose}>
-                        Close
-                    </button>
                     {renderDeleteButton()}
                     <button
                     hidden = {!showJoin}

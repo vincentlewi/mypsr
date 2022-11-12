@@ -12,7 +12,6 @@ export default function TimeslotCard(props){
     let today = new Date()
     let nowHour = today.getHours()
     let dayNow = format(today, 'yyyy-MM-dd')
-    console.log(dayNow)
 
     return (
         <div className="timeslot-card container-sm p-3">

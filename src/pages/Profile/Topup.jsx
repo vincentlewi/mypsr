@@ -3,20 +3,20 @@ import { db } from "../../components/firebase";
 import { collection, getDocs, query, where, addDoc, onSnapshot, doc, updateDoc, increment } from "firebase/firestore";
 import { useEffect } from "react";
 import { useAuth } from '../../components/contexts/AuthContext';
+import animation from "./7455-loading1.json"
+import Lottie from "react-lottie";
 
 
 export default function Topup(){
     const user = useAuth()
     const [products, setProducts] = useState(null)
+    const [loading, setLoading] = useState(false);
 
     async function getActiveProducts(){
         const collectionRef = collection(db, 'products');
         const filteredCollection = query(collectionRef, where("active", "==", true))
         const docs = await getDocs(filteredCollection);
         const products = [];
-        // docs.forEach((doc) => {
-        //     products.push(doc.data())
-        // })
         for await(const doc of docs.docs){
             const product = doc.data()
             product.id = doc.id
@@ -28,7 +28,14 @@ export default function Topup(){
         return products
     }
 
-
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animation,
+        rendererSettings: {
+          preserveAspectRatio: "xMidYMid slice"
+        }
+      };
     
     useEffect(() => {
        async function getProducts(){
@@ -40,6 +47,7 @@ export default function Topup(){
 
 
     async function createCheckoutSession(uid, item){
+        setLoading(true)
         const checkoutSessionsRef = collection(db, `users/${uid}/checkout_sessions`);
         const { id } = await addDoc(checkoutSessionsRef, {
             mode: "payment",
@@ -51,15 +59,15 @@ export default function Topup(){
                     price: item.priceId
                 }]
         })
-        
+
         const cancelListening = onSnapshot(doc(db, `users/${uid}/checkout_sessions/${id}`),
         (snapshot) => {
             let url = snapshot.data().url;
             if(url){
+                setLoading(false)
                 cancelListening();
                 window.location.href = url;
             }
-
         })
 
     }
@@ -67,15 +75,18 @@ export default function Topup(){
 
 
     return(
-        <div className="topup-modal">
-            {products ? products.map((p) => {
+        <div className={`topup-modal ${loading ? "d-flex align-items-center" : "" }`}>
+            { !loading && products ? <p>Choose how much you want !</p>: null }
+            {loading && (<div><h1>Loading...</h1><Lottie options={defaultOptions} height={400} width={400}/>
+            <h3>More coins for us?</h3>
+            <h5>No more common cents for you </h5></div>)}
+            {!loading && products ? products.map((p) => {
                 return(
                 <button
                     className="createbtn" 
                     key={p.id}
                     onClick={()=>{
                         createCheckoutSession(user.user.uid, p)
-                        console.log(p.priceId)
                     }}>
                         {p.name}
                 </button>)

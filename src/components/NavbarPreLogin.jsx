@@ -35,8 +35,8 @@ export default function NavbarPreLogin(props) {
             <Nav className="me-auto my-2 my-lg-0">
               <Nav.Link className={`nav-link ${isActive[0] ? 'active':''}`} id='laundryLink' href="#laundry">Laundry</Nav.Link>
               <Nav.Link className={`nav-link ${isActive[1] ? 'active':''}`} id='eventsLink' href="#events">Events</Nav.Link>
-              <Nav.Link className={`nav-link ${isActive[2] ? 'active':''}`} id='chatsLink' href="#chats">Chats</Nav.Link>
-              <Nav.Link className={`nav-link ${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#maintenance">Maintenance</Nav.Link>
+              <Nav.Link className={`nav-link ${isActive[2] ? 'active':''}`} id='chatsLink' href="#services">Services</Nav.Link>
+              <Nav.Link className={`nav-link ${isActive[3] ? 'active':''}`} id='maintenaceLink' href="#chats">Chats</Nav.Link>
             </Nav>
             <Link to='login' state={1} style={{textDecoration:'none'}}>
               <Button variant="outline-success" className="d-grid gap-2">Login</Button>{' '}

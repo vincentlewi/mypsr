@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
-import { addDoc, getDoc, doc, collection, Timestamp, setDoc, query, getDocs, where, updateDoc, orderBy } from 'firebase/firestore'
+import { addDoc, getDoc, doc, collection, Timestamp, setDoc, query, getDocs, where, updateDoc, orderBy, arrayRemove, arrayUnion } from 'firebase/firestore'
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useForm, Controller } from 'react-hook-form'
 import { addDays, format } from 'date-fns';
@@ -48,14 +48,25 @@ export default function GuestFormPopup(props) {
       const datetimestamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1], dateArr[2], 23, 59))
       try {
         if (guestSnap.exists()) {
-          await updateDoc(docRef, {
-            name: values.gname,
-            guestid: values.gid,
-            email: values.gemail,
-            phoneNumber: values.gphonenum,
-            favouritedBy: [user.uid]
-          })
-          const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", values.gemail), where("resident", "==", username), where("date", "==", format(values.dateTime, 'yyyy-MM-dd')))
+          if (values.gfavourite){
+            await updateDoc(docRef, {
+              name: values.gname,
+              guestid: values.gid,
+              email: values.gemail,
+              phoneNumber: values.gphonenum,
+              favouritedBy: arrayUnion(user.uid)
+            })
+          } else {
+            await updateDoc(docRef, {
+              name: values.gname,
+              guestid: values.gid,
+              email: values.gemail,
+              phoneNumber: values.gphonenum,
+              favouritedBy: arrayRemove(user.uid)
+            })
+          }
+          
+          const q = query(collection(db, "guestVisit"), where("guestFirebaseRef", "==", values.gemail), where("resident", "==", username), where("date", "==", values.gdate))
           const querySnapshot = await getDocs(q)
           if (querySnapshot.docs.length > 0) {
             setErrorMessage("The guest has been registered for today")
@@ -75,7 +86,7 @@ export default function GuestFormPopup(props) {
             reset()
           }
         } else {
-          if (values.gfavourite !== "") {
+          if (values.gfavourite) {
             await setDoc(doc(db, 'guests', values.gemail), {
               name: values.gname,
               guestid: values.gid,
@@ -115,7 +126,18 @@ export default function GuestFormPopup(props) {
     }
   }
 
-  const { register, handleSubmit, reset, control } = useForm()
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      gname: '',
+      gid: '',
+      gemail: '',
+      gpurpose: '',
+      gphonenum: '',
+      gdate: '',
+      gfavourite: '',
+      gentrytime: ''
+    }
+  })
 
   const onSubmit = (values) => { create(values) }
   // const onSubmit = (values) => { console.log(format(values.dateTime, 'yyyy-MM-dd')) }
@@ -176,7 +198,6 @@ export default function GuestFormPopup(props) {
             {errorMessage && <div className="error"> {errorMessage} </div>}
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose} className="closebtn">Close</button>
             <button className="createbtn" type='submit'>Add guest</button>
           </Modal.Footer>
         </form>

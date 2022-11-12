@@ -22,6 +22,7 @@ export default function RemoveFavouriteGuest(props) {
         await updateDoc(doc(db, "guests", id), {
             favouritedBy: arrayRemove(user.uid)
         })
+        handleClose()
     }
 
     return (
@@ -39,7 +40,6 @@ export default function RemoveFavouriteGuest(props) {
                     The guest will be removed from your favourites list
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className='closebtn' onClick={handleClose}>Close</button>
                     <button onClick={() => { removeFavouriteGuest(props.id) }} className="cancelbtn">Remove</button>
                 </Modal.Footer>
             </Modal>

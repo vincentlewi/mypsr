@@ -8,6 +8,7 @@ import Lottie from 'react-lottie';
 import eventAnimation from "./29774-dance-party.json"
 import chatAnimation from "./74908-girl-chatting-with-online-friends.json"
 import maintainenceAnimation from "./52676-meditating-mechanic.json"
+import registrationAnimation from "./112454-form-registration.json"
 
 export default function PreLoginContent() {
   const x = 0
@@ -43,6 +44,15 @@ export default function PreLoginContent() {
     loop: true,
     autoplay: true,
     animationData: maintainenceAnimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+
+  const registrationDefaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: registrationAnimation,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice"
     }
@@ -85,6 +95,7 @@ export default function PreLoginContent() {
           </motion.div>
         </div>
       </div>
+
       <div id='events' className='screen row'>
         <h1 className='break'>Events</h1>
         <div className='content'>
@@ -94,6 +105,21 @@ export default function PreLoginContent() {
           </Row>
         </div>
       </div>
+
+      <div id='services' className='screen'>
+        <h1 className='break'>Services</h1>
+        <div className='content'>
+          <Row class="d-flex align-items-center">
+            <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
+            <Col> <Lottie options={maintainenceDefaultOptions} /> </Col>
+          </Row>
+          <Row class="d-flex align-items-center">
+            <Col> <Lottie options={registrationDefaultOptions} /> </Col>
+            <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
+          </Row>
+        </div>
+      </div>
+
       <div id='chats' className='chats screen'>
         <h1 className='break'>Chats</h1>
         <div className='content'>
@@ -103,15 +129,7 @@ export default function PreLoginContent() {
           </Row>
         </div>
       </div>
-      <div id='maintenance' className='screen'>
-        <h1 className='break'>Maintenance</h1>
-        <div className='content'>
-          <Row class="d-flex align-items-center">
-            <Col> <h2>Report faulty utilities and get them fixed</h2> </Col>
-            <Col> <Lottie options={maintainenceDefaultOptions} /> </Col>
-          </Row>
-        </div>
-      </div>
+
     </>
   );
 }

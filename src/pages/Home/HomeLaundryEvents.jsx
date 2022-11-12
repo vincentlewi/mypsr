@@ -29,7 +29,6 @@ export default function HomeLaundryEvents() {
             error => {
                 console.log(error.message)
             })
-
     }
 
     function getCurrentTime() {
