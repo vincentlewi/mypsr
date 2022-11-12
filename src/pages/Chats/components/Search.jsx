@@ -12,10 +12,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../components/firebase";
 import { ChatContext } from "../context/ChatContext";
-import { AuthContext, useAuth } from "../../../components/contexts/AuthContext";
+import { useAuth } from "../../../components/contexts/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
-  console.log(username);
+  // console.log(username);
   // const [findUser, setUser] = useState(null);
   // console.log(findUser)
   const [err, setErr] = useState(false);
@@ -59,6 +59,7 @@ const Search = () => {
     //   console.log(pengguna[1])
     //   // setUser(key)
     // })
+    
   };
 
   // Object.entries(userlists).map((keys, values) => {
@@ -72,6 +73,7 @@ const Search = () => {
   useEffect(() => {
     username.trim() ? handleSearch() : setUserLists({})
   }, [username])
+
   const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
     // console.log(pengguna)
@@ -106,10 +108,10 @@ const Search = () => {
         });
       }
     } catch (err) {}
-
+    dispatch({ type: "CHANGE_USER", payload: pengguna });
     // setUser(null);
     setUsername("")
-    dispatch({ type: "CHANGE_USER", payload: pengguna });
+
   };
   return (
     <div className="search">
