@@ -83,7 +83,7 @@ const Search = () => {
         : pengguna[0] + user.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(combinedId)
+      // console.log(combinedId)
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
@@ -108,11 +108,19 @@ const Search = () => {
         });
       }
     } catch (err) {}
-    dispatch({ type: "CHANGE_USER", payload: pengguna });
     // setUser(null);
     setUsername("")
 
   };
+
+  const changeChat = async (u) => {
+    // console.log(u)
+    await dispatch({ type: "CHANGE_USER", payload: u });
+    console.log(u)
+  };
+
+  // console.log(pengguna)
+
   return (
     <div className="search">
       <div className="searchForm">
@@ -127,7 +135,16 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {Object.entries(userlists).map((pengguna) => (
-        <div className="userChat" onClick={() => handleSelect(pengguna)}>
+        <div className="userChat" onClick={() => {
+          handleSelect(pengguna)
+          const temp = new Object()
+          temp.uid = pengguna[0]
+          temp.displayName = pengguna[1][0]
+          temp.name = pengguna[1][0]
+          temp.photoURL = pengguna[1][1]
+          changeChat(temp)
+          console.log("sa")
+          }}>
           <img src={pengguna[1][1]} alt="" />
           <div className="userChatInfo">
             <span>{pengguna[1][0]}</span>
