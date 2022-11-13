@@ -20,7 +20,7 @@
     width: 100%;
 }
 
-.somespace{
+.events .somespace{
     margin-bottom: 20px;
     border-radius: 5px;
     border: none;
@@ -29,16 +29,16 @@
     box-shadow: 1.5px 1.5px #FFE0CF;
 }
 
-span{
+.events span{
     font-weight: bold;
 }
 
-.create{
+.events .create{
     text-align: right;
 }
 
 @media screen and (max-width: 767px){
-    .create{
+    .events .create{
         text-align: left;
     }
 }

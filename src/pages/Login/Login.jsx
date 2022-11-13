@@ -51,54 +51,54 @@ export default function LoginNew() {
         <>
             <PageTransition animated={animate}/>
             <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
-                <img src={require("../../assets/arrow.png")} width="30px"/><span>Back</span>
+                <img src={require("../../assets/arrow.png")} width="30px" alt="back"/><span>Back</span>
             </div>
             {error && <Alert variant ="danger" className="error mb-0">{error}</Alert>}
-            {/* <div className="login"> */}
-            <div className="boxx">
-            <div className="roww">
-        <div className="column">
-            <div className="cardd greeting">
-                <div>
-                <h1>Hello!</h1>
-                <p>Welcome to myPSR,</p>
-                <p>your one-stop booking system.</p>
+            <div className="login">
+                <div className="boxx">
+                    <div className="roww-login">
+                        <div className="column-login">
+                            <div className="cardd greeting">
+                                <div>
+                                    <h1>Hello!</h1>
+                                    <p>Welcome to myPSR,</p>
+                                    <p>your one-stop booking system.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="column-login">
+                            <div className="cardd">
+                                <div className="centerr">
+                                    <h1>Login</h1>
+                                    <form>
+                                        <div className="inputbox">
+                                            <input ref={emailRef} type="text" required/>
+                                            <span>Email</span>
+                                        </div>
+                                        <div className="inputbox">
+                                            <input ref={passwordRef} type="password" required/>
+                                            <span>Password</span>
+                                        </div>
+                                        <div className="inputbtn">
+                                            <button id="sign-in" className = "createbtn" disabled={loading} onClick={handleSubmit}>Login</button>
+                                        </div>
+                                        <div class="signup">
+                                            <p>Do not have an account?
+                                                <Link
+                                                to="/register"
+                                                onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
+                                                className='link'>
+                                                    Sign Up
+                                                </Link>
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
-        
-            <div className="column">
-              <div className="cardd">
-                <div className="centerr">
-                    <h1>Login</h1>
-                    <form>
-                      <div className="inputbox">
-                        <input ref={emailRef} type="text" required/>
-                        <span>Email</span>
-                      </div>
-                      <div className="inputbox">
-                        <input ref={passwordRef} type="password" required/>
-                        <span>Password</span>
-                      </div>
-                      <div className="inputbtn">
-                      <button id="sign-in" className = "createbtn" disabled={loading} onClick={handleSubmit}>Login</button>
-                      </div>
-                      <div class="signup">
-                        <p>Do not have an account? <Link
-                            to="/register"
-                            onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
-                            className='link'>
-                                Sign Up
-                            </Link></p>
-                      </div>
-                    </form>
-                  </div>
-              </div>
-            </div>
-            
-            
-          </div>
-        </div>
         {/* </div> */}
             {/* <div id="login">
                 

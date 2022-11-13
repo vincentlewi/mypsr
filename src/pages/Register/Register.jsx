@@ -1,5 +1,5 @@
 import './register.css'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useAuth } from "../../components/contexts/AuthContext"
@@ -15,6 +15,9 @@ export default function Register() {
     const [passwordWarning, setPasswordWarning] = useState('')
     const [ConfirmWarning, setConfirmWarning] = useState('')
     const [x, setX] = useState(-50)
+    let ani = useLocation().state
+    const [animate, setAnimate] = useState(ani)
+    const [destination, setDestination] = useState('')
 
     // reroute to home if user exists
     useEffect(() => {
@@ -32,7 +35,7 @@ export default function Register() {
     
     function checkFullname() {
         if (data.current.fullname.length === 0) {
-            setFullnameWarning('Please enter your name')
+            setFullnameWarning('  Please enter your name')
             isValid.current.fullname = false
         } else {
             setFullnameWarning('')
@@ -57,7 +60,7 @@ export default function Register() {
 
     function checkPassword() {
         if (data.current.password.length < 8) {
-            setPasswordWarning('Password needs to be at least 8 characters')
+            setPasswordWarning('Needs to be at least 8 characters')
             isValid.current.password = false
         } else {
             setPasswordWarning('')
@@ -107,12 +110,106 @@ export default function Register() {
     }, [error, navigate])
 
     return (
-        <div className="register">
-            {error && <Alert variant ="danger">{error}</Alert>}
-            <div className='leftText'>
-                <h1>Hello!</h1>
-                <h2>Welcome to myPSR, your one-stop booking website!</h2>
+        <>
+        <div className='regback' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
+                <img src={require("../../assets/arrow.png")} width="30px" alt="back"/><span>Back</span>
             </div>
+            {error && <Alert variant ="danger">{error}</Alert>}
+        <div className="register">
+        
+            <div className="boxx">
+            <div className="roww">
+        <div className="column">
+            <div className="cardd greeting">
+                <div>
+                <h1>Hello!</h1>
+                <p>Welcome to myPSR,</p>
+                <p>your one-stop booking system.</p>
+                </div>
+            </div>
+          </div>
+        
+            <div className="column">
+              <div className="cardd">
+                <div className="centerr">
+                    <h1>Register</h1>
+                    <form>
+                      <div className="inputbox">
+                      <input 
+                        type='text'
+                        onChange={(e) => {data.current.fullname = e.target.value; checkFullname()}}
+                        
+                        
+                    />
+                    {/* <p style ={{color: "red"}}>{fullnameWarning}</p> */}
+                        {/* <input type="text" required/> */}
+                        <span className="caption"><span>Full Name</span> <span style={{color:'red'}} className='warning'>{fullnameWarning}</span></span>
+                        
+                      </div>
+                      <div className="inputbox">
+                      <input 
+                        type='email'
+                        onChange={(e) => {data.current.email = e.target.value; checkEmail()}}
+                        
+                    />
+                    {/* <p>{emailWarning}</p> */}
+                        {/* <input type="text" required/> */}
+                        <span className="caption"><span>SMU Email</span><span style={{color:'red'}} className='warning'>  {emailWarning}</span></span>
+                      </div>
+                      <div className="inputbox">
+                      <input 
+                        type='password'
+                        onChange={(e) => {data.current.password = e.target.value; checkPassword()}}
+                        
+                    />
+                    {/* <p>{passwordWarning}</p> */}
+                        {/* <input type="password" required/> */}
+                        <span className="caption"><span>Password</span><span style={{color:'red'}} className='warning'>  {passwordWarning}</span></span>
+                      </div>
+                      <div className="inputbox">
+                      <input 
+                        type='password'
+                        onChange={(e) => {data.current.confirm = e.target.value; checkConfirm()}}
+                        
+                    />
+                    {/* <p>{ConfirmWarning}</p> */}
+                        {/* <input type="password" required/> */}
+                        <span className="caption"><span>Confirm Password</span><span style={{color:'red'}} className='warning'>  {ConfirmWarning}</span></span>
+                      </div>
+                      <div className="mb-2 signup">
+                      <motion.div
+                        className='submit'
+                        animate={{ x }}
+                        onMouseEnter={() => {checkFullname(); checkEmail(); checkPassword(); checkConfirm(); validateForm()}}>
+                            <button 
+                                disabled={(!Object.values(isValid.current).every((v) => v)) || (loading)}
+                                onClick={(e) => handleSubmit(e)}
+                                className = "createbtn"
+                            >
+                                Submit
+                            </button>
+                    </motion.div>
+                      </div>
+                      <div class="signup">
+                      <span>Already have an account? <Link to='/mypsr/login' state={0} className='link'>Login</Link></span>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+        
+            
+            {/* <div className='leftText'>
+                <h1>Hello!</h1>
+                <h2>Welcome to myPSR, do register and join the fun!</h2>
+            </div>
+
+            
+
             <div className='form'>
                 <img src={require('../../assets/logowhite.png')} alt='logowhite'/>
                 <form>
@@ -164,7 +261,8 @@ export default function Register() {
                     <br/>
                     Already have an account? <Link to='/mypsr/login' state={0}>Login</Link>
                 </form>
-            </div>
+            </div> */}
         </div>
+        </>
     )
 }

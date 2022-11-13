@@ -14,9 +14,7 @@ export default function MachineSlot(props){
         <div className="machine-slot">
             <h3>{props.name} at {props.timeslot}</h3>
             {props.slots ? props.slots.map((slot) => {
-                // console.log(slotList)
                 const checked = props.slotList.includes(slot[0])
-                // console.log(slot[0])
                 if(slot[1].length === 0){    
                     return (
                         <div className="timeslot-buttons" key={slot}>
