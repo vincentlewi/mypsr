@@ -138,36 +138,45 @@ export default function EventCard(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <Row>
-                            <Col lg={4}><p>Time:</p></Col>
-                        
-                    <Col lg={8}><p>{props.startTime + " to " + props.endTime}</p></Col>
-                    </Row><Row>
-                    <Col lg={4}><p>Date: </p></Col>
-                    
-                    <Col lg={8}><p>{props.date}</p></Col>
-                    </Row><Row>
-                    <Col lg={4}><p>Location: </p></Col>
-                    
-                    <Col lg={8}><p>{props.location}</p></Col>
-                    </Row><Row>
-                    <Col lg={4}><p><b>Host:</b></p></Col>
-                    <Col lg={8}>
+                    <Row>
+                        <Col lg={4}><p>Date: </p></Col>
+                        <Col lg={8}><p>{props.date}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p>Time:</p></Col>
+                        <Col lg={8}><p>{props.startTime + " to " + props.endTime}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p>Location: </p></Col>
+                        <Col lg={8}><p>{props.location}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p><b>Host:</b></p></Col>
+                        <Col lg={8}>
                         <p><b>{host.name}</b></p>
-                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})} className="createbtn">Chat</button>}
                     </Col>
-                    </Row><Row>
-                    <Col><p>Other Participants:</p></Col></Row>
-                    <Row><Col lg={8}><p> {eventJoiners}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col><p>Other Participants:</p></Col></Row>
+                        <Row><Col lg={8}><p> {eventJoiners}</p></Col>
                     </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     {renderDeleteButton()}
+                    <button 
+                        hidden = {!showJoin}
+                        onClick={() => navigate('/mypsr/chats', {state: host})} 
+                        className="chatbtn"
+                    >
+                        Chat
+                    </button>
                     <button
-                    hidden = {!showJoin}
-                    className = "createbtn"
-                    onClick={() => { joinEvent(props.id) }}>
+                        hidden = {!showJoin}
+                        className = {(props.participants.length >= props.limit & joinName === 'Join') ? "closebtn" : "createbtn"}
+                        onClick={() => { joinEvent(props.id) }}
+                        disabled={props.participants.length >= props.limit & joinName === 'Join'}
+                    >
                         {joinName}
                     </button>
                 </Modal.Footer>
