@@ -14,7 +14,7 @@ export const Chats = () => {
 
   const [active, setActive] = useState('');
 
-  console.log(chats)
+  // console.log(chats)
   // cons []
   
 

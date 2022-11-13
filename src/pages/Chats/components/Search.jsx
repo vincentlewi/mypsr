@@ -41,6 +41,7 @@ const Search = () => {
         // console.log(doc.id, "=>", doc.data())
         if (host) {
           if(doc.data().uid === host.ID){
+            // console.log(doc.data().uid)
             // userl[doc.id] = [doc.data().name, doc.data().photoURL]
             const pengguna = [doc.id, [doc.data().name, doc.data().photoURL]]
             handleSelect(pengguna)
@@ -54,8 +55,12 @@ const Search = () => {
           }
         } 
         else {
-          if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
-            userl[doc.id] = [doc.data().name, doc.data().photoURL]
+          // console.log(doc.data())
+          if(doc.id !== user.uid)
+          {  
+            if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
+              userl[doc.id] = [doc.data().name, doc.data().photoURL]
+            }
           }
         }
         // setUser(findUser[doc.data().uid] = doc.data());
@@ -146,7 +151,7 @@ const Search = () => {
   const changeChat = async (u) => {
     // console.log(u)
     await dispatch({ type: "CHANGE_USER", payload: u });
-    console.log(u)
+    // console.log(u)
   };
 
 
