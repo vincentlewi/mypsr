@@ -141,26 +141,25 @@ export default function EventCard(props) {
                 <Modal.Body>
                     <Container>
                         <Row>
-                            <Col lg={4}><p>Time:</p></Col>
+                            <Col sm={4} xs={6}><p>Time:</p></Col>
                         
-                    <Col lg={8}><p>{props.startTime + " to " + props.endTime}</p></Col>
+                    <Col sm={8} xs={6}><p>{props.startTime + " to " + props.endTime}</p></Col>
                     </Row><Row>
-                    <Col lg={4}><p>Date: </p></Col>
+                    <Col sm={4} xs={6}><p>Date: </p></Col>
                     
-                    <Col lg={8}><p>{props.date}</p></Col>
+                    <Col sm={8} xs={6}><p>{props.date}</p></Col>
                     </Row><Row>
-                    <Col lg={4}><p>Location: </p></Col>
+                    <Col sm={4} xs={6}><p>Location: </p></Col>
                     
-                    <Col lg={8}><p>{props.location}</p></Col>
+                    <Col sm={8} xs={6}><p>{props.location}</p></Col>
                     </Row><Row>
-                    <Col lg={4}><p><b>Host:</b></p></Col>
-                    <Col lg={8}>
+                    <Col sm={4} xs={6}><p><b>Host:</b></p></Col>
+                    <Col sm={8} xs={6}>
                         <p><b>{host.name}</b></p>
-                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})} className="createbtn">Chat</button>}
                     </Col>
                     </Row><Row>
                     <Col><p>Other Participants:</p></Col></Row>
-                    <Row><Col lg={8}><p> {eventJoiners}</p></Col>
+                    <Row><Col sm={8} xs={6}><p> {eventJoiners}</p></Col>
                     </Row>
                     </Container>
                 </Modal.Body>
