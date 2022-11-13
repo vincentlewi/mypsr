@@ -23,93 +23,93 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    if(img)
-    {if ( text.length === 0 ) {
-      const storageRef = ref(storage, uuid());
+    // if(img)
+    // {if ( text.length === 0 ) {
+    //   const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                senderId: user.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
-            setImg(downloadURL);
-            console.log("PICTURE AFTER ASSIGNED" + toString(img));
+    //   uploadTask.on(
+    //     (error) => {
+    //       //TODO:Handle Error
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await updateDoc(doc(db, "chats", data.chatId), {
+    //           messages: arrayUnion({
+    //             id: uuid(),
+    //             senderId: user.uid,
+    //             date: Timestamp.now(),
+    //             img: downloadURL,
+    //           }),
+    //         });
+    //         setImg(downloadURL);
+    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
 
-          });
-        }
-      );
-      await updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
+    //       });
+    //     }
+    //   );
+    //   await updateDoc(doc(db, "userChats", user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
           
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
   
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-    }else{
-      const storageRef = ref(storage, uuid());
+    //   await updateDoc(doc(db, "userChats", data.user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
+    // }
+    // }else{
+    //   const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: user.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
-            setImg(downloadURL);
-            console.log("PICTURE AFTER ASSIGNED" + toString(img));
+    //   uploadTask.on(
+    //     (error) => {
+    //       //TODO:Handle Error
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await updateDoc(doc(db, "chats", data.chatId), {
+    //           messages: arrayUnion({
+    //             id: uuid(),
+    //             text,
+    //             senderId: user.uid,
+    //             date: Timestamp.now(),
+    //             img: downloadURL,
+    //           }),
+    //         });
+    //         setImg(downloadURL);
+    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
 
-          });
-        }
-      );
-      await updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
+    //       });
+    //     }
+    //   );
+    //   await updateDoc(doc(db, "userChats", user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
   
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-    }
+    //   await updateDoc(doc(db, "userChats", data.user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
+    // }
     
-    }
-    else {
+    // }
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -134,7 +134,7 @@ const Input = () => {
           },
         [data.chatId + ".date"]: serverTimestamp(),
       });
-    }
+    
 
 
     setText("");
@@ -158,6 +158,7 @@ const Input = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            console.log(downloadURL)
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -167,25 +168,25 @@ const Input = () => {
               }),
             });
             setImg(downloadURL);
-            // console.log(downloadURL)
+            await updateDoc(doc(db, "userChats", user.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: 'sent you a picture',
+                img
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            });
+        
+            await updateDoc(doc(db, "userChats", data.user.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: 'sent you a picture',
+                img
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            });
+            console.log('pic snet')
           });
         }
       );
-      updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
-      updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
     }
     console.log(img)
     setText("");
