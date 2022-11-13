@@ -23,87 +23,93 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    if(img)
-    {if ( text.length === 0 ) {
-      const storageRef = ref(storage, uuid());
+    // if(img)
+    // {if ( text.length === 0 ) {
+    //   const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                senderId: user.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
-          });
-        }
-      );
-      await updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
+    //   uploadTask.on(
+    //     (error) => {
+    //       //TODO:Handle Error
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await updateDoc(doc(db, "chats", data.chatId), {
+    //           messages: arrayUnion({
+    //             id: uuid(),
+    //             senderId: user.uid,
+    //             date: Timestamp.now(),
+    //             img: downloadURL,
+    //           }),
+    //         });
+    //         setImg(downloadURL);
+    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
+
+    //       });
+    //     }
+    //   );
+    //   await updateDoc(doc(db, "userChats", user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
           
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
   
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-    }else{
-      const storageRef = ref(storage, uuid());
+    //   await updateDoc(doc(db, "userChats", data.user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
+    // }
+    // }else{
+    //   const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: user.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
-          });
-        }
-      );
-      await updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
+    //   uploadTask.on(
+    //     (error) => {
+    //       //TODO:Handle Error
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await updateDoc(doc(db, "chats", data.chatId), {
+    //           messages: arrayUnion({
+    //             id: uuid(),
+    //             text,
+    //             senderId: user.uid,
+    //             date: Timestamp.now(),
+    //             img: downloadURL,
+    //           }),
+    //         });
+    //         setImg(downloadURL);
+    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
+
+    //       });
+    //     }
+    //   );
+    //   await updateDoc(doc(db, "userChats", user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
   
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-    }
+    //   await updateDoc(doc(db, "userChats", data.user.uid), {
+    //     [data.chatId + ".lastMessage"]: {
+    //       text,
+    //       img
+    //     },
+    //     [data.chatId + ".date"]: serverTimestamp(),
+    //   });
+    // }
     
-    }
-    else {
+    // }
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -112,23 +118,24 @@ const Input = () => {
           date: Timestamp.now(),
         }),
       });
-    }
 
-    await updateDoc(doc(db, "userChats", user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        img
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
 
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        img
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+          },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+    
+
 
     setText("");
     setImg(null);
@@ -136,10 +143,9 @@ const Input = () => {
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSend();
-    console.log("WORKING")
   };
 
-  useEffect(() => {
+  useEffect(() =>  {
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -151,6 +157,7 @@ const Input = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -159,26 +166,46 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
+            setImg(downloadURL);
+            await updateDoc(doc(db, "userChats", user.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: 'you sent a picture',
+                img: null
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            });
+        
+            await updateDoc(doc(db, "userChats", data.user.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: 'sent you a picture',
+                img: null
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            });
           });
         }
       );
-      updateDoc(doc(db, "userChats", user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
-      updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-          img
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
     }
+    setText("");
+    setImg(null);
   }, [img])
+  // console.log(data.user.uid)
+  // updateDoc(doc(db, "userChats", user.uid), {
+  //       [data.chatId + ".lastMessage"]: {
+  //         text,
+  //         img
+  //       },
+  //       [data.chatId + ".date"]: serverTimestamp(),
+  //     });
+  
+  //     updateDoc(doc(db, "userChats", data.user.uid), {
+  //       [data.chatId + ".lastMessage"]: {
+  //         text,
+  //         img
+  //       },
+  //       [data.chatId + ".date"]: serverTimestamp(),
+  //     });
+
   return (
     <div className="input">
       <input

@@ -1,8 +1,8 @@
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { format } from 'date-fns'
 
 export default function TransactionHistoryCards(props) {
-    if (props.name == "Washer" || props.name == "Dryer") {
+    if (props.name === "Washer" || props.name === "Dryer") {
         return (
             <Row className="history text-center py-3 px-3 rounded">
                 <Col lg={6} md={6} sm={6} className="text-start">

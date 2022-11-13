@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { db } from "../../components/firebase"
 import { getDoc, doc, Timestamp } from "firebase/firestore"
 import { useAuth } from "../../components/contexts/AuthContext"
 import DeleteGuestRegistration from "./DeleteGuestRegistration"
 import AddToFavourites from './AddToFavourites';
+import { Row, Col, Container, Card } from 'react-bootstrap';
 
 export default function ComplaintCard(props) {
 
@@ -34,8 +34,6 @@ export default function ComplaintCard(props) {
         const guestDoc = await getDoc(doc(db, "guests", guestRef))
         if (guestDoc.data().favouritedBy.includes(user.uid)) {
             setFavourited(true)
-        } else {
-            return null
         }
     }
 
@@ -46,22 +44,20 @@ export default function ComplaintCard(props) {
         } else {
             setStatus("Status: Registration Request Received")
         }
-    }, [show])
-
-    useEffect(() => {
-
-    }, [])
+    }, [favourited])
 
     return (
         <>
-            <div className="column">
-                <div className="card" id={props.id} onClick={handleShow}>
-                    <h5><b>Registration: {props.name}</b></h5>
-                    <hr />
-                    <p>Date: {props.date}</p>
-                    <p>{status}</p>
-                </div>
-            </div>
+            <Col lg={4} md={6} sm={6} className="mb-3" >
+                <Card style={{border:'none'}} className="guestpart bg-light" onClick={handleShow} id={props.id}>
+                    <Card.Body>
+                    <Card.Title>{props.name}</Card.Title>
+                    <Card.Subtitle className="mb-2 date">{props.date} at {props.entryTime}</Card.Subtitle>
+                    <Card.Text>{props.purpose}</Card.Text>
+                    <Card.Subtitle className="mb-2">{status}</Card.Subtitle>
+                    </Card.Body>
+                </Card>
+            </Col>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

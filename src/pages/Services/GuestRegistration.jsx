@@ -1,22 +1,18 @@
 import WelcomeButton from "../../components/WelcomeButton";
 import GuestFormPopup from "./GuestFormPopup";
-import ComplaintPopup from "./ComplaintPopup";
-import ComplaintUpdates from "./ComplaintUpdates";
 import GuestRegistrationUpdates from "./GuestRegistrationUpdates";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./tabs.css"
 import FavouriteGuestsUpdates from "./FavouriteGuestsUpdates"
 import Navbar from '../../components/Navbar'
 import '../../components/card.css'
-import { Row, Col, Container, Card } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import './services.css';
-import CardHeader from "react-bootstrap/esm/CardHeader";
 
-export default function Services() {
+export default function GuestRegistration() {
     console.log("Rendering Services.jsx")
     return (
         <>
-            <Navbar/>
+          <Navbar/>
             <div className="container">
                 <WelcomeButton loc="services" />
 
@@ -48,8 +44,7 @@ export default function Services() {
                         </Container>
                     </div>
                 </div>
-            </div>
-            
+            </div>  
         </>
 
     )

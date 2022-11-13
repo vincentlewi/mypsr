@@ -15,6 +15,8 @@ import { collection, getDocs, where, updateDoc, increment, query, onSnapshot } f
 import { Row, Col, Container } from 'react-bootstrap';
 import TransactionHistoryCards from "./TransactionHistoryCards";
 import { useRef } from "react";
+import Lottie from "react-lottie";
+import animation from "./lf30_editor_2erpimqf.json"
 
 export default function Profile() {
   // const [walletBalance, setWalletBalance] = useState(50)
@@ -151,6 +153,15 @@ export default function Profile() {
     doSth()
   }, [])
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+
 
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -216,7 +227,8 @@ export default function Profile() {
               <Row>
                 <Col className="m-3 rounded-4 transaction">
                   <span className="text-start text-secondary">Transaction History</span>
-
+                  {sortedDesc.length == 0 ? <Lottie options={defaultOptions} height={400} width={400}/> : null}
+                  {sortedDesc.length == 0 ? <h2 className="text-center">No Transactions Yet...</h2> : null}
                   {sortedDesc.map((trans) => {
                         return (
                             <TransactionHistoryCards
@@ -241,7 +253,7 @@ export default function Profile() {
           <Modal.Header closeButton>
             <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <Topup />
           </Modal.Body>
           <Modal.Footer>

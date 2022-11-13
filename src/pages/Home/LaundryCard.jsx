@@ -11,7 +11,7 @@ export default function LaundryCard(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [host, setHost] = useState({ name: '', ID: '' })
-    const [showPrevUserObj, setShowPrevUser] = useState(false)
+    const [showPrevUser, setShowPrevUser] = useState(false)
     const { user } = useAuth()
     const navigate = useNavigate()
 
@@ -28,18 +28,18 @@ export default function LaundryCard(props) {
             const laundryData = await getDoc(laundryRef)
             const prevTiming = props.timing.charAt(0) + (Number(props.timing.charAt(1)) - 1) + ":00"
             const prevUser = laundryData.data()[prevTiming][props.machine]
-            console.log(prevUser)
-            if (prevUser != [] && prevUser.ID != user.uid) {
+            console.log(Object.keys(prevUser).length > 0)
+            if (Object.keys(prevUser).length > 0 && prevUser.ID != user.uid) {
                 setShowPrevUser(true)
                 setHost({name: prevUser.name, ID: prevUser.ID})
-            }
+            } 
         } else {
             const laundryRef = doc(db, "dryer", props.date)
             const laundryData = await getDoc(laundryRef)
             const prevTiming = props.timing.charAt(0) + (Number(props.timing.charAt(1)) - 1) + ":00"
             const prevUser = laundryData.data()[prevTiming][props.machine]
-            console.log(prevUser)
-            if (prevUser != [] && prevUser.ID != user.uid) {
+            console.log(Object.keys(prevUser).length > 0)
+            if (Object.keys(prevUser).length > 0 && prevUser.ID != user.uid) {
                 setShowPrevUser(true)
                 setHost({name: prevUser.name, ID: prevUser.ID})
             }
@@ -74,7 +74,7 @@ export default function LaundryCard(props) {
                     <p>Machine: {machinestr}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    {setShowPrevUser && <button onClick={() => navigate('/mypsr/chats', { state: host })}>Chat Previous User</button>}
+                    { showPrevUser ? <button onClick={() => navigate('/mypsr/chats', { state: host })} className="button button-primary">Chat Previous User</button> : null}
                     {renderDeleteButton()}
                 </Modal.Footer>
             </Modal>
