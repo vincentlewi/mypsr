@@ -73,11 +73,11 @@ export default function LoginNew() {
                     <h1>Login</h1>
                     <form>
                       <div className="inputbox">
-                        <input type="text" required/>
+                        <input ref={emailRef} type="text" required/>
                         <span>Email</span>
                       </div>
                       <div className="inputbox">
-                        <input type="password" required/>
+                        <input ref={passwordRef} type="password" required/>
                         <span>Password</span>
                       </div>
                       <div className="inputbtn">
