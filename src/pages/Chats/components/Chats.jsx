@@ -14,6 +14,9 @@ export const Chats = () => {
 
   const [active, setActive] = useState('');
 
+  // const tempChats = new Object();
+  const tempChats = [];
+
   // console.log(chats)
   // cons []
   
@@ -71,7 +74,7 @@ export const Chats = () => {
   }
 
   function activeChecker(u){
-    console.log(u)
+    // console.log(u)
   }
   
   const handleSelect = (u) => {
@@ -83,31 +86,41 @@ export const Chats = () => {
   // console.log(chats)
 
   function populate(){
-    console.log(chats)
+    // console.log(chats)
+    // console.log(typeof chats)
+    Object.entries(chats).forEach(chat =>{
+      console.log(chat[1].lastMessage)
+      if(chat[1].lastMessage){
+        // tempChats.push(chat[1].lastMessage)
+        tempChats.push([chat[0],chat[1].lastMessage, chat[1].userInfo.uid, chat[1].userInfo.photoURL, chat[1].userInfo.displayName, chat[1].userInfo])
+      }
+      // console.log(chat)
+    })
+    console.log(tempChats)
   }
+  populate()
 
   return (
     <div className="chats">
-      {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
+      {tempChats.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div
-          className={`userChat ${active ===  chat[1].userInfo.uid ? 'active':''}`}
+          className={`userChat ${active ===  chat[2] ? 'active':''}`}
           key={chat[0]}
           onClick={(e) => {
             e.target.className = 'chatSelected'
-            handleSelect(chat[1].userInfo)
-            activeChecker(e.target.className)
+            handleSelect(chat[5])
+            // activeChecker(e.target.className)
           }}
         >
         
-          <img src={chat[1].userInfo.photoURL} alt="" />
+          <img src={chat[3]} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage ?.text}{}</p>
-            <p>{LastMessage(chat[1])}</p>
+            <span>{chat[4]}</span>
+            {/* <p>{chat[1].lastMessage ?.text}{}</p> */}
+            <p>{chat[1].text}</p>
           </div>
         </div>
       ))}
-      {/* {populate()} */}
     </div>
   )
 }
