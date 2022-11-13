@@ -88,7 +88,7 @@ export default function RegisterFavouriteGuest(props) {
 
     return (
         <>
-            <button className='createbtn' onClick={handleShow}>Re-register Guest</button>
+            <span onClick={handleShow} style={{cursor:'pointer', textDecoration: 'underline'}}>Re-register Guest</span>
 
             <Modal show={show} onHide={handleClose}>
                 <form onSubmit={handleSubmit(onSubmit)}>
