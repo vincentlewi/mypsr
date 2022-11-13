@@ -6,6 +6,7 @@ import { getDoc, doc, arrayUnion, updateDoc, arrayRemove } from "firebase/firest
 import { useAuth } from "../../components/contexts/AuthContext"
 import { Row, Col, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 export default function EventCard(props) {
     const [show, setShow] = useState(false);
@@ -18,7 +19,6 @@ export default function EventCard(props) {
     const navigate = useNavigate()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
 
     async function joinEvent(eventID) {
         try {
@@ -108,7 +108,7 @@ export default function EventCard(props) {
                             <img src={require("../../assets/calendar.png")} width="30px"/>
                             </Col>
                             <Col lg={8} md={8} sm={8} xs={8}>
-                            <p>{props.date}</p>
+                            <p>{format(new Date(`${props.date} ${props.startTime}`), 'dd MMM, HH:mm')}</p>
                             </Col>
                         </Row>
                         <Row>
@@ -116,7 +116,7 @@ export default function EventCard(props) {
                             <img src={require("../../assets/clock.png")} width="30px"/>
                             </Col>
                             <Col lg={8} md={8} sm={8} xs={8}>
-                            <p>{props.startTime + " to " + props.endTime}</p>
+                            <p>{props.location}</p>
                             </Col>
                         </Row>
                         <Row>
@@ -124,7 +124,7 @@ export default function EventCard(props) {
                             <img src={require("../../assets/location.png")} width="30px"/>
                             </Col>
                             <Col lg={8} md={8} sm={8} xs={8}>
-                            <p>{props.location}</p>
+                            <p>{`${props.participants.length} / ${props.limit} members`}</p>
                             </Col>
                         </Row>
                     </Container>
@@ -156,7 +156,7 @@ export default function EventCard(props) {
                     <Col lg={4}><p><b>Host:</b></p></Col>
                     <Col lg={8}>
                         <p><b>{host.name}</b></p>
-                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})}>Chat</button>}
+                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})} className="createbtn">Chat</button>}
                     </Col>
                     </Row><Row>
                     <Col><p>Other Participants:</p></Col></Row>

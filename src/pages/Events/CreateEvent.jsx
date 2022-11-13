@@ -26,6 +26,7 @@ export default function CreateNewEvent() {
     let defaultValues = {}
     defaultValues.name = ""
     defaultValues.date = new Date()
+    defaultValues.limit = ""
     defaultValues.startTime = ""
     defaultValues.endTime = ""
     defaultValues.location = ""
@@ -49,6 +50,7 @@ export default function CreateNewEvent() {
           {
             name: values.name,
             date: format(values.date, 'yyyy-MM-dd'),
+            limit: values.limit,
             startTime: format(values.startTime, 'HH:mm'),
             endTime: format(values.endTime, 'HH:mm'),
             location: values.location,
@@ -71,7 +73,7 @@ export default function CreateNewEvent() {
     create(values)
     handleClose()
   }
-  // const onSubmit = (values) => {console.log(new Date(format(values.startTime.getTime(), 'yyyy-MM-dd HH:mm')))}
+  // const onSubmit = (values) => {console.log(values)}
 
   const [name, date, startTime] = watch(['name', 'date', 'startTime'])
   const today = new Date()
@@ -96,26 +98,32 @@ export default function CreateNewEvent() {
             <Container>
             <Row>
               <Col>
-            <span>Event Name</span>
-            <input {...register('name')} type="text" style={{width: "100%"}} className="somespace" maxLength={15}/>
-            { name === 'ngentot' && <span>gabole</span>}
-            </Col>
-            <Col>
-            <span>Date</span>
-            <Controller
-              control={control}
-              name="date"
-              render={({ field }) => (
-                <DatePicker
-                  minDate={new Date()}
-                  onChange={(e) => field.onChange(e)}
-                  dateFormat="yyyy-MM-dd"
-                  selected={field.value ? field.value : new Date()}
-                  className="somespace"
-                />
-              )}
-              />
-            </Col>
+                <span>Event Name</span>
+                <input {...register('name')} type="text" style={{width: "100%"}} className="somespace" maxLength={15}/>
+                { name === 'ngentot' && <span>gabole</span>}
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <span>Date</span>
+                <Controller
+                  control={control}
+                  name="date"
+                  render={({ field }) => (
+                    <DatePicker
+                      minDate={new Date()}
+                      onChange={(e) => field.onChange(e)}
+                      dateFormat="dd MMM yyyy"
+                      selected={field.value ? field.value : new Date()}
+                      className="somespace"
+                    />
+                  )}
+                  />
+              </Col>
+              <Col>
+                <span>Pax Limit</span>
+                <input {...register('limit')} type="number" min='2' style={{width: "100%"}} className="somespace"/>
+              </Col>
             </Row>
             <Row>
               <Col>

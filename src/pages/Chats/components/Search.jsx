@@ -41,6 +41,7 @@ const Search = () => {
         // console.log(doc.id, "=>", doc.data())
         if (host) {
           if(doc.data().uid === host.ID){
+            // console.log(doc.data().uid)
             // userl[doc.id] = [doc.data().name, doc.data().photoURL]
             const pengguna = [doc.id, [doc.data().name, doc.data().photoURL]]
             handleSelect(pengguna)
@@ -52,15 +53,20 @@ const Search = () => {
             changeChat(temp)
             window.history.replaceState({}, document.title)
           }
-        } else {
-          if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
-            userl[doc.id] = [doc.data().name, doc.data().photoURL]
+        } 
+        else {
+          // console.log(doc.data())
+          if(doc.id !== user.uid)
+          {  
+            if(doc.data().name.toLowerCase().includes(username.toLowerCase())){
+              userl[doc.id] = [doc.data().name, doc.data().photoURL]
+            }
           }
         }
         // setUser(findUser[doc.data().uid] = doc.data());
       });
-
-      setUserLists({});
+      // console.log(userlists)
+      // setUserLists({});
       // console.log(userl)
       // Object.entries(userlists).map((keys) => {
       //   console.log(keys)
@@ -105,7 +111,7 @@ const Search = () => {
 
   const handleSelect = async (pengguna) => {
     //check whether the group(chats in firestore) exists, if not create
-    console.log(pengguna)
+    // console.log(pengguna)
     const combinedId =
       user.uid > pengguna[0]
         ? user.uid + pengguna[0]
@@ -139,13 +145,13 @@ const Search = () => {
     } catch (err) {}
     // setUser(null);
     setUsername("")
-    setUserLists({});
+    // setUserLists({});
   };
 
   const changeChat = async (u) => {
     // console.log(u)
     await dispatch({ type: "CHANGE_USER", payload: u });
-    console.log(u)
+    // console.log(u)
   };
 
 

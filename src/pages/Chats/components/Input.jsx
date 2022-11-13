@@ -23,93 +23,6 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    // if(img)
-    // {if ( text.length === 0 ) {
-    //   const storageRef = ref(storage, uuid());
-
-    //   const uploadTask = uploadBytesResumable(storageRef, img);
-
-    //   uploadTask.on(
-    //     (error) => {
-    //       //TODO:Handle Error
-    //     },
-    //     () => {
-    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-    //         await updateDoc(doc(db, "chats", data.chatId), {
-    //           messages: arrayUnion({
-    //             id: uuid(),
-    //             senderId: user.uid,
-    //             date: Timestamp.now(),
-    //             img: downloadURL,
-    //           }),
-    //         });
-    //         setImg(downloadURL);
-    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
-
-    //       });
-    //     }
-    //   );
-    //   await updateDoc(doc(db, "userChats", user.uid), {
-    //     [data.chatId + ".lastMessage"]: {
-    //       text,
-    //       img
-          
-    //     },
-    //     [data.chatId + ".date"]: serverTimestamp(),
-    //   });
-  
-    //   await updateDoc(doc(db, "userChats", data.user.uid), {
-    //     [data.chatId + ".lastMessage"]: {
-    //       text,
-    //       img
-    //     },
-    //     [data.chatId + ".date"]: serverTimestamp(),
-    //   });
-    // }
-    // }else{
-    //   const storageRef = ref(storage, uuid());
-
-    //   const uploadTask = uploadBytesResumable(storageRef, img);
-
-    //   uploadTask.on(
-    //     (error) => {
-    //       //TODO:Handle Error
-    //     },
-    //     () => {
-    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-    //         await updateDoc(doc(db, "chats", data.chatId), {
-    //           messages: arrayUnion({
-    //             id: uuid(),
-    //             text,
-    //             senderId: user.uid,
-    //             date: Timestamp.now(),
-    //             img: downloadURL,
-    //           }),
-    //         });
-    //         setImg(downloadURL);
-    //         console.log("PICTURE AFTER ASSIGNED" + toString(img));
-
-    //       });
-    //     }
-    //   );
-    //   await updateDoc(doc(db, "userChats", user.uid), {
-    //     [data.chatId + ".lastMessage"]: {
-    //       text,
-    //       img
-    //     },
-    //     [data.chatId + ".date"]: serverTimestamp(),
-    //   });
-  
-    //   await updateDoc(doc(db, "userChats", data.user.uid), {
-    //     [data.chatId + ".lastMessage"]: {
-    //       text,
-    //       img
-    //     },
-    //     [data.chatId + ".date"]: serverTimestamp(),
-    //   });
-    // }
-    
-    // }
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -189,22 +102,6 @@ const Input = () => {
     setText("");
     setImg(null);
   }, [img])
-  // console.log(data.user.uid)
-  // updateDoc(doc(db, "userChats", user.uid), {
-  //       [data.chatId + ".lastMessage"]: {
-  //         text,
-  //         img
-  //       },
-  //       [data.chatId + ".date"]: serverTimestamp(),
-  //     });
-  
-  //     updateDoc(doc(db, "userChats", data.user.uid), {
-  //       [data.chatId + ".lastMessage"]: {
-  //         text,
-  //         img
-  //       },
-  //       [data.chatId + ".date"]: serverTimestamp(),
-  //     });
 
   return (
     <div className="input">
@@ -224,12 +121,7 @@ const Input = () => {
           accept="image/*"
           onChange={(e) => setImg(e.target.files[0])}
         />
-        {/* <input
-          type ="image"
-          id="file"
-          alt="submit"
-          onChange={(e) => setImg(e.target.files[0])}
-        /> */}
+    
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>

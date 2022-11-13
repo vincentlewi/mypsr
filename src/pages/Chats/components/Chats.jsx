@@ -13,6 +13,8 @@ export const Chats = () => {
   const { dispatch } = useContext(ChatContext);
 
   const [active, setActive] = useState('');
+
+  // console.log(chats)
   // cons []
   
 
@@ -20,10 +22,10 @@ export const Chats = () => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
         setChats(doc.data());
-        console.log(doc.data())
-        chats.forEach(chat => {
-          console.log("ABECE") 
-        })
+        // console.log(doc.data())
+        // chats.forEach(chat => {
+        //   // console.log("ABECE") 
+        // })
       });
 
       return () => {
@@ -81,7 +83,7 @@ export const Chats = () => {
   // console.log(chats)
 
   function populate(){
-    
+    console.log(chats)
   }
 
   return (
@@ -96,16 +98,16 @@ export const Chats = () => {
             activeChecker(e.target.className)
           }}
         >
-
         
-          <img src={chat[1].lastMessage && chat[1].userInfo.photoURL} alt="" />
+          <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].lastMessage && chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage && chat[1].lastMessage ?.text}{}</p>
+            <span>{chat[1].userInfo.displayName}</span>
+            <p>{chat[1].lastMessage ?.text}{}</p>
             <p>{LastMessage(chat[1])}</p>
           </div>
         </div>
       ))}
+      {/* {populate()} */}
     </div>
   )
 }
