@@ -170,8 +170,8 @@ const Input = () => {
             setImg(downloadURL);
             await updateDoc(doc(db, "userChats", user.uid), {
               [data.chatId + ".lastMessage"]: {
-                text: 'sent you a picture',
-                img
+                text: 'you sent a picture',
+                img:null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
@@ -179,7 +179,7 @@ const Input = () => {
             await updateDoc(doc(db, "userChats", data.user.uid), {
               [data.chatId + ".lastMessage"]: {
                 text: 'sent you a picture',
-                img
+                img:null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
@@ -188,10 +188,10 @@ const Input = () => {
         }
       );
     }
-    console.log(img)
-    setText("");
-    setImg(null);
-  }, [img])
+    // console.log(img)
+      setText("");
+      setImg(null);
+    }, [img])
   // console.log(data.user.uid)
   // updateDoc(doc(db, "userChats", user.uid), {
   //       [data.chatId + ".lastMessage"]: {
