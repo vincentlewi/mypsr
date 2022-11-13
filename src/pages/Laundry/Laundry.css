@@ -1,4 +1,4 @@
-.grid-container {
+/* .grid-container {
     display: grid;
     grid-template-columns: 35px 35px 35px 35px 35px 35px 35px;
   }
@@ -24,18 +24,13 @@
 }
 
 .today {
-    color: blue;
+    color: #D3EFBD;
     font-weight: bold;
-}
+} */
 
 .selected{
-    background-color: blue;
+    background-color: #D3EFBD;
     color: white;
-}
-
-.hover:hover {
-    background-color: lightgray;
-    color: black;
 }
 
 .top-part, .bottom-part{    

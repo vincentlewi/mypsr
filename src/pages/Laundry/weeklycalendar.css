@@ -1,0 +1,113 @@
+.calendar {
+    display: block;
+    position: relative;
+    width: 100%;  
+  }
+  
+  .calendar .header {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 115%;
+    padding: 1.5em 0;
+    border-bottom: 1px solid #024959;
+  }
+  
+  .calendar .header .icon {
+    cursor: pointer;
+    transition: 0.15s ease-out;
+  }
+  
+  .calendar .header .icon:hover {
+    transition: 0.25s ease-out;
+    color: #024959;
+  }
+  
+  .calendar .header .icon:first-of-type {
+    margin-left: 1em;
+  }
+  
+  .calendar .header .icon:last-of-type {
+    margin-right: 1em;
+  }
+  
+  .calendar .days {
+    text-transform: uppercase;
+    font-weight: 400;
+    color: black;
+    font-size: 70%;
+    padding: 0.75em 0;
+    border-bottom: 1px solid #EFF7FF;
+  }
+  
+  .calendar .body .cell {
+    position: relative;
+    height: 4em;
+    border-right: 1px solid #EFF7FF;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s ease-out;
+    font-size: 1.2em;
+  }
+  
+  .calendar .body .cell:hover {
+    background: #D3EFBD;
+    transition: 0.5s ease-out;
+  }
+  
+  .calendar .body .selected {
+    border-left: 10px solid transparent;
+    border-image: linear-gradient(45deg, #D3EFBD 0%, #97f54f 40%);
+    border-image-slice: 1;
+    background-color: #D3EFBD;
+  }
+
+
+  .calendar .body .today {
+    border-left: 10px solid transparent;
+    border-image: linear-gradient(45deg, #ff1a79 0%, #eb82b3 40%);
+    border-image-slice: 1;
+  }
+
+  .calendar .body .today.selected{
+    background-color: #D3EFBD;
+  }
+  
+
+  
+  .calendar .body .cell:last-child {
+    border-right: none;
+  }
+  
+  .calendar .body .cell .number {
+    position: absolute;
+    font-size: 82.5%;
+    line-height: 1;
+    top: 0.75em;
+    right: 0.75em;
+    font-weight: 700;
+    color: black;
+  }
+
+  .calendar .body .disabled {
+    color: grey;
+    pointer-events: none;
+  }
+  
+  .calendar .body .col {
+    flex-grow: 0;
+    flex-basis: calc(100% / 7);
+    width: calc(100% / 7);
+  }
+
+  .calendar .header .prevweek{
+    text-align: start;
+  }
+
+  .calendar .header .nxtweek{
+    text-align: end;
+  }
+
+  /* .selected{
+    background-color: #D3EFBD;
+    color: white;
+} */
