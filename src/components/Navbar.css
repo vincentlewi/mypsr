@@ -1,0 +1,14 @@
+.dropdown-menu{
+    border: none;
+    background-color: white;
+    outline: 0;
+}
+
+
+
+@media screen and (max-width: 992px){
+    .dropdown-menu{
+        background-color: #f8f9fa;
+    }
+}
+    
