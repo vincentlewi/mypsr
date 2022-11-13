@@ -37,8 +37,16 @@
     text-align: right;
 }
 
-@media screen and (max-width: 767px){
+.events h5{
+    font-size: calc(0.7em + 0.5vw);
+}
+
+@media screen and (max-width: 768px){
     .events .create{
-        text-align: left;
+        text-align: center;
+    }
+    .events h5{
+        text-align: center;
     }
 }
+

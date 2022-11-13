@@ -288,7 +288,20 @@
     text-align: left;
     margin: 0px;
 }
-
+.chatHome .container .chat .messages .message .messageContent img{
+    color:#A5A2A2;
+    font-size: 10px;
+    /* text-align: center; */
+    padding: 0px;
+    margin-right: auto;
+}
+.chatHome .container .chat .messages .message.owner .messageContent img{
+    color:#A5A2A2;
+    font-size: 10px;
+    /* text-align: center; */
+    padding: 0px;
+    margin-left: auto;
+}
 
 .chatHome .container .chat .input {
     height: 50px;

@@ -76,8 +76,8 @@
     
   } */
   
-.register  .boxx{
-    height: 100vh;
+.register .boxx{
+    height: calc(100vh - 50px);
     /* width: 100vw; */
     display: flex;
     align-items: center;
@@ -96,6 +96,8 @@
 .register .greeting h1{
     font-size: 50px;
     margin-bottom: 3px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
 
 .register .greeting p{
@@ -251,4 +253,14 @@
         border-color: red;
     }
 
+}
+
+.register .signup p{
+  color: #fff;
+  font-size: 15px;
+}
+
+.register .signup .link{
+  color: #6EC1AF;
+  margin-left: 10px;
 }

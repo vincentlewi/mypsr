@@ -19,7 +19,13 @@ span{
 
 .edit{
     color:#3CA6A6;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
 
 .profile_data{
     background-color: #CBE5FF;

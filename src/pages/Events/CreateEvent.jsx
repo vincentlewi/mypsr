@@ -168,7 +168,7 @@ export default function CreateNewEvent() {
             <Row>
               <Col>
             <span>Location</span>
-            <input {...register('location')} type="text" style={{width: "100%"}} className="somespace"/>
+            <input {...register('location')} type="text" style={{width: "100%"}} className="somespace" maxLength={15}/>
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
             </Col>
