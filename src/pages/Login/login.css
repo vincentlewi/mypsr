@@ -9,10 +9,9 @@
     align-items: center;
     justify-content: left;
     width: 100vw;
-    background-color:#EFF7FF; 
 }
 
-.back span{
+ .back span{
     font-weight: bold;
     margin: 10px;
     cursor: pointer;
@@ -21,7 +20,7 @@
   cursor: pointer;
 }
 
-.error{
+.logerror{
     width: 80%;
     text-align: center;
     margin-left: auto;
@@ -30,21 +29,18 @@
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap'); */
 
 * {
     box-sizing: border-box;
   }
   
   .login {
-    font-family: Arial, Helvetica, sans-serif;
-    /* width: 80vw; */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    width: 80vw;
     margin-left: auto;
     margin-right:auto;
-    background-color: #EFF7FF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0vh 5vw;
     
   }
   
@@ -55,7 +51,7 @@
     justify-content: center;
 }
 
-.greeting{
+.login .greeting{
     color:#024959;
     display: flex;
     justify-content: center;
@@ -64,21 +60,21 @@
     margin-left: 2vw;
 }
 
-.greeting h1{
+.login .greeting h1{
     font-size: 50px;
     margin-bottom: 3px;
 }
 
-.greeting p{
+.login .greeting p{
     font-size: 20px;
     
 }
 
-.signup p{
+.login .signup p{
     color:#EFF7FF;
     font-size: 15px;;
 }
-.link{
+.login .link{
     text-decoration: none;
     color:#6EC1AF;
 }
@@ -127,13 +123,13 @@
 
   
 
-  .centerr {
+  .login .centerr {
     position: relative;
     padding: 7vh 3vw;
     background: #024959;
     border-radius: 10px;
   }
-  .centerr h1 {
+  .login .centerr h1 {
     font-size: 2em;
     /* border-left: 5px solid dodgerblue; */
     /* padding: 10px; */
@@ -143,7 +139,7 @@
     font-weight: bold;
     /* padding-left: 10px; */
   }
-  .centerr .inputbox {
+  .login .centerr .inputbox {
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -154,7 +150,7 @@
     margin-right: 30px;
   }
   
-   .inputbox input {
+   .login .inputbox input {
     position: absolute;
     top: 0;
     left: 0;
@@ -167,73 +163,45 @@
     font-size: 0.8em;
     color: #fff;
     resize: vertical;
+    margin: auto;
   }
   
-   .inputbox input:invalid:focus{
+   .login .inputbox input:invalid:focus{
     border-color: #CD2C2C;
   }
   
-   .inputbox:last-child {
+   .login .inputbox:last-child {
     margin-bottom: 0;
   }
-   .inputbox span {
+   .login .inputbox span {
     position: absolute;
     top: 13px;
     left: 13px;
     font-size: 0.8em;
     transition: 0.6s;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     background-color:#024959;
     padding-left:5px;
     padding-right: 5px;
     border-radius: 3px;
   }
-  .inputbox input:focus ~ span,
-  .inputbox input:valid ~ span {
+  .login .inputbox input:focus ~ span,
+  .login .inputbox input:valid ~ span {
     transform: translateX(-13px) translateY(-30px);
     font-size: 0.8em;
   }
 
-  .inputbtn{
+  .login .inputbtn{
     margin-bottom: 20px;
   }
-  
-  /* @media screen and (max-width: 1000px) {
-    .column{
-      width: 100%;
-      margin-top: 0;
-    }
-  } */
 
-  /* #createbutt{
-    border-radius: 25px;
-    background-color: #3CA6A6; 
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-  }
-  
-  #createbutt:hover{
-    background-color: #3CA6A6;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  .login .centerr .signup{
+    color: #fff;
     
   }
   
-  #createbutt:active{
-    background-color: #026773;
-    box-shadow: 0px 0px;
-  } */
-  
-  .center .signup{
-    color: #fff;
-  }
-  
-  .center .signup a{
+  .login .centerr .signup .link{
     color: #6EC1AF;
+    margin-left: 10px;
   }

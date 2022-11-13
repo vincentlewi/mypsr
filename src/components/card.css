@@ -1,16 +1,16 @@
-.column {
+.events .column {
     float: left;
     width: 33%;
     padding: 20px;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.roww {
+.events .roww {
     margin: 0 -5px;
 }
 
 /* Clear floats after the columns */
-.roww:after {
+.events .roww:after {
     content: "";
     display: table;
     clear: both;
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 1073px) {
-    .column {
+    .events .column {
         width: 50%;
         display: block;
         margin-bottom: 20px;
@@ -39,7 +39,7 @@
   }
 
   @media screen and (max-width: 767px) {
-    .column {
+    .events .column {
       width: 100%;
       display: block;
       margin-bottom: 20px;
@@ -52,7 +52,7 @@
     margin-top: 6px;
 }
 
-.title {
+.events .title {
     font-weight: bold;
     margin-left: 5px;
     margin-bottom:0px;
