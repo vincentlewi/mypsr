@@ -4,12 +4,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from './contexts/AuthContext';
+import { useState } from 'react';
 import './Navbar.css'
 
 export default function NavbarDoang(props) {
   const { user } = useAuth()
-
-  // const profile
+  const [show, setShow] = useState(false);
+  const showDropdown = (e)=>{
+      setShow(!show);
+  }
+  const hideDropdown = e => {
+      setShow(false);
+  }
   const navigate = useNavigate()
   return (
       <Navbar className='navbar' bg="light" expand="lg" sticky="top" style={{zIndex:'100'}}>
@@ -21,7 +27,7 @@ export default function NavbarDoang(props) {
               <Nav.Link className={'nav-link'} id='laundryLink' onClick={() => {navigate("/mypsr/laundry")}}>Laundry</Nav.Link>
               <Nav.Link className={'nav-link'} id='eventsLink' onClick={() => {navigate("/mypsr/events")}}>Events</Nav.Link>
               {/* <Nav.Link className={'nav-link'} id='servicesLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link> */}
-              <NavDropdown title="Services" id="basic-nav-dropdown" className='bg-light  border-0' style={{border: 'none'}} onMouseOver = {console.log()}>
+              <NavDropdown title="Services" id="basic-nav-dropdown" className='bg-light  border-0' style={{border: 'none'}} onMouseOver = {console.log()} show={show} onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
                   <NavDropdown.Item className={'nav-link border-0'} id='maintenanceLink' onClick={() => {navigate("/mypsr/maintenance")}}>
                     Maintenance Report
                   </NavDropdown.Item>
