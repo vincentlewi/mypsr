@@ -9,7 +9,6 @@
     align-items: center;
     justify-content: left;
     width: 100vw;
-    background-color:#EFF7FF; 
 }
 
  .logback span{
@@ -38,13 +37,9 @@
   
   .login {
     /* font-family: Arial, Helvetica, sans-serif; */
-    /* width: 80vw; */
-    /* margin-left: auto;
+    width: 80vw;
+    margin-left: auto;
     margin-right:auto;
-    background-color: #EFF7FF;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
     padding: 0vh 5vw;
     
   }
@@ -199,43 +194,12 @@
   .login .inputbtn{
     margin-bottom: 20px;
   }
-  
-  /* @media screen and (max-width: 1000px) {
-    .column{
-      width: 100%;
-      margin-top: 0;
-    }
-  } */
-
-  /* #createbutt{
-    border-radius: 25px;
-    background-color: #3CA6A6; 
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-  }
-  
-  #createbutt:hover{
-    background-color: #3CA6A6;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  .login .centerr .signup{
+    color: #fff;
     
   }
   
-  #createbutt:active{
-    background-color: #026773;
-    box-shadow: 0px 0px;
-  } */
-  
-  .login .centerr .signup{
-    color: #fff;
-  }
-  
-  .login .centerr .signup a{
+  .login .centerr .signup .link{
     color: #6EC1AF;
+    margin-left: 10px;
   }
