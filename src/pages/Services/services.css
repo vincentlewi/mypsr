@@ -12,6 +12,7 @@
 .date{
     color: #A5A2A2;
     font-size: 0.75em;
+    font-weight: lighter;
 }
 
 .title{
@@ -19,7 +20,7 @@
 }
 
 .comment{
-    font-size: 0.6em;
+    font-size: 1em;
 }
 
 .utilities{
@@ -52,4 +53,42 @@
 
 .reportcomp{
     text-align: right;
+}
+
+
+.guestpart{
+    background-color:#EFF7FF;
+    color: #024959;
+    border-radius: 10px;
+    padding: 10px;
+    /* position: relative; */
+}
+
+.cancel{
+    width: 100px;
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+.rereg{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+}
+
+.somespace{
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #EFF7FF;
+    padding: 5px 10px;
+    box-shadow: 1.5px 1.5px #FFE0CF;
 }

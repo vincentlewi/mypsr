@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from './contexts/AuthContext';
 
@@ -20,6 +21,14 @@ export default function NavbarDoang(props) {
               <Nav.Link className={'nav-link'} id='eventsLink' onClick={() => {navigate("/mypsr/events")}}>Events</Nav.Link>
               <Nav.Link className={'nav-link'} id='servicesLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
               <Nav.Link className={'nav-link'} id='chatsLink' onClick={() => {navigate("/mypsr/chats")}}>Chats</Nav.Link>
+              <NavDropdown title="Services" id="basic-nav-dropdown">
+                  <NavDropdown.Item className={'nav-link'} id='maintenanceLink' onClick={() => {navigate("/mypsr/maintenance")}}>
+                    Maintenance Report
+                  </NavDropdown.Item>
+                  <NavDropdown.Item className={'nav-link'} id='gRegisterLink' onClick={() => {navigate("/mypsr/guestregistration")}}>
+                    Guest Registration
+                  </NavDropdown.Item>
+            </NavDropdown>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
               <p className='nav-link d-inline text-black-50'>Profile</p>

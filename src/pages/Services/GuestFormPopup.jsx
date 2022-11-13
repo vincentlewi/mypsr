@@ -7,6 +7,8 @@ import { useForm, Controller } from 'react-hook-form'
 import { addDays, format } from 'date-fns';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+import { Row, Col, Container, Card } from 'react-bootstrap';
+import './services.css';
 
 export default function GuestFormPopup(props) {
 
@@ -147,8 +149,84 @@ export default function GuestFormPopup(props) {
             <Modal.Title>Register New Guest</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h5>Key in all the details necessary for registration</h5>
-            <p>Name </p>
+            {/* <h5>Key in all the details necessary for registration</h5> */}
+            <Container>
+              <Row>
+                <Col>
+                <p>Name </p>
+                </Col>
+
+                <Col>
+                <input {...register('gname')} type="text" className="somespace"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p>Student ID</p>
+                </Col>
+
+                <Col>
+                <input {...register('gid')} type="text" className="somespace"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p>Email</p>
+                </Col>
+
+                <Col>
+                <input {...register('gemail')} type="email" className="somespace"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p>Phone Number</p>
+                </Col>
+
+                <Col>
+                <input {...register('gphonenum')} type="text" className="somespace"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p>Purpose</p>
+                </Col>
+
+                <Col>
+                <input {...register('gpurpose')} type="text" className="somespace"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p>Date and Time</p>
+                </Col>
+
+                <Col>
+                <Controller
+              control={control}
+              name="dateTime"
+              render={({ field }) => (
+                <DatePicker
+                  minDate={new Date()}
+                  maxDate={addDays(new Date(), 6)}
+                  onChange={(e) => field.onChange(e)}
+                  showTimeSelect
+                  filterTime={filterPassedTime}
+                  dateFormat="yyyy-MM-dd hh:mm aa"
+                  selected={field.value}
+                  className="somespace"
+                />
+              )}
+            />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <p><input {...register('gfavourite')} type="checkbox" /> Add to favourites</p>
+                </Col>
+              </Row>
+            </Container>
+            {/* <p>Name </p>
             <input {...register('gname')} type="text" />
 
             <p>Student ID or NRIC</p>
@@ -178,11 +256,11 @@ export default function GuestFormPopup(props) {
                   selected={field.value}
                 />
               )}
-            />
+            /> */}
             {/* <input {...register('gdate')} type="date" min={new Date().toISOString().split("T")[0]} />
             <p>Entry Time</p>
             <input {...register('gentrytime')} type="time" /> */}
-            <p><input {...register('gfavourite')} type="checkbox" /> Add to favourites</p>
+            {/* <p><input {...register('gfavourite')} type="checkbox" /> Add to favourites</p> */}
 
             {errorMessage && <div className="error"> {errorMessage} </div>}
           </Modal.Body>

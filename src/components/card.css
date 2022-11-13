@@ -55,6 +55,11 @@
 .title {
     font-weight: bold;
     margin-left: 5px;
+    margin-bottom:0px;
+}
+
+.line{
+    margin-top: 5px;
 }
 
 .laundry .card {
