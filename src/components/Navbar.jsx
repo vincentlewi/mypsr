@@ -19,8 +19,7 @@ export default function NavbarDoang(props) {
             <Nav className="me-auto my-2 my-lg-0">
               <Nav.Link className={'nav-link'} id='laundryLink' onClick={() => {navigate("/mypsr/laundry")}}>Laundry</Nav.Link>
               <Nav.Link className={'nav-link'} id='eventsLink' onClick={() => {navigate("/mypsr/events")}}>Events</Nav.Link>
-              <Nav.Link className={'nav-link'} id='servicesLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link>
-              <Nav.Link className={'nav-link'} id='chatsLink' onClick={() => {navigate("/mypsr/chats")}}>Chats</Nav.Link>
+              {/* <Nav.Link className={'nav-link'} id='servicesLink' onClick={() => {navigate("/mypsr/services")}}>Services</Nav.Link> */}
               <NavDropdown title="Services" id="basic-nav-dropdown">
                   <NavDropdown.Item className={'nav-link'} id='maintenanceLink' onClick={() => {navigate("/mypsr/maintenance")}}>
                     Maintenance Report
@@ -29,6 +28,7 @@ export default function NavbarDoang(props) {
                     Guest Registration
                   </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link className={'nav-link'} id='chatsLink' onClick={() => {navigate("/mypsr/chats")}}>Chats</Nav.Link>
             </Nav>
             <Link to='/mypsr/profile' style={{textDecoration:'none'}}>
               <p className='nav-link d-inline text-black-50'>Profile</p>
