@@ -253,7 +253,7 @@ export default function Profile() {
           <Modal.Header closeButton>
             <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <Topup />
           </Modal.Body>
           <Modal.Footer>
