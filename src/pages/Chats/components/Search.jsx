@@ -27,6 +27,7 @@ const Search = () => {
 
   const { dispatch } = useContext(ChatContext);
 
+
   // const 
   
  
@@ -58,6 +59,8 @@ const Search = () => {
         }
         // setUser(findUser[doc.data().uid] = doc.data());
       });
+
+      setUserLists({});
       // console.log(userl)
       // Object.entries(userlists).map((keys) => {
       //   console.log(keys)
@@ -66,8 +69,14 @@ const Search = () => {
       // console.log(findUser)
     } catch (err) {
       setErr(true);
-    }
+    }    
     setUserLists(userl)
+    
+    
+
+
+  
+
     // Object.entries(userlists).map((pengguna) => {
     //   console.log(pengguna[1])
     //   // setUser(key)
@@ -83,6 +92,7 @@ const Search = () => {
     // e.code === "onKeyPress" && handleSearch();
     handleSearch();
   };
+
   useEffect(() => {
     username.trim() ? handleSearch() : setUserLists({})
   }, [username])
@@ -129,7 +139,7 @@ const Search = () => {
     } catch (err) {}
     // setUser(null);
     setUsername("")
-
+    setUserLists({});
   };
 
   const changeChat = async (u) => {
@@ -151,7 +161,6 @@ const Search = () => {
           value={username}
         />
       </div>
-      {err && <span>User not found!</span>}
       {Object.entries(userlists).map((pengguna) => (
         <div id='userChat' className="userChat" onClick={() => {
           handleSelect(pengguna)

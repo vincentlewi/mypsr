@@ -13,7 +13,7 @@ export const Chats = () => {
   const { dispatch } = useContext(ChatContext);
 
   const [active, setActive] = useState('');
-
+  // cons []
   
 
   useEffect(() => {
@@ -79,6 +79,11 @@ export const Chats = () => {
     // console.log(active)
   };
   // console.log(chats)
+
+  function populate(){
+    
+  }
+
   return (
     <div className="chats">
       {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
@@ -93,10 +98,10 @@ export const Chats = () => {
         >
 
         
-          <img src={chat[1].userInfo.photoURL} alt="" />
+          <img src={chat[1].lastMessage && chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage ?.text}{}</p>
+            <span>{chat[1].lastMessage && chat[1].userInfo.displayName}</span>
+            <p>{chat[1].lastMessage && chat[1].lastMessage ?.text}{}</p>
             <p>{LastMessage(chat[1])}</p>
           </div>
         </div>
