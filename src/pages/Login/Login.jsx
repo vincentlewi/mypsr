@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 import { useAuth } from "../../components/contexts/AuthContext"
-import { Alert } from "react-bootstrap"
+import { Alert, Col, Row, Container } from "react-bootstrap"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import './login.css'
 import PageTransition from "../../components/PageTransition"
@@ -53,9 +53,56 @@ export default function LoginNew() {
             <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
                 <img src={require("../../assets/arrow.png")} width="30px"/><span>Back</span>
             </div>
-            <div id="login">
+            {error && <Alert variant ="danger" className="error mb-0">{error}</Alert>}
+            {/* <div className="login"> */}
+            <div className="boxx">
+            <div className="roww">
+        <div className="column">
+            <div className="cardd greeting">
+                <div>
+                <h1>Hello!</h1>
+                <p>Welcome to myPSR,</p>
+                <p>your one-stop booking system.</p>
+                </div>
+            </div>
+          </div>
+        
+            <div className="column">
+              <div className="cardd">
+                <div className="centerr">
+                    <h1>Login</h1>
+                    <form>
+                      <div className="inputbox">
+                        <input type="text" required/>
+                        <span>Email</span>
+                      </div>
+                      <div className="inputbox">
+                        <input type="password" required/>
+                        <span>Password</span>
+                      </div>
+                      <div className="inputbtn">
+                      <button id="sign-in" className = "createbtn" disabled={loading} onClick={handleSubmit}>Login</button>
+                      </div>
+                      <div class="signup">
+                        <p>Do not have an account? <Link
+                            to="/register"
+                            onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
+                            className='link'>
+                                Sign Up
+                            </Link></p>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+        {/* </div> */}
+            {/* <div id="login">
                 
-                {error && <Alert variant ="danger">{error}</Alert>}
+                
                 <div id="opening"> 
                     <div className="content">
                         <h1>Hello!</h1>
@@ -82,7 +129,7 @@ export default function LoginNew() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             
 
         </>
