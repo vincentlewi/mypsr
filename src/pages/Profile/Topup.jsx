@@ -76,10 +76,10 @@ export default function Topup(){
 
 
     return(
-        <div className={`topup-modal ${loading ? "d-flex align-items-center" : "" }`}>
-            {loading && (<div><h1>Loading...</h1><Lottie options={defaultOptions} height={400} width={400}/>
-            <h3>More coins for us?</h3>
-            <h5>No more common cents for you </h5></div>)}
+        <div>
+            {loading ? <div><h1 className="text-center">Loading...</h1><Lottie options={defaultOptions} height={400} width={400}/>
+            <h3 className="text-center">More coins for us?</h3>
+            <h5 className="text-center">No more common cents for you </h5></div> :null}
             {!loading && products ? products.map((p) => {
                 return(
                 <button

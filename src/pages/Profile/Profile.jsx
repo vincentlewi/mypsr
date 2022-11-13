@@ -253,7 +253,7 @@ export default function Profile() {
           <Modal.Header closeButton>
             <Modal.Title>Choose the amount you want to top up!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <Topup />
           </Modal.Body>
           <Modal.Footer>
