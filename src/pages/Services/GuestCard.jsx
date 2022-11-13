@@ -34,8 +34,6 @@ export default function ComplaintCard(props) {
         const guestDoc = await getDoc(doc(db, "guests", guestRef))
         if (guestDoc.data().favouritedBy.includes(user.uid)) {
             setFavourited(true)
-        } else {
-            return null
         }
     }
 
@@ -46,11 +44,7 @@ export default function ComplaintCard(props) {
         } else {
             setStatus("Status: Registration Request Received")
         }
-    }, [show])
-
-    useEffect(() => {
-
-    }, [])
+    }, [favourited])
 
     return (
         <>
