@@ -189,7 +189,7 @@ export default function Profile() {
                     <img className="pp" src={userInfo.photo} alt="profile" />
                     <Row>
                       <Col>
-                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit</span>
+                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit <img src={"edit.png"}/></span>
                       </Col>
                     </Row>
                   </div>
