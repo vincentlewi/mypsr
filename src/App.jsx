@@ -16,6 +16,7 @@ import './App.css';
 import './components/Components.css'
 import './components/buttons.css'
 import Maintenance from './pages/Services/Maintenance';
+import GuestRegistration from './pages/Services/GuestRegistration';
 
 function App() {
   const location = useLocation();
@@ -30,10 +31,11 @@ function App() {
             <Route path='home' element={<Home />}/>
             <Route path='laundry' element={<Laundry />}/>
             <Route path='events' element={<Events />}/>
-            <Route path='services' element={<Services />}/>
+            {/* <Route path='services' element={<Services />}/> */}
             <Route path='profile' element={<Profile/>}/>
             <Route path='chats' element={<Chats/>}/>
             <Route path='maintenance' element={<Maintenance/>}/>
+            <Route path='guestregistration' element={<GuestRegistration/>}/>
           </Route>
         </Route>
         <Route path='*' element={<Error404/>}/>
