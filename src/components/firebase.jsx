@@ -58,7 +58,7 @@ export const auth = getAuth()
 export const storage = getStorage()
 export async function upload(file, user, setUserInfo, setLoading) {
   setLoading(true)
-  let photoURL = 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
+  let photoURL = 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/defaultProfile.jpg?alt=media&token=c573eed3-2637-4e95-b304-5d33e5d82736'
   if (file) {
     const fileRef = ref(storage, `${user.uid}.png`)
     const snapshot = await uploadBytes(fileRef, file)

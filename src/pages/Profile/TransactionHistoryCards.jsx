@@ -1,19 +1,13 @@
 import { Row, Col, Container } from 'react-bootstrap';
+import { format } from 'date-fns'
 
 export default function TransactionHistoryCards(props) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
     if (props.name == "Washer" || props.name == "Dryer") {
-        
-        const date_arr = props.date.split(" ")
-
         return (
             <Row className="history text-center py-3 px-3 rounded">
                 <Col lg={6} md={6} sm={6} className="text-start">
                     <h2>{props.name}</h2>
-                    <span className="text-secondary date">{date_arr[1]} {date_arr[2]} {date_arr[3]}</span>
+                    <span className="text-secondary date">{format(new Date(props.date), 'dd MMM yyyy')} </span>
                 </Col>
                 <Col lg={6} md={6} sm={6} className="m-auto text-end">
                     <h5>- {props.price}.00</h5>

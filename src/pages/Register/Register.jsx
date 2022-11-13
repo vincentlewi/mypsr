@@ -142,9 +142,9 @@ export default function Register() {
                     
                     <p>Confirm Password:</p>
                     <input 
-                        type='p4s5w0rD'
+                        type='password'
                         onChange={(e) => {data.current.confirm = e.target.value; checkConfirm()}}
-                        placeholder={ConfirmWarning}
+                        placeholder='p4s5w0rD'
                     />
                     <p>{ConfirmWarning}</p>
                     

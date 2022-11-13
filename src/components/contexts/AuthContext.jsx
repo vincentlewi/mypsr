@@ -34,12 +34,12 @@ export function AuthProvider({ children }) {
                         complaints: [],
                         wallet: 0,
                         address: address,
-                        photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
+                        photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/defaultProfile.jpg?alt=media&token=c573eed3-2637-4e95-b304-5d33e5d82736'
                     })
                     setDoc(doc(db, "userChats", cred.user.uid), {})
                     updateProfile(auth.currentUser, {
                         displayName: fullname,
-                        photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/DefaultPhoto.jpg?alt=media&token=561406c4-1f82-409f-9a12-cafcad7baac9'
+                        photoURL: 'https://firebasestorage.googleapis.com/v0/b/mypsr-backup.appspot.com/o/defaultProfile.jpg?alt=media&token=c573eed3-2637-4e95-b304-5d33e5d82736'
                     })
                     setUser(auth.currentUser)
                 })

@@ -50,10 +50,13 @@ export default function LoginNew() {
     return (
         <>
             <PageTransition animated={animate}/>
+            <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
+                <img src={require("../../assets/arrow.png")} width="30px"/><span>Back</span>
+            </div>
             <div id="login">
-                <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>back</div>
+                
                 {error && <Alert variant ="danger">{error}</Alert>}
-                <div id="opening">
+                <div id="opening"> 
                     <div className="content">
                         <h1>Hello!</h1>
                         <br/>
