@@ -8,7 +8,6 @@ export default function TimeslotCard(props){
     let nowHour = today.getHours()
     let dayNow = format(today, 'yyyy-MM-dd')
 
-
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }

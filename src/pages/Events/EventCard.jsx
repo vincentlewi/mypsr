@@ -140,35 +140,45 @@ export default function EventCard(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <Row>
-                            <Col sm={4} xs={6}><p>Time:</p></Col>
-                        
-                    <Col sm={8} xs={6}><p>{props.startTime + " to " + props.endTime}</p></Col>
-                    </Row><Row>
-                    <Col sm={4} xs={6}><p>Date: </p></Col>
-                    
-                    <Col sm={8} xs={6}><p>{props.date}</p></Col>
-                    </Row><Row>
-                    <Col sm={4} xs={6}><p>Location: </p></Col>
-                    
-                    <Col sm={8} xs={6}><p>{props.location}</p></Col>
-                    </Row><Row>
-                    <Col sm={4} xs={6}><p><b>Host:</b></p></Col>
-                    <Col sm={8} xs={6}>
+                    <Row>
+                        <Col lg={4}><p>Date: </p></Col>
+                        <Col lg={8}><p>{props.date}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p>Time:</p></Col>
+                        <Col lg={8}><p>{props.startTime + " to " + props.endTime}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p>Location: </p></Col>
+                        <Col lg={8}><p>{props.location}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}><p><b>Host:</b></p></Col>
+                        <Col lg={8}>
                         <p><b>{host.name}</b></p>
                     </Col>
-                    </Row><Row>
-                    <Col><p>Other Participants:</p></Col></Row>
-                    <Row><Col sm={8} xs={6}><p> {eventJoiners}</p></Col>
+                    </Row>
+                    <Row>
+                        <Col><p>Other Participants:</p></Col></Row>
+                        <Row><Col lg={8}><p> {eventJoiners}</p></Col>
                     </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     {renderDeleteButton()}
+                    <button 
+                        hidden = {!showJoin}
+                        onClick={() => navigate('/mypsr/chats', {state: host})} 
+                        className="chatbtn"
+                    >
+                        Chat
+                    </button>
                     <button
-                    hidden = {!showJoin}
-                    className = "createbtn"
-                    onClick={() => { joinEvent(props.id) }}>
+                        hidden = {!showJoin}
+                        className = {(props.participants.length >= props.limit & joinName === 'Join') ? "closebtn" : "createbtn"}
+                        onClick={() => { joinEvent(props.id) }}
+                        disabled={props.participants.length >= props.limit & joinName === 'Join'}
+                    >
                         {joinName}
                     </button>
                 </Modal.Footer>

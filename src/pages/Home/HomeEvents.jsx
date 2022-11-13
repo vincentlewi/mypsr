@@ -76,10 +76,13 @@ export default function HomeEvents() {
                                     key={event.id}
                                     id={event.id}
                                     name={event.name}
+                                    limit={event.limit}
                                     startTime={event.startTime}
                                     endTime={event.endTime}
                                     location={event.location}
-                                    date={event.date} />
+                                    date={event.date} 
+                                    participants={event.participants}
+                                />
                                     )
                                 })}
                     </div>
@@ -93,10 +96,13 @@ export default function HomeEvents() {
                                     key={event.id}
                                     id={event.id}
                                     name={event.name}
+                                    limit={event.limit}
                                     startTime={event.startTime}
                                     endTime={event.endTime}
                                     location={event.location}
-                                    date={event.date} />
+                                    date={event.date} 
+                                    participants={event.participants}
+                                 />
                             )
                         })}
                     </div>
@@ -115,10 +121,13 @@ export default function HomeEvents() {
                                     key={event.id}
                                     id={event.id}
                                     name={event.name}
+                                    limit={event.limit}
                                     startTime={event.startTime}
                                     endTime={event.endTime}
                                     location={event.location}
-                                    date={event.date} />
+                                    date={event.date} 
+                                    participants={event.participants}
+                                />
                             )
                             })}
                     </div>
@@ -136,10 +145,13 @@ export default function HomeEvents() {
                                     key={event.id}
                                     id={event.id}
                                     name={event.name}
+                                    limit={event.limit}
                                     startTime={event.startTime}
                                     endTime={event.endTime}
                                     location={event.location}
-                                    date={event.date} />
+                                    date={event.date} 
+                                    participants={event.participants}
+                                />
                             )
                         })}
                     </div>

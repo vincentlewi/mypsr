@@ -68,7 +68,8 @@ export default function OrderSummary(props){
             type: "washer",
             transactionDate: new Date().toGMTString(),
             status: "Booked",
-            previousBooker: {bookerBefore}
+            previousBooker: {bookerBefore},
+            laundryDate: new Date(props.dateID +" " + props.laundryTimeSlot)
         })
     } 
 
@@ -87,8 +88,8 @@ export default function OrderSummary(props){
             type: "dryer",
             transactionDate: new Date().toGMTString(),
             status: "Booked",
-            previousBooker: bookerBefore
-            
+            previousBooker: bookerBefore,
+            laundryDate: new Date(props.dateID +" " + props.laundryTimeSlot)
         })
         
     }  

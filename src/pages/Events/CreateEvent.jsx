@@ -35,17 +35,16 @@ export default function CreateNewEvent() {
 
   async function create(values) {
     try {
-      const userSnap = await getDoc(userRef)
-      const dateArr = format(values.date, 'yyyy-MM-dd').split("-")
-      const startTimeArr = format(values.startTime, 'HH:mm').split(":")
-      const endTimeArr = format(values.endTime, 'HH:mm').split(":")
-      const startTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], startTimeArr[0], startTimeArr[1]))
-      const endTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endTimeArr[0], endTimeArr[1]))
-
-      if (values.name == "" || values.startTime == "" || values.endTime == "" || values.location == "" || values.date == "") {
+      if (values.name == "" || values.startTime == "" || values.endTime == "" || values.location == "" || values.date == "" || values.limit == "") {
         setErrorMessage("Please enter all of the required fields")
         setShow(true)
       } else {
+        const userSnap = await getDoc(userRef)
+        const dateArr = format(values.date, 'yyyy-MM-dd').split("-")
+        const startTimeArr = format(values.startTime, 'HH:mm').split(":")
+        const endTimeArr = format(values.endTime, 'HH:mm').split(":")
+        const startTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], startTimeArr[0], startTimeArr[1]))
+        const endTimeStamp = Timestamp.fromDate(new Date(dateArr[0], dateArr[1] - 1, dateArr[2], endTimeArr[0], endTimeArr[1]))
         const docRef = await addDoc(eventsCollectionRef,
           {
             name: values.name,
