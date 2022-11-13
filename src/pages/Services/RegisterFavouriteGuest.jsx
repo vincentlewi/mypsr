@@ -112,7 +112,21 @@ export default function RegisterFavouriteGuest(props) {
                                 <p>Date and Time</p>
                                 </Col>
                                 <Col sm={9}>
-                                <input {...register('gpurpose')} type="text" />
+                                <Controller
+                                control={control}
+                                name="dateTime"
+                                render={({ field }) => (
+                                <DatePicker
+                                    minDate={new Date()}
+                                    maxDate={addDays(new Date(), 6)}
+                                    onChange={(e) => field.onChange(e)}
+                                    showTimeSelect
+                                    filterTime={filterPassedTime}
+                                    dateFormat="yyyy-MM-dd hh:mm aa"
+                                    selected={field.value}
+                            />
+                            )}
+                        />
                                 </Col>
                             </Row>
                         </Container>

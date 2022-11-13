@@ -52,8 +52,8 @@ export default function Topup(){
         const { id } = await addDoc(checkoutSessionsRef, {
             mode: "payment",
             payment_method_types: ['card', 'paynow', 'grabpay'],
-            success_url: `http://vincentlewi.github.io/mypsr/profile`,
-            cancel_url: `http://vincentlewi.github.io/mypsr/home`,
+            success_url: `http://localhost:3000/mypsr/profile`,
+            cancel_url: `http://localhost:3000/mypsr/home`,
             line_items:     
                 [{
                     quantity: 1,

@@ -21,7 +21,7 @@ export default function NoEvent(){
     return(
         <div className="noevent">
             <Lottie options={defaultOptions} height={400} width={400}/>
-            <h2>You have not joined any events</h2>
+            <h2 className='d-flex justify-content-center text-center'>You have not joined any events</h2>
             <br></br>
             <button className="createbtn" onClick={() => {
                 navigate("/mypsr/events")

@@ -169,9 +169,9 @@ export default function EventCard(props) {
                     <button 
                         hidden = {!showJoin}
                         onClick={() => navigate('/mypsr/chats', {state: host})} 
-                        className="chatbtn"
+                        className="closebtn font-weight-bold"
                     >
-                        Chat
+                        Chat with Host
                     </button>
                     <button
                         hidden = {!showJoin}

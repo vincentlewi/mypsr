@@ -92,7 +92,7 @@ export default function PreLoginContent() {
 
       <div id='services' className='services screen'>
         <h1 className='break'>Services</h1>
-        <div className='content'>
+        <div className='content mx-auto'>
           <Row className="d-flex align-items-center">
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
             <Col> <Lottie options={maintainenceDefaultOptions} height={250} width={250}/> </Col>
