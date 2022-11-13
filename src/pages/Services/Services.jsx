@@ -35,7 +35,7 @@ export default function Services() {
                     </Row>
                 </Container>
 
-                <div className="Requested">
+                <div className="Requested mt-3">
                     <ComplaintUpdates/>
                 </div>
             </div>
