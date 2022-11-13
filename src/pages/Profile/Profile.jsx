@@ -251,13 +251,13 @@ export default function Profile() {
 
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
+            <Modal.Title>Choose the amount you want to top up!</Modal.Title>
           </Modal.Header>
           <Modal.Body >
             <Topup />
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose} className="closebtn">Close</button>
+            Your current Wallet Balance is ${userInfo.wallet}
           </Modal.Footer>
         </Modal>
       </div>

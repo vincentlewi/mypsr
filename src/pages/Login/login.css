@@ -1,8 +1,9 @@
 *{
     background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
+    box-sizing: border-box;
 }
 
-#login{
+/* #login{
     display:flex;
     margin:auto;
     width: 80vw;
@@ -11,9 +12,9 @@
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
-}
+} */
 
-
+/*
 #opening{
     text-align: center;
     width: 50%;
@@ -90,16 +91,242 @@
 #new_account a{
     color: #7cdbc7;
     text-decoration: underline;
-}
+} */
 
 .back{
-    padding: 10px;
+    /* padding: 10px; */
+    padding-left: 10px;
     display: flex;
     align-items: center;
     justify-content: left;
+    width: 10vw;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .back span{
     font-weight: bold;
     margin: 10px;
 }
+
+.error{
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+  
+  .login {
+    font-family: Arial, Helvetica, sans-serif;
+    /* width: 80vw; */
+    margin-left: auto;
+    margin-right:auto;
+    background-color: #EFF7FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+.boxx{
+    height: 100vh;
+    /* width: 100vw; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.greeting{
+    color:#024959;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+    margin-left: 2vw;
+}
+
+.greeting h1{
+    font-size: 50px;
+    margin-bottom: 3px;
+}
+
+.greeting p{
+    font-size: 20px;
+    
+}
+
+.signup p{
+    color:#EFF7FF;
+    font-size: 15px;;
+}
+.link{
+    text-decoration: none;
+    color:#6EC1AF;
+}
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 50%;
+    /* padding: 20px 10px; */
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .roww {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    }
+  
+  /* Clear floats after the columns */
+  .roww:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the counter cards */
+  .cardd {
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  */
+    /* this adds the "card" effect */
+    /* padding: 16px; */
+    text-align: center;
+    /* background-color: #f1f1f1; */
+  }
+  
+  /* Responsive columns - one column layout (vertical) on small screens */
+  @media screen and (max-width: 900px) {
+    .roww{
+        flex-direction: column;
+    }
+    .column {
+      width: 100%;
+      display: block;
+      /* margin-bottom: 20px; */
+    }
+  }
+
+  
+
+  .centerr {
+    position: relative;
+    padding: 7vh 3vw;
+    background: #024959;
+    border-radius: 10px;
+  }
+  .centerr h1 {
+    font-size: 2em;
+    /* border-left: 5px solid dodgerblue; */
+    /* padding: 10px; */
+    color: #fff;
+    /* letter-spacing: 5px; */
+    margin-bottom: 40px;
+    font-weight: bold;
+    /* padding-left: 10px; */
+  }
+  .centerr .inputbox {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+    color: #fff;
+    margin-right: 30px;
+  }
+  
+   .inputbox input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 2px solid #fff;
+    outline: none;
+    background: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    color: #fff;
+    resize: vertical;
+  }
+  
+   .inputbox input:invalid:focus{
+    border-color: #CD2C2C;
+  }
+  
+   .inputbox:last-child {
+    margin-bottom: 0;
+  }
+   .inputbox span {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    font-size: 0.8em;
+    transition: 0.6s;
+    font-family: sans-serif;
+    background-color:#024959;
+    padding-left:5px;
+    padding-right: 5px;
+    border-radius: 3px;
+  }
+  .inputbox input:focus ~ span,
+  .inputbox input:valid ~ span {
+    transform: translateX(-13px) translateY(-30px);
+    font-size: 0.8em;
+  }
+
+  .inputbtn{
+    margin-bottom: 20px;
+  }
+  
+  /* @media screen and (max-width: 1000px) {
+    .column{
+      width: 100%;
+      margin-top: 0;
+    }
+  } */
+
+  /* #createbutt{
+    border-radius: 25px;
+    background-color: #3CA6A6; 
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+  }
+  
+  #createbutt:hover{
+    background-color: #3CA6A6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  #createbutt:active{
+    background-color: #026773;
+    box-shadow: 0px 0px;
+  } */
+  
+  .center .signup{
+    color: #fff;
+  }
+  
+  .center .signup a{
+    color: #6EC1AF;
+  }
