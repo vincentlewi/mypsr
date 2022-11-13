@@ -143,7 +143,6 @@ const Input = () => {
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSend();
-    console.log("WORKING")
   };
 
   useEffect(() =>  {
@@ -158,7 +157,7 @@ const Input = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(downloadURL)
+            
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -171,7 +170,7 @@ const Input = () => {
             await updateDoc(doc(db, "userChats", user.uid), {
               [data.chatId + ".lastMessage"]: {
                 text: 'you sent a picture',
-                img:null
+                img: null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
@@ -179,19 +178,17 @@ const Input = () => {
             await updateDoc(doc(db, "userChats", data.user.uid), {
               [data.chatId + ".lastMessage"]: {
                 text: 'sent you a picture',
-                img:null
+                img: null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
-            console.log('pic snet')
           });
         }
       );
     }
-    // console.log(img)
-      setText("");
-      setImg(null);
-    }, [img])
+    setText("");
+    setImg(null);
+  }, [img])
   // console.log(data.user.uid)
   // updateDoc(doc(db, "userChats", user.uid), {
   //       [data.chatId + ".lastMessage"]: {
