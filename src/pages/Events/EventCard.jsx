@@ -154,7 +154,7 @@ export default function EventCard(props) {
                     <Col lg={4}><p><b>Host:</b></p></Col>
                     <Col lg={8}>
                         <p><b>{host.name}</b></p>
-                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})}>Chat</button>}
+                        {showJoin && <button onClick={() => navigate('/mypsr/chats', {state: host})} className="createbtn">Chat</button>}
                     </Col>
                     </Row><Row>
                     <Col><p>Other Participants:</p></Col></Row>

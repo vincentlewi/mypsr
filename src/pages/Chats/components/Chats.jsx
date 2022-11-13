@@ -23,9 +23,9 @@ export const Chats = () => {
       const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
         setChats(doc.data());
         // console.log(doc.data())
-        chats.forEach(chat => {
-          // console.log("ABECE") 
-        })
+        // chats.forEach(chat => {
+        //   // console.log("ABECE") 
+        // })
       });
 
       return () => {
@@ -82,9 +82,9 @@ export const Chats = () => {
   };
   // console.log(chats)
 
-  // function populate(){
-    
-  // }
+  function populate(){
+    console.log(chats)
+  }
 
   return (
     <div className="chats">
@@ -107,6 +107,7 @@ export const Chats = () => {
           </div>
         </div>
       ))}
+      {/* {populate()} */}
     </div>
   )
 }
