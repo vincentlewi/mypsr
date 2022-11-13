@@ -5,9 +5,8 @@ import {format} from 'date-fns'
 export default function TimeslotCard(props){
     // console.log("==RENDER in TimeslotCard.jsx==")
     let today = new Date()
-    let nowHour = today.getHours()
+    let nowHour = 22
     let dayNow = format(today, 'yyyy-MM-dd')
-
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
