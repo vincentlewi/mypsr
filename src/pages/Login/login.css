@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: left;
     width: 100vw;
+    position: sticky;
 }
 
  .back span{
@@ -37,15 +38,15 @@
   
   .login {
     /* font-family: Arial, Helvetica, sans-serif; */
-    width: 80vw;
+    width: 100vw;
     margin-left: auto;
     margin-right:auto;
-    padding: 0vh 5vw;
+    padding: 0vh 10vw;
     
   }
   
 .boxx{
-    height: 100vh;
+    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,25 +59,28 @@
     align-items: center;
     margin-right: 2vw;
     margin-left: 2vw;
+    margin-bottom: 20px;
 }
 
 .login .greeting h1{
-    font-size: 50px;
+    font-size: calc(3vw + 2em);
     margin-bottom: 3px;
+    margin-top: 3px;
 }
 
 .login .greeting p{
-    font-size: 20px;
-    
+    font-size: calc(0.75vw + 0.75em);
+    margin:0px;
 }
 
 .login .signup p{
     color:#EFF7FF;
-    font-size: 15px;;
+    font-size: 15px;
 }
-.login .link{
+.login .signup .link{
     text-decoration: none;
     color:#6EC1AF;
+    margin-left: 10px;
 }
   /* Float four columns side by side */
   .column-login {
@@ -196,7 +200,7 @@
   }
 
 
-  .login .centerr .signup{
+  /* .login .centerr .signup{
     color: #fff;
     
   }
@@ -204,4 +208,4 @@
   .login .centerr .signup .link{
     color: #6EC1AF;
     margin-left: 10px;
-  }
+  } */

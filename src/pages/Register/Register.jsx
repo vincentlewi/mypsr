@@ -191,7 +191,7 @@ export default function Register() {
                     </motion.div>
                       </div>
                       <div class="signup">
-                      <span>Already have an account? <Link to='/mypsr/login' state={0} className='link'>Login</Link></span>
+                      <p>Already have an account?<Link to='/mypsr/login' state={0} className='link'>Login</Link></p>
                       </div>
                     </form>
                   </div>

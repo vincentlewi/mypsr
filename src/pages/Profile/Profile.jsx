@@ -189,7 +189,7 @@ export default function Profile() {
                     <img className="pp" src={userInfo.photo} alt="profile" />
                     <Row>
                       <Col>
-                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit <img src={"edit.png"}/></span>
+                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit</span>
                       </Col>
                     </Row>
                   </div>
@@ -251,7 +251,7 @@ export default function Profile() {
 
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Choose the amount you want to top up!</Modal.Title>
+            <Modal.Title><h5>How much do you want to top up?</h5></Modal.Title>
           </Modal.Header>
           <Modal.Body >
             <Topup />

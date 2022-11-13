@@ -61,8 +61,8 @@ export default function LoginNew() {
                             <div className="cardd greeting">
                                 <div>
                                     <h1>Hello!</h1>
-                                    <p>Welcome to myPSR,</p>
-                                    <p>your one-stop booking system.</p>
+                                    <p>Welcome to myPSR,
+                                    your one-stop booking system.</p>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ export default function LoginNew() {
                                     <form>
                                         <div className="inputbox">
                                             <input ref={emailRef} type="text" required/>
-                                            <span>Email</span>
+                                            <span>SMU Email</span>
                                         </div>
                                         <div className="inputbox">
                                             <input ref={passwordRef} type="password" required/>

@@ -41,11 +41,12 @@ export default function ComplaintUpdates() {
 
     return (
         <>
-            <Container>
-                <Row>
-                    {complaints.length == 0 ? <span><Lottie options={defaultOptions} height={400} width={400} /><h3 className="text-center">Nothing to fix yet, so stay happy !</h3></span>:null}
+            <Container className="p-3 mx-auto">
+                
+                    {complaints.length == 0 ? <span><Lottie options={defaultOptions} width={'30vw'} /><h5 className="text-center">Nothing to fix yet, so stay happy !</h5></span>:null}
                     {complaints.map((complaint) => {
                         return (
+                            <Row>
                             <Col lg={4} md={6} sm={6} className="mb-3 laundry">
                                 <ComplaintCard
                                     key={complaint.id}
@@ -55,9 +56,10 @@ export default function ComplaintUpdates() {
                                     location={complaint.location}
                                     time={complaint.time}
                                 />
-                            </Col>)
+                            </Col>
+                            </Row>)
                     })}
-                </Row>
+                
             </Container>
         </>
 
