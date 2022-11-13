@@ -43,6 +43,9 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
+            setImg(downloadURL);
+            console.log("PICTURE AFTER ASSIGNED" + toString(img));
+
           });
         }
       );
@@ -82,6 +85,9 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
+            setImg(downloadURL);
+            console.log("PICTURE AFTER ASSIGNED" + toString(img));
+
           });
         }
       );
@@ -112,23 +118,24 @@ const Input = () => {
           date: Timestamp.now(),
         }),
       });
+
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          img
+          },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
     }
 
-    await updateDoc(doc(db, "userChats", user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        img
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
-
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        img
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
 
     setText("");
     setImg(null);
@@ -139,7 +146,7 @@ const Input = () => {
     console.log("WORKING")
   };
 
-  useEffect(() => {
+  useEffect(() =>  {
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -159,6 +166,8 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
+            setImg(downloadURL);
+            // console.log(downloadURL)
           });
         }
       );
@@ -178,7 +187,27 @@ const Input = () => {
         [data.chatId + ".date"]: serverTimestamp(),
       });
     }
+    console.log(img)
+    setText("");
+    setImg(null);
   }, [img])
+  // console.log(data.user.uid)
+  // updateDoc(doc(db, "userChats", user.uid), {
+  //       [data.chatId + ".lastMessage"]: {
+  //         text,
+  //         img
+  //       },
+  //       [data.chatId + ".date"]: serverTimestamp(),
+  //     });
+  
+  //     updateDoc(doc(db, "userChats", data.user.uid), {
+  //       [data.chatId + ".lastMessage"]: {
+  //         text,
+  //         img
+  //       },
+  //       [data.chatId + ".date"]: serverTimestamp(),
+  //     });
+
   return (
     <div className="input">
       <input
