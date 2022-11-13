@@ -92,4 +92,14 @@
     text-decoration: underline;
 }
 
+.back{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
 
+.back span{
+    font-weight: bold;
+    margin: 10px;
+}
