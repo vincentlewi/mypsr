@@ -112,7 +112,7 @@ export default function Register() {
     return (
         <>
         <div className='regback' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
-                <img src={require("../../assets/arrow.png")} width="30px"/><span>Back</span>
+                <img src={require("../../assets/arrow.png")} width="30px" alt="back"/><span>Back</span>
             </div>
             {error && <Alert variant ="danger">{error}</Alert>}
         <div className="register">
