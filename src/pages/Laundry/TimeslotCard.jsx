@@ -31,7 +31,7 @@ export default function TimeslotCard(props){
             // console.log(time)
             const checked = props.slotList.includes(time)
             return(
-            <div className="col-lg-2 col-md-4 col-sm-6 timeslot-buttons" key={time}>
+            <div className="col-lg-2 col-md-3 col-sm-4 timeslot-buttons" key={time}>
                 <button
                     className = { //if either of this is TRUE returns 'laundrybtn'
                         classNames(

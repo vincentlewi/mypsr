@@ -8,7 +8,9 @@ export const Sidebar = () => {
     <div className='sidebar'>
       <Navbar />
       <Search />
+      <div className='needscroll'>
       <Chats />
+      </div>
     </div>
   )
 }

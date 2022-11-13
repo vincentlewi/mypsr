@@ -31,7 +31,7 @@ const Message = ({ message }) => {
         
       </div>
       <div className="messageContent">
-        <div>
+        <div className='contents'>
           {message.text && message.text}
           {message.img && <img src={message.img} alt="" />}
           <div className="timestamp">{today.toDateString() === tanggal.toDateString()

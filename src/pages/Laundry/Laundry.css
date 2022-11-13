@@ -42,6 +42,7 @@
 .payment-area{
     display:flex;
     justify-content: space-around;
+    align-items: center;
     margin-bottom: 40px;
 }
 
@@ -60,4 +61,10 @@
 
 .ordersummary-table .price{
     text-align: end;
+}
+
+@media screen and (max-width: 768px){
+    .ordersummary-table{
+        align-items: center;
+    }
 }

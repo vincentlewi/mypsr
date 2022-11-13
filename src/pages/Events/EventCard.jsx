@@ -113,7 +113,7 @@ export default function EventCard(props) {
                         </Row>
                         <Row>
                             <Col lg={4} md={4} sm={4} xs={4}>
-                            <img src={require("../../assets/clock.png")} width="30px"/>
+                            <img src={require("../../assets/location.png")} width="30px"/>
                             </Col>
                             <Col lg={8} md={8} sm={8} xs={8}>
                             <p>{props.location}</p>
@@ -121,7 +121,7 @@ export default function EventCard(props) {
                         </Row>
                         <Row>
                             <Col lg={4} md={4} sm={4} xs={4}>
-                            <img src={require("../../assets/location.png")} width="30px"/>
+                            <img src={require("../../assets/group.png")} width="30px"/>
                             </Col>
                             <Col lg={8} md={8} sm={8} xs={8}>
                             <p>{`${props.participants.length} / ${props.limit} members`}</p>

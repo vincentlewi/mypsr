@@ -5,7 +5,8 @@ import { addDoc, getDoc, doc, collection, orderBy, query, where, getDocs, Timest
 import { useAuth } from '../../components/contexts/AuthContext'
 import { useForm, Controller } from 'react-hook-form'
 import { addDays, format } from 'date-fns';
-import DatePicker from 'react-datepicker'
+import DatePicker from 'react-datepicker';
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function RegisterFavouriteGuest(props) {
 
@@ -97,7 +98,25 @@ export default function RegisterFavouriteGuest(props) {
                     </Modal.Header>
                     <Modal.Body>
                         <h5>Registration for {props.name} </h5>
-                        <p>Purpose</p>
+                        <Container>
+                            <Row>
+                                <Col sm={3}>
+                                <p>Purpose</p>
+                                </Col>
+                                <Col sm={9}>
+                                <input {...register('gpurpose')} type="text" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={3}>
+                                <p>Date and Time</p>
+                                </Col>
+                                <Col sm={9}>
+                                <input {...register('gpurpose')} type="text" />
+                                </Col>
+                            </Row>
+                        </Container>
+                        {/* <p>Purpose</p>
                         <input {...register('gpurpose')} type="text" />
                         <p>Date and Time</p>
                         <Controller
@@ -114,7 +133,7 @@ export default function RegisterFavouriteGuest(props) {
                                 selected={field.value}
                             />
                             )}
-                        />
+                        /> */}
                         {errorMessage && <div className="error"> {errorMessage} </div>}
                     </Modal.Body>
                     <Modal.Footer>

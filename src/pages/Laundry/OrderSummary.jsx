@@ -6,6 +6,7 @@ import { db } from '../../components/firebase'
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import Topup from '../Profile/Topup'
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function OrderSummary(props){
     const [show, setShow] = useState(false);
@@ -142,7 +143,10 @@ export default function OrderSummary(props){
     return(
         <div className="payment-area">
         <div>
-            <h3>Order Summary</h3>
+            <Container className='align-center'>
+                <Row className='align-center'>
+                    <Col md={6} sm={12} className='mx-auto mb-3'>
+                    <h3>Order Summary</h3>
             <table className="ordersummary-table">
                 <tr>
                    <td colSpan={2}>Services</td>
@@ -166,22 +170,38 @@ export default function OrderSummary(props){
                     <th className = "price">${total}.00</th>
                 </tr>: null}
             </table>
-        </div>
-    <div className="payment-button-area">
-        <button onClick={handleShow} className={total < walletBalance?"laundrybtn": "disabledbtn"} disabled={total > walletBalance}>
-            <span>Your PSRwallet Balance is ${walletBalance}</span>
+                    </Col>
+                    <Col md={6} sm={12}  className='my-auto'>
+                    <div className="payment-button-area">
+                    <Row>
+                        <Col sm={6} xs={6} className='my-auto'>
+                        <button onClick={handleShow} className={total < walletBalance?"laundrybtn": "disabledbtn"} disabled={total > walletBalance}>
+            <span>PSRwallet Balance: ${walletBalance}</span>
             <br/>
             <span>Pay NOW</span>
         </button>
-        {total > walletBalance ?
+                        </Col>
+                        <Col sm={6} xs={6} className='my-auto'>
+                        {total > walletBalance ?
                     <>
-                        <br/>
+                        
                         <button onClick={handleTopUp} className={"laundrybtn"}>
-                            <p>Insufficient Balance</p>
+                            <p className='mb-0'>Insufficient Balance</p>
                             <span>Please Top Up now</span>
                         </button>
                     </> : null}
+                        </Col>
+                    </Row>
+                    
+        
+        
     </div>
+                    </Col>
+                </Row>
+            </Container>
+            
+        </div>
+    
 
     <Modal
             show={show}

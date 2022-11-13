@@ -90,6 +90,7 @@
     background-color: #EFF7FF;
     position: relative;
     border-radius: 10px 0px 0px 0px;
+    
 }
 .chatHome .container .sidebar .navbar {
     display: flex;
@@ -145,11 +146,17 @@
     color: #333333;
     outline: none;
     font-size: 0.8em;
+    width: 100%;
 }
 .chatHome .container .sidebar .search .searchForm input::placeholder {
     color: #A5A2A2;
     font-size: 0.9em;
 }
+.chatHome .container .sidebar .needscroll{
+    height: calc(100% - 100px);
+    overflow: scroll;
+}
+
 .chatHome .container .sidebar .userChat {
     padding: 10px;
     display: flex;
@@ -273,27 +280,38 @@
 /* .chatHome .container .chat .messages .message.owner .messageContent img:after{
     content: "";
 } */
+.chatHome .container .chat .messages .message .messageContent .contents{
+    padding-bottom: 3px;
+    text-align: right;
+}
+
+.chatHome .container .chat .messages .message.owner .messageContent .contents{
+    padding-bottom: 3px;
+    text-align: left;
+    margin-left: auto;
+    /* width: max-content; */
+}
 
 .chatHome .container .chat .messages .message .messageContent .timestamp{
     color:#A5A2A2;
     font-size: 10px;
     /* text-align: center; */
     padding: 0px;
-    margin-left: auto;
+    margin-right: 0px;
 }
 
 .chatHome .container .chat .messages .message.owner .messageContent .timestamp{
     color:#A5A2A2;
     font-size: 10px;
     text-align: left;
-    margin: 0px;
+    margin-left: 0px;
 }
 .chatHome .container .chat .messages .message .messageContent img{
     color:#A5A2A2;
     font-size: 10px;
     /* text-align: center; */
     padding: 0px;
-    margin-right: auto;
+    margin-right: 0px;
 }
 .chatHome .container .chat .messages .message.owner .messageContent img{
     color:#A5A2A2;
@@ -302,6 +320,7 @@
     padding: 0px;
     margin-left: auto;
 }
+
 
 .chatHome .container .chat .input {
     height: 50px;
