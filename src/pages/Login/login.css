@@ -190,7 +190,7 @@
     padding-right: 5px;
     border-radius: 3px;
   }
-  .login inputbox input:focus ~ span,
+  .login .inputbox input:focus ~ span,
   .login .inputbox input:valid ~ span {
     transform: translateX(-13px) translateY(-30px);
     font-size: 0.8em;

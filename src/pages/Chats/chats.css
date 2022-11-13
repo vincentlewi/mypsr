@@ -169,13 +169,14 @@
     gap: 10px;
     color: #333333;
     cursor: pointer;
-    background-color: #3CA6A6;
+    background-color: #CBE5FF;
 }
 .chatHome .container .sidebar .userChat img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    
 }
 .chatHome .container .sidebar .userChat .userChatInfo span {
     font-size: 18px;
