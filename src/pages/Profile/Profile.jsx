@@ -189,7 +189,7 @@ export default function Profile() {
                     <img className="pp" src={userInfo.photo} alt="profile" />
                     <Row>
                       <Col>
-                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit</span>
+                        <span onClick={() => setShow(true)} className="edit" style={{cursor: 'pointer'}}>Edit <img src={"edit.png"}/></span>
                       </Col>
                     </Row>
                   </div>
@@ -251,13 +251,13 @@ export default function Profile() {
 
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Your current Wallet Balance is ${userInfo.wallet}</Modal.Title>
+            <Modal.Title>Choose the amount you want to top up!</Modal.Title>
           </Modal.Header>
           <Modal.Body >
             <Topup />
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose} className="closebtn">Close</button>
+            Your current Wallet Balance is ${userInfo.wallet}
           </Modal.Footer>
         </Modal>
       </div>

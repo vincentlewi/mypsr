@@ -9,11 +9,20 @@ import { db } from '../../components/firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
 import { format } from 'date-fns'
+import Calendar from './WeeklyCalendar'
+// import { CalendarPicker } from './WeeklyCalendar/calendar/CalendarPicker'
 
 
 export default function Laundry(){
     let today = new Date()
     let dateToday = format(today, 'yyyy-MM-dd')
+
+    const [data, setData] = useState(null);
+    
+
+    const showDetailsHandle = (dayStr) => {
+        setData(dayStr);
+      };
 
     
     const [dateID, setDateID] = useState(dateToday)
@@ -409,7 +418,9 @@ export default function Laundry(){
         <div className="container">
             <WelcomeButton loc="laundry"/>
             <div className="top d-flex justify-content-center">
-                <CalendarNew getDateID={getDateID}/>
+                {/* <CalendarNew getDateID={getDateID}/> */}
+                <Calendar showDetailsHandle={showDetailsHandle} getDateID={getDateID}/>
+                {/* <CalendarPicker/> */}
             </div>
             <div className="washer">
                 <TimeslotCard name="Laundry" timings={laundryTimings} getTimeSlot={getLaundryTimeSlot} setSlotList = {setLaundryTimeSlotList} slotList = {laundryTimeSlotList} dateID={dateID} currentSlot = {laundryTimeSlot}/>

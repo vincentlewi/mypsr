@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../../components/contexts/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../../../components/firebase";
+import { format } from "date-fns";
 
 
 export const Chats = () => {
@@ -11,10 +12,18 @@ export const Chats = () => {
   const { user } = useAuth()
   const { dispatch } = useContext(ChatContext);
 
+  const [active, setActive] = useState('');
+  // cons []
+  
+
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
         setChats(doc.data());
+        console.log(doc.data())
+        chats.forEach(chat => {
+          console.log("ABECE") 
+        })
       });
 
       return () => {
@@ -30,7 +39,8 @@ export const Chats = () => {
 
   function LastMessage(message){
     if (message.lastMessage)
-      {console.log(message.lastMessage)
+      {
+        // console.log(message.lastMessage)
 
       // const temp = new Object ()
       // temp.text = message.lastMessage.text
@@ -38,7 +48,7 @@ export const Chats = () => {
       // console.log(temp)
       
       if(!message.text){
-        console.log(message.img)
+        // console.log(message.img)
         if(message.img){
           // console.log(message.userInfo.photoURL)
           return "picture was sent"
@@ -58,28 +68,40 @@ export const Chats = () => {
     }
   }
 
+  function activeChecker(u){
+    console.log(u)
+  }
+  
   const handleSelect = (u) => {
     // console.log(u)
     dispatch({ type: "CHANGE_USER", payload: u });
+    setActive(u.uid)
+    // console.log(active)
   };
   // console.log(chats)
+
+  function populate(){
+    
+  }
+
   return (
     <div className="chats">
       {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div
-          className="userChat"
+          className={`userChat ${active ===  chat[1].userInfo.uid ? 'active':''}`}
           key={chat[0]}
           onClick={(e) => {
-            // e.target.className = 'chatSelected'
+            e.target.className = 'chatSelected'
             handleSelect(chat[1].userInfo)
+            activeChecker(e.target.className)
           }}
         >
 
         
-          <img src={chat[1].userInfo.photoURL} alt="" />
+          <img src={chat[1].lastMessage && chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage ?.text}{}</p>
+            <span>{chat[1].lastMessage && chat[1].userInfo.displayName}</span>
+            <p>{chat[1].lastMessage && chat[1].lastMessage ?.text}{}</p>
             <p>{LastMessage(chat[1])}</p>
           </div>
         </div>

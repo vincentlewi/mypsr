@@ -1,113 +1,24 @@
 *{
-    /* background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd); */
     box-sizing: border-box;
 }
 
-/* #login{
-    display:flex;
-    margin:auto;
-    width: 80vw;
-    height: 60%;
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-} */
-
-/*
-#opening{
-    text-align: center;
-    width: 50%;
-    border-radius: 20px 0px 0px 20px;
-    color: #146152;
-}
-
-#opening h1{
-    font-size: 5vw;
-    font-weight: bold;
-}
-
-#opening p{
-    font-size: 2vw;
-    
-}
-
-#welcome{
-    display: flex;
-}
-
-#form{
-    background-color: #024959;
-    width: 50%;
-    border-radius: 20px;
-    box-shadow: 3px 4px;
-    color: white;
-    font-weight: 400;
-    font-size: 17px;
-}
-
-#form label{
-    margin-top: 10px;
-}
-
-#form td{
-    padding: 1rem;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-#form input{
-    border-radius: 15px;
-    border: 0px solid #555 !important;
-    height: 30px;
-    padding: 20px;
-    color: #146152;
-    margin-bottom: 20px;
-}
-
-
-#form input:focus{
-    background-color: #d7eeee;
-    border: 0px solid #555 !important;
-}
-
-
-#login button{
-    width: 30%;
-}
-
-#login button:hover{
-    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 1px 4px 0 rgba(0,0,0,0.19);
-    background-color: #318686;
-}
-
-.content{
-    width: 60%;
-    margin:auto;
-    margin-top: 60px;
-}
-
-#new_account a{
-    color: #7cdbc7;
-    text-decoration: underline;
-} */
-
- .logback{
-    /* padding: 10px; */
-    padding-left: 10px;
+.back{
+    padding-left: 20px;
+    padding-top: 10px;
     display: flex;
     align-items: center;
     justify-content: left;
-    width: 10vw;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: pointer;
+    width: 100vw;
+    background-color:#EFF7FF; 
 }
 
  .logback span{
     font-weight: bold;
     margin: 10px;
+    cursor: pointer;
+}
+.back img{
+  cursor: pointer;
 }
 
 .logerror{
@@ -138,9 +49,8 @@
     
   }
   
-.login  .boxx{
-    height: 80vh;
-    /* width: 100vw; */
+.boxx{
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,14 +84,14 @@
     color:#6EC1AF;
 }
   /* Float four columns side by side */
-  .login .column {
+  .column-login {
     float: left;
     width: 50%;
     /* padding: 20px 10px; */
   }
   
   /* Remove extra left and right margins, due to padding in columns */
-  .login .roww {
+  .roww-login {
     margin-left: auto;
     margin-right: auto;
     height: 100vh;
@@ -192,27 +102,24 @@
     }
   
   /* Clear floats after the columns */
-  .login .roww:after {
+  .roww-login:after {
     content: "";
     display: table;
     clear: both;
   }
   
   /* Style the counter cards */
-  .login .cardd {
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  */
-    /* this adds the "card" effect */
-    /* padding: 16px; */
+  .cardd {
     text-align: center;
-    /* background-color: #f1f1f1; */
   }
-  
+
+
   /* Responsive columns - one column layout (vertical) on small screens */
   @media screen and (max-width: 900px) {
-    .login .roww{
+    .roww-login{
         flex-direction: column;
     }
-    .login .column {
+    .column-login {
       width: 100%;
       display: block;
       /* margin-bottom: 20px; */
