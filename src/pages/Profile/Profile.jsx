@@ -65,7 +65,10 @@ export default function Profile() {
   async function getTransactionHistory() {
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
-    const laundryEventsData = await getDocs(collection(db, 'laundryEvents'), where("participant", "==", userData.name), orderBy("date", "asc"), orderBy("timing", "asc"))
+    const laundryEventsRef = collection(db, 'laundryEvents')
+    console.log(userData.name)
+    const q = query(laundryEventsRef, where("participant", "==", userData.name), orderBy("date", "asc"), orderBy("timing", "asc"))
+    const laundryEventsData = await getDocs(q)
     const laundryEvents = (laundryEventsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     const topupData = await getDocs(collection(db, `users/${user.uid}/payments`))
     const topupTransactions = (topupData.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
