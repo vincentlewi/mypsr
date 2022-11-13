@@ -55,6 +55,18 @@
     text-align: right;
 }
 
+@media screen and (max-width: 768px) {
+    .reportcomp{
+        text-align:center;
+    }
+    .subttl h5{
+        text-align: center;
+    }
+    h1{
+        text-align: center;
+    }
+}
+
 
 .guestpart{
     background-color:#EFF7FF;
@@ -92,3 +104,32 @@
     padding: 5px 10px;
     box-shadow: 1.5px 1.5px #FFE0CF;
 }
+
+.guestregistration h1{
+    font-size: calc(1em + 1vw);
+    font-weight: bold;
+}
+
+.guestregistration h5{
+    font-size: calc(0.7em + 0.5vw);
+}
+
+.guestregistration .subttl{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.maintenance h1{
+    font-size: calc(1em + 1vw);
+    font-weight: bold;
+}
+
+.maintenance h5{
+    font-size: calc(0.7em + 0.5vw);
+}
+
+.maintenance .subttl{
+    text-align: left;
+    padding-top: 10px;
+}
+

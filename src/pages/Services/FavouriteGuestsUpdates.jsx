@@ -37,10 +37,11 @@ export default function FavouriteGuestsUpdates() {
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="events roww">
-                    <Row>
-                        {userFavourites.length == 0 ? <span><Lottie options={defaultOptions} height={400} width={400} /> <h5 className="text-center">Trying to identify your favourite guests...</h5></span> : null}
+                    
+                        {userFavourites.length == 0 ? <span><Lottie options={defaultOptions} width={'30vw'} /> <h5 className="text-center">Trying to identify your favourite guests...</h5></span> : null}
                         {userFavourites.map((guest) => {
                             return (
+                                <Row>
                                 <FavouriteGuestCard
                                     key={guest.id}
                                     id={guest.id}
@@ -50,10 +51,10 @@ export default function FavouriteGuestsUpdates() {
                                     phoneNumber={guest.phoneNumber}
                                     guestFirebaseRef={guest.guestFirebaseRef}
                                 />
-
+                             </Row>
                             )
                         })}
-                    </Row>
+                    
                 </div>
             </div>
         </>

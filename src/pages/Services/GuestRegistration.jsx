@@ -22,10 +22,10 @@ export default function GuestRegistration() {
                     <h1>Guest Registration</h1>
                     <Container className="mb-2">
                         <Row>
-                            <Col lg={4} md={4} sm={12}>
+                            <Col lg={9} md={7} sm={12} className="subttl">
                             <h5>Your guests coming over:</h5>
                             </Col>
-                            <Col lg={8} md={8} sm={12} className="reportcomp">
+                            <Col lg={3} md={5} sm={12} className="reportcomp">
                             <GuestFormPopup />
                             </Col>
                         </Row>

@@ -50,7 +50,7 @@ export default function GuestRegistrationUpdates() {
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="events roww">
-                    {guests.length == 0 ? <span><Lottie options={defaultOptions} height={400} width={400} /> <h5 className="text-center">Seems like you're too busy studying, no guests registered yet</h5></span> : null}
+                    {guests.length == 0 ? <span><Lottie options={defaultOptions} width={'30vw'} /> <h5 className="text-center">Seems like you're too busy studying, no guests registered yet</h5></span> : null}
                     {guests ? guests.map((guest) => {
                         return (
                             <Row>

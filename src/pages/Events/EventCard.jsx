@@ -97,6 +97,7 @@ export default function EventCard(props) {
 
     return (
         <>
+        {/* <div className="events"> */}
             <div className="column">
                 <div className="card" onClick={handleShow} id={props.id}>
                     <h4 className="title"><b>{props.name}</b></h4>
@@ -129,6 +130,7 @@ export default function EventCard(props) {
                     </Container>
                 </div>
             </div>
+            {/* </div> */}
             <Modal
                 show={show}
                 onHide={handleClose}

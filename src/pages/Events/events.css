@@ -42,3 +42,7 @@
         text-align: left;
     }
 }
+
+.events h5{
+    font-size: calc(0.7em + 0.5vw);
+}
