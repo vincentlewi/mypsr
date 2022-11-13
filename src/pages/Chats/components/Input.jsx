@@ -170,14 +170,15 @@ const Input = () => {
             await updateDoc(doc(db, "userChats", user.uid), {
               [data.chatId + ".lastMessage"]: {
                 text: 'you sent a picture',
-                img:null
+                img: null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
         
             await updateDoc(doc(db, "userChats", data.user.uid), {
               [data.chatId + ".lastMessage"]: {
-                text: 'sent you a picture':null
+                text: 'sent you a picture',
+                img: null
               },
               [data.chatId + ".date"]: serverTimestamp(),
             });
