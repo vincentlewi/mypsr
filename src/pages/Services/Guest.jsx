@@ -38,7 +38,7 @@ export default function Services() {
 
                 <div className="Register">
                     <Card className="guestpart">
-                        <CardHeader.Title>{props.name}</CardHeader.Title>
+                        <CardHeader.Title>Hello</CardHeader.Title>
                         <CardHeader.Subtitle></CardHeader.Subtitle>
                     </Card>
                 </div>

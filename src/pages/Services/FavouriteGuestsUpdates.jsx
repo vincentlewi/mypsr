@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { db } from '../../components/firebase'
-import { collection, query, orderBy, onSnapshot, getDoc, doc, where, getDocs } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, where } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext";
 import FavouriteGuestCard from "./FavouriteGuestCard"
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function FavouriteGuestsUpdates() {
 
@@ -25,6 +26,7 @@ export default function FavouriteGuestsUpdates() {
         <>
             <div className="schedule p-3 mx-auto">
                 <div className="events roww">
+                <Row>
                     {userFavourites.map((guest) => {
                         return (
                             <FavouriteGuestCard
@@ -36,8 +38,10 @@ export default function FavouriteGuestsUpdates() {
                                 phoneNumber={guest.phoneNumber}
                                 guestFirebaseRef={guest.guestFirebaseRef}
                             />
+                            
                         )
                     })}
+                </Row>
                 </div>
             </div>
         </>

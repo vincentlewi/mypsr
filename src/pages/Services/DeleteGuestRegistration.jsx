@@ -8,8 +8,8 @@ export default function DeleteGuestRegistration(props) {
   console.log("Rendering DeleteGuestRegistration.jsx")
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseDeletePopup = () => setShow(false);
+  const handleShowDeletePopup = () => setShow(true);
 
 
   const deleteGuestRegistration = async(id) => {
@@ -19,9 +19,9 @@ export default function DeleteGuestRegistration(props) {
 
   return (
     <>
-      <button disabled = {props.isDisabled} onClick={handleShow} className="cancelbtn">Delete Registration Request</button>
+      <button disabled = {props.isDisabled} onClick={handleShowDeletePopup} className="cancelbtn">Delete Registration Request</button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleCloseDeletePopup}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Registration Request?</Modal.Title>
         </Modal.Header>

@@ -3,6 +3,7 @@ import { db } from '../../components/firebase'
 import { collection, query, orderBy, onSnapshot, getDoc, doc, where, Timestamp } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext";
 import GuestCard from "./GuestCard";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function GuestRegistrationUpdates() {
 
@@ -41,6 +42,7 @@ export default function GuestRegistrationUpdates() {
                 <div className="events roww">
                     {guests?guests.map((guest) => {
                         return (
+                            <Row>
                             <GuestCard
                                 key={guest.id}
                                 id={guest.id}
@@ -51,6 +53,7 @@ export default function GuestRegistrationUpdates() {
                                 created={guest.created}
                                 entryTime = {guest.entryTime}
                             />
+                            </Row>
                         )
                     }):"No guest registered yet!"}
                 </div>

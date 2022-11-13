@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import { db } from '../../components/firebase'
 import { doc, deleteDoc, updateDoc, arrayRemove } from 'firebase/firestore'
 import { useAuth } from "../../components/contexts/AuthContext"
-import { createPath } from 'react-router-dom';
 
 export default function RemoveFavouriteGuest(props) {
 
