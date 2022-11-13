@@ -1,5 +1,5 @@
 *{
-    background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd);
+    /* background-color: linear-gradient(to right bottom, #cbe5ff, #b7ebfc, #aef0ee, #b9f2d6, #d3efbd); */
     box-sizing: border-box;
 }
 
@@ -93,7 +93,7 @@
     text-decoration: underline;
 } */
 
-.back{
+ .logback{
     /* padding: 10px; */
     padding-left: 10px;
     display: flex;
@@ -105,12 +105,12 @@
     cursor: pointer;
 }
 
-.back span{
+ .logback span{
     font-weight: bold;
     margin: 10px;
 }
 
-.error{
+.logerror{
     width: 80%;
     text-align: center;
     margin-left: auto;
@@ -126,26 +126,27 @@
   }
   
   .login {
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
     /* width: 80vw; */
-    margin-left: auto;
+    /* margin-left: auto;
     margin-right:auto;
     background-color: #EFF7FF;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    padding: 0vh 5vw;
     
   }
   
-.boxx{
-    height: 100vh;
+.login  .boxx{
+    height: 80vh;
     /* width: 100vw; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.greeting{
+.login .greeting{
     color:#024959;
     display: flex;
     justify-content: center;
@@ -154,33 +155,33 @@
     margin-left: 2vw;
 }
 
-.greeting h1{
+.login .greeting h1{
     font-size: 50px;
     margin-bottom: 3px;
 }
 
-.greeting p{
+.login .greeting p{
     font-size: 20px;
     
 }
 
-.signup p{
+.login .signup p{
     color:#EFF7FF;
     font-size: 15px;;
 }
-.link{
+.login .link{
     text-decoration: none;
     color:#6EC1AF;
 }
   /* Float four columns side by side */
-  .column {
+  .login .column {
     float: left;
     width: 50%;
     /* padding: 20px 10px; */
   }
   
   /* Remove extra left and right margins, due to padding in columns */
-  .roww {
+  .login .roww {
     margin-left: auto;
     margin-right: auto;
     height: 100vh;
@@ -191,14 +192,14 @@
     }
   
   /* Clear floats after the columns */
-  .roww:after {
+  .login .roww:after {
     content: "";
     display: table;
     clear: both;
   }
   
   /* Style the counter cards */
-  .cardd {
+  .login .cardd {
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  */
     /* this adds the "card" effect */
     /* padding: 16px; */
@@ -208,10 +209,10 @@
   
   /* Responsive columns - one column layout (vertical) on small screens */
   @media screen and (max-width: 900px) {
-    .roww{
+    .login .roww{
         flex-direction: column;
     }
-    .column {
+    .login .column {
       width: 100%;
       display: block;
       /* margin-bottom: 20px; */
@@ -220,13 +221,13 @@
 
   
 
-  .centerr {
+  .login .centerr {
     position: relative;
     padding: 7vh 3vw;
     background: #024959;
     border-radius: 10px;
   }
-  .centerr h1 {
+  .login .centerr h1 {
     font-size: 2em;
     /* border-left: 5px solid dodgerblue; */
     /* padding: 10px; */
@@ -236,7 +237,7 @@
     font-weight: bold;
     /* padding-left: 10px; */
   }
-  .centerr .inputbox {
+  .login .centerr .inputbox {
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -247,7 +248,7 @@
     margin-right: 30px;
   }
   
-   .inputbox input {
+   .login .inputbox input {
     position: absolute;
     top: 0;
     left: 0;
@@ -260,16 +261,17 @@
     font-size: 0.8em;
     color: #fff;
     resize: vertical;
+    margin: auto;
   }
   
-   .inputbox input:invalid:focus{
+   .login .inputbox input:invalid:focus{
     border-color: #CD2C2C;
   }
   
-   .inputbox:last-child {
+   .login .inputbox:last-child {
     margin-bottom: 0;
   }
-   .inputbox span {
+   .login .inputbox span {
     position: absolute;
     top: 13px;
     left: 13px;
@@ -281,13 +283,13 @@
     padding-right: 5px;
     border-radius: 3px;
   }
-  .inputbox input:focus ~ span,
-  .inputbox input:valid ~ span {
+  .login inputbox input:focus ~ span,
+  .login .inputbox input:valid ~ span {
     transform: translateX(-13px) translateY(-30px);
     font-size: 0.8em;
   }
 
-  .inputbtn{
+  .login .inputbtn{
     margin-bottom: 20px;
   }
   
@@ -323,10 +325,10 @@
     box-shadow: 0px 0px;
   } */
   
-  .center .signup{
+  .login .centerr .signup{
     color: #fff;
   }
   
-  .center .signup a{
+  .login .centerr .signup a{
     color: #6EC1AF;
   }

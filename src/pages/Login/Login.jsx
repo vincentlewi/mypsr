@@ -50,11 +50,11 @@ export default function LoginNew() {
     return (
         <>
             <PageTransition animated={animate}/>
-            <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
+            <div className='logback' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
                 <img src={require("../../assets/arrow.png")} width="30px"/><span>Back</span>
             </div>
-            {error && <Alert variant ="danger" className="error mb-0">{error}</Alert>}
-            {/* <div className="login"> */}
+            {error && <Alert variant ="danger" className="logerror mb-0">{error}</Alert>}
+            <div className="login">
             <div className="boxx">
             <div className="roww">
         <div className="column">
@@ -73,11 +73,13 @@ export default function LoginNew() {
                     <h1>Login</h1>
                     <form>
                       <div className="inputbox">
-                        <input type="text" required/>
+                      <input type="email" id="username" ref={emailRef} required/>
+                      {/* <input type="text" required/> */}
                         <span>Email</span>
                       </div>
                       <div className="inputbox">
-                        <input type="password" required/>
+                      <input type="password" id="pwd" ref={passwordRef} required/>
+                        {/* <input type="password" required/> */}
                         <span>Password</span>
                       </div>
                       <div className="inputbtn">
@@ -99,7 +101,7 @@ export default function LoginNew() {
             
           </div>
         </div>
-        {/* </div> */}
+        </div>
             {/* <div id="login">
                 
                 
