@@ -52,8 +52,8 @@ export default function Topup(){
         const { id } = await addDoc(checkoutSessionsRef, {
             mode: "payment",
             payment_method_types: ['card', 'paynow', 'grabpay'],
-            success_url: `http://vincentlewi.github.io/mypsr/profile`,
-            cancel_url: `http://vincentlewi.github.io/mypsr/home`,
+            success_url: `https://mypsr.vercel.app/profile`,
+            cancel_url: `https://mypsr.vercel.app/profile`,
             line_items:     
                 [{
                     quantity: 1,
