@@ -31,7 +31,7 @@ export default function Login() {
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
             setAnimate(true)
-            navigate('/mypsr/home', {state:1})
+            navigate('/home', {state:1})
         }
         catch {
             setError('GABISA LOGIN JANCOK')
@@ -58,7 +58,7 @@ export default function Login() {
                     <input type='password' ref={passwordRef}/>
                     <div disabled={loading} onClick={handleSubmit}>Login</div>
                     Need an account? 
-                    <div onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}>Register</div>
+                    <div onClick={() => {setAnimate(false); setDestination('/register')}}>Register</div>
                 </form>
             </div>
         </div>

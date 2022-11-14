@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     <AuthProvider>
-      <Router>
+      <Router basename='/mypsr'>
         <App />
       </Router>
     </AuthProvider>

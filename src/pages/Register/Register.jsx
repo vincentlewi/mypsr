@@ -22,7 +22,7 @@ export default function Register() {
     // reroute to home if user exists
     useEffect(() => {
         if (user) {
-            navigate("/mypsr/home", {state:1})
+            navigate("/home", {state:1})
         }
     }, [])
 
@@ -105,7 +105,7 @@ export default function Register() {
     }
     useEffect(() => {
         if (error === '') {
-            navigate('/mypsr/home')
+            navigate('/home')
         }
     }, [error, navigate])
 
@@ -191,7 +191,7 @@ export default function Register() {
                     </motion.div>
                       </div>
                       <div class="signup">
-                      <p>Already have an account?<Link to='/mypsr/login' state={0} className='link'>Login</Link></p>
+                      <p>Already have an account?<Link to='/login' state={0} className='link'>Login</Link></p>
                       </div>
                     </form>
                   </div>
@@ -259,7 +259,7 @@ export default function Register() {
                             </button>
                     </motion.div>
                     <br/>
-                    Already have an account? <Link to='/mypsr/login' state={0}>Login</Link>
+                    Already have an account? <Link to='/login' state={0}>Login</Link>
                 </form>
             </div> */}
         </div>
