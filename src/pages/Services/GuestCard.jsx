@@ -39,7 +39,7 @@ export default function ComplaintCard(props) {
 
     useEffect(() => {
         showButtons()
-        if (Timestamp.now().toMillis() > props.created.toMillis() + 300000) {
+        if (Timestamp.now().toMillis() > props.created.toMillis() + 120000) {
             setStatus("Status: Registration Request Approved")
         } else {
             setStatus("Status: Registration Request Received")

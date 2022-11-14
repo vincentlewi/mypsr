@@ -44,7 +44,7 @@ export default function Login() {
         <div className="login">
             <PageTransition animated={animate}/>
             {error && <Alert variant ="danger">{error}</Alert>}
-            <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>back</div>
+            <div className='back' onClick={() => {setAnimate(true); setDestination('/')}}>back</div>
             <div className='leftText'>
                 <h1>Hello!</h1>
                 <h2>Welcome to myPSR, your one-stop booking website!</h2>

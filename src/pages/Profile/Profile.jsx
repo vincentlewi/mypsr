@@ -31,7 +31,7 @@ export default function Profile() {
 
   function logout() {
     signOut(auth);
-    navigate("/mypsr");
+    navigate("/");
   }
 
   // getting user data from firestore
