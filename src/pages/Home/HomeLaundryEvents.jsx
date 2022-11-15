@@ -77,7 +77,7 @@ export default function HomeLaundryEvents() {
                         <h2 style={{textAlign: "center"}}>You do not have any laundry scheduled</h2>
                         <br></br>
                         <button className="createbtn" onClick={() => {
-                            navigate("/mypsr/laundry")
+                            navigate("/laundry")
                         }}>Book a laundry slot now</button>
                     </div>
                 </div>
