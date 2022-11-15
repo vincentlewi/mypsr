@@ -93,12 +93,12 @@ export default function PreLoginContent() {
       <div id='services' className='services screen'>
         <h1 className='break'>Services</h1>
         <div className='content mx-auto'>
-          <Row className="d-flex align-items-center">
+          <Row className="d-flex align-items-center" width={'40%'}>
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
-            <Col> <Lottie options={maintainenceDefaultOptions} width={'70%'}/> </Col>
+            <Col> <Lottie options={maintainenceDefaultOptions} width={'40%'}/> </Col>
           </Row>
-          <Row className="d-flex align-items-center">
-            <Col> <Lottie options={registrationDefaultOptions} width={'70%'} /> </Col>
+          <Row className="d-flex align-items-center" width={'40%'}>
+            <Col> <Lottie options={registrationDefaultOptions} width={'40%'} /> </Col>
             <Col> <h3>Register your favourite guests seamlessly</h3> </Col>
           </Row>
         </div>

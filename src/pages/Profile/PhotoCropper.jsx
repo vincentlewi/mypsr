@@ -68,7 +68,7 @@ export default function PhotoCropper(props) {
                 <Modal.Title>Profile Picture Preview</Modal.Title>
             </Modal.Header>
             <Modal.Body style={photo && {height: 500}}>
-            {!photo?<input type='file' ref={fileSelectRef} key={1} onChange={(e) => handleChange(e)}></input>:null}
+            {!photo?<input type='file' ref={fileSelectRef} key={1} onChange={(e) => handleChange(e)} ></input>:null}
             {photo?<Cropper
                 image={photo}
                 crop={crop}
@@ -81,8 +81,8 @@ export default function PhotoCropper(props) {
             />:null}
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleReset}>Reset Profile Picture</button>
-                <input disabled={loading || !photo} type='submit' onClick={handleSubmit} value='Set as Profile Picture'></input>
+                <button onClick={handleReset} className="closebtn">Reset Profile Picture</button>
+                <input disabled={loading || !photo} type='submit' onClick={handleSubmit} value='Set as Profile Picture' className="createbtn"></input>
             </Modal.Footer>
         </Modal>
     )

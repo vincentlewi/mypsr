@@ -76,7 +76,7 @@ export default function LaundryCard(props) {
                     {showPrevUser ? <p>Previous Booker: {host.name}</p> : null}
                 </Modal.Body>
                 <Modal.Footer>
-                    { showPrevUser ? <button onClick={() => navigate('/chats', { state: host })} className="button button-primary">Chat Previous User</button> : null}
+                    { showPrevUser ? <button onClick={() => navigate('/chats', { state: host })} className="closebtn">Chat Previous User</button> : null}
                     {renderDeleteButton()}
                 </Modal.Footer>
             </Modal>
