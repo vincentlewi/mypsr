@@ -27,23 +27,25 @@ export default function TimeslotCard(props){
             {props.timings ? props.timings.map((hourSlot)=>{
             let time = hourSlot[0]
             let hour = time.split(":")[0]
+            Object.values(hourSlot[1]).map((slot) => console.log(slot.name))
+            // console.log(Object.values(hourSlot[1]).every((slot) => slot[0]))
             // console.log(time)
             const checked = props.slotList.includes(time)
             return(
             <div className="col-lg-2 col-md-3 col-sm-4 timeslot-buttons" key={time}>
                 <button
                     className = { //if either of this is TRUE returns 'laundrybtn'
-                        classNames(
-                            checked && 'active',
-                            (parseInt(hour) >= nowHour || // returns TRUE when timing slot >= hour NOW
-                            dayNow !== props.dateID) && //returns TRUE when 
-                            !Object.values(hourSlot[1]).every((slot) => slot[0]) //if not all the slot is filled return true
-                            ?'laundrybtn':'disabledbtn',
-                        )}
-                    
-                        disabled = {
-                        Object.values(hourSlot[1]).every((slot) => slot[0]) //klaau semua ad nama org == true
-                        || 
+                            `${checked ? 'active' :''}
+                            ${(parseInt(hour) >= nowHour || 
+                            // returns TRUE when timing slot >= hour NOW
+                            dayNow !== props.dateID) && 
+                            //returns TRUE when 
+                            !Object.values(hourSlot[1]).every((slot) => slot.name) //if not all the slot is filled return true
+                            ?'laundrybtn':'disabledbtn'}
+                        `}
+                    disabled = {
+                        Object.values(hourSlot[1]).every((slot) => slot.name) //klaau semua ad nama org == true
+                        ||
                         (parseInt(hour) < nowHour && dayNow === props.dateID)
                     }    
                     id={time}

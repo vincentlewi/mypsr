@@ -176,7 +176,7 @@ export default function OrderSummary(props){
                     <div className="payment-button-area">
                     <Row>
                         <Col sm={6} xs={6} className='my-auto'>
-                        <button onClick={handleShow} className={total < walletBalance?"laundrybtn": "disabledbtn"} disabled={total > walletBalance}>
+                        <button onClick={handleShow} className={total <= walletBalance?"laundrybtn": "disabledbtn"} disabled={total > walletBalance}>
             <span>PSRwallet Balance: ${walletBalance}</span>
             <br/>
             <span>Pay NOW</span>
