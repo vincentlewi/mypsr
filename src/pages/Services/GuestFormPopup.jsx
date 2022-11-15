@@ -222,7 +222,7 @@ export default function GuestFormPopup(props) {
               </Row>
               <Row>
                 <Col>
-                <p><input {...register('gfavourite')} type="checkbox" /> Add to favourites</p>
+                <label><p><input {...register('gfavourite')} type="checkbox" /> Add to favourites</p></label>
                 </Col>
               </Row>
             </Container>

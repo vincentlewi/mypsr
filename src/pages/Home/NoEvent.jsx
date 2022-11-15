@@ -24,7 +24,7 @@ export default function NoEvent(){
             <h2 className='d-flex justify-content-center text-center'>You have not joined any events</h2>
             <br></br>
             <button className="createbtn" onClick={() => {
-                navigate("/mypsr/events")
+                navigate("/events")
             }}>Join an event Now</button>
         </div>
     )

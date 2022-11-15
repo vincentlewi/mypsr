@@ -23,20 +23,18 @@ function App() {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
-        <Route path='/mypsr'>
-          <Route index element={<Landing/>}/>
-          <Route path='login' element={<Login />}/>
-          <Route path='register' element={<Register />}/>
-          <Route element={<PrivateRoutes />}>
-            <Route path='home' element={<Home />}/>
-            <Route path='laundry' element={<Laundry />}/>
-            <Route path='events' element={<Events />}/>
-            {/* <Route path='services' element={<Services />}/> */}
-            <Route path='profile' element={<Profile/>}/>
-            <Route path='chats' element={<Chats/>}/>
-            <Route path='maintenance' element={<Maintenance/>}/>
-            <Route path='guestregistration' element={<GuestRegistration/>}/>
-          </Route>
+        <Route index element={<Landing/>}/>
+        <Route path='login' element={<Login />}/>
+        <Route path='register' element={<Register />}/>
+        <Route element={<PrivateRoutes />}>
+          <Route path='home' element={<Home />}/>
+          <Route path='laundry' element={<Laundry />}/>
+          <Route path='events' element={<Events />}/>
+          {/* <Route path='services' element={<Services />}/> */}
+          <Route path='profile' element={<Profile/>}/>
+          <Route path='chats' element={<Chats/>}/>
+          <Route path='maintenance' element={<Maintenance/>}/>
+          <Route path='guestregistration' element={<GuestRegistration/>}/>
         </Route>
         <Route path='*' element={<Error404/>}/>
       </Routes>

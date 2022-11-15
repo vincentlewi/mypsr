@@ -13,7 +13,7 @@ export default function OrderSummary(props){
     const [walletBalance, setWalletBalance] = useState(10);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleTopUp = () => navigate("/mypsr/profile")
+    const handleTopUp = () => navigate("/profile")
     const navigate = useNavigate()
     const { user } = useAuth()
     const userRef = doc(db, "users", user.uid);
@@ -50,7 +50,7 @@ export default function OrderSummary(props){
         await updateDoc(userRef, {
             wallet: increment(-total)
         })
-        navigate('/mypsr/home')
+        navigate('/home')
     }
 
     async function addLaundryBookingSlot(){

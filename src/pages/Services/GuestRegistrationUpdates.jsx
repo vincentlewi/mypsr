@@ -49,11 +49,13 @@ export default function GuestRegistrationUpdates() {
     return (
         <>
             <div className="schedule p-3 mx-auto">
-                <div className="events roww">
+                <div className="events">
+            <Row>
                     {guests.length == 0 ? <span><Lottie options={defaultOptions} width={'30vw'} /> <h5 className="text-center">Seems like you're too busy studying, no guests registered yet</h5></span> : null}
                     {guests ? guests.map((guest) => {
                         return (
-                            <Row>
+                            
+                                
                                 <GuestCard
                                     key={guest.id}
                                     id={guest.id}
@@ -64,9 +66,10 @@ export default function GuestRegistrationUpdates() {
                                     created={guest.created}
                                     entryTime={guest.entryTime}
                                 />
-                            </Row>
+                            
                         )
                     }) : "No guest registered yet!"}
+            </Row>
                 </div>
             </div>
         </>

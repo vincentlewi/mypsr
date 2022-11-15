@@ -4,7 +4,7 @@ This myPSR project was created with create-react-app
 
 
 If you choose to run this app on github-pages, you can go to:
-### vincentlewi.github.io/mypsr
+### mypsr.vercel.app
 
 
 If you choose to run this app locally, in the project directory, you can run:

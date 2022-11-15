@@ -16,7 +16,7 @@ export default function LoginNew() {
     // reroute to home if user exists
     useEffect(() => {
         if (user) {
-            navigate("/mypsr/home", {state:1})
+            navigate("/home", {state:1})
         }
     }, [])
 
@@ -26,7 +26,7 @@ export default function LoginNew() {
     const [destination, setDestination] = useState('')
     useEffect(() => {
         if(ani !== animate){
-            destination === '/mypsr/home' ? navigate(destination, {state: 1}) : navigate(destination)
+            destination === '/home' ? navigate(destination, {state: 1}) : navigate(destination)
         }
     }, [destination, navigate, ani, animate])
 
@@ -39,7 +39,7 @@ export default function LoginNew() {
             console.log("before logging innn")
             await login(emailRef.current.value, passwordRef.current.value)
             setAnimate(true)
-            setDestination('/mypsr/home')
+            setDestination('/home')
         }
         catch {
             setError('Something went wrong! Please try again!')
@@ -50,7 +50,7 @@ export default function LoginNew() {
     return (
         <>
             <PageTransition animated={animate}/>
-            <div className='back' onClick={() => {setAnimate(true); setDestination('/mypsr')}}>
+            <div className='back' onClick={() => {setAnimate(true); setDestination('/')}}>
                 <img src={require("../../assets/arrow.png")} width="30px" alt="back"/><span>Back</span>
             </div>
             {error && <Alert variant ="danger" className="error mb-0">{error}</Alert>}
@@ -86,7 +86,7 @@ export default function LoginNew() {
                                             <p>Do not have an account?
                                                 <Link
                                                 to="/register"
-                                                onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
+                                                onClick={() => {setAnimate(false); setDestination('/register')}}
                                                 className='link'>
                                                     Sign Up
                                                 </Link>
@@ -122,7 +122,7 @@ export default function LoginNew() {
                             <span>Do not have an account? </span>
                             <Link
                             to="/register"
-                            onClick={() => {setAnimate(false); setDestination('/mypsr/register')}}
+                            onClick={() => {setAnimate(false); setDestination('/register')}}
                             >
                                 Sign Up
                             </Link>
