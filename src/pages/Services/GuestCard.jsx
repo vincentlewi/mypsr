@@ -6,6 +6,7 @@ import { useAuth } from "../../components/contexts/AuthContext"
 import DeleteGuestRegistration from "./DeleteGuestRegistration"
 import AddToFavourites from './AddToFavourites';
 import { Row, Col, Container, Card } from 'react-bootstrap';
+import './services.css'
 
 export default function ComplaintCard(props) {
 
@@ -54,7 +55,7 @@ export default function ComplaintCard(props) {
                     <Card.Title>{props.name}</Card.Title>
                     <Card.Subtitle className="mb-2 date">{props.date} at {props.entryTime}</Card.Subtitle>
                     <Card.Text>{props.purpose}</Card.Text>
-                    <Card.Subtitle className="mb-2">{status}</Card.Subtitle>
+                    <Card.Subtitle className={`mb-2 ${status === "Status: Registration Request Received" ? "text-warning" : 'guestokay'}`}>{status}</Card.Subtitle>
                     </Card.Body>
                 </Card>
             </Col>

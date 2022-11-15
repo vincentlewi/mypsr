@@ -30,12 +30,12 @@ export default function FavouriteGuestCard(props) {
     <>
       <Col lg={4} md={6} sm={6} className="mb-3 guestpart" id={props.id}>
         <Row>
-          <Col lg={9} md={9} sm={9}>
+          <Col lg={8} md={8} sm={8} xs={8}>
             <span>
               <h5 className="mb-0">{props.name}</h5>
             </span>
           </Col>
-          <Col className="reportcomp" lg={3} md={3} sm={3}>
+          <Col className="reportcomp" lg={4} md={4} sm={4} xs={4}>
             <img
               src={require("../../assets/closes.png")}
               width="20px"

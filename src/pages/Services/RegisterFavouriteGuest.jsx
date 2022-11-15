@@ -89,7 +89,7 @@ export default function RegisterFavouriteGuest(props) {
 
     return (
         <>
-            <span onClick={handleShow} style={{cursor:'pointer', textDecoration: 'underline'}}>Re-register Guest</span>
+            <span onClick={handleShow} style={{cursor:'pointer', textDecoration:'underline', color:'#024959', fontSize:'10px', marginTop:'0px'}}>Re-Register</span>
 
             <Modal show={show} onHide={handleClose}>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -104,14 +104,14 @@ export default function RegisterFavouriteGuest(props) {
                                 <p>Purpose</p>
                                 </Col>
                                 <Col sm={9}>
-                                <input {...register('gpurpose')} type="text" />
+                                <input {...register('gpurpose')} type="text" className="details"/>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={3}>
+                                <Col sm={5}>
                                 <p>Date and Time</p>
                                 </Col>
-                                <Col sm={9}>
+                                <Col sm={7}>
                                 <Controller
                                 control={control}
                                 name="dateTime"
@@ -124,6 +124,7 @@ export default function RegisterFavouriteGuest(props) {
                                     filterTime={filterPassedTime}
                                     dateFormat="yyyy-MM-dd hh:mm aa"
                                     selected={field.value}
+                                    className="details"
                             />
                             )}
                         />

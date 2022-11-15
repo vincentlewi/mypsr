@@ -8,6 +8,7 @@ import LaundryCard from "./LaundryCard";
 import Lottie from "react-lottie";
 import laundryAnimationData from "./89833-laundry.json"
 import { useNavigate } from "react-router-dom";
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function HomeLaundryEvents() {
     console.log("==RENDER in homeLaundryEvents.jsx==")
@@ -67,8 +68,10 @@ export default function HomeLaundryEvents() {
 
     if (events.length === 0) {
         return (
+            <Container>
             <div className="schedule p-3 mx-auto">
-                <div className="roww events">
+                <Row>
+                <div className="events">
                     <div className="noevent">
                         <Lottie options={defaultOptions} height={400} width={400} />
                         <h2 style={{textAlign: "center"}}>You do not have any laundry scheduled</h2>
@@ -78,13 +81,17 @@ export default function HomeLaundryEvents() {
                         }}>Book a laundry slot now</button>
                     </div>
                 </div>
+                </Row>
             </div>
+            </Container>
         )
     } else {
         return (
             <>
+            <Container>
                 <div className="schedule p-3 mx-auto">
-                    <div className="roww events">
+                    <Row>
+                    <div className="events">
                         <h1>Your Upcoming Laundry</h1>
                         {events.length === 0 ? <NoEvent /> : null}
                         {events.map((event) => {
@@ -102,7 +109,9 @@ export default function HomeLaundryEvents() {
                             )
                         })}
                     </div>
+                    </Row>
                 </div>
+                </Container>
             </>
 
         );

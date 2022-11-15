@@ -4,7 +4,7 @@ import { collection, query, orderBy, onSnapshot, where, getDoc, doc, Timestamp }
 import { useAuth } from "../../components/contexts/AuthContext"
 import EventCard from "../Events/EventCard";
 import NoEvent from "./NoEvent";
-
+import { Row, Col, Container } from 'react-bootstrap';
 
 
 export default function HomeEvents() {
@@ -67,8 +67,10 @@ export default function HomeEvents() {
     } else if (nextweekevents.length > 0 && otherevents.length > 0) {
         return (
             <>
+            <Container>
                 <div className="schedule p-3 mx-auto">
-                    <div className="roww events">
+                    <Row>
+                    <div className="events">
                         <h1>Your Events in the next 7 days</h1>
                         {nextweekevents.map((event) => {
                             return (
@@ -86,9 +88,14 @@ export default function HomeEvents() {
                                     )
                                 })}
                     </div>
+                    </Row>
                 </div>
+
+                </Container>
+                <Container>
                 <div className="schedule p-3 mx-auto">
-                    <div className="roww events">
+                    <Row>
+                    <div className="events">
                     <h1>Your Other Events</h1>
                         {otherevents.map((event) => {
                             return (
@@ -106,14 +113,18 @@ export default function HomeEvents() {
                             )
                         })}
                     </div>
+                    </Row>
                 </div>
+                </Container>
             </>
         )
     } else if ((nextweekevents.length > 0 && otherevents.length == 0)) {
         return (
             <>
+            <Container>
                 <div className="schedule p-3 mx-auto">
-                    <div className="roww events">
+                    <Row>
+                    <div className="events">
                         <h1>Your Events in the next 7 days</h1>
                         {nextweekevents.map((event) => {
                             return (
@@ -131,13 +142,17 @@ export default function HomeEvents() {
                             )
                             })}
                     </div>
+                    </Row>
                 </div>
+                </Container>
             </>)
     } else if ((nextweekevents.length === 0 && otherevents.length > 0)) {
         return (
             <>
+            <Container>
                 <div className="schedule p-3 mx-auto">
-                    <div className="roww events">
+                    <Row>
+                    <div className="events">
                     <h1>Your Events</h1>
                         {otherevents.map((event) => {
                             return (
@@ -155,7 +170,9 @@ export default function HomeEvents() {
                             )
                         })}
                     </div>
+                    </Row>
                 </div>
+                </Container>
             </>
         )
     }

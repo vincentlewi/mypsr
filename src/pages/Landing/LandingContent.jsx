@@ -72,7 +72,7 @@ export default function PreLoginContent() {
     <>
       <div id='laundry' className='laundry screen'>
         <h1 className='break'>Laundry</h1>
-          <div className='content'>
+          <div className='content mx-auto'>
             <Row className="d-flex align-items-center">
               <Col> <Lottie options={laundryDefaultOptions} speed={0.7}/> </Col>
               <Col> <h2>Book washing and dryer machines to do you laundry !</h2> </Col>
@@ -82,7 +82,7 @@ export default function PreLoginContent() {
 
       <div id='events' className='screen row'>
         <h1 className='break'>Events</h1>
-        <div className='content'>
+        <div className='content mx-auto'>
           <Row className="d-flex align-items-center">
             <Col> <h2>Join or create events for fellow PSR residents</h2> </Col>
             <Col> <Lottie options={eventDefaultOptions} /> </Col>
@@ -95,20 +95,20 @@ export default function PreLoginContent() {
         <div className='content mx-auto'>
           <Row className="d-flex align-items-center">
             <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
-            <Col> <Lottie options={maintainenceDefaultOptions} height={250} width={250}/> </Col>
+            <Col> <Lottie options={maintainenceDefaultOptions} width={'70%'}/> </Col>
           </Row>
           <Row className="d-flex align-items-center">
-            <Col> <Lottie options={registrationDefaultOptions} height={200} width={220} /> </Col>
-            <Col> <h3>Report faulty utilities and get them fixed</h3> </Col>
+            <Col> <Lottie options={registrationDefaultOptions} width={'70%'} /> </Col>
+            <Col> <h3>Register your favourite guests seamlessly</h3> </Col>
           </Row>
         </div>
       </div>
 
       <div id='chats' className='chats screen'>
         <h1 className='break'>Chats</h1>
-        <div className='content'>
+        <div className='content mx-auto'>
           <Row className="d-flex align-items-center">
-            <Col> <Lottie options={chatsDefaultOptions} /> </Col>
+            <Col> <Lottie options={chatsDefaultOptions} width={'100%'}/> </Col>
             <Col> <h2>Chat with some of your fellow residents </h2> </Col>
           </Row>
         </div>

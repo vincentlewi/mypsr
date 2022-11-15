@@ -160,7 +160,7 @@ export default function EventCard(props) {
                     </Row>
                     <Row>
                         <Col><p>Other Participants:</p></Col></Row>
-                        <Row><Col lg={8}><p> {eventJoiners}</p></Col>
+                        <Row><Col lg={12}><p> {eventJoiners}</p></Col>
                     </Row>
                     </Container>
                 </Modal.Body>
